@@ -17,33 +17,37 @@ public class MainClass {
      */
     
     public static void main(String[] args) {
-        WndEditorPlatos platos = new WndEditorPlatos();        
-        WndEditorContornos contornos = new WndEditorContornos();
-        WndDespachoPedidos despacho = new WndDespachoPedidos();
-        WndCocinaPedidos cocina = new WndCocinaPedidos();
-        WndCaja caja = new WndCaja();
-        WndGestorPedido gestor = new WndGestorPedido();
-        WndConfirmacionPedido pedido = new WndConfirmacionPedido();
-        WndLogin login = new WndLogin();
-        WndLoginFallido loginFallido = new WndLoginFallido();
-        WndSelectorTareas selectorChef = new WndSelectorTareas();
-        WndSelectorContornos selectorContornos = new WndSelectorContornos();
-        //WndEditorCredencialesObsolete credenciales = new WndEditorCredencialesObsolete();
-        WndEstadisticas estadisticas = new WndEstadisticas();
+//        WndEditorPlatos platos = new WndEditorPlatos();        
+//        WndEditorContornos contornos = new WndEditorContornos();
+//        WndDespachoPedidos despacho = new WndDespachoPedidos();
+//        WndCocinaPedidos cocina = new WndCocinaPedidos();
+//        WndCaja caja = new WndCaja();
+//        WndGestorPedido gestor = new WndGestorPedido();
+//        WndConfirmacionPedido pedido = new WndConfirmacionPedido();
+//        WndLogin login = new WndLogin();
+//        WndLoginFallido loginFallido = new WndLoginFallido();
+//        WndSelectorTareas selectorChef = new WndSelectorTareas();
+//        WndSelectorContornos selectorContornos = new WndSelectorContornos();
+//        //WndEditorCredencialesObsolete credenciales = new WndEditorCredencialesObsolete();
+//        WndEstadisticas estadisticas = new WndEstadisticas();
+//        
+//        platos.setVisible(true);
+//        contornos.setVisible(true);
+//        despacho.setVisible(true);
+//        cocina.setVisible(true);
+//        caja.setVisible(true);
+//        gestor.setVisible(true);
+//        pedido.setVisible(true);
+//        login.setVisible(true);
+//        loginFallido.setVisible(true);
+//        selectorChef.setVisible(true);
+//        selectorContornos.setVisible(true);
+//        //credenciales.setVisible(true);
+//        estadisticas.setVisible(true);
         
-        platos.setVisible(true);
-        contornos.setVisible(true);
-        despacho.setVisible(true);
-        cocina.setVisible(true);
-        caja.setVisible(true);
-        gestor.setVisible(true);
-        pedido.setVisible(true);
-        login.setVisible(true);
-        loginFallido.setVisible(true);
-        selectorChef.setVisible(true);
-        selectorContornos.setVisible(true);
-        //credenciales.setVisible(true);
-        estadisticas.setVisible(true);
+        // Punto de Entrada de la Aplicacion
+        Dbg___WndLauncher launcher = new Dbg___WndLauncher();
+        launcher.setVisible(true);
     }
     
 }
