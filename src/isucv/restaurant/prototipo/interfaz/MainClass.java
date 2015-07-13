@@ -8,6 +8,7 @@ package isucv.restaurant.prototipo.interfaz;
 /**
  *
  * @author KDERazorback
+ * @author rubenyai
  */
 public class MainClass {
 
