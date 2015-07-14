@@ -46,3 +46,4 @@ Temporary Items
 build/
 nbproject/private/
 # User Defined files
+/dist/

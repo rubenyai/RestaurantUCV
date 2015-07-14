@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package isucv.restaurant.prototipo.interfaz;
+package isucv.restaurant.view;
 
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;

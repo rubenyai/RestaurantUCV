@@ -3,28 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package isucv.restaurant.prototipo.interfaz;
+package isucv.restaurant.view;
 
 /**
  *
  * @author KDERazorback
  */
-public class WndEditorContornos extends javax.swing.JFrame {
+public class WndEditorPlatos extends javax.swing.JFrame {
 
     private final static int COLUMN_DESCRIPTION = 0;
-    private final static int COLUMN_PRICE = 1;
-    private final static int COLUMN_AVAILABLE = 2;
-    
+    private final static int COLUMN_SIDES = 1;
+    private final static int COLUMN_PRICE = 2;
+    private final static int COLUMN_TIME = 3;
+    private final static int COLUMN_AVAILABLE = 4;
     /**
      * Creates new form wndPrincipal
      */
-    public WndEditorContornos() {
+    public WndEditorPlatos() {
         initComponents();
         jTable1.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(160);
+        jTable1.getColumnModel().getColumn(COLUMN_SIDES).setPreferredWidth(60);
         jTable1.getColumnModel().getColumn(COLUMN_PRICE).setPreferredWidth(60);
+        jTable1.getColumnModel().getColumn(COLUMN_TIME).setPreferredWidth(40);
         jTable1.getColumnModel().getColumn(COLUMN_AVAILABLE).setPreferredWidth(60);
         
-        lblTotal.setText(jTable1.getRowCount() + " Contornos totales.");
+        lblTotal.setText(jTable1.getRowCount() + " Platos totales.");
         
         int i;
         int count = 0;
@@ -34,7 +37,7 @@ public class WndEditorContornos extends javax.swing.JFrame {
             if (val != null && (boolean)val)
                 count++;
         }
-        lblVisible.setText(count + " Contornos Visibles en Cartelera.");
+        lblVisible.setText(count + " Platos Visibles en Cartelera.");
     }
 
     /**
@@ -58,26 +61,27 @@ public class WndEditorContornos extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Editor de Contornos");
+        setTitle("Editor de Platos");
         setMinimumSize(new java.awt.Dimension(580, 393));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Papas Fritas",  new Float(210.7),  new Boolean(false)},
-                {"Papas al Vapor",  new Float(180.4),  new Boolean(true)},
-                {"Yuca Frita",  new Float(110.5),  new Boolean(true)},
-                {"Arroz Blanco",  new Float(70.0),  new Boolean(true)},
-                {"Arroz Frito",  new Float(70.0),  new Boolean(false)},
-                {"Ensalada Rallada",  new Float(110.0),  new Boolean(true)},
-                {"Tajadas",  new Float(90.0),  new Boolean(true)},
-                {"Nestea Durazno",  new Float(90.0),  new Boolean(true)}
+                {"Pizza Margarita",  new Integer(0),  new Float(685.4),  new Float(25.0),  new Boolean(true)},
+                {"Pizza Vegetariana",  new Integer(0),  new Float(590.0),  new Float(25.0), null},
+                {"Pizza 4 Estaciones",  new Integer(0),  new Float(759.9),  new Float(25.0),  new Boolean(true)},
+                {"Pollo a la Canasta",  new Integer(2),  new Float(580.4),  new Float(15.0),  new Boolean(true)},
+                {"Hamburguesa de Carne",  new Integer(1),  new Float(483.8),  new Float(10.0),  new Boolean(true)},
+                {"Hamburguesa de Pollo",  new Integer(1),  new Float(410.0),  new Float(10.0),  new Boolean(true)},
+                {"Bistec al ajillo",  new Integer(3),  new Float(499.9),  new Float(20.0),  new Boolean(false)},
+                {"Parrilla Mixta",  new Integer(2),  new Float(963.1),  new Float(30.0),  new Boolean(true)},
+                {"Sopa del dia",  new Integer(0),  new Float(348.5),  new Float(5.0),  new Boolean(true)}
             },
             new String [] {
-                "Descripción", "Precio", "Disponible"
+                "Descripción", "Contornos", "Precio", "Tiempo", "Disponible"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -91,16 +95,17 @@ public class WndEditorContornos extends javax.swing.JFrame {
 
         jButton2.setText("Descartar");
 
-        jLabel1.setText("Contornos Almacenados Actualmente");
+        jLabel1.setText("Platos Almacenados Actualmente");
 
         jButton3.setText("Agregar");
 
         jButton4.setText("Eliminar");
 
-        lblTotal.setText("# Contornos Totales");
+        lblTotal.setText("# Platos Totales");
 
         lblVisible.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblVisible.setText("# Contornos Disponibles en Cartelera");
+        lblVisible.setText("# Platos Disponibles en Cartelera");
+        lblVisible.setToolTipText("");
 
         jButton5.setText("Eliminar Todo");
 
@@ -120,12 +125,12 @@ public class WndEditorContornos extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTotal)
                                     .addComponent(lblVisible))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -179,23 +184,21 @@ public class WndEditorContornos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WndEditorContornos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WndEditorPlatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WndEditorContornos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WndEditorPlatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WndEditorContornos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WndEditorPlatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WndEditorContornos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WndEditorPlatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WndEditorContornos().setVisible(true);
+                new WndEditorPlatos().setVisible(true);
             }
         });
     }

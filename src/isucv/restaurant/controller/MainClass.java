@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package isucv.restaurant.prototipo.interfaz;
+package isucv.restaurant.controller;
+
+import isucv.restaurant.view.*;
 
 /**
  *
@@ -45,7 +47,10 @@ public class MainClass {
 //        //credenciales.setVisible(true);
 //        estadisticas.setVisible(true);
         
-        // Punto de Entrada de la Aplicacion
+        // Inicializar la Clase Controladora en esquema Singleton
+        AppController.Instance = new AppController();
+        
+        // Punto de Entrada de la Aplicacion - DEBUG
         Dbg___WndLauncher launcher = new Dbg___WndLauncher();
         launcher.setVisible(true);
     }
