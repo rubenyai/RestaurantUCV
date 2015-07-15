@@ -6,6 +6,8 @@
 package isucv.restaurant.controller;
 
 import isucv.restaurant.view.*;
+//Import necesario para manejar arraylist
+import java.util.ArrayList;
 
 /**
  *
