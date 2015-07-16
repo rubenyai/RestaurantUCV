@@ -29,7 +29,7 @@ public class Usuarios
     
     public boolean CheckLogIn(String User, String Pass){
                  for( int i = 0 ; i  < Users.size(); i++){
-                            if(Users.get(i).GetUser()==User && Users.get(i).GetPass()==Pass){
+                            if(Users.get(i).user.equals(User) && Users.get(i).pass.equals(Pass)){
                                 return true;
                             }                        
                        }
@@ -78,8 +78,8 @@ public class Usuarios
     public int GetTaskForUser(String User){
         int tsk=0;
          for( int i = 0 ; i  < Users.size(); i++){
-                            if(Users.get(i).GetUser()==User){
-                                tsk=Users.get(i).GetTask();
+                            if(Users.get(i).user.equals(User)) {
+                                tsk=Users.get(i).task;
                             }                        
                        }
         return tsk;

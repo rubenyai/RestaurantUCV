@@ -17,9 +17,9 @@ public class Usuario
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    private String user;
-    private String pass;
-    private int task;   
+    public String user;
+    public String pass;
+    public int task;   
     
     /*//////////////
     //   METODOS  //
@@ -32,10 +32,5 @@ public Usuario(String usr,String psw, int tsk)
     pass=psw;
     task=tsk;
 }
-
-//Metodos get 
-public String GetUser() {return user;}
-public String GetPass() {return pass;}
-public int GetTask() {return task;}
 
 }
