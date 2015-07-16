@@ -33,9 +33,9 @@ public Usuario(String usr,String psw, int tsk)
     task=tsk;
 }
 
-//Metodos get para pruebas, estos no estan contemplados en el diseño, borrar en fase final
+//Metodos get 
 public String getuser() {return user;}
 public String getpass() {return pass;}
 public int gettask() {return task;}
-/////////////////////////////////////////////////////////////////////////////////////////
+
 }

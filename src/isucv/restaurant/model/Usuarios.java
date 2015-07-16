@@ -28,26 +28,60 @@ public class Usuarios
     *///////////////
     
     public boolean CheckLogIn(String User, String Pass){
+                 for( int i = 0 ; i  < Users.size(); i++){
+                            if(Users.get(i).getuser()==User && Users.get(i).getpass()==Pass){
+                                return true;
+                            }                        
+                       }
         return false; 
     }
     
     public void LoadFile(){
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\users.txt")))
+        //Creamos el objetos con new array list de usuario con los datos
+        Users=new ArrayList <Usuario> ();
+         try (BufferedReader br = new BufferedReader(new FileReader("C:\\users.txt")))
 		{
 			String sCurrentLine;
+                        String usr;
+                        String psw;
+                        char aux;
+                        int tsk = 0;
+                        int inicio,fin;
+                        //Mientras que no se llegue al final del archivo, movemos la linea a scurrenline como string
 			while ((sCurrentLine = br.readLine()) != null) {
-				//Prueba si esta funcionando bien la lectura
-                                System.out.println(sCurrentLine);
-                                ///////////////////////////////////////////
-                                //Creamos los objetos con new array list de usuario con los datos
-                                Users=new ArrayList <Usuario>();
+				//procedemos a buscar usr,psw y tsk que estan separados por ","
+                                //buscamos psw
+                                inicio = sCurrentLine.indexOf(",");
+                                fin = sCurrentLine.indexOf(",", inicio + 1);
+                                psw=sCurrentLine.substring(inicio + 1, fin);
+                                //Buscamos usr 
+                                inicio = sCurrentLine.indexOf(",",fin+1);
+                                fin = sCurrentLine.indexOf(",", inicio + 1);
+                                usr=sCurrentLine.substring(inicio + 1, fin);
+                                //buscamos task
+                                inicio=sCurrentLine.length();
+                                aux=sCurrentLine.charAt(inicio-1);
+                                if(aux=='1')
+                                    {tsk=1;}    
+                                else if(aux=='2')
+                                    {tsk=2;}
+                                else if (aux=='3')
+                                    {tsk=3;}
+                                //Creamos un nuevo objeto al arraylist con los datos
+                                Users.add(new Usuario(usr,psw,tsk)); 
 			}
 		} catch (IOException e) {
                         throw new RuntimeException(e);
-		} 
+		}
     }
     
     public int GetTaskForUser(String User){
-        return 0;
+        int tsk=0;
+         for( int i = 0 ; i  < Users.size(); i++){
+                            if(Users.get(i).getuser()==User){
+                                tsk=Users.get(i).gettask();
+                            }                        
+                       }
+        return tsk;
     }
 }
