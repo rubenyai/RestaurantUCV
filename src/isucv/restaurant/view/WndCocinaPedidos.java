@@ -5,6 +5,8 @@
  */
 package isucv.restaurant.view;
 
+import isucv.restaurant.controller.AppController;
+import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -70,10 +72,15 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Preparación de Pedidos");
         setMinimumSize(new java.awt.Dimension(572, 469));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -223,39 +230,35 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WndCocinaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WndCocinaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WndCocinaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WndCocinaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    // Permite retornar a la ventana de seleccion de tarea al cerrar
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setVisible(false);
+    }//GEN-LAST:event_formWindowClosing
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WndCocinaPedidos().setVisible(true);
-            }
-        });
+    // Almacena la ventana principal que muestra esta ventana
+    private JFrame ParentWindow = null;
+    
+    // Permite intercambiar las ventanas activas del controlador al mostrarse
+    // y ocultarse
+    @Override
+    public void setVisible(boolean value)
+    {        
+        if (value)
+        {
+            // Mostrar esta ventana y ocultar la ventana contenedora
+            super.setVisible(true);
+            ParentWindow = AppController.Instance.ActiveWindow;
+            AppController.Instance.ActiveWindow = this;
+            ParentWindow.setVisible(false);
+        }
+        else
+        {
+            // Ocultar esta ventana y mostrar la ventana contenedora
+            ParentWindow.setVisible(true);
+            AppController.Instance.ActiveWindow = ParentWindow;
+            ParentWindow = null;
+            super.setVisible(false);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,8 @@
  */
 package isucv.restaurant.view;
 
+import isucv.restaurant.controller.AppController;
+
 /**
  *
  * @author KDERazorback
@@ -76,14 +78,18 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
 
     private void cmdDebugUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDebugUsersActionPerformed
         Dbg___WndUserDebugger wnd = new Dbg___WndUserDebugger();
-        wnd.setVisible(true);
+        AppController.Instance.ActiveWindow = wnd;
+        AppController.Instance.ActiveWindow.setVisible(true);
+
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_cmdDebugUsersActionPerformed
 
     private void cmdDebugSideSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDebugSideSelectorActionPerformed
         Dbg___WndSideSelectorDebugger wnd = new Dbg___WndSideSelectorDebugger();
-        wnd.setVisible(true);
+        AppController.Instance.ActiveWindow = wnd;
+        AppController.Instance.ActiveWindow.setVisible(true);
+
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_cmdDebugSideSelectorActionPerformed

@@ -5,12 +5,17 @@
  */
 package isucv.restaurant.view;
 
+import isucv.restaurant.controller.AppController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+
 /**
  *
  * @author KDERazorback
  */
 public class WndSelectorTareas extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form WndSelectorTareas
      */
@@ -27,29 +32,48 @@ public class WndSelectorTareas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        cmdEditSpecialities = new javax.swing.JButton();
+        cmdEditSides = new javax.swing.JButton();
+        cmdKitchenTask = new javax.swing.JButton();
+        cmdStatistics = new javax.swing.JButton();
+        cmdLogout = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Selector de Tarea");
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Usuario Actual: Angel Lozano");
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblUsername.setText("Usuario Actual: Angel Lozano");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menu de Chef", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
-        jButton2.setText("Editar Especialidades");
+        cmdEditSpecialities.setText("Editar Especialidades");
+        cmdEditSpecialities.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEditSpecialitiesActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Editar Contornos");
+        cmdEditSides.setText("Editar Contornos");
+        cmdEditSides.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEditSidesActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("Preparar Pedido");
+        cmdKitchenTask.setText("Preparar Pedido");
+        cmdKitchenTask.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdKitchenTaskActionPerformed(evt);
+            }
+        });
 
-        jButton8.setText("Estadisticas del Dia");
+        cmdStatistics.setText("Estadisticas del Dia");
+        cmdStatistics.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdStatisticsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -58,27 +82,32 @@ public class WndSelectorTareas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmdKitchenTask, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmdEditSides, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmdEditSpecialities, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                    .addComponent(cmdStatistics, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addComponent(cmdEditSpecialities)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(cmdEditSides)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
+                .addComponent(cmdKitchenTask)
                 .addGap(32, 32, 32)
-                .addComponent(jButton8)
+                .addComponent(cmdStatistics)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Cerrar Sesion");
+        cmdLogout.setText("Cerrar Sesion");
+        cmdLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,9 +118,9 @@ public class WndSelectorTareas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmdLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -101,56 +130,59 @@ public class WndSelectorTareas extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(cmdLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsername))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WndSelectorTareas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WndSelectorTareas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WndSelectorTareas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WndSelectorTareas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    /*/////////////////////////////////
+    //    APERTURA DE SUB-VENTANAS   //
+    *//////////////////////////////////
+    // Cierra la ventana del Selector de Tareas
+    private void cmdLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogoutActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdLogoutActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WndSelectorTareas().setVisible(true);
-            }
-        });
+    private void cmdStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdStatisticsActionPerformed
+        OpenSubTask(new WndEstadisticas()); // Abrir sub-ventana de Estadisticas
+    }//GEN-LAST:event_cmdStatisticsActionPerformed
+
+    private void cmdKitchenTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKitchenTaskActionPerformed
+        OpenSubTask(new WndCocinaPedidos()); // Abrir sub-ventana de Cocina
+    }//GEN-LAST:event_cmdKitchenTaskActionPerformed
+
+    private void cmdEditSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSidesActionPerformed
+        OpenSubTask(new WndEditorContornos()); // Abrir Editor de Contornos
+    }//GEN-LAST:event_cmdEditSidesActionPerformed
+
+    private void cmdEditSpecialitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSpecialitiesActionPerformed
+        OpenSubTask(new WndEditorPlatos()); // Abrir Editor de Platos
+    }//GEN-LAST:event_cmdEditSpecialitiesActionPerformed
+
+    // Permite abrir una sub-ventana de rol para la instancia actual
+    // del selector de tareas
+    private void OpenSubTask(JFrame wnd)
+    {
+        wnd.setLocationRelativeTo(null); // Centrar sub-ventana
+        wnd.setVisible(true); // Mostrar sub-ventana
+    }
+    
+    // Establece el nombre de usuario a mostrar
+    public void setUsername(String value)
+    {
+        lblUsername.setText("Usuario Actual: " + value);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton cmdEditSides;
+    private javax.swing.JButton cmdEditSpecialities;
+    private javax.swing.JButton cmdKitchenTask;
+    private javax.swing.JButton cmdLogout;
+    private javax.swing.JButton cmdStatistics;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblUsername;
     // End of variables declaration//GEN-END:variables
 }

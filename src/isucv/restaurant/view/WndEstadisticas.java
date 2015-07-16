@@ -5,8 +5,10 @@
  */
 package isucv.restaurant.view;
 
+import isucv.restaurant.controller.AppController;
 import java.awt.List;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableModel;
@@ -71,8 +73,13 @@ public class WndEstadisticas extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Estadisticas del Dia");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Especialidades mas Solicitadas");
@@ -196,39 +203,35 @@ public class WndEstadisticas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WndEstadisticas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WndEstadisticas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WndEstadisticas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WndEstadisticas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    // Permite retornar a la ventana de seleccion de tarea al cerrar
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setVisible(false);
+    }//GEN-LAST:event_formWindowClosing
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WndEstadisticas().setVisible(true);
-            }
-        });
+    // Almacena la ventana principal que muestra esta ventana
+    private JFrame ParentWindow = null;
+    
+    // Permite intercambiar las ventanas activas del controlador al mostrarse
+    // y ocultarse
+    @Override
+    public void setVisible(boolean value)
+    {        
+        if (value)
+        {
+            // Mostrar esta ventana y ocultar la ventana contenedora
+            super.setVisible(true);
+            ParentWindow = AppController.Instance.ActiveWindow;
+            AppController.Instance.ActiveWindow = this;
+            ParentWindow.setVisible(false);
+        }
+        else
+        {
+            // Ocultar esta ventana y mostrar la ventana contenedora
+            ParentWindow.setVisible(true);
+            AppController.Instance.ActiveWindow = ParentWindow;
+            ParentWindow = null;
+            super.setVisible(false);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

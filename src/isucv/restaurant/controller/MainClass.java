@@ -20,7 +20,7 @@ public class MainClass {
      * @param args the command line arguments
      */
     
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
 //        WndEditorPlatos platos = new WndEditorPlatos();        
 //        WndEditorContornos contornos = new WndEditorContornos();
 //        WndDespachoPedidos despacho = new WndDespachoPedidos();
@@ -50,11 +50,11 @@ public class MainClass {
 //        estadisticas.setVisible(true);
         
         // Inicializar la Clase Controladora en esquema Singleton
-        AppController.Instance = new AppController();
+        //AppController.Instance = new AppController();
         
         // Punto de Entrada de la Aplicacion - DEBUG
-        Dbg___WndLauncher launcher = new Dbg___WndLauncher();
-        launcher.setVisible(true);
-    }
+        //Dbg___WndLauncher launcher = new Dbg___WndLauncher();
+        //launcher.setVisible(true);
+    //}
     
 }
