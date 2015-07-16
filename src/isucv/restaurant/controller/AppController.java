@@ -76,7 +76,7 @@ public class AppController {
             }
             
             // Determinar si se debe cerrar la aplicacion
-            // Cierrepor parte del usuario de la ventana Login
+            // Cierre por parte del usuario de la ventana Login
             if (Instance.LoginWindow.getCloseApp())
                 break;
         }
