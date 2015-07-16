@@ -16,6 +16,14 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+/*
+   NOTA! Mover este comentario dentro del cuerpo del metodo OpenSubTask(...)
+    Sub-roles Disponibles para el Chef (metodo OpenSubTask(...))
+
+    4. Editor de Especialidades
+    5. Editor de Contornos
+    6. Visualizador de Estadisticas
+*/
 /**
  *
  * @author KDERazorback

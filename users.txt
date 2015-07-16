@@ -1,3 +1,20 @@
-chef,chef123,1
-caja,caja123,2
-mesonero,mesonero123,3
+$ Archivo de Credenciales para la Aplicacion
+$ Aqui se definen los nombres de usuario, contrasenas y rol de cada usuario en el sistema.
+$ Los usuarios se describen en una unica linea, con los atributos separados por comas.
+$ Cada linea representa un usuario distinto del sistema.
+$ El formato a utilizar es:
+$    <username>,<password>,<type>
+$
+$    El tipo de usuario es un numero entero positivo descrito como:
+$      1 = Chef
+$      2 = Cajero
+$      3 = Mesonero
+
+$ CHEFS
+chef,angel_lozano,1
+
+$ CAJEROS
+caja,soyuncajero,2
+
+$ MESONEROS
+mesonero12,mesa,3

@@ -1,0 +1,12 @@
+Roles Principales
+	0. Cliente (sin credenciales)
+	1. Chef
+	2. Caja
+	3. Mesonero
+
+
+
+SubRoles del Chef
+	4. Editor de Especialidades
+	5. Editor de Contornos
+	6. Visualizador de Estadisticas

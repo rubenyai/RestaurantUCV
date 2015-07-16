@@ -10,6 +10,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/*
+   Numeros de Rol Disponibles para Usuarios
+     1. Chef
+     2. Caja
+     3. Mesonero
+*/
+
 /**
  *
  * @author Ruben
@@ -39,7 +46,7 @@ public class Usuarios
     public void LoadFile(){
         //Creamos el objetos con new array list de usuario con los datos
         Users=new ArrayList <Usuario> ();
-         try (BufferedReader br = new BufferedReader(new FileReader("C:\\users.txt")))
+         try (BufferedReader br = new BufferedReader(new FileReader(".//users.txt")))
 		{
 			String sCurrentLine;
                         String usr;
@@ -49,6 +56,10 @@ public class Usuarios
                         int inicio,fin;
                         //Mientras que no se llegue al final del archivo, movemos la linea a scurrenline como string
 			while ((sCurrentLine = br.readLine()) != null) {
+                                // Comprobar si la linea es un comentario o esta vacia
+                                if (sCurrentLine.length() < 5 || sCurrentLine.charAt(0) == '$')
+                                    continue;
+                            
 				//procedemos a buscar usr,psw y tsk que estan separados por ","
                                 //buscamos psw
                                 inicio = sCurrentLine.indexOf(",");
