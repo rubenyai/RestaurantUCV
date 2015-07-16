@@ -28,7 +28,6 @@ public class Usuarios
     *///////////////
     
     public boolean CheckLogIn(String User, String Pass){
-       
         return false; 
     }
     
@@ -43,7 +42,6 @@ public class Usuarios
                                 //Creamos los objetos con new array list de usuario con los datos
                                 Users=new ArrayList <Usuario>();
 			}
- 
 		} catch (IOException e) {
                         throw new RuntimeException(e);
 		} 
