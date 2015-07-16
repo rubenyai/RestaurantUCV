@@ -11,8 +11,16 @@ package isucv.restaurant.model;
  */
 public class ContadorContorno 
 {
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private Integer Count;
     private Contorno Side;
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
     
     public ContadorContorno(Contorno Side)
     {

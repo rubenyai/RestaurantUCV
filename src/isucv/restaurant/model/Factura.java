@@ -11,9 +11,17 @@ package isucv.restaurant.model;
  */
 public class Factura 
 {
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private Pedido Order;
     private Cliente Client;
     private Float GrandTotal;
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
     
     public Factura(Pedido O, Cliente C, Float T)
     {

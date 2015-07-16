@@ -13,9 +13,17 @@ import java.util.ArrayList;
  */
 public class ContadorEspecialidad 
 {
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private Especialidad Speciality;
     private Integer Count;
     private ArrayList<ContadorContorno> Sides;
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
     
     public ContadorEspecialidad(Especialidad Name)
     {

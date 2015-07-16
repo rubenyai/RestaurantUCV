@@ -11,9 +11,17 @@ package isucv.restaurant.model;
  */
 public class Contorno 
 {
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private Float Price;
     private Integer Time;
     private Boolean Visible;
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
     
     public Contorno(Float P, Integer T, Boolean V)
     {

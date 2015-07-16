@@ -11,10 +11,18 @@ package isucv.restaurant.model;
  */
 public class Especialidad 
 {
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private Float Price;
     private Integer TotalSides;
     private Integer Time;
     private Boolean Visible;
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
     
     public Especialidad (Float P, Integer S, Integer T, Boolean V)
     {

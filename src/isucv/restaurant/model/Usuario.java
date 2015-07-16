@@ -11,11 +11,20 @@ package isucv.restaurant.model;
  */
 
 // Clase usuario, que sera objeto de usuarios para crear un array 
-public class Usuario {
+public class Usuario 
+{
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private String user;
     private String pass;
-    private int task;    
-
+    private int task;   
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
+    
 //metodo para set de la clase usuario
 public Usuario(String usr,String psw, int tsk)
 {

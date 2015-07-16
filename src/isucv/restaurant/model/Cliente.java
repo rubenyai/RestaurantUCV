@@ -11,10 +11,18 @@ package isucv.restaurant.model;
  */
 public class Cliente 
 {
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private String Name;
     private String ID;
     private String BillingAddr;
     private String PhoneNumber;
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
     
     public Cliente(String N, String ID, String Addr, String P)
     {

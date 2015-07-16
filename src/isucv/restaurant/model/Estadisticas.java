@@ -13,8 +13,16 @@ import java.util.ArrayList;
  */
 public class Estadisticas 
 {
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     public ArrayList<ContadorEspecialidad> TopSpecialities;
     public ArrayList<ContadorContorno> TopSides;
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
     
     public void Reset()
     {

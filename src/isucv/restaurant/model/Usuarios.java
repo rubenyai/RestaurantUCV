@@ -14,9 +14,18 @@ import java.io.IOException;
  *
  * @author Ruben
  */
-public class Usuarios {
+public class Usuarios 
+{
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private ArrayList <Usuario> Users=null;
     private boolean FileLoaded=false;
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
     
     public boolean CheckLogIn(String User, String Pass){
        

@@ -13,10 +13,18 @@ import java.util.ArrayList;
  */
 public class Cartelera 
 {
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private ArrayList<Especialidad> Speciality;
     private ArrayList<Contorno> Sides;
     private Integer TotalSpecialities;
     private Integer TotalSides;
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
     
     public void UpdateSpecialities(ArrayList<Especialidad> Esp)
     {

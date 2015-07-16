@@ -13,10 +13,19 @@ import java.util.ArrayList;
  */
 public class Pedido 
 {
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private Integer ID;
     private String Status;
     private ArrayList<ContadorEspecialidad> Specialities;
     private ArrayList<ContadorContorno> Sides;
+    
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
     
   /*  public Factura GenerateInvoice(Cliente Datos)
     {
