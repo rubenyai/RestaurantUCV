@@ -5,17 +5,14 @@
  */
 package isucv.restaurant.controller;
 
-import isucv.restaurant.view.WndCaja;
-import isucv.restaurant.view.WndDespachoPedidos;
-import isucv.restaurant.view.WndGestorPedido;
-import isucv.restaurant.view.WndLogin;
-import isucv.restaurant.view.WndLoginFallido;
-import isucv.restaurant.view.WndSelectorTareas;
-import java.util.Locale;
+// Importar el Paquete "view" completo
+import isucv.restaurant.view.*;
+//Import necesario para manejar arraylist
+import java.util.ArrayList;
+
+// Imports Adicionales
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 

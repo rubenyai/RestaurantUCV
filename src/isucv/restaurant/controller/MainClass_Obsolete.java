@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author KDERazorback
  * @author rubenyai
  */
-public class MainClass {
+public class MainClass_Obsolete {
 
     /**
      * @param args the command line arguments
