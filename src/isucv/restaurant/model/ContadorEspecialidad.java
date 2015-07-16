@@ -39,6 +39,6 @@ public class ContadorEspecialidad
     
     public void SetSides(ArrayList<ContadorContorno> Sides)
     {
-        this.Sides = (ArrayList<ContadorContorno>) Sides.clone();
+        this.Sides = Sides;
     }    
 }

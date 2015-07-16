@@ -84,4 +84,12 @@ public class Usuarios
                        }
         return tsk;
     }
+    
+    public int DBG__GetTotalUsersLoaded()
+    {
+        if (Users == null)
+            return 0;
+        else
+            return Users.size();
+    }
 }

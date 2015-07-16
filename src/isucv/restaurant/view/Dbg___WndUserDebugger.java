@@ -5,6 +5,8 @@
  */
 package isucv.restaurant.view;
 
+import isucv.restaurant.model.Usuarios;
+
 /**
  *
  * @author KDERazorback
@@ -18,11 +20,15 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
     // Cantidad de Clases "Usuarios": 1 sola
     // Cantidad de Clases "Usuario": Una por cada usuario en el archivo cargado
     
+    Usuarios users;
+    
     /**
      * Creates new form Dbg___WndUserDebugger
      */
     public Dbg___WndUserDebugger() {
         initComponents();
+        
+        users = new Usuarios();
     }
 
     /**
@@ -48,11 +54,14 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
         cmdGetTask = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         lblTaskType = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lblTotalUsers = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("User Debugger");
 
-        txtUserFile.setText("C:\\.................");
+        txtUserFile.setEditable(false);
+        txtUserFile.setText("OBSOLETE");
 
         jLabel1.setText("Archivo de Usuarios a cargar");
 
@@ -100,6 +109,10 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
 
         lblTaskType.setText("0");
 
+        jLabel6.setText("Total de usuarios cargados");
+
+        lblTotalUsers.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -126,13 +139,17 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblTaskType)))
+                        .addComponent(lblTaskType))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTotalUsers)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,7 +157,7 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
@@ -150,8 +167,12 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(lblTaskType))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmdGetTask, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(cmdGetTask, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(lblTotalUsers))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,12 +212,9 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
 
     private void cmdLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoadActionPerformed
         // CARGAR UN NUEVO ARCHIVO DE USUARIOS
-        
-        // Variable que almacena el nombre del archivo de usuarios a cargar
-        String filename = txtUserFile.getText();
-        
-        // AYUDA:
-        // MisUsuarios.LoadFile(filename)
+
+        users.LoadFile();
+        lblTotalUsers.setText(String.valueOf(users.DBG__GetTotalUsersLoaded()));
     }//GEN-LAST:event_cmdLoadActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -209,10 +227,7 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
         
         // Variable que almacena el resultado de la operacion Login.
         // Si fue exitosa o no
-        boolean result = false;
-        
-        // AYUDA:
-        // result = MisUsuarios.Login(username, password)
+        boolean result = users.CheckLogIn(username, password);
         
         // Mostrar el resultado
         if (result)
@@ -227,14 +242,10 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
         // Variables que almacenan el nombre de usuario y el password
         // respectivamente
         String username = txtUsername.getText();
-        String password = txtPassword.getText();
         
         // Variable que almacena el resultado de la operacion.
         // En forma de un entero
-        int result = 0;
-        
-        // AYUDA:
-        // result = MisUsuarios.GetTask......(username, password);
+        int result = users.GetTaskForUser(username);
         
         // Mostrar el resultado
         lblTaskType.setText(String.valueOf(result));
@@ -284,9 +295,11 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblLoginResult;
     private javax.swing.JLabel lblTaskType;
+    private javax.swing.JLabel lblTotalUsers;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUserFile;
     private javax.swing.JTextField txtUsername;

@@ -117,7 +117,7 @@ public class AppController {
                     Instance.ActiveWindow = mesonero;
                     break;
                     
-                default: // Caso de error para le ventana del cliente
+                default: // Caso de error para la ventana del cliente
                     WndGestorPedido gestor = new WndGestorPedido();
                     gestor.setLocationRelativeTo(null);
                     Instance.ActiveWindow = gestor;
