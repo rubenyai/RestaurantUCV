@@ -30,6 +30,6 @@ public class ContadorContorno
     
     public void AddCount(Integer Count)
     {
-        this.Count = Count;
+        this.Count += Count;
     }
 }

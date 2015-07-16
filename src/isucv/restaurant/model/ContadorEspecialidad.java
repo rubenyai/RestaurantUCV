@@ -34,7 +34,7 @@ public class ContadorEspecialidad
     
     public void AddCount(Integer Count)
     {
-        this.Count = Count;
+        this.Count += Count;
     }
     
     public void SetSides(ArrayList<ContadorContorno> Sides)
