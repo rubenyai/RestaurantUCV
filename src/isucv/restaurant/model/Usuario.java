@@ -34,8 +34,8 @@ public Usuario(String usr,String psw, int tsk)
 }
 
 //Metodos get 
-public String getuser() {return user;}
-public String getpass() {return pass;}
-public int gettask() {return task;}
+public String GetUser() {return user;}
+public String GetPass() {return pass;}
+public int GetTask() {return task;}
 
 }
