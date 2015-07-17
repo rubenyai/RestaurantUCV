@@ -19,16 +19,18 @@ public class Especialidad
     private Integer TotalSides;
     private Integer Time;
     private Boolean Visible;
+    private String Name;
     
     /*//////////////
     //   METODOS  //
     *///////////////
     
-    public Especialidad (Float P, Integer S, Integer T, Boolean V)
+    public Especialidad (Float P, Integer S, Integer T, Boolean V, String N)
     {
         Price = P;
         TotalSides = S;
         Time = T;
         Visible = V;
+        Name = N;
     }
 }
