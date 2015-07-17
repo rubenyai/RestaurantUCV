@@ -6,6 +6,7 @@
 package isucv.restaurant.controller;
 
 // Importar el Paquete "view" completo
+import isucv.restaurant.model.Usuarios;
 import isucv.restaurant.view.*;
 //Import necesario para manejar arraylist
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ import javax.swing.JOptionPane;
 public class AppController {
     // Instancia del Controlador Principal de la Aplicacion
     public static AppController Instance;
-    
+
     /*///////////////////////////
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
@@ -62,7 +63,7 @@ public class AppController {
         // Crear una nueva instancia de WndLogin
         Instance.LoginWindow = new WndLogin();
         Instance.LoginWindow.setLocationRelativeTo(null); // Centrar Ventana
-        
+                
         // Mostrar la ventana de Login siempre que no haya otra ventana activa
         while (true)
         {
@@ -101,19 +102,19 @@ public class AppController {
         Instance.LoginWindow.dispose();
         Instance = null;
     }
-    
+   
     // Comprueba los credenciales para un inicio de Sesion y abre la ventana
     // correspondiente
     public void Login(String username, String password)
     {
-        // TODO: Enlazar con la clase Usuarios y comprobar credenciales!
-        boolean result = true; // Eliminar inicializacion!
-        
+        Usuarios users;
+        users = new Usuarios();
+        users.LoadFile();
+        boolean result = users.CheckLogIn(username, password);
         if (result)
         {
-            // TODO: Enlazar con la clase Usuarios y obtener el Rol
-            int taskId = 1; // Eliminar inicializacion! [CHEF]
-            
+            int taskId = users.GetTaskForUser(username);
+         
             // Almacenar el nombre de usuario Actual
             Instance.ActiveUsername = username;
             
@@ -135,12 +136,13 @@ public class AppController {
                     mesonero.setLocationRelativeTo(null);
                     Instance.ActiveWindow = mesonero;
                     break;
-                    
-                default: // Caso de error para la ventana del cliente
-                    WndGestorPedido gestor = new WndGestorPedido();
-                    gestor.setLocationRelativeTo(null);
-                    Instance.ActiveWindow = gestor;
             }
+        }
+        else if(username==null && password==null)
+        {
+            WndGestorPedido gestor = new WndGestorPedido();
+            gestor.setLocationRelativeTo(null);
+            Instance.ActiveWindow = gestor;
         }
         else
         {
