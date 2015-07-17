@@ -6,7 +6,6 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.AppController;
-import java.util.Arrays;
 
 /**
  *
@@ -127,7 +126,7 @@ public class WndLogin extends javax.swing.JFrame {
 
     // Abrir ventana de Depuracion
     private void cmdDebugWndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDebugWndActionPerformed
-        // Crear una nueva ventana de Debug Launcher
+        // Crear una nueva ventana Debug Launcher
         Dbg___WndLauncher launcher = new Dbg___WndLauncher();
         launcher.setVisible(true);
         CloseApp = false;
@@ -156,46 +155,9 @@ public class WndLogin extends javax.swing.JFrame {
         // Iniciar sesion con los credenciales proporcionados
         CloseApp = false;     
         
-        String password = String.copyValueOf(txtPassword.getPassword());
-        
-        AppController.Instance.Login(txtUsername.getText(), password);
+        AppController.Instance.Login(getUsername(), getPassword());
     }//GEN-LAST:event_cmdLoginActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WndLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WndLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WndLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WndLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WndLogin().setVisible(true);
-            }
-        });
-    }
-    
     // Retorna el valor de CloseApp
     public boolean getCloseApp()
     {

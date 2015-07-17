@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /*
-   Numeros de Rol Disponibles para Usuarios
+   Numeros de Rol Disponibles para Usuarios dentro del Archivo de Credenciales
      1. Chef
      2. Caja
      3. Mesonero

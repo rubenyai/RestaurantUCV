@@ -183,21 +183,11 @@ public class WndEditorContornos extends javax.swing.JFrame {
     @Override
     public void setVisible(boolean value)
     {        
-        if (value)
+        super.setVisible(value);
+        
+        if (!value)
         {
-            // Mostrar esta ventana y ocultar la ventana contenedora
-            super.setVisible(true);
-            ParentWindow = AppController.Instance.ActiveWindow;
-            AppController.Instance.ActiveWindow = this;
-            ParentWindow.setVisible(false);
-        }
-        else
-        {
-            // Ocultar esta ventana y mostrar la ventana contenedora
-            ParentWindow.setVisible(true);
-            AppController.Instance.ActiveWindow = ParentWindow;
-            ParentWindow = null;
-            super.setVisible(false);
+            AppController.Instance.OpenSubTask(1);
         }
     }
 

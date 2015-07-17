@@ -17,12 +17,17 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /*
-   NOTA! Mover este comentario dentro del cuerpo del metodo OpenSubTask(...)
+    Roles Principales Disponibles para Usuarios
+        1. Chef (Selector de Tareas)
+        2. Caja
+        3. Mesonero
+
     Sub-roles Disponibles para el Chef (metodo OpenSubTask(...))
 
-    4. Editor de Especialidades
-    5. Editor de Contornos
-    6. Visualizador de Estadisticas
+        4. Editor de Especialidades
+        5. Editor de Contornos
+        6. Visualizador de Estadisticas
+        7. Preparacion de Pedidos
 */
 /**
  *
@@ -38,8 +43,11 @@ public class AppController {
     // Ventana de Inicio de Sesion
     public WndLogin LoginWindow;
     
-    // Ventana de Rol Active
+    // Ventana de Rol o Subrol Activa
     public JFrame ActiveWindow;
+    
+    // Almacena el Nombre de usuario Actual (luego de Iniciar Sesion)
+    public String ActiveUsername;
     
     /*//////////////
     //   METODOS  //
@@ -106,6 +114,9 @@ public class AppController {
             // TODO: Enlazar con la clase Usuarios y obtener el Rol
             int taskId = 1; // Eliminar inicializacion! [CHEF]
             
+            // Almacenar el nombre de usuario Actual
+            Instance.ActiveUsername = username;
+            
             switch (taskId)
             {
                 case 1: // Chef
@@ -138,8 +149,45 @@ public class AppController {
             Instance.ActiveWindow = loginError;
         }
         
-        // Mostrar a Ventana Activa y ocultar la Ventana de Inicio de Sesion
+        // Mostrar la Ventana Activa y ocultar la Ventana de Inicio de Sesion
         Instance.ActiveWindow.setVisible(true);
         Instance.LoginWindow.setVisible(false);
+    }
+    
+    // Permite abrir una sub-ventana de rol para la instancia actual
+    // del selector de tareas
+    public void OpenSubTask(int subTask)
+    {
+        JFrame wnd;
+        
+        switch (subTask)
+        {
+            case 1: // Regresar al selector de Tareas
+                wnd = new WndSelectorTareas(Instance.ActiveUsername);
+                break;
+            case 4: // Especialidades
+                wnd = new WndEditorPlatos();
+                break;
+            case 5: // Contornos
+                wnd = new WndEditorContornos();
+                break;
+            case 6: // Estadisticas
+                wnd = new WndEstadisticas();
+                break;
+            case 7: // Preparacion de Pedidos
+                wnd = new WndCocinaPedidos();
+                break;
+            default: // Ignorar
+                return;
+        }
+        
+        wnd.setLocationRelativeTo(null); // Centrar sub-ventana
+        wnd.setVisible(true); // Mostrar sub-ventana
+        JFrame prevWnd = Instance.ActiveWindow; // Almacenar la ventana actual
+        Instance.ActiveWindow = wnd; // Establecer la nueva ventana como Activa
+        
+        // Ocultar y desechar la ventana anterior
+        prevWnd.setVisible(false);
+        prevWnd.dispose();
     }
 }

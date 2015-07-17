@@ -22,6 +22,15 @@ public class WndSelectorTareas extends javax.swing.JFrame {
     public WndSelectorTareas() {
         initComponents();
     }
+    
+    /*
+     * Crea una nueva instancia de la Ventana especificando el nombre de Usuario
+     */
+    public WndSelectorTareas(String username)
+    {
+        this();
+        setUsername(username);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -147,31 +156,23 @@ public class WndSelectorTareas extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdLogoutActionPerformed
 
     private void cmdStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdStatisticsActionPerformed
-        OpenSubTask(new WndEstadisticas()); // Abrir sub-ventana de Estadisticas
+        AppController.Instance.OpenSubTask(6); // Abrir sub-ventana de Estadisticas
     }//GEN-LAST:event_cmdStatisticsActionPerformed
 
     private void cmdKitchenTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKitchenTaskActionPerformed
-        OpenSubTask(new WndCocinaPedidos()); // Abrir sub-ventana de Cocina
+        AppController.Instance.OpenSubTask(7); // Abrir sub-ventana de Cocina
     }//GEN-LAST:event_cmdKitchenTaskActionPerformed
 
     private void cmdEditSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSidesActionPerformed
-        OpenSubTask(new WndEditorContornos()); // Abrir Editor de Contornos
+        AppController.Instance.OpenSubTask(5); // Abrir Editor de Contornos
     }//GEN-LAST:event_cmdEditSidesActionPerformed
 
     private void cmdEditSpecialitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSpecialitiesActionPerformed
-        OpenSubTask(new WndEditorPlatos()); // Abrir Editor de Platos
+        AppController.Instance.OpenSubTask(4); // Abrir Editor de Platos
     }//GEN-LAST:event_cmdEditSpecialitiesActionPerformed
 
-    // Permite abrir una sub-ventana de rol para la instancia actual
-    // del selector de tareas
-    private void OpenSubTask(JFrame wnd)
-    {
-        wnd.setLocationRelativeTo(null); // Centrar sub-ventana
-        wnd.setVisible(true); // Mostrar sub-ventana
-    }
-    
     // Establece el nombre de usuario a mostrar
-    public void setUsername(String value)
+    public final void setUsername(String value)
     {
         lblUsername.setText("Usuario Actual: " + value);
     }
