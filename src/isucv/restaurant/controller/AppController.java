@@ -193,6 +193,14 @@ public class AppController {
         prevWnd.dispose();
     }
     
+    public Estadisticas GetStats()
+    {
+        Estadisticas statistics;
+        statistics = new Estadisticas();
+        
+        return null;
+    }
+    
     //Reinicia las estadisticas
     //Hace .clear en los arraylist topspecialities y topsides
     public void ResetStats()
