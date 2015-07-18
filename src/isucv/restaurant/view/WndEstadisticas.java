@@ -6,6 +6,7 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.AppController;
+import isucv.restaurant.model.Estadisticas;
 import java.awt.List;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -214,7 +215,7 @@ public class WndEstadisticas extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+         AppController.Instance.ResetStats();
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

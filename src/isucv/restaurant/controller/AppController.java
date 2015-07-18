@@ -192,7 +192,7 @@ public class AppController {
         prevWnd.setVisible(false);
         prevWnd.dispose();
     }
-    
+       
     public Estadisticas GetStats()
     {
         Estadisticas statistics;
