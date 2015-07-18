@@ -5,8 +5,8 @@
  */
 package isucv.restaurant.controller;
 
-// Importar el Paquete "view" completo
-import isucv.restaurant.model.Usuarios;
+// Importar el Paquete "view" y "model" completo
+import isucv.restaurant.model.*;
 import isucv.restaurant.view.*;
 //Import necesario para manejar arraylist
 import java.util.ArrayList;
@@ -191,5 +191,14 @@ public class AppController {
         // Ocultar y desechar la ventana anterior
         prevWnd.setVisible(false);
         prevWnd.dispose();
+    }
+    
+    //Reinicia las estadisticas
+    //Hace .clear en los arraylist topspecialities y topsides
+    public void ResetStats()
+    {
+        Estadisticas statistics;
+        statistics = new Estadisticas();
+        statistics.Reset();
     }
 }
