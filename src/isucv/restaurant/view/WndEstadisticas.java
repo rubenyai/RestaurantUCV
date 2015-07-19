@@ -6,12 +6,16 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.AppController;
+import isucv.restaurant.model.ContadorContorno;
+import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Estadisticas;
 import java.awt.List;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -79,6 +83,9 @@ public class WndEstadisticas extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -216,8 +223,42 @@ public class WndEstadisticas extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          AppController.Instance.ResetStats();
+        //Mostramos las tablas vacias
+        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+        model1.setRowCount(0);
+        
+        DefaultTableModel model2 = (DefaultTableModel)this.jTable2.getModel();
+        model2.setRowCount(0);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+//Aqui codigo al abrir la ventana estadisticas
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       //codigo que vacia las tables
+        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+        model1.setRowCount(0);
+        
+        DefaultTableModel model2 = (DefaultTableModel)this.jTable2.getModel();
+        model2.setRowCount(0);
+        
+        Estadisticas statistics;
+        statistics = new Estadisticas();
+        
+        //Nos devuelve nuestros arraylists
+        statistics = AppController.Instance.GetStats();
+        //para q no explote
+        statistics.TopSpecialities=new ArrayList <ContadorEspecialidad> ();
+        statistics.TopSides=new ArrayList <ContadorContorno> ();
+        //
+        //llenamos los arraylists segun los cont que tengan, si estan vacios, no hacemos nada
+        if(statistics.TopSides.isEmpty()==false)
+        {
+            JOptionPane.showMessageDialog(null,"hola1");
+        }
+        if(statistics.TopSides.isEmpty()==false)
+        {
+             JOptionPane.showMessageDialog(null,"hola2");
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     // Almacena la ventana principal que muestra esta ventana
     private JFrame ParentWindow = null;
