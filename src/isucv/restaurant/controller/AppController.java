@@ -57,6 +57,9 @@ public class AppController {
     //Almacena las ordenes sin pagar
     public ArrayList<Pedido> UnpaidOrders;
     
+     //Almacena las ordenes sin pagar
+    public ArrayList<Pedido> PendingOrders;
+    
     //Cola de despacho de ordenes
     public Queue<Pedido> OrdersReady;
     
