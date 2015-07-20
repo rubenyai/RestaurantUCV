@@ -226,4 +226,22 @@ public class AppController {
                        }        
         return null; 
     }
+    
+    public void PayOrder(String Name,int ID,String ClientID, String BillingAdr, String PhoneNumber)
+    {
+       Pedido order=FindOrder(ID);
+       Cliente client=new Cliente(Name,ClientID,BillingAdr,PhoneNumber);
+       float total=0;
+       for(int i=0;i<order.Specialities.size();i++)
+       {
+           total+=(order.Specialities.get(i).Speciality.Price * order.Specialities.get(i).Count);
+       }
+       
+       for(int i=0;i<order.Sides.size();i++)
+       {
+           total+=(order.Sides.get(i).Side.Price * order.Sides.get(i).Count);
+       }
+       
+       Factura f= new Factura(order,client,total);
+    }
 }

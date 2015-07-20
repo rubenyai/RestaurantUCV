@@ -15,8 +15,8 @@ public class ContadorContorno
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    private Integer Count;
-    private Contorno Side;
+    public Integer Count;
+    public Contorno Side;
     
     /*//////////////
     //   METODOS  //

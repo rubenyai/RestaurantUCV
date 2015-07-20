@@ -17,8 +17,8 @@ public class ContadorEspecialidad
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    private Especialidad Speciality;
-    private Integer Count;
+    public Especialidad Speciality;
+    public Integer Count;
     private ArrayList<ContadorContorno> Sides;
     
     /*//////////////

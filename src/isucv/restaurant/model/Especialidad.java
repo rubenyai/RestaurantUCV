@@ -15,11 +15,11 @@ public class Especialidad
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    private Float Price;
+    public Float Price;
     private Integer TotalSides;
     private Integer Time;
     private Boolean Visible;
-    private String Name;
+    public String Name;
     
     /*//////////////
     //   METODOS  //
