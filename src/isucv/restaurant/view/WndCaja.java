@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import isucv.restaurant.controller.AppController;
 import isucv.restaurant.model.Pedido;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,7 +28,6 @@ public class WndCaja extends javax.swing.JFrame {
      */
     public WndCaja() {
         initComponents();
-        
         // Center Column text for the JTable
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -38,7 +38,6 @@ public class WndCaja extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
         jTable1.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);
         jTable1.getColumnModel().getColumn(ORDER_COLUMN_PRICE).setPreferredWidth(120);
-        
     }
 
     /**
@@ -329,22 +328,44 @@ public class WndCaja extends javax.swing.JFrame {
         Integer i = 0;
         //VARIABLES PARA SER USADAS CUANDO SAQUES LOS DATOS DEL ARRAYLIST
         String Descripcion;
-        float Costo;
+        float Costo, Balance = 0;
         int Cantidad;
         Pedido ActualOrder;
         ID = Integer.parseInt(jTextField1.getText());
         ActualOrder = AppController.Instance.FindOrder(ID);
+        Object[] Nuevo = new Object[3];
         //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
         //Aqui sacamos los datos de especialidades
-        Descripcion=ActualOrder.Specialities.get(i).Speciality.Name;
-        Costo=ActualOrder.Specialities.get(i).Speciality.Price;
-        Cantidad=ActualOrder.Specialities.get(i).Count;
-       
-        //Aqui la de los contornos
-        Descripcion=ActualOrder.Sides.get(i).Side.Name;
-        Costo=ActualOrder.Sides.get(i).Side.Price;
-        Cantidad=ActualOrder.Sides.get(i).Count;
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        for (i = 0; i < ActualOrder.Specialities.size(); i++)
+        {
+            Descripcion=ActualOrder.Specialities.get(i).Speciality.Name;
+            Costo=ActualOrder.Specialities.get(i).Speciality.Price;
+            Cantidad=ActualOrder.Specialities.get(i).Count;
+            Balance = (Balance + (Cantidad * Costo));
+            //HACE FALTA COMPROBAR QUE SIRVA
+            Nuevo[0] = Cantidad;
+            Nuevo[1] = Descripcion;
+            Nuevo[2] = Costo;
+            modelo.addRow(Nuevo);
+        }
         
+        //Aqui la de los contornos ADICIONALES
+        for (i = 0; i < ActualOrder.Sides.size(); i++)
+        {
+            Descripcion=ActualOrder.Sides.get(i).Side.Name;
+            Costo=ActualOrder.Sides.get(i).Side.Price;
+            Cantidad=ActualOrder.Sides.get(i).Count;
+            Balance = (Balance + (Cantidad * Costo));
+            /*HACE FALTA COMPROBAR QUE SIRVA Y ELEJIR CUAL ES LA MEJOR OPCION
+            Nuevo[0] = Cantidad;
+            Nuevo[1] = Descripcion;
+            Nuevo[2] = Costo;
+            modelo.addRow(Nuevo);
+                    */
+            Object Test[]= {Cantidad, Descripcion, Costo};
+            modelo.addRow(Test);
+        }
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -357,11 +378,10 @@ public class WndCaja extends javax.swing.JFrame {
         Direccion1 = jTextField5.getText();
         Direccion2 = jTextField6.getText();
     }
-    private void CalculateAmount()
+    private void CalculateAmount(int Balance)
     {
         //Se encarga de calcular el Subtotal de la orden
         //Falta agregar que sume todas las columnas de precio del jtable
-        float Balance = 0;
         float aux;
         aux = (float) (Balance * 0.12);
 
