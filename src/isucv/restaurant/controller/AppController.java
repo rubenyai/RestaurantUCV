@@ -44,10 +44,7 @@ public class AppController {
     *////////////////////////////
     // Ventana de Inicio de Sesion
     public WndLogin LoginWindow;
-    
-     // Ventana de Estadisticas
-    public WndLogin StatisticsWindow;
-    
+        
     // Ventana de Rol o Subrol Activa
     public JFrame ActiveWindow;
     

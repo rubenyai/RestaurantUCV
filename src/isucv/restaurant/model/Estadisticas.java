@@ -26,19 +26,8 @@ public class Estadisticas
     
     public void Reset()
     {   
-        //mientras se implementa los add dejar este codigo para q no explote
-        TopSpecialities=new ArrayList <ContadorEspecialidad> ();
-        TopSides=new ArrayList <ContadorContorno> ();
-        //borrar estas dos lineas al implementar los add
-        
-        if(TopSpecialities.isEmpty()==false)
-        {
-            TopSpecialities.clear();
-        }
-        if(TopSides.isEmpty()==false)
-        {
-             TopSides.clear();
-        }
+        TopSpecialities.clear();
+        TopSides.clear();
     }
     
     public void AddSpeciality(Especialidad Speciality, Integer Count)
