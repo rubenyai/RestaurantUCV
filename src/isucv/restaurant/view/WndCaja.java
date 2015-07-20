@@ -22,7 +22,7 @@ public class WndCaja extends javax.swing.JFrame {
     private final static int ORDER_COLUMN_PRICE = 2;
     // ATRIBUTOS INTERNOS
     Integer ID;
-    String Name, CI, Num, Direccion1, Direccion2;
+    String Name, CI, Num, Direccion1;
     /**
      * Creates new form WndCaja
      */
@@ -375,8 +375,7 @@ public class WndCaja extends javax.swing.JFrame {
         Name = jTextField2.getText();
         CI = jTextField3.getText();
         Num = jTextField4.getText();
-        Direccion1 = jTextField5.getText();
-        Direccion2 = jTextField6.getText();
+        Direccion1 = (jTextField5.getText() + " " + jTextField6.getText());
     }
     private void CalculateAmount(int Balance)
     {
@@ -391,7 +390,14 @@ public class WndCaja extends javax.swing.JFrame {
         aux = aux + Balance;
         jLabel13.setText(Float.toString(aux));
     }
-    
+    private void PayForOrder()
+    {//Se envian los datos del cliente al metodo payorder para poder generar  la factura
+        AppController.Instance.PayOrder(Name, Integer.parseInt(jTextField1.getText()) , CI, Direccion1, Num);
+    }
+    public float GetTotal()
+    {
+        return (Float.parseFloat(jLabel13.getText()));
+    }
     
       
 
