@@ -10,6 +10,7 @@ import isucv.restaurant.model.*;
 import isucv.restaurant.view.*;
 //Import necesario para manejar arraylist
 import java.util.ArrayList;
+import java.util.Queue;
 
 // Imports Adicionales
 import java.util.logging.Level;
@@ -55,6 +56,14 @@ public class AppController {
     
     //Almacena las ordenes sin pagar
     public ArrayList<Pedido> UnpaidOrders;
+    
+    //Cola de despacho de ordenes
+    public Queue<Pedido> OrdersReady;
+    
+    //Almacena la cartelera
+    public Cartelera Billboard;
+    
+    //Almacena Billboard
       
     /*//////////////
     //   METODOS  //
@@ -198,24 +207,40 @@ public class AppController {
         prevWnd.setVisible(false);
         prevWnd.dispose();
     }
-       
-    public Estadisticas GetStats()
+               
+    public ArrayList<ContadorContorno> ChooseSides(int TotalSides,ArrayList<ContadorContorno> SelectedSides)
     {
-        Estadisticas statistics;
-        statistics = new Estadisticas();
+        //TODO here       
+        return null; 
+    }
+    
+    public ArrayList<Especialidad> GetBillboardSpecialities()
+    {
+        //TODO here
+        return null;
+    }
+    
+    public ArrayList<Contorno> GetBillboardSides()
+    {
+        //TODO here
+        return null;
+    }
+    
+    public void SetBillboardSpecialities(ArrayList<Especialidad> Specialities)
+    {
+        //TODO here
+    }
+    
+     public void SetBillboardSides(ArrayList<Contorno> Sides)
+    {
+        //TODO here
+    }
+    
+    public void GenerateOrder(ArrayList<ContadorEspecialidad> Specialities,ArrayList<ContadorContorno> Sides)
+    {
+        //TODO here
+    }
         
-        return statistics;
-    }
-    
-    //Reinicia las estadisticas
-    //Hace .clear en los arraylist topspecialities y topsides
-    public void ResetStats()
-    {
-        Estadisticas statistics;
-        statistics = new Estadisticas();
-        statistics.Reset();
-    }
-    
     public Pedido FindOrder(Integer ID)
     {
         UnpaidOrders=new ArrayList <Pedido> (); 
@@ -226,7 +251,7 @@ public class AppController {
                        }        
         return null; 
     }
-    
+            
     public void PayOrder(String Name,int ID,String ClientID, String BillingAdr, String PhoneNumber)
     {
        Pedido order=FindOrder(ID);
@@ -243,5 +268,47 @@ public class AppController {
        }
        
        Factura f= new Factura(order,client,total);
+    }
+    
+    public ArrayList<Pedido> GetPendingOrders()
+    {
+        return null;
+    }
+    
+    public void RequestDelivery(int ID)
+    {
+        //TODO here
+    }
+    
+    public boolean IsNextPendingOrderAvalaible()
+    {
+        return false;
+    }
+    
+    public Pedido GetNextOrderReady()
+    {
+        return null;
+    }
+    
+    public void RemoveOrder(int ID)
+    {
+        //TODO here
+    }
+    
+    public Estadisticas GetStats()
+    {
+        Estadisticas statistics;
+        statistics = new Estadisticas();
+        
+        return statistics;
+    }
+    
+    //Reinicia las estadisticas
+    //Hace .clear en los arraylist topspecialities y topsides
+    public void ResetStats()
+    {
+        Estadisticas statistics;
+        statistics = new Estadisticas();
+        statistics.Reset();
     }
 }
