@@ -245,10 +245,7 @@ public class WndEstadisticas extends javax.swing.JFrame {
         
         //Nos devuelve nuestros arraylists
         statistics = AppController.Instance.GetStats();
-        //para q no explote
-        statistics.TopSpecialities=new ArrayList <ContadorEspecialidad> ();
-        statistics.TopSides=new ArrayList <ContadorContorno> ();
-        //
+
         //llenamos los arraylists segun los cont que tengan, si estan vacios, no hacemos nada
         if(statistics.TopSides.isEmpty()==false)
         {

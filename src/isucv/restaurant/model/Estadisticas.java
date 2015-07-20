@@ -26,8 +26,8 @@ public class Estadisticas
     
     public void Reset()
     {   
-        TopSpecialities.clear();
-        TopSides.clear();
+        TopSpecialities=new ArrayList<ContadorEspecialidad> ();
+        TopSides=new ArrayList<ContadorContorno> ();
     }
     
     public void AddSpeciality(Especialidad Speciality, Integer Count)
