@@ -54,8 +54,8 @@ public class AppController {
     public String ActiveUsername;
     
     //Almacena las ordenes sin pagar
-    private ArrayList<Pedido> UnpaidOrders;
-    
+    public ArrayList<Pedido> UnpaidOrders;
+      
     /*//////////////
     //   METODOS  //
     *///////////////
@@ -216,9 +216,10 @@ public class AppController {
         statistics.Reset();
     }
     
-    public  Pedido FindOrder(Integer ID)
+    public Pedido FindOrder(Integer ID)
     {
-         for( int i = 0 ; i  < UnpaidOrders.size(); i++){
+        UnpaidOrders=new ArrayList <Pedido> (); 
+        for( int i = 0 ; i  < UnpaidOrders.size(); i++){
                             if(UnpaidOrders.get(i).ID.equals(ID)) {
                                 return (UnpaidOrders.get(i));
                             }                        
