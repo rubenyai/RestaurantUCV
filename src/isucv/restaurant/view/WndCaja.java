@@ -328,11 +328,22 @@ public class WndCaja extends javax.swing.JFrame {
         //Se busca el pedido utilizando el ID
         Integer i = 0;
         //VARIABLES PARA SER USADAS CUANDO SAQUES LOS DATOS DEL ARRAYLIST
-        String Cantidad, Descripcion, Costo;
+        String Descripcion;
+        float Costo;
+        int Cantidad;
         Pedido ActualOrder;
         ID = Integer.parseInt(jTextField1.getText());
         ActualOrder = AppController.Instance.FindOrder(ID);
         //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
+        //Aqui sacamos los datos de especialidades
+        Descripcion=ActualOrder.Specialities.get(i).Speciality.Name;
+        Costo=ActualOrder.Specialities.get(i).Speciality.Price;
+        Cantidad=ActualOrder.Specialities.get(i).Count;
+       
+        //Aqui la de los contornos
+        Descripcion=ActualOrder.Sides.get(i).Side.Name;
+        Costo=ActualOrder.Sides.get(i).Side.Price;
+        Cantidad=ActualOrder.Sides.get(i).Count;
         
         
         
