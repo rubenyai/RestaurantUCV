@@ -53,6 +53,9 @@ public class AppController {
     // Almacena el Nombre de usuario Actual (luego de Iniciar Sesion)
     public String ActiveUsername;
     
+    //Almacena las ordenes sin pagar
+    private ArrayList<Pedido> UnpaidOrders;
+    
     /*//////////////
     //   METODOS  //
     *///////////////
@@ -212,4 +215,13 @@ public class AppController {
         statistics = new Estadisticas();
         statistics.Reset();
     }
+    
+    //EL METODO FIND ORDER HAY QUE BORARRLO Y HACER EL QUE ES, LO PUSE SOLO PARA PODER REALIZAR LA INTERFAZ
+    public static Pedido FindOrder(Integer ID)
+    {
+        Pedido A;
+        A = new Pedido();
+        return (A);
+    }
+    //HAY QUE BORRAR EL METODO FINDORDER Y HACERLO CORRECTAMENTE
 }

@@ -7,6 +7,8 @@ package isucv.restaurant.view;
 
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import isucv.restaurant.controller.AppController;
+import isucv.restaurant.model.Pedido;
 
 /**
  *
@@ -17,7 +19,9 @@ public class WndCaja extends javax.swing.JFrame {
     private final static int ORDER_COLUMN_QUANTITY = 0;
     private final static int ORDER_COLUMN_DESCRIPTION = 1;
     private final static int ORDER_COLUMN_PRICE = 2;
-    
+    // ATRIBUTOS INTERNOS
+    Integer ID;
+    String Name, CI, Num, Direccion1, Direccion2;
     /**
      * Creates new form WndCaja
      */
@@ -82,6 +86,11 @@ public class WndCaja extends javax.swing.JFrame {
         jTextField1.setText("2456");
 
         jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Datos de Cliente");
@@ -254,13 +263,10 @@ public class WndCaja extends javax.swing.JFrame {
                                 .addComponent(jTextField4))
                             .addComponent(jTextField2)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel7)))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
         );
@@ -317,7 +323,46 @@ public class WndCaja extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    //Boton BUSCAR
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //Se busca el pedido utilizando el ID
+        Integer i = 0;
+        //VARIABLES PARA SER USADAS CUANDO SAQUES LOS DATOS DEL ARRAYLIST
+        String Cantidad, Descripcion, Costo;
+        Pedido ActualOrder;
+        ID = Integer.parseInt(jTextField1.getText());
+        ActualOrder = AppController.FindOrder(ID);
+        //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private void GetInformation()
+    {
+        //Se recopila los datos del cliente (Nombre, CI, Direccion, etc)
+        Name = jTextField2.getText();
+        CI = jTextField3.getText();
+        Num = jTextField4.getText();
+        Direccion1 = jTextField5.getText();
+        Direccion2 = jTextField6.getText();
+    }
+    private void CalculateAmount()
+    {
+        //Se encarga de calcular el Subtotal de la orden
+        //Falta agregar que sume todas las columnas de precio del jtable
+        float Balance = 0;
+        float aux;
+        aux = (float) (Balance * 0.12);
 
+        //Se empiezan a llenar los campos del subtotal, iva y total
+        jLabel9.setText(Float.toString(Balance));
+        jLabel11.setText(Float.toString(aux));
+        aux = aux + Balance;
+        jLabel13.setText(Float.toString(aux));
+    }
+    
+    
+      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
