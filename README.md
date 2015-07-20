@@ -1,10 +1,15 @@
 # RestaurantUCV
-Proyecto Ingeria de software
+Proyecto Ingenieria de Software
 
 Equipo:
+
 -Fabian Ramos
+
 -David Contreras
+
 -Ruben Maza
--Roger Desaparicio
+
+-¿Roger Aparicio?
+
 
 Cliente: Paulo Perez
