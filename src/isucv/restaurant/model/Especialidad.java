@@ -25,7 +25,7 @@ public class Especialidad
     //   METODOS  //
     *///////////////
     
-    public Especialidad (Float P, Integer S, Integer T, Boolean V, String N)
+    public Especialidad (String N, Float P, Integer S, Integer T, Boolean V)
     {
         Price = P;
         TotalSides = S;

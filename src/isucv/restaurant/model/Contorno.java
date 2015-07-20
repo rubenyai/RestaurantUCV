@@ -24,7 +24,7 @@ public class Contorno
     //   METODOS  //
     *///////////////
     
-    public Contorno(Float P, Integer T, Boolean V, String N)
+    public Contorno(String N, Float P, Integer T, Boolean V)
     {
         Price = P;
         Time = T;

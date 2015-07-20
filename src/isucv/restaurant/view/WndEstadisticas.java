@@ -75,8 +75,8 @@ public class WndEstadisticas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cmdClose = new javax.swing.JButton();
+        cmdResetStats = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Estadisticas del Dia");
@@ -164,13 +164,13 @@ public class WndEstadisticas extends javax.swing.JFrame {
         jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTable2);
 
-        jButton1.setText("Cerrar");
+        cmdClose.setText("Cerrar");
 
-        jButton2.setText("Reiniciar Estadisticas");
-        jButton2.setToolTipText("");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cmdResetStats.setText("Reiniciar Estadisticas");
+        cmdResetStats.setToolTipText("");
+        cmdResetStats.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cmdResetStatsActionPerformed(evt);
             }
         });
 
@@ -183,9 +183,9 @@ public class WndEstadisticas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmdResetStats, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmdClose, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -208,8 +208,8 @@ public class WndEstadisticas extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmdClose, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdResetStats, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -221,7 +221,7 @@ public class WndEstadisticas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cmdResetStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdResetStatsActionPerformed
          AppController.Instance.ResetStats();
         //Mostramos las tablas vacias
         DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
@@ -230,7 +230,7 @@ public class WndEstadisticas extends javax.swing.JFrame {
         DefaultTableModel model2 = (DefaultTableModel)this.jTable2.getModel();
         model2.setRowCount(0);
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cmdResetStatsActionPerformed
 //Aqui codigo al abrir la ventana estadisticas
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        //codigo que vacia las tables
@@ -277,8 +277,8 @@ public class WndEstadisticas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cmdClose;
+    private javax.swing.JButton cmdResetStats;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;

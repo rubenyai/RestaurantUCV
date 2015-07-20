@@ -51,7 +51,7 @@ public class WndCaja extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        cmdSearchOrder = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -72,8 +72,8 @@ public class WndCaja extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        cmdGenerateOrder = new javax.swing.JButton();
+        cmdDiscardOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pago de Pedidos");
@@ -84,10 +84,10 @@ public class WndCaja extends javax.swing.JFrame {
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setText("2456");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cmdSearchOrder.setText("Buscar");
+        cmdSearchOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cmdSearchOrderActionPerformed(evt);
             }
         });
 
@@ -214,9 +214,9 @@ public class WndCaja extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jButton2.setText("Generar Pedido");
+        cmdGenerateOrder.setText("Generar Pedido");
 
-        jButton3.setText("Descartar Pedido");
+        cmdDiscardOrder.setText("Descartar Pedido");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,7 +230,7 @@ public class WndCaja extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(jButton1)
+                        .addComponent(cmdSearchOrder)
                         .addGap(52, 234, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
@@ -243,8 +243,8 @@ public class WndCaja extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cmdGenerateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdDiscardOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +280,7 @@ public class WndCaja extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1))
+                    .addComponent(cmdSearchOrder))
                 .addGap(11, 11, 11)
                 .addComponent(jLabel2)
                 .addGap(6, 6, 6)
@@ -314,16 +314,16 @@ public class WndCaja extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmdGenerateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmdDiscardOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(11, 11, 11))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     //Boton BUSCAR
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cmdSearchOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSearchOrderActionPerformed
         //Se busca el pedido utilizando el ID
         Integer i = 0;
         //VARIABLES PARA SER USADAS CUANDO SAQUES LOS DATOS DEL ARRAYLIST
@@ -368,7 +368,7 @@ public class WndCaja extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cmdSearchOrderActionPerformed
     private void GetInformation()
     {
         //Se recopila los datos del cliente (Nombre, CI, Direccion, etc)
@@ -396,9 +396,9 @@ public class WndCaja extends javax.swing.JFrame {
       
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton cmdDiscardOrder;
+    private javax.swing.JButton cmdGenerateOrder;
+    private javax.swing.JButton cmdSearchOrder;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
