@@ -17,7 +17,7 @@ public class Pedido
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    private Integer ID;
+    public Integer ID;
     private String Status;
     //CAMBIAR ATRIBUTOS A PRIVATE
     public ArrayList<ContadorEspecialidad> Specialities;
@@ -38,4 +38,4 @@ public class Pedido
     {
         this.Status = Status;
     }
-}
+ }

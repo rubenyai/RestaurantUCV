@@ -43,11 +43,20 @@ public class Estadisticas
     
     public void AddSpeciality(Especialidad Speciality, Integer Count)
     {
-        
+        ContadorEspecialidad contesp;
+        //Creamos el objeto
+        contesp = new ContadorEspecialidad(Speciality);
+        //Introducimos el count
+        contesp.AddCount(Count);
+        //Introducimos los contornos del mismo
     }
     
     public void AddSides(Contorno Sides, Integer Count)
     {
-        
+        ContadorContorno contcon;
+        //Creamos el objeto
+        contcon = new ContadorContorno(Sides);
+        //Introducimos el count
+        contcon.AddCount(Count);
     }
 }

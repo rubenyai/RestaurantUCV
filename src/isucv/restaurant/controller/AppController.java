@@ -217,11 +217,16 @@ public class AppController {
     }
     
     //EL METODO FIND ORDER HAY QUE BORARRLO Y HACER EL QUE ES, LO PUSE SOLO PARA PODER REALIZAR LA INTERFAZ
-    public static Pedido FindOrder(Integer ID)
+    public Pedido FindOrder(Integer ID)
     {
-        Pedido A;
-        A = new Pedido();
-        return (A);
+         for( int i = 0 ; i  < UnpaidOrders.size(); i++){
+                            if(UnpaidOrders.get(i).ID.equals(ID)) {
+                                return (UnpaidOrders.get(i));
+                            }                        
+                       }        
+        return null;
+        
+        
     }
     //HAY QUE BORRAR EL METODO FINDORDER Y HACERLO CORRECTAMENTE
 }
