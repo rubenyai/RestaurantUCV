@@ -331,7 +331,7 @@ public class WndCaja extends javax.swing.JFrame {
         String Cantidad, Descripcion, Costo;
         Pedido ActualOrder;
         ID = Integer.parseInt(jTextField1.getText());
-        ActualOrder = AppController.FindOrder(ID);
+        ActualOrder = AppController.Instance.FindOrder(ID);
         //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
         
         
