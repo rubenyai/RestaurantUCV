@@ -318,10 +318,13 @@ public class AppController {
             if(UnpaidOrders.get(i).ID.equals(ID)) {
                    UnpaidOrders.remove(i);
             }
+        } 
+        
+        for( int i = 0 ; i  < PendingOrders.size(); i++){
             if(PendingOrders.get(i).ID.equals(ID)) {
-                   PendingOrders.remove(i);
-            } 
-        }               
+                       PendingOrders.remove(i);
+            }
+        }
     }
     
     public Estadisticas GetStats()
