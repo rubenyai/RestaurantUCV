@@ -6,8 +6,11 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.AppController;
+import isucv.restaurant.model.ContadorContorno;
+import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Contorno;
 import isucv.restaurant.model.Especialidad;
+import isucv.restaurant.model.Pedido;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -43,6 +46,9 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         cmdBillboardLoadFromFile = new javax.swing.JButton();
         cmdBillboardSaveToFile = new javax.swing.JButton();
+        cmdCreateDebugOrder = new javax.swing.JButton();
+        txtOrderId = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lanzador de Ventanas");
@@ -85,6 +91,19 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
             }
         });
 
+        cmdCreateDebugOrder.setText("Create Debug Order");
+        cmdCreateDebugOrder.setEnabled(false);
+        cmdCreateDebugOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCreateDebugOrderActionPerformed(evt);
+            }
+        });
+
+        txtOrderId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtOrderId.setText("2456");
+
+        jLabel1.setText("Order ID");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,12 +115,18 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                         .addComponent(cmdDebugSideSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                         .addComponent(cmdDebugUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdCreateDebugOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdBillboardLoadFromFile)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(cmdBillboardLoadFromFile))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdBillboardSaveToFile)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmdBillboardSaveToFile)
+                            .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +140,12 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdBillboardLoadFromFile, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdBillboardSaveToFile, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdCreateDebugOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,6 +219,8 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
 		} catch (IOException e) {
                         throw new RuntimeException(e);
 		}
+         
+         cmdCreateDebugOrder.setEnabled(true);
     }//GEN-LAST:event_cmdBillboardLoadFromFileActionPerformed
 
     private void cmdBillboardSaveToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardSaveToFileActionPerformed
@@ -244,11 +276,61 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_cmdBillboardSaveToFileActionPerformed
 
+    private void cmdCreateDebugOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCreateDebugOrderActionPerformed
+        // Order
+        Pedido p = new Pedido();
+        p.ID = Integer.parseInt(txtOrderId.getText());
+        
+        // Speciality=Pizza 4 Estaciones (x2)
+        ContadorEspecialidad sp = new ContadorEspecialidad(AppController.Instance.Billboard.Specialities.get(2));
+        sp.Count = 2;
+        p.Specialities.add(sp);
+        
+        // Speciality=Pizza Margarita (x1)
+        sp = new ContadorEspecialidad(AppController.Instance.Billboard.Specialities.get(0));
+        sp.Count = 1;
+        p.Specialities.add(sp);
+        
+        // Speciality=Pollo a la Canasta (x1) {Yuca Frita, Papas al Vapor}
+        ArrayList<ContadorContorno> sides = new ArrayList<>();
+        sp = new ContadorEspecialidad(AppController.Instance.Billboard.Specialities.get(3));
+        sp.AddCount(1);
+        ContadorContorno cont = new ContadorContorno(AppController.Instance.Billboard.Sides.get(2));
+        cont.Count = 1;
+        sides.add(cont);
+        cont = new ContadorContorno(AppController.Instance.Billboard.Sides.get(1));
+        cont.Count = 1;
+        sides.add(cont);
+        sp.SetSides(sides);
+        p.Specialities.add(sp);
+                
+        // Speciality=Pollo a la Canasta (x1) {Papas al Vapor (x2)}
+        sides = new ArrayList<>();
+        sp = new ContadorEspecialidad(AppController.Instance.Billboard.Specialities.get(3));
+        sp.AddCount(1);
+        cont = new ContadorContorno(AppController.Instance.Billboard.Sides.get(1));
+        cont.Count = 2;
+        sides.add(cont);
+        sp.SetSides(sides);
+        p.Specialities.add(sp);
+        
+        // Additional Side=Papas al Vapor (x1)
+        cont = new ContadorContorno(AppController.Instance.Billboard.Sides.get(1));
+        cont.Count = 1;
+        p.Sides.add(cont);
+        
+        // Add Order to UnpaidOrders
+        AppController.Instance.UnpaidOrders.add(p);
+    }//GEN-LAST:event_cmdCreateDebugOrderActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBillboardLoadFromFile;
     private javax.swing.JButton cmdBillboardSaveToFile;
+    private javax.swing.JButton cmdCreateDebugOrder;
     private javax.swing.JButton cmdDebugSideSelector;
     private javax.swing.JButton cmdDebugUsers;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField txtOrderId;
     // End of variables declaration//GEN-END:variables
 }

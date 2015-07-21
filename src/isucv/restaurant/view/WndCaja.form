@@ -410,6 +410,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Descartar Pedido"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdDiscardOrderActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

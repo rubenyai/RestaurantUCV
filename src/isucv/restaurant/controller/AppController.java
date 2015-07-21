@@ -8,6 +8,7 @@ package isucv.restaurant.controller;
 // Importar el Paquete "view" y "model" completo
 import isucv.restaurant.model.*;
 import isucv.restaurant.view.*;
+import java.util.AbstractQueue;
 //Import necesario para manejar arraylist
 import java.util.ArrayList;
 import java.util.Queue;
@@ -83,6 +84,10 @@ public class AppController {
         // Crear una nueva instancia de WndLogin
         Instance.LoginWindow = new WndLogin();
         Instance.LoginWindow.setLocationRelativeTo(null); // Centrar Ventana
+        
+        // Inicializar las Colas y Listas de Pedidos
+        Instance.UnpaidOrders = new ArrayList<>();
+        Instance.PendingOrders = new ArrayList<>();
                 
         // Mostrar la ventana de Login siempre que no haya otra ventana activa
         while (true)

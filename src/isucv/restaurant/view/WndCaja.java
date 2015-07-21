@@ -38,6 +38,9 @@ public class WndCaja extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
         jTable1.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);
         jTable1.getColumnModel().getColumn(ORDER_COLUMN_PRICE).setPreferredWidth(120);
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setNumRows(0); // Se elimina el contenido del Table
     }
 
     /**
@@ -217,6 +220,11 @@ public class WndCaja extends javax.swing.JFrame {
         cmdGenerateOrder.setText("Generar Pedido");
 
         cmdDiscardOrder.setText("Descartar Pedido");
+        cmdDiscardOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDiscardOrderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -337,6 +345,7 @@ public class WndCaja extends javax.swing.JFrame {
         //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
         //Aqui sacamos los datos de especialidades
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setNumRows(0); // Se elimina el contenido del Table
         for (i = 0; i < ActualOrder.Specialities.size(); i++)
         {
             Descripcion=ActualOrder.Specialities.get(i).Speciality.Name;
@@ -367,8 +376,12 @@ public class WndCaja extends javax.swing.JFrame {
             modelo.addRow(Test);
         }
         
-        
+        CalculateAmount(Balance);
     }//GEN-LAST:event_cmdSearchOrderActionPerformed
+
+    private void cmdDiscardOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardOrderActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdDiscardOrderActionPerformed
     private void GetInformation()
     {
         //Se recopila los datos del cliente (Nombre, CI, Direccion, etc)
@@ -377,7 +390,7 @@ public class WndCaja extends javax.swing.JFrame {
         Num = jTextField4.getText();
         Direccion1 = (jTextField5.getText() + " " + jTextField6.getText());
     }
-    private void CalculateAmount(int Balance)
+    private void CalculateAmount(float Balance)
     {
         //Se encarga de calcular el Subtotal de la orden
         //Falta agregar que sume todas las columnas de precio del jtable

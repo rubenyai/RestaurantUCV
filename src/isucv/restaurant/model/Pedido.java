@@ -20,8 +20,8 @@ public class Pedido
     public Integer ID;
     private String Status;
     //CAMBIAR ATRIBUTOS A PRIVATE
-    public ArrayList<ContadorEspecialidad> Specialities;
-    public ArrayList<ContadorContorno> Sides;
+    public ArrayList<ContadorEspecialidad> Specialities = new ArrayList<>();
+    public ArrayList<ContadorContorno> Sides = new ArrayList<>();
     
     
     /*//////////////
