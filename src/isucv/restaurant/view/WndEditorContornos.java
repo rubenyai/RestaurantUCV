@@ -7,6 +7,7 @@ package isucv.restaurant.view;
 
 import isucv.restaurant.controller.AppController;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,17 +24,17 @@ public class WndEditorContornos extends javax.swing.JFrame {
      */
     public WndEditorContornos() {
         initComponents();
-        jTable1.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(160);
-        jTable1.getColumnModel().getColumn(COLUMN_PRICE).setPreferredWidth(60);
-        jTable1.getColumnModel().getColumn(COLUMN_AVAILABLE).setPreferredWidth(60);
+        Table.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(160);
+        Table.getColumnModel().getColumn(COLUMN_PRICE).setPreferredWidth(60);
+        Table.getColumnModel().getColumn(COLUMN_AVAILABLE).setPreferredWidth(60);
         
-        lblTotal.setText(jTable1.getRowCount() + " Contornos totales.");
+        lblTotal.setText(Table.getRowCount() + " Contornos totales.");
         
         int i;
         int count = 0;
-        for (i = 0; i < jTable1.getRowCount(); i++)
+        for (i = 0; i < Table.getRowCount(); i++)
         {
-            Object val = jTable1.getModel().getValueAt(i, COLUMN_AVAILABLE);
+            Object val = Table.getModel().getValueAt(i, COLUMN_AVAILABLE);
             if (val != null && (boolean)val)
                 count++;
         }
@@ -50,15 +51,15 @@ public class WndEditorContornos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Table = new javax.swing.JTable();
+        cmdApplyChanges = new javax.swing.JButton();
+        cmdDiscardChanges = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        cmdAdd = new javax.swing.JButton();
+        cmdDelete = new javax.swing.JButton();
         lblTotal = new javax.swing.JLabel();
         lblVisible = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        cmdDeleteAll = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editor de Contornos");
@@ -69,7 +70,7 @@ public class WndEditorContornos extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Papas Fritas",  new Float(210.7),  new Boolean(false)},
                 {"Papas al Vapor",  new Float(180.4),  new Boolean(true)},
@@ -92,25 +93,50 @@ public class WndEditorContornos extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTable1);
+        Table.getTableHeader().setReorderingAllowed(false);
+        Table.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                TablePropertyChange(evt);
+            }
+        });
+        jScrollPane2.setViewportView(Table);
 
-        jButton1.setText("Aplicar Cambios");
+        cmdApplyChanges.setText("Aplicar Cambios");
 
-        jButton2.setText("Descartar");
+        cmdDiscardChanges.setText("Descartar");
+        cmdDiscardChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDiscardChangesActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Contornos Almacenados Actualmente");
 
-        jButton3.setText("Agregar");
+        cmdAdd.setText("Agregar");
+        cmdAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAddActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Eliminar");
+        cmdDelete.setText("Eliminar");
+        cmdDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDeleteActionPerformed(evt);
+            }
+        });
 
         lblTotal.setText("# Contornos Totales");
 
         lblVisible.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblVisible.setText("# Contornos Disponibles en Cartelera");
 
-        jButton5.setText("Eliminar Todo");
+        cmdDeleteAll.setText("Eliminar Todo");
+        cmdDeleteAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDeleteAllActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,14 +155,14 @@ public class WndEditorContornos extends javax.swing.JFrame {
                                     .addComponent(lblTotal)
                                     .addComponent(lblVisible))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmdApplyChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cmdDiscardChanges, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdDeleteAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(12, 12, 12))))
         );
         layout.setVerticalGroup(
@@ -151,18 +177,18 @@ public class WndEditorContornos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmdApplyChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmdDiscardChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblTotal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblVisible))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(cmdAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
+                        .addComponent(cmdDelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
+                        .addComponent(cmdDeleteAll)
                         .addGap(0, 262, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -175,6 +201,63 @@ public class WndEditorContornos extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
 
+    private void cmdDiscardChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardChangesActionPerformed
+        // Cierra esta Ventana y descarta los cambios
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdDiscardChangesActionPerformed
+
+    private void cmdDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteAllActionPerformed
+        // Elimina todos los elementos de la lista
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        md.setRowCount(0);
+        
+        UpdateInternalStatistics();
+    }//GEN-LAST:event_cmdDeleteAllActionPerformed
+
+    private void cmdAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddActionPerformed
+        // Agrega un elemento adicional (fila) a la tabla
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        md.setRowCount(md.getRowCount() + 1);
+        
+        UpdateInternalStatistics();
+    }//GEN-LAST:event_cmdAddActionPerformed
+
+    private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
+        // Elimina uno o varios elementos (filas) seleccionados de la tabla      
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        if (md.getRowCount() < 1)
+            return;
+        
+        int i;
+        for (i = md.getRowCount() - 1; i >= 0; i--)
+        {
+            if (Table.isRowSelected(i))
+                md.removeRow(i);
+        }
+        
+        UpdateInternalStatistics();
+    }//GEN-LAST:event_cmdDeleteActionPerformed
+
+    private void TablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablePropertyChange
+         UpdateInternalStatistics();
+    }//GEN-LAST:event_TablePropertyChange
+
+    // Actualiza las estadisticas sobre contornos totales y visibles
+    // mostradas en los Labels de la ventana
+    private void UpdateInternalStatistics()
+    {
+        lblTotal.setText(Table.getRowCount() + " Contornos totales.");
+        int i;
+        int count = 0;
+        for (i = 0; i < Table.getRowCount(); i++)
+        {
+            Object val = Table.getModel().getValueAt(i, COLUMN_AVAILABLE);
+            if (val != null && (boolean)val)
+                count++;
+        }
+        lblVisible.setText(count + " Contornos Visibles en Cartelera.");
+    }
+    
     // Almacena la ventana principal que muestra esta ventana
     private JFrame ParentWindow = null;
     
@@ -192,14 +275,14 @@ public class WndEditorContornos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JTable Table;
+    private javax.swing.JButton cmdAdd;
+    private javax.swing.JButton cmdApplyChanges;
+    private javax.swing.JButton cmdDelete;
+    private javax.swing.JButton cmdDeleteAll;
+    private javax.swing.JButton cmdDiscardChanges;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblVisible;
     // End of variables declaration//GEN-END:variables

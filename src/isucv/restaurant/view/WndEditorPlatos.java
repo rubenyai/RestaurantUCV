@@ -7,6 +7,7 @@ package isucv.restaurant.view;
 
 import isucv.restaurant.controller.AppController;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,7 +31,7 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         Table.getColumnModel().getColumn(COLUMN_TIME).setPreferredWidth(40);
         Table.getColumnModel().getColumn(COLUMN_AVAILABLE).setPreferredWidth(60);
         
-        lblTotal.setText(Table.getRowCount() + " Platos totales.");
+        lblTotal.setText(Table.getRowCount() + " Especialidades totales.");
         
         int i;
         int count = 0;
@@ -40,7 +41,7 @@ public class WndEditorPlatos extends javax.swing.JFrame {
             if (val != null && (boolean)val)
                 count++;
         }
-        lblVisible.setText(count + " Platos Visibles en Cartelera.");
+        lblVisible.setText(count + " Especialidades Visibles en Cartelera.");
     }
 
     /**
@@ -64,7 +65,7 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         cmdDeleteAll = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Editor de Platos");
+        setTitle("Editor de Especialidades");
         setMinimumSize(new java.awt.Dimension(580, 393));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -97,17 +98,37 @@ public class WndEditorPlatos extends javax.swing.JFrame {
             }
         });
         Table.getTableHeader().setReorderingAllowed(false);
+        Table.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                TablePropertyChange(evt);
+            }
+        });
         jScrollPane2.setViewportView(Table);
 
         cmdApplyChanges.setText("Aplicar Cambios");
 
         cmdDiscardChanges.setText("Descartar");
+        cmdDiscardChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDiscardChangesActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Platos Almacenados Actualmente");
 
         cmdAdd.setText("Agregar");
+        cmdAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAddActionPerformed(evt);
+            }
+        });
 
         cmdDelete.setText("Eliminar");
+        cmdDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDeleteActionPerformed(evt);
+            }
+        });
 
         lblTotal.setText("# Platos Totales");
 
@@ -116,6 +137,11 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         lblVisible.setToolTipText("");
 
         cmdDeleteAll.setText("Eliminar Todo");
+        cmdDeleteAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDeleteAllActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,6 +206,63 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
 
+    private void cmdDiscardChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardChangesActionPerformed
+        // Cierra esta ventana y descarta los cambios
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdDiscardChangesActionPerformed
+
+    private void cmdDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteAllActionPerformed
+        // Elimina todos los elementos de la lista
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        md.setRowCount(0);
+        
+        UpdateInternalStatistics();
+    }//GEN-LAST:event_cmdDeleteAllActionPerformed
+
+    private void cmdAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddActionPerformed
+        // Agrega un elemento adicional (fila) a la tabla
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        md.setRowCount(md.getRowCount() + 1);
+        
+        UpdateInternalStatistics();
+    }//GEN-LAST:event_cmdAddActionPerformed
+
+    private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
+        // Elimina uno o varios elementos (filas) seleccionados de la tabla      
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        if (md.getRowCount() < 1)
+            return;
+        
+        int i;
+        for (i = md.getRowCount() - 1; i >= 0; i--)
+        {
+            if (Table.isRowSelected(i))
+                md.removeRow(i);
+        }
+        
+        UpdateInternalStatistics();
+    }//GEN-LAST:event_cmdDeleteActionPerformed
+
+    private void TablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablePropertyChange
+        UpdateInternalStatistics();
+    }//GEN-LAST:event_TablePropertyChange
+
+    // Actualiza las estadisticas sobre contornos totales y visibles
+    // mostradas en los Labels de la ventana
+    private void UpdateInternalStatistics()
+    {
+        lblTotal.setText(Table.getRowCount() + " Especialidades totales.");
+        int i;
+        int count = 0;
+        for (i = 0; i < Table.getRowCount(); i++)
+        {
+            Object val = Table.getModel().getValueAt(i, COLUMN_AVAILABLE);
+            if (val != null && (boolean)val)
+                count++;
+        }
+        lblVisible.setText(count + " Especialidades Visibles en Cartelera.");
+    }
+    
     // Almacena la ventana principal que muestra esta ventana
     private JFrame ParentWindow = null;
     
