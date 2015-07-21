@@ -270,10 +270,18 @@ public class AppController {
     {
         return null;
     }
-    
+    //Mueve el pedido de PendingdOrders a OrdersReady
+    //Pedidos de chef a mesonero
     public void RequestDelivery(int ID)
     {
-        //TODO here
+        for( int i = 0 ; i  < UnpaidOrders.size(); i++){
+            if(PendingOrders.get(i).ID.equals(ID)) {
+                    //Añadimos el pedido a la cola de despacho
+                    OrdersReady.add(PendingOrders.get(i));
+                    //Borramos ya que movimos la orden a la cola de despacho
+                    PendingOrders.remove(i);
+            } 
+        } 
     }
     
     public boolean IsNextPendingOrderAvalaible()
@@ -294,8 +302,8 @@ public class AppController {
             }
             if(PendingOrders.get(i).ID.equals(ID)) {
                    PendingOrders.remove(i);
-                } 
-            }               
+            } 
+        }               
     }
     
     public Estadisticas GetStats()
