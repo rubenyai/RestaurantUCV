@@ -243,11 +243,13 @@ public class AppController {
         
     public Pedido FindOrder(Integer ID)
     {
-        UnpaidOrders=new ArrayList <Pedido> (); 
         for( int i = 0 ; i  < UnpaidOrders.size(); i++){
                             if(UnpaidOrders.get(i).ID.equals(ID)) {
                                 return (UnpaidOrders.get(i));
-                            }                        
+                            }
+                            if(PendingOrders.get(i).ID.equals(ID)) {
+                                return (PendingOrders.get(i));
+                            } 
                        }        
         return null; 
     }
@@ -281,7 +283,14 @@ public class AppController {
     
     public void RemoveOrder(int ID)
     {
-        //TODO here
+        for( int i = 0 ; i  < UnpaidOrders.size(); i++){
+            if(UnpaidOrders.get(i).ID.equals(ID)) {
+                   UnpaidOrders.remove(i);
+            }
+            if(PendingOrders.get(i).ID.equals(ID)) {
+                   PendingOrders.remove(i);
+                } 
+            }               
     }
     
     public Estadisticas GetStats()
