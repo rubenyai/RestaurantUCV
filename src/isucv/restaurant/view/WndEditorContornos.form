@@ -156,6 +156,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Aplicar Cambios"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdApplyChangesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cmdDiscardChanges">
       <Properties>

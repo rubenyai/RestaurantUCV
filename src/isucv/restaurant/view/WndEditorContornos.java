@@ -6,6 +6,9 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.AppController;
+import isucv.restaurant.model.Contorno;
+import isucv.restaurant.model.Especialidad;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,10 +27,30 @@ public class WndEditorContornos extends javax.swing.JFrame {
      */
     public WndEditorContornos() {
         initComponents();
+        
+        // Establecer ancho de columnas para la Tabla
         Table.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(160);
         Table.getColumnModel().getColumn(COLUMN_PRICE).setPreferredWidth(60);
         Table.getColumnModel().getColumn(COLUMN_AVAILABLE).setPreferredWidth(60);
         
+        // Rellenar el Table con el contenido actual de la cartelera (Contornos)
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        md.setRowCount(0); // Eliminar el contenido del Table
+        
+        if (AppController.Instance.Billboard.Sides.size() > 0)
+        {
+            int i;
+            for (i = 0; i < AppController.Instance.Billboard.Sides.size(); i++)
+            {
+                // Celdas:
+                // Nombre, Precio, Visible
+                Contorno e = AppController.Instance.Billboard.Sides.get(i);
+                
+                md.addRow(new Object[] {e.Name, e.Price, e.Visible});
+            }
+        }
+        
+        // Actualizar Labels Estadisticos
         lblTotal.setText(Table.getRowCount() + " Contornos totales.");
         
         int i;
@@ -102,6 +125,11 @@ public class WndEditorContornos extends javax.swing.JFrame {
         jScrollPane2.setViewportView(Table);
 
         cmdApplyChanges.setText("Aplicar Cambios");
+        cmdApplyChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdApplyChangesActionPerformed(evt);
+            }
+        });
 
         cmdDiscardChanges.setText("Descartar");
         cmdDiscardChanges.addActionListener(new java.awt.event.ActionListener() {
@@ -241,6 +269,39 @@ public class WndEditorContornos extends javax.swing.JFrame {
     private void TablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablePropertyChange
          UpdateInternalStatistics();
     }//GEN-LAST:event_TablePropertyChange
+
+    private void cmdApplyChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdApplyChangesActionPerformed
+        // Elimina el contenido actual de la cartelera (Contornos)
+        // y lo sustituye con el almacenado en esta ventana
+        
+        AppController.Instance.Billboard.Sides = new ArrayList<>();
+        
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        if (md.getRowCount() > 0)
+        {
+            // Celdas:
+            // Nombre, Precio, Visible
+            
+            int i;
+            for (i = 0; i < md.getRowCount(); i++)
+            {
+                Contorno d = new Contorno((String)md.getValueAt(i, 0),
+                    (Float)md.getValueAt(i, 1),
+                    (Boolean)md.getValueAt(i, 2));
+                
+                if (d.Visible == null)
+                    d.Visible = false;
+                
+                if (d.Price == null)
+                    d.Price = 0.0f;
+                
+                AppController.Instance.Billboard.Sides.add(d);
+            }
+        }
+        
+        AppController.Instance.Billboard.TotalSides = md.getRowCount();
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdApplyChangesActionPerformed
 
     // Actualiza las estadisticas sobre contornos totales y visibles
     // mostradas en los Labels de la ventana

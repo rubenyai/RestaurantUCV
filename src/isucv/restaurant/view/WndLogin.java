@@ -44,7 +44,7 @@ public class WndLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inicio de Sesion");
 
-        txtUsername.setText("Angel Lozano");
+        txtUsername.setText("chef1");
         txtUsername.setToolTipText("");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -53,7 +53,7 @@ public class WndLogin extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Contraseña");
 
-        txtPassword.setText("password");
+        txtPassword.setText("chef2");
 
         cmdClientTask.setText("Cliente");
         cmdClientTask.addActionListener(new java.awt.event.ActionListener() {

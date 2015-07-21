@@ -143,17 +143,7 @@
                   <Data value="963.1"/>
                   <Data value="348.5"/>
                 </Column>
-                <Column editable="true" title="Tiempo" type="java.lang.Float">
-                  <Data value="25.0"/>
-                  <Data value="25.0"/>
-                  <Data value="25.0"/>
-                  <Data value="15.0"/>
-                  <Data value="10.0"/>
-                  <Data value="10.0"/>
-                  <Data value="20.0"/>
-                  <Data value="30.0"/>
-                  <Data value="5.0"/>
-                </Column>
+                <Column editable="true" title="Tiempo" type="java.lang.Integer"/>
                 <Column editable="true" title="Disponible" type="java.lang.Boolean">
                   <Data value="true"/>
                   <Data value="null"/>
@@ -181,6 +171,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Aplicar Cambios"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdApplyChangesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cmdDiscardChanges">
       <Properties>

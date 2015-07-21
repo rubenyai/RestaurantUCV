@@ -6,6 +6,8 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.AppController;
+import isucv.restaurant.model.Especialidad;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,12 +27,33 @@ public class WndEditorPlatos extends javax.swing.JFrame {
      */
     public WndEditorPlatos() {
         initComponents();
+        
+        // Establecer ancho de columnas para la Tabla
         Table.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(160);
         Table.getColumnModel().getColumn(COLUMN_SIDES).setPreferredWidth(60);
         Table.getColumnModel().getColumn(COLUMN_PRICE).setPreferredWidth(60);
         Table.getColumnModel().getColumn(COLUMN_TIME).setPreferredWidth(40);
         Table.getColumnModel().getColumn(COLUMN_AVAILABLE).setPreferredWidth(60);
         
+        // Rellenar el Table con el contenido actual de la cartelera (Especialidades)
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        md.setRowCount(0); // Eliminar el contenido del Table
+        
+        if (AppController.Instance.Billboard.Specialities.size() > 0)
+        {
+            int i;
+            for (i = 0; i < AppController.Instance.Billboard.Specialities.size(); i++)
+            {
+                // Celdas:
+                // Nombre, Contornos, Precio, Tiempo, Visible
+                Especialidad e = AppController.Instance.Billboard.Specialities.get(i);
+                
+                md.addRow(new Object[] {e.Name, e.TotalSides, e.Price, e.Time, e.Visible});
+            }
+        }
+        
+        
+        // Actualizar Labels Estadisticos
         lblTotal.setText(Table.getRowCount() + " Especialidades totales.");
         
         int i;
@@ -75,22 +98,22 @@ public class WndEditorPlatos extends javax.swing.JFrame {
 
         Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Pizza Margarita",  new Integer(0),  new Float(685.4),  new Float(25.0),  new Boolean(true)},
-                {"Pizza Vegetariana",  new Integer(0),  new Float(590.0),  new Float(25.0), null},
-                {"Pizza 4 Estaciones",  new Integer(0),  new Float(759.9),  new Float(25.0),  new Boolean(true)},
-                {"Pollo a la Canasta",  new Integer(2),  new Float(580.4),  new Float(15.0),  new Boolean(true)},
-                {"Hamburguesa de Carne",  new Integer(1),  new Float(483.8),  new Float(10.0),  new Boolean(true)},
-                {"Hamburguesa de Pollo",  new Integer(1),  new Float(410.0),  new Float(10.0),  new Boolean(true)},
-                {"Bistec al ajillo",  new Integer(3),  new Float(499.9),  new Float(20.0),  new Boolean(false)},
-                {"Parrilla Mixta",  new Integer(2),  new Float(963.1),  new Float(30.0),  new Boolean(true)},
-                {"Sopa del dia",  new Integer(0),  new Float(348.5),  new Float(5.0),  new Boolean(true)}
+                {"Pizza Margarita",  new Integer(0),  new Float(685.4), null,  new Boolean(true)},
+                {"Pizza Vegetariana",  new Integer(0),  new Float(590.0), null, null},
+                {"Pizza 4 Estaciones",  new Integer(0),  new Float(759.9), null,  new Boolean(true)},
+                {"Pollo a la Canasta",  new Integer(2),  new Float(580.4), null,  new Boolean(true)},
+                {"Hamburguesa de Carne",  new Integer(1),  new Float(483.8), null,  new Boolean(true)},
+                {"Hamburguesa de Pollo",  new Integer(1),  new Float(410.0), null,  new Boolean(true)},
+                {"Bistec al ajillo",  new Integer(3),  new Float(499.9), null,  new Boolean(false)},
+                {"Parrilla Mixta",  new Integer(2),  new Float(963.1), null,  new Boolean(true)},
+                {"Sopa del dia",  new Integer(0),  new Float(348.5), null,  new Boolean(true)}
             },
             new String [] {
                 "Descripción", "Contornos", "Precio", "Tiempo", "Disponible"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -106,6 +129,11 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         jScrollPane2.setViewportView(Table);
 
         cmdApplyChanges.setText("Aplicar Cambios");
+        cmdApplyChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdApplyChangesActionPerformed(evt);
+            }
+        });
 
         cmdDiscardChanges.setText("Descartar");
         cmdDiscardChanges.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +274,47 @@ public class WndEditorPlatos extends javax.swing.JFrame {
     private void TablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablePropertyChange
         UpdateInternalStatistics();
     }//GEN-LAST:event_TablePropertyChange
+
+    private void cmdApplyChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdApplyChangesActionPerformed
+        // Elimina el contenido actual de la cartelera (Especialidades)
+        // y lo sustituye con el almacenado en esta ventana
+        
+        AppController.Instance.Billboard.Specialities = new ArrayList<>();
+        
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        if (md.getRowCount() > 0)
+        {
+            // Celdas:
+            // Nombre, Contornos, Precio, Tiempo, Visible
+            
+            int i;
+            for (i = 0; i < md.getRowCount(); i++)
+            {
+                Especialidad d = new Especialidad((String)md.getValueAt(i, 0),
+                    (Float)md.getValueAt(i, 2),
+                    (Integer)md.getValueAt(i, 1),
+                    (Integer)md.getValueAt(i, 3),
+                    (Boolean)md.getValueAt(i, 4));
+                
+                if (d.Visible == null)
+                    d.Visible = false;
+                
+                if (d.Price == null)
+                    d.Price = 0.0f;
+                
+                if (d.Time == null)
+                    d.Time = 0;
+                
+                if (d.TotalSides == null)
+                    d.TotalSides = 0;
+                
+                AppController.Instance.Billboard.Specialities.add(d);
+            }
+        }
+        
+        AppController.Instance.Billboard.TotalSpecialities = md.getRowCount();
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdApplyChangesActionPerformed
 
     // Actualiza las estadisticas sobre contornos totales y visibles
     // mostradas en los Labels de la ventana
