@@ -32,4 +32,12 @@ public class ContadorContorno
     {
         this.Count += Count;
     }
+    
+    public int GetCount(){
+            return this.Count;
+    }
+    
+    public Contorno GetSide(){
+            return this.Side;
+    }
 }

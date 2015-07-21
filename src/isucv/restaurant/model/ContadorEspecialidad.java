@@ -40,5 +40,17 @@ public class ContadorEspecialidad
     public void SetSides(ArrayList<ContadorContorno> Sides)
     {
         this.Sides = Sides;
-    }    
+    }
+    
+    public Especialidad GetSpeciality(){
+            return this.Speciality;
+    }
+    
+    public int GetCount(){
+            return this.Count;
+    }
+    
+    public ArrayList<ContadorContorno> GetSides(){
+            return this.Sides;
+    }
 }

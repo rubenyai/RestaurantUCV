@@ -29,4 +29,16 @@ public class Factura
         Client = C;
         GrandTotal = T;
     }
+    
+    public Pedido GetOrder(){
+            return this.Order;
+    }
+    
+    public Cliente GetClient(){
+            return this.Client;
+    }
+    
+    public Float GetGrandTotal(){
+            return this.GrandTotal;
+    }
 }

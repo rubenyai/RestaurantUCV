@@ -33,4 +33,25 @@ public class Especialidad
         Visible = V;
         Name = N;
     }
+    public Float GetPrice(){
+            return this.Price;
+    }
+    
+    public int GetTotalSides(){
+            return this.TotalSides;
+    }
+    
+    public int GetTime(){
+            return this.Time;
+    }
+    
+    public Boolean GetVisible(){
+            return this.Visible;
+    }
+    
+    public String GetName(){
+            return this.Name;
+    }
+    
+    
 }

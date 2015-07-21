@@ -33,4 +33,15 @@ public Usuario(String usr,String psw, int tsk)
     task=tsk;
 }
 
+public String GetUser(){
+            return this.user;
+    }
+
+public String GetPass(){
+            return this.pass;
+    }
+
+public int GetTask(){
+            return this.task;
+    }
 }

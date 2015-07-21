@@ -42,4 +42,19 @@ public class Cartelera
         TotalSides = Sides.size();
     }
     
+    public ArrayList<Especialidad> GetSpecialities(){
+            return this.Specialities;
+    }
+    
+    public ArrayList<Especialidad> GetSides(){
+            return this.Specialities;
+    }
+        
+    public int GetTotalSpecialities(){
+            return this.TotalSpecialities;
+    }
+    
+    public int GetTotalSides(){
+            return this.TotalSides;
+    }
 }

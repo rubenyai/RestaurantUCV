@@ -19,7 +19,6 @@ public class Pedido
     
     public Integer ID;
     private String Status;
-    //CAMBIAR ATRIBUTOS A PRIVATE
     public ArrayList<ContadorEspecialidad> Specialities = new ArrayList<>();
     public ArrayList<ContadorContorno> Sides = new ArrayList<>();
     
@@ -31,5 +30,21 @@ public class Pedido
     public void SetStatus(String Status)
     {
         this.Status = Status;
+    }
+    
+    public int GetID(){
+            return this.ID;
+    }
+    
+    public String GetStatus(){
+            return this.Status;
+    }
+    
+    public ArrayList<ContadorEspecialidad> GetSpecialities(){
+            return this.Specialities;
+    }
+    
+    public ArrayList<ContadorContorno> GetSides(){
+            return this.Sides;
     }
  }

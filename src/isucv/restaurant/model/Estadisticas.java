@@ -48,4 +48,12 @@ public class Estadisticas
         //Introducimos el count
         contcon.AddCount(Count);
     }
+    
+    public ArrayList<ContadorEspecialidad> GetTopSpecialities(){
+            return this.TopSpecialities;
+    }
+    
+    public ArrayList<ContadorContorno> GetTopSides(){
+            return this.TopSides;
+    }
 }

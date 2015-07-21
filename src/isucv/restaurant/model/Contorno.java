@@ -32,4 +32,15 @@ public class Contorno
         Name = N;
     }
     
+    public Float GetPrice(){
+            return this.Price;
+    }
+    
+    public Boolean GetVisible(){
+            return this.Visible;
+    }
+    
+    public String GetName(){
+            return this.Name;
+    }
 }

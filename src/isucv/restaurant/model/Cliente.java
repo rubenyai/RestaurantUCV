@@ -32,4 +32,21 @@ public class Cliente
         PhoneNumber = P;
     }
     
+    public String GetName(){
+            return this.Name;
+    }
+        
+    public String GetID(){
+            return this.ID;
+    }
+    
+    public String GetBillingAddr(){
+            return this.BillingAddr;
+    }
+    
+    public String GetPhoneNumber(){
+            return this.PhoneNumber;
+    }
 }
+
+
