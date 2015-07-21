@@ -5,6 +5,12 @@
  */
 package isucv.restaurant.view;
 
+import isucv.restaurant.controller.AppController;
+import isucv.restaurant.model.Contorno;
+import isucv.restaurant.model.Especialidad;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author KDERazorback
@@ -32,23 +38,44 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
         cmdBreak = new javax.swing.JButton();
         cmdRefresh = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstSpecialities = new javax.swing.JList();
+        lstSpecialities = new javax.swing.JList<String>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        lstSides = new javax.swing.JList();
+        lstSides = new javax.swing.JList<String>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         cmdEditSides.setText("Edit Sides");
+        cmdEditSides.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEditSidesActionPerformed(evt);
+            }
+        });
 
         cmdEditSpecialities.setText("Edit Specialities");
+        cmdEditSpecialities.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEditSpecialitiesActionPerformed(evt);
+            }
+        });
 
         cmdBreak.setText("Break into Debugger");
+        cmdBreak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBreakActionPerformed(evt);
+            }
+        });
 
         cmdRefresh.setText("Refresh");
         cmdRefresh.setToolTipText("");
+        cmdRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdRefreshActionPerformed(evt);
+            }
+        });
 
+        lstSpecialities.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         lstSpecialities.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -56,6 +83,7 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstSpecialities);
 
+        lstSides.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         lstSides.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -101,8 +129,8 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
                         .addComponent(cmdEditSides)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdEditSpecialities)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmdBreak, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdBreak, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdRefresh))
                     .addGroup(layout.createSequentialGroup()
@@ -119,40 +147,63 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dbg___WndBillboardDebugger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dbg___WndBillboardDebugger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dbg___WndBillboardDebugger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dbg___WndBillboardDebugger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void cmdEditSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSidesActionPerformed
+        WndEditorContornos wnd = new WndEditorContornos();
+        wnd.setLocationRelativeTo(null);
+        wnd.setVisible(true);
+    }//GEN-LAST:event_cmdEditSidesActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dbg___WndBillboardDebugger().setVisible(true);
-            }
-        });
-    }
+    private void cmdEditSpecialitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSpecialitiesActionPerformed
+        WndEditorPlatos wnd = new WndEditorPlatos();
+        wnd.setLocationRelativeTo(null);
+        wnd.setVisible(true);
+    }//GEN-LAST:event_cmdEditSpecialitiesActionPerformed
+
+    private void cmdBreakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBreakActionPerformed
+        ArrayList<Especialidad> k_backingField__Specialities = AppController.Instance.Billboard.Specialities;
+        ArrayList<Contorno> k_backingField__Sides = AppController.Instance.Billboard.Sides;
+        AppController k_backingField__LocalController = AppController.Instance;
+        
+        int i = 0;
+        i = 0 + 0;
+    }//GEN-LAST:event_cmdBreakActionPerformed
+
+    private void cmdRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRefreshActionPerformed
+        // Specialities
+        DefaultListModel<String> contents = new DefaultListModel<>();
+        
+        int i;
+        String line;
+        for (i = 0; i < AppController.Instance.Billboard.Specialities.size(); i++)
+        {
+            Especialidad e = AppController.Instance.Billboard.Specialities.get(i);
+            line = (e.Visible? "V " : "  ");
+            line += e.TotalSides + "  [";
+            line += e.Time + " min]  ";
+            line += e.Name + "  (";
+            line += Float.toString(e.Price) + " BsF)";
+            
+            contents.addElement(line);
+        }
+        
+        lstSpecialities.setModel(contents);
+        
+        // Sides
+        contents = new DefaultListModel<>();
+
+        for (i = 0; i < AppController.Instance.Billboard.Sides.size(); i++)
+        {
+            Contorno e = AppController.Instance.Billboard.Sides.get(i);
+            line = (e.Visible? "V  " : "   ");
+            line += e.Name + "  (";
+            line += Float.toString(e.Price) + " BsF)";
+            
+            contents.addElement(line);
+        }
+        
+        lstSides.setModel(contents);
+    }//GEN-LAST:event_cmdRefreshActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBreak;
@@ -163,7 +214,7 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList lstSides;
-    private javax.swing.JList lstSpecialities;
+    private javax.swing.JList<String> lstSides;
+    private javax.swing.JList<String> lstSpecialities;
     // End of variables declaration//GEN-END:variables
 }

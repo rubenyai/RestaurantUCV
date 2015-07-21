@@ -17,10 +17,10 @@ public class Cartelera
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    private ArrayList<Especialidad> Speciality;
-    private ArrayList<Contorno> Sides;
-    private Integer TotalSpecialities;
-    private Integer TotalSides;
+    public ArrayList<Especialidad> Specialities;
+    public ArrayList<Contorno> Sides;
+    public Integer TotalSpecialities;
+    public Integer TotalSides;
     
     /*//////////////
     //   METODOS  //
@@ -29,9 +29,9 @@ public class Cartelera
     public void UpdateSpecialities(ArrayList<Especialidad> Esp)
     {
         //Se actualizan las especialidades pasandole por parametro un ArrayList con las especialidades completas
-        Speciality = Esp;
+        Specialities = Esp;
         //Se totaliza el numero de especialidades dentro de la cartelera
-        TotalSpecialities = Speciality.size();
+        TotalSpecialities = Specialities.size();
     }
    
     public void UpdateSides(ArrayList<Contorno> Con)

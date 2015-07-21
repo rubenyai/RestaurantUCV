@@ -75,6 +75,11 @@ public class AppController {
         // Crear una nueva instancia de la clase Controller
         Instance = new AppController();
         
+        // Crear una nueva instancia de la Cartelera
+        Instance.Billboard = new Cartelera();
+        Instance.Billboard.Specialities = new ArrayList<>();
+        Instance.Billboard.Sides = new ArrayList<>();
+        
         // Crear una nueva instancia de WndLogin
         Instance.LoginWindow = new WndLogin();
         Instance.LoginWindow.setLocationRelativeTo(null); // Centrar Ventana

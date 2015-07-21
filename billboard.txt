@@ -1,0 +1,29 @@
+$ Archivo de Estado de Cartelera
+$ Aqui se almacena el ultimo estado guardado de la Cartelera de la Aplicacion
+
+
+$ ESPECIALIDADES
+$  Sintaxis: Nombre, Precio, Contornos, Tiempo, Visible
+
+Pizza Margarita, 685.4, 0, 25, true
+Pizza Vegetariana, 590.0, 0, 25, false
+Pizza 4 Estaciones, 759.9, 0, 25, true
+Pollo a la Canasta, 580.4, 2, 15, true
+Hamburguesa de Carne, 483.8, 1, 10, true
+Hamburguesa de Pollo, 410.0, 1, 10, true
+Bistec al Ajillo, 499.9, 3, 20, false
+Parrilla Mixta, 963.1, 2, 30, true
+Sopa del Dia, 348.5, 0, 5, true
+
+
+$ CONTORNOS
+$  Sintaxis: Nombre, Precio, Visible
+
+Papas Fritas, 210.7, false
+Papas al Vapor, 180.4, true
+Yuca Frita, 110.5, true
+Arroz Blanco, 70.0, true
+Arroz Frito, 70.0, false
+Ensalada Rallada, 110.0, true
+Tajadas, 90.0, true
+Nestea Durazno, 90.0, true

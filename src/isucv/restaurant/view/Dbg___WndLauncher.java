@@ -6,6 +6,14 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.AppController;
+import isucv.restaurant.model.Contorno;
+import isucv.restaurant.model.Especialidad;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,6 +41,8 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         cmdDebugUsers = new javax.swing.JButton();
         cmdDebugSideSelector = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        cmdBillboardLoadFromFile = new javax.swing.JButton();
+        cmdBillboardSaveToFile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lanzador de Ventanas");
@@ -61,6 +71,20 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
             }
         });
 
+        cmdBillboardLoadFromFile.setText("LFF");
+        cmdBillboardLoadFromFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBillboardLoadFromFileActionPerformed(evt);
+            }
+        });
+
+        cmdBillboardSaveToFile.setText("STF");
+        cmdBillboardSaveToFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBillboardSaveToFileActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -71,8 +95,13 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(cmdDebugSideSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                         .addComponent(cmdDebugUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(229, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdBillboardLoadFromFile)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdBillboardSaveToFile)))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +111,10 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmdDebugSideSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdBillboardLoadFromFile, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdBillboardSaveToFile, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
 
@@ -117,42 +149,104 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dbg___WndLauncher.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dbg___WndLauncher.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dbg___WndLauncher.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dbg___WndLauncher.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void cmdBillboardLoadFromFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardLoadFromFileActionPerformed
+        AppController.Instance.Billboard.Specialities = new ArrayList<>();
+        AppController.Instance.Billboard.Sides = new ArrayList<>();
+        
+         try (BufferedReader br = new BufferedReader(new FileReader(".//billboard.txt")))
+		{
+			String line;
+                        String[] segments;
+			while ((line = br.readLine()) != null) {
+                                // Comprobar si la linea es un comentario o esta vacia o no contiene comas
+                                if (line.length() < 5 || line.charAt(0) == '$' || !line.contains(","))
+                                    continue;
+                            
+				segments = line.split(",");
+                                
+                                if (segments == null || segments.length < 1)
+                                    continue;
+                                
+                                int i;
+                                for (i = 0; i < segments.length; i++)
+                                    segments[i] = segments[i].trim();
+                                
+                                if (segments.length == 5)
+                                {
+                                    // Especialidad
+                                    // Nombre, Precio, Contornos, Tiempo, Visible
+                                    Especialidad n = new Especialidad(segments[0], Float.parseFloat(segments[1]), Integer.parseInt(segments[2]), Integer.parseInt(segments[3]), (segments[4].equalsIgnoreCase("true")));
+                                    AppController.Instance.Billboard.Specialities.add(n);
+                                }
+                                else if (segments.length == 3)
+                                {
+                                    // Contorno
+                                    // Nombre, Precio, Visible
+                                    Contorno n = new Contorno(segments[0], Float.parseFloat(segments[1]), (segments[2].equalsIgnoreCase("true")));
+                                    AppController.Instance.Billboard.Sides.add(n);
+                                }
+			}
+		} catch (IOException e) {
+                        throw new RuntimeException(e);
+		}
+    }//GEN-LAST:event_cmdBillboardLoadFromFileActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dbg___WndLauncher().setVisible(true);
-            }
-        });
-    }
+    private void cmdBillboardSaveToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardSaveToFileActionPerformed
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(".//billboard.txt")))
+		{
+                    // Header
+                    bw.write("$ Archivo de Estado de Cartelera\n");
+                    bw.write("$ Aqui se almacena el ultimo estado guardado de la Cartelera de la Aplicacion\n");
+                    bw.write("\n\n");
+                            
+                    // Specialities Header
+                    bw.write("$ ESPECIALIDADES\n");
+                    bw.write("$  Sintaxis: Nombre, Precio, Contornos, Tiempo, Visible\n\n");
+                    int i;
+                    
+                    // Specialities
+                    for (i = 0; i < AppController.Instance.Billboard.Specialities.size(); i++)
+                    {
+                        Especialidad d = AppController.Instance.Billboard.Specialities.get(i);
+                        bw.write(d.Name);
+                        bw.write(", ");
+                        bw.write(d.Price.toString());
+                        bw.write(", ");
+                        bw.write(d.TotalSides.toString());
+                        bw.write(", ");
+                        bw.write(d.Time.toString());
+                        bw.write(", ");
+                        bw.write(d.Visible.toString());
+                        bw.write("\n");
+                    }
+                    
+                    // Sides Header
+                    bw.write("\n\n$ CONTORNOS\n");
+                    bw.write("$  Sintaxis: Nombre, Precio, Visible\n\n");
+                    
+                    // Sides
+                    for (i = 0; i < AppController.Instance.Billboard.Sides.size(); i++)
+                    {
+                        Contorno d = AppController.Instance.Billboard.Sides.get(i);
+                        bw.write(d.Name);
+                        bw.write(", ");
+                        bw.write(d.Price.toString());
+                        //bw.write(", ");
+                        //bw.write(d.Time.toString());
+                        bw.write(", ");
+                        bw.write(d.Visible.toString());
+                        bw.write("\n");
+                    }
+                    
+                    bw.flush(); // Sincronizar con el sistema de archivos
+		} catch (IOException e) {
+                        throw new RuntimeException(e);
+		}
+    }//GEN-LAST:event_cmdBillboardSaveToFileActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdBillboardLoadFromFile;
+    private javax.swing.JButton cmdBillboardSaveToFile;
     private javax.swing.JButton cmdDebugSideSelector;
     private javax.swing.JButton cmdDebugUsers;
     private javax.swing.JButton jButton1;

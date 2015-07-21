@@ -16,18 +16,18 @@ public class Contorno
     *////////////////////////////
     
     public Float Price;
-    private Integer Time;
-    private Boolean Visible;
+    //public Integer Time; TIEMPO CONSTANTE!
+    public Boolean Visible;
     public String Name;
     
     /*//////////////
     //   METODOS  //
     *///////////////
     
-    public Contorno(String N, Float P, Integer T, Boolean V)
+    public Contorno(String N, Float P,/* Integer T,*/ Boolean V)
     {
         Price = P;
-        Time = T;
+        //Time = T;
         Visible = V;
         Name = N;
     }

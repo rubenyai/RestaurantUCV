@@ -16,9 +16,9 @@ public class Especialidad
     *////////////////////////////
     
     public Float Price;
-    private Integer TotalSides;
-    private Integer Time;
-    private Boolean Visible;
+    public Integer TotalSides;
+    public Integer Time;
+    public Boolean Visible;
     public String Name;
     
     /*//////////////

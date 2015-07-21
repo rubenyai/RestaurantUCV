@@ -32,9 +32,15 @@
                       <Component id="cmdDebugSideSelector" pref="150" max="32767" attributes="0"/>
                       <Component id="cmdDebugUsers" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jButton1" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jButton1" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmdBillboardLoadFromFile" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmdBillboardSaveToFile" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="229" max="32767" attributes="0"/>
+              <EmptySpace pref="117" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -46,7 +52,11 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="cmdDebugSideSelector" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="37" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButton1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="cmdBillboardLoadFromFile" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="cmdBillboardSaveToFile" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="133" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -77,6 +87,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="cmdBillboardLoadFromFile">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="LFF"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdBillboardLoadFromFileActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="cmdBillboardSaveToFile">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="STF"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdBillboardSaveToFileActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
