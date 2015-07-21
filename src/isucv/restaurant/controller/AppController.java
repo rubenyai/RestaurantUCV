@@ -253,22 +253,31 @@ public class AppController {
         
     public Pedido FindOrder(Integer ID)
     {
-        for( int i = 0 ; i  < UnpaidOrders.size(); i++){
-                            if(UnpaidOrders.get(i).ID.equals(ID)) {
-                                return (UnpaidOrders.get(i));
-                            }
-                            if(PendingOrders.get(i).ID.equals(ID)) {
-                                return (PendingOrders.get(i));
-                            } 
-                       }        
+        for( int i = 0 ; i  < UnpaidOrders.size(); i++)
+        {
+            if(UnpaidOrders.get(i).ID.equals(ID)) 
+            {
+                return (UnpaidOrders.get(i));
+            }
+        }
+        for (int i = 0; i < PendingOrders.size(); i++)
+        {
+            if(PendingOrders.get(i).ID.equals(ID)) 
+            {
+                return (PendingOrders.get(i));
+            } 
+        }
         return null; 
     }
             
     public void PayOrder(String Name,int ID,String ClientID, String BillingAdr, String PhoneNumber)
     {
-       Cliente client=new Cliente(Name,ClientID,BillingAdr,PhoneNumber);
+       Pedido ActualOrder;
+       ActualOrder = AppController.Instance.FindOrder(ID);
+       //Falta validar
+       Cliente Datos=new Cliente(Name,ClientID,BillingAdr,PhoneNumber);
        WndCaja Caja = (WndCaja) ActiveWindow;
-       Factura f= new Factura(AppController.Instance.FindOrder(ID),client,Caja.GetTotal());
+       Factura f= new Factura(ActualOrder,Datos, Caja.GetTotal());
     }
     
     public ArrayList<Pedido> GetPendingOrders()

@@ -27,13 +27,7 @@ public class Pedido
     /*//////////////
     //   METODOS  //
     *///////////////
-    
-  /*  public Factura GenerateInvoice(Cliente Datos)
-    {
-        FALTA EL VALOR DE RETORNO APARTE DEL CODIGO
-        return (  );
-    }
-    */
+        
     public void SetStatus(String Status)
     {
         this.Status = Status;

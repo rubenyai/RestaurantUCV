@@ -19,7 +19,7 @@ public class ContadorEspecialidad
     
     public Especialidad Speciality;
     public Integer Count;
-    private ArrayList<ContadorContorno> Sides;
+    public ArrayList<ContadorContorno> Sides;
     
     /*//////////////
     //   METODOS  //
@@ -27,7 +27,7 @@ public class ContadorEspecialidad
     
     public ContadorEspecialidad(Especialidad Name)
     {
-        ArrayList<ContadorContorno> Sides = new ArrayList<>();
+        Sides = new ArrayList<>();
         Count = 0;
         Speciality = Name;
     }

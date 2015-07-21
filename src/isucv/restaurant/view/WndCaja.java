@@ -9,6 +9,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import isucv.restaurant.controller.AppController;
 import isucv.restaurant.model.Pedido;
+import java.awt.Color;
+import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,7 +24,10 @@ public class WndCaja extends javax.swing.JFrame {
     private final static int ORDER_COLUMN_PRICE = 2;
     // ATRIBUTOS INTERNOS
     Integer ID;
-    String Name, CI, Num, Direccion1;
+    float Total = 0;
+    float Costo, Balance = 0;
+    int Cantidad;
+    String Descripcion;
     /**
      * Creates new form WndCaja
      */
@@ -39,8 +44,8 @@ public class WndCaja extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);
         jTable1.getColumnModel().getColumn(ORDER_COLUMN_PRICE).setPreferredWidth(120);
         
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setNumRows(0); // Se elimina el contenido del Table
+        jTextField1.setText("");
+        ClearFiles(); //Se elimina el contenido de los Files y jTable
     }
 
     /**
@@ -218,6 +223,11 @@ public class WndCaja extends javax.swing.JFrame {
         );
 
         cmdGenerateOrder.setText("Generar Pedido");
+        cmdGenerateOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdGenerateOrderActionPerformed(evt);
+            }
+        });
 
         cmdDiscardOrder.setText("Descartar Pedido");
         cmdDiscardOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -333,87 +343,121 @@ public class WndCaja extends javax.swing.JFrame {
     //Boton BUSCAR
     private void cmdSearchOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSearchOrderActionPerformed
         //Se busca el pedido utilizando el ID
-        Integer i = 0;
+        Integer i, j;
         //VARIABLES PARA SER USADAS CUANDO SAQUES LOS DATOS DEL ARRAYLIST
         String Descripcion;
-        float Costo, Balance = 0;
-        int Cantidad;
         Pedido ActualOrder;
         ID = Integer.parseInt(jTextField1.getText());
         ActualOrder = AppController.Instance.FindOrder(ID);
-        Object[] Nuevo = new Object[3];
-        //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
-        //Aqui sacamos los datos de especialidades
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setNumRows(0); // Se elimina el contenido del Table
-        for (i = 0; i < ActualOrder.Specialities.size(); i++)
+        jTextField1.setBackground(Color.white);
+        if (AppController.Instance.FindOrder(ID) != null)
         {
-            Descripcion=ActualOrder.Specialities.get(i).Speciality.Name;
-            Costo=ActualOrder.Specialities.get(i).Speciality.Price;
-            Cantidad=ActualOrder.Specialities.get(i).Count;
-            Balance = (Balance + (Cantidad * Costo));
-            //HACE FALTA COMPROBAR QUE SIRVA
-            Nuevo[0] = Cantidad;
-            Nuevo[1] = Descripcion;
-            Nuevo[2] = Costo;
-            modelo.addRow(Nuevo);
+            Object[] Nuevo = new Object[3];
+            //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
+            //Aqui sacamos los datos de especialidades
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            modelo.setNumRows(0); // Se elimina el contenido del Table
+            for (i = 0; i < ActualOrder.Specialities.size(); i++)
+            {
+                Descripcion = ActualOrder.Specialities.get(i).Speciality.Name;
+                Costo = ActualOrder.Specialities.get(i).Speciality.Price;
+                Cantidad = ActualOrder.Specialities.get(i).Count;
+                Balance = (Balance + (Cantidad * Costo));
+                Nuevo = new Object[] {Cantidad, Descripcion, Costo};
+                modelo.addRow(Nuevo);
+                ClearVariables(); //Se resetean las variables a status inciales
+                //Se añaden los contornos del plato al table
+                for (j = 0; j < ActualOrder.Specialities.get(i).Sides.size(); j++)
+                {
+                    Descripcion = ActualOrder.Specialities.get(i).Sides.get(j).Side.Name;
+                    Cantidad = ActualOrder.Specialities.get(i).Sides.get(j).Count;
+                    if (Cantidad == 1)
+                        Nuevo = new Object[] {null, Descripcion, null};
+                    else
+                    Nuevo = new Object[] {Cantidad, Descripcion, null};
+
+                    modelo.addRow(Nuevo);
+                    ClearVariables();
+                }
+                ClearVariables();
+            } 
+            //Aqui la de los contornos ADICIONALES
+            for (i = 0; i < ActualOrder.Sides.size(); i++)
+            {
+                Descripcion = ActualOrder.Sides.get(i).Side.Name;
+                Costo=ActualOrder.Sides.get(i).Side.Price;
+                Cantidad=ActualOrder.Sides.get(i).Count;
+                Balance = (Balance + (Cantidad * Costo));
+                Nuevo = new Object[] {Cantidad, Descripcion, Costo};
+                modelo.addRow(Nuevo);
+                ClearVariables(); ////Se resetean las variables a status inciales
+            }
+
+            CalculateAmount(Balance);
         }
-        
-        //Aqui la de los contornos ADICIONALES
-        for (i = 0; i < ActualOrder.Sides.size(); i++)
+        else
         {
-            Descripcion=ActualOrder.Sides.get(i).Side.Name;
-            Costo=ActualOrder.Sides.get(i).Side.Price;
-            Cantidad=ActualOrder.Sides.get(i).Count;
-            Balance = (Balance + (Cantidad * Costo));
-            /*HACE FALTA COMPROBAR QUE SIRVA Y ELEJIR CUAL ES LA MEJOR OPCION
-            Nuevo[0] = Cantidad;
-            Nuevo[1] = Descripcion;
-            Nuevo[2] = Costo;
-            modelo.addRow(Nuevo);
-                    */
-            Object Test[]= {Cantidad, Descripcion, Costo};
-            modelo.addRow(Test);
+            jTextField1.setBackground(Color.red);
+            ClearFiles();
         }
-        
-        CalculateAmount(Balance);
     }//GEN-LAST:event_cmdSearchOrderActionPerformed
 
     private void cmdDiscardOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardOrderActionPerformed
-        this.setVisible(false);
+        AppController.Instance.RemoveOrder(Integer.parseInt(jTextField1.getText()));
+        ClearFiles();
+        jTextField1.setText("");
     }//GEN-LAST:event_cmdDiscardOrderActionPerformed
-    private void GetInformation()
-    {
-        //Se recopila los datos del cliente (Nombre, CI, Direccion, etc)
-        Name = jTextField2.getText();
-        CI = jTextField3.getText();
-        Num = jTextField4.getText();
-        Direccion1 = (jTextField5.getText() + " " + jTextField6.getText());
-    }
+
+    private void cmdGenerateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerateOrderActionPerformed
+        
+        PayForOrder();
+        ClearFiles();
+        jTextField1.setText("");
+    }//GEN-LAST:event_cmdGenerateOrderActionPerformed
+
     private void CalculateAmount(float Balance)
     {
         //Se encarga de calcular el Subtotal de la orden
         //Falta agregar que sume todas las columnas de precio del jtable
-        float aux;
+        float aux = 0;
         aux = (float) (Balance * 0.12);
-
         //Se empiezan a llenar los campos del subtotal, iva y total
-        jLabel9.setText(Float.toString(Balance));
-        jLabel11.setText(Float.toString(aux));
+        jLabel9.setText(String.format("%.2f", Balance) + " BsF ");
+        jLabel11.setText(String.format("%.2f", aux) + " BsF ");
         aux = aux + Balance;
-        jLabel13.setText(Float.toString(aux));
+        Total = aux;
+        jLabel13.setText(String.format("%.2f", aux) + " BsF ");    
     }
     private void PayForOrder()
     {//Se envian los datos del cliente al metodo payorder para poder generar  la factura
-        AppController.Instance.PayOrder(Name, Integer.parseInt(jTextField1.getText()) , CI, Direccion1, Num);
+        AppController.Instance.PayOrder(jTextField2.getText(), Integer.parseInt(jTextField1.getText()) , jTextField3.getText(), (jTextField5.getText() + " " + jTextField6.getText()), jTextField4.getText());
     }
     public float GetTotal()
     {
-        return (Float.parseFloat(jLabel13.getText()));
+        return (Total);
     }
     
-      
-
+    public final void ClearFiles()
+    {
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jLabel9.setText("0 BsF ");
+        jLabel11.setText("0 BsF ");
+        jLabel13.setText("0 BsF ");
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setNumRows(0); // Se elimina el contenido del Table
+    }
+    
+    private void ClearVariables()
+    {
+        Costo = 0;
+        Cantidad = 0;
+        Descripcion = "";
+        Object Nuevo[]= {"", "", ""};
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdDiscardOrder;
     private javax.swing.JButton cmdGenerateOrder;

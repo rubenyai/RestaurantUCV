@@ -405,6 +405,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Generar Pedido"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdGenerateOrderActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cmdDiscardOrder">
       <Properties>
