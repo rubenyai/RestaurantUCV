@@ -283,9 +283,13 @@ public class AppController {
             } 
         } 
     }
-    
+    //Verifica si existe alguna orden en OrdersReady
     public boolean IsNextPendingOrderAvalaible()
     {
+        if(OrdersReady.isEmpty()==false)
+        {
+            return true;
+        }
         return false;
     }
     
