@@ -295,7 +295,7 @@ public class AppController {
     
     public Pedido GetNextOrderReady()
     {
-        return null;
+        return OrdersReady.poll();
     }
     
     public void RemoveOrder(int ID)
