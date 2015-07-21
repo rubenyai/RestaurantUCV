@@ -224,33 +224,40 @@ public class AppController {
         return null; 
     }
     
+    //Retorno arraylist de especialidades de la cartelera
     public ArrayList<Especialidad> GetBillboardSpecialities()
     {
-        //TODO here
-        return null;
+        return Billboard.Specialities;
     }
     
+    //Retorno arraylist de contornos de la cartelera
     public ArrayList<Contorno> GetBillboardSides()
     {
-        //TODO here
-        return null;
+        return Billboard.Sides;
     }
     
+    //Se actualiza el arraylist de especialidades de la cartelera
     public void SetBillboardSpecialities(ArrayList<Especialidad> Specialities)
     {
-        //TODO here
+        Cartelera cart;
+        cart = new Cartelera();
+        cart.UpdateSpecialities(Specialities);     
     }
     
+    //Se actualiza el arraylist de contornos de la cartelera
      public void SetBillboardSides(ArrayList<Contorno> Sides)
     {
-        //TODO here
+        Cartelera cart;
+        cart = new Cartelera();
+        cart.UpdateSides(Sides);
     }
     
     public void GenerateOrder(ArrayList<ContadorEspecialidad> Specialities,ArrayList<ContadorContorno> Sides)
     {
         //TODO here
     }
-        
+    
+    //Busca un Order en los Arrays UnpaidOrders y PendingOrders y lo retorna
     public Pedido FindOrder(Integer ID)
     {
         for( int i = 0 ; i  < UnpaidOrders.size(); i++)
@@ -260,6 +267,7 @@ public class AppController {
                 return (UnpaidOrders.get(i));
             }
         }
+        
         for (int i = 0; i < PendingOrders.size(); i++)
         {
             if(PendingOrders.get(i).ID.equals(ID)) 
@@ -269,7 +277,8 @@ public class AppController {
         }
         return null; 
     }
-            
+    
+    //Obtiene datos del cliente y crea factura en la ventana caja
     public void PayOrder(String Name,int ID,String ClientID, String BillingAdr, String PhoneNumber)
     {
        Pedido ActualOrder;
@@ -284,6 +293,7 @@ public class AppController {
     {
         return GetPendingOrders();
     }
+    
     //Mueve el pedido de PendingdOrders a OrdersReady
     //Pedidos de chef a mesonero
     public void RequestDelivery(int ID)
@@ -297,6 +307,7 @@ public class AppController {
             } 
         } 
     }
+    
     //Verifica si existe alguna orden en OrdersReady
     public boolean IsNextPendingOrderAvalaible()
     {
@@ -307,6 +318,8 @@ public class AppController {
         return false;
     }
     
+    //Obtiene la proxima orden por despachar por el mesonero
+    //Desencolando el pedido de OrdersReady
     public Pedido GetNextOrderReady()
     {
         return OrdersReady.poll();
@@ -326,17 +339,17 @@ public class AppController {
             }
         }
     }
-    
+      
     public Estadisticas GetStats()
     {
         Estadisticas statistics;
-        statistics = new Estadisticas();
-        
+        statistics = new Estadisticas();      
+    
         return statistics;
     }
     
     //Reinicia las estadisticas
-    //Hace .clear en los arraylist topspecialities y topsides
+    //Vuelve a crear el arraylist de 0
     public void ResetStats()
     {
         Estadisticas statistics;
