@@ -268,7 +268,7 @@ public class AppController {
     
     public ArrayList<Pedido> GetPendingOrders()
     {
-        return null;
+        return GetPendingOrders();
     }
     //Mueve el pedido de PendingdOrders a OrdersReady
     //Pedidos de chef a mesonero
