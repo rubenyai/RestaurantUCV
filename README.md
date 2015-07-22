@@ -1,7 +1,8 @@
-# RestaurantUCV
+# Restaurant UCV
 Proyecto Ingenieria de Software
+Semestre 2015-01
 
-Equipo:
+Equipo de Desarrollo:
 
 -Fabian Ramos
 
@@ -9,7 +10,7 @@ Equipo:
 
 -Ruben Maza
 
--¿Roger Aparicio?
+
 
 
 Cliente: Paulo Perez
