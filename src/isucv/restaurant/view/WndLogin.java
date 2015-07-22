@@ -5,7 +5,7 @@
  */
 package isucv.restaurant.view;
 
-import isucv.restaurant.controller.AppController;
+import isucv.restaurant.controller.Controller;
 
 /**
  *
@@ -132,7 +132,7 @@ public class WndLogin extends javax.swing.JFrame {
         CloseApp = false;
         
         // Establecer el Launcher como ventana activa
-        AppController.Instance.SetActiveWindow(launcher);
+        Controller.SetActiveWindow(launcher);
         
         // Ocultar ventana de Inicio de Sesion
         this.setVisible(false);
@@ -147,7 +147,7 @@ public class WndLogin extends javax.swing.JFrame {
         CloseApp = false;
         
         // Solicitar un inicio de sesion como Cliente
-        AppController.Instance.Login(null, null);
+        Controller.Login(null, null);
     }//GEN-LAST:event_cmdClientTaskActionPerformed
 
     // Iniciar sesion con los credenciales proporcionados
@@ -155,7 +155,7 @@ public class WndLogin extends javax.swing.JFrame {
         // Iniciar sesion con los credenciales proporcionados
         CloseApp = false;     
         
-        AppController.Instance.Login(getUsername(), getPassword());
+        Controller.Login(getUsername(), getPassword());
     }//GEN-LAST:event_cmdLoginActionPerformed
 
     // Retorna el valor de CloseApp

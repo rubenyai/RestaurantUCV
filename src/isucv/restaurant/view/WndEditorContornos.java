@@ -5,7 +5,7 @@
  */
 package isucv.restaurant.view;
 
-import isucv.restaurant.controller.AppController;
+import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.Contorno;
 import isucv.restaurant.model.Especialidad;
 import java.util.ArrayList;
@@ -37,14 +37,14 @@ public class WndEditorContornos extends javax.swing.JFrame {
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         md.setRowCount(0); // Eliminar el contenido del Table
         
-        if (AppController.Instance.GetBillboard().GetSides().size() > 0)
+        if (Controller.GetBillboard().GetSides().size() > 0)
         {
             int i;
-            for (i = 0; i < AppController.Instance.GetBillboard().GetSides().size(); i++)
+            for (i = 0; i < Controller.GetBillboard().GetSides().size(); i++)
             {
                 // Celdas:
                 // Nombre, Precio, Visible
-                Contorno e = AppController.Instance.GetBillboard().GetSides().get(i);
+                Contorno e = Controller.GetBillboard().GetSides().get(i);
                 
                 md.addRow(new Object[] {e.GetName(), e.GetPrice(), e.GetVisible()});
             }
@@ -274,7 +274,7 @@ public class WndEditorContornos extends javax.swing.JFrame {
         // Elimina el contenido actual de la cartelera (Contornos)
         // y lo sustituye con el almacenado en esta ventana
         
-        AppController.Instance.GetBillboard().SetSides(new ArrayList<>());
+        Controller.GetBillboard().SetSides(new ArrayList<>());
         
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         if (md.getRowCount() > 0)
@@ -295,11 +295,11 @@ public class WndEditorContornos extends javax.swing.JFrame {
                 if (d.GetPrice() == null)
                     d.SetPrice(0.0f);
                 
-                AppController.Instance.GetBillboard().GetSides().add(d);
+                Controller.GetBillboard().GetSides().add(d);
             }
         }
         
-        AppController.Instance.GetBillboard().SetTotalSides(md.getRowCount());
+        Controller.GetBillboard().SetTotalSides(md.getRowCount());
         this.setVisible(false);
     }//GEN-LAST:event_cmdApplyChangesActionPerformed
 
@@ -331,7 +331,7 @@ public class WndEditorContornos extends javax.swing.JFrame {
         
         if (!value)
         {
-            AppController.Instance.OpenSubTask(1);
+            Controller.OpenSubTask(1);
         }
     }
 

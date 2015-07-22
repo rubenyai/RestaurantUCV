@@ -5,7 +5,7 @@
  */
 package isucv.restaurant.view;
 
-import isucv.restaurant.controller.AppController;
+import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.ContadorContorno;
 import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Estadisticas;
@@ -222,7 +222,7 @@ public class WndEstadisticas extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void cmdResetStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdResetStatsActionPerformed
-         AppController.Instance.ResetStats();
+         Controller.ResetStats();
         //Mostramos las tablas vacias
         DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
         model1.setRowCount(0);
@@ -244,7 +244,7 @@ public class WndEstadisticas extends javax.swing.JFrame {
         statistics = new Estadisticas();
         
         //Nos devuelve nuestros arraylists
-        statistics = AppController.Instance.GetStats();
+        statistics = Controller.GetStats();
 
         //llenamos los arraylists segun los cont que tengan, si estan vacios, no hacemos nada
         if(statistics.GetTopSpecialities().isEmpty()==false)
@@ -269,7 +269,7 @@ public class WndEstadisticas extends javax.swing.JFrame {
         
         if (!value)
         {
-            AppController.Instance.OpenSubTask(1);
+            Controller.OpenSubTask(1);
         }
     }
 

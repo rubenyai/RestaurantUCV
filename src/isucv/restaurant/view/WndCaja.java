@@ -7,7 +7,7 @@ package isucv.restaurant.view;
 
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-import isucv.restaurant.controller.AppController;
+import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.Pedido;
 import java.awt.Color;
 import java.text.DecimalFormat;
@@ -348,9 +348,9 @@ public class WndCaja extends javax.swing.JFrame {
         String Descripcion;
         Pedido ActualOrder;
         ID = Integer.parseInt(jTextField1.getText());
-        ActualOrder = AppController.Instance.FindOrder(ID);
+        ActualOrder = Controller.FindOrder(ID);
         jTextField1.setBackground(Color.white);
-        if (AppController.Instance.FindOrder(ID) != null)
+        if (Controller.FindOrder(ID) != null)
         {
             Object[] Nuevo = new Object[3];
             //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
@@ -403,7 +403,7 @@ public class WndCaja extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdSearchOrderActionPerformed
 
     private void cmdDiscardOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardOrderActionPerformed
-        AppController.Instance.RemoveOrder(Integer.parseInt(jTextField1.getText()));
+        Controller.RemoveOrder(Integer.parseInt(jTextField1.getText()));
         ClearFiles();
         jTextField1.setText("");
     }//GEN-LAST:event_cmdDiscardOrderActionPerformed
@@ -430,7 +430,7 @@ public class WndCaja extends javax.swing.JFrame {
     }
     private void PayForOrder()
     {//Se envian los datos del cliente al metodo payorder para poder generar  la factura
-        AppController.Instance.PayOrder(jTextField2.getText(), Integer.parseInt(jTextField1.getText()) , jTextField3.getText(), (jTextField5.getText() + " " + jTextField6.getText()), jTextField4.getText());
+        Controller.PayOrder(jTextField2.getText(), Integer.parseInt(jTextField1.getText()) , jTextField3.getText(), (jTextField5.getText() + " " + jTextField6.getText()), jTextField4.getText());
     }
     public float GetTotal()
     {

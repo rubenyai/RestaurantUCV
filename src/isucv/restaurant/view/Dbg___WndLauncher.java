@@ -5,7 +5,7 @@
  */
 package isucv.restaurant.view;
 
-import isucv.restaurant.controller.AppController;
+import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.ContadorContorno;
 import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Contorno;
@@ -153,8 +153,8 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
 
     private void cmdDebugUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDebugUsersActionPerformed
         Dbg___WndUserDebugger wnd = new Dbg___WndUserDebugger();
-        AppController.Instance.SetActiveWindow(wnd);
-        AppController.Instance.GetActiveWindow().setVisible(true);
+        Controller.SetActiveWindow(wnd);
+        Controller.GetActiveWindow().setVisible(true);
 
         this.setVisible(false);
         this.dispose();
@@ -162,8 +162,8 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
 
     private void cmdDebugSideSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDebugSideSelectorActionPerformed
         Dbg___WndSideSelectorDebugger wnd = new Dbg___WndSideSelectorDebugger();
-        AppController.Instance.SetActiveWindow(wnd);
-        AppController.Instance.GetActiveWindow().setVisible(true);
+        Controller.SetActiveWindow(wnd);
+        Controller.GetActiveWindow().setVisible(true);
 
         this.setVisible(false);
         this.dispose();
@@ -171,8 +171,8 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Dbg___WndBillboardDebugger wnd = new Dbg___WndBillboardDebugger();
-        AppController.Instance.SetActiveWindow(wnd);
-        AppController.Instance.GetActiveWindow().setVisible(true);
+        Controller.SetActiveWindow(wnd);
+        Controller.GetActiveWindow().setVisible(true);
         wnd.setLocationRelativeTo(null); // Center Window
 
         this.setVisible(false);
@@ -180,8 +180,8 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cmdBillboardLoadFromFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardLoadFromFileActionPerformed
-        AppController.Instance.GetBillboard().SetSpecialities(new ArrayList<>());
-        AppController.Instance.GetBillboard().SetSides(new ArrayList<>());
+        Controller.GetBillboard().SetSpecialities(new ArrayList<>());
+        Controller.GetBillboard().SetSides(new ArrayList<>());
         
          try (BufferedReader br = new BufferedReader(new FileReader(".//billboard.txt")))
 		{
@@ -206,14 +206,14 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                                     // Especialidad
                                     // Nombre, Precio, Contornos, Tiempo, Visible
                                     Especialidad n = new Especialidad(segments[0], Float.parseFloat(segments[1]), Integer.parseInt(segments[2]), Integer.parseInt(segments[3]), (segments[4].equalsIgnoreCase("true")));
-                                    AppController.Instance.GetBillboard().GetSpecialities().add(n);
+                                    Controller.GetBillboard().GetSpecialities().add(n);
                                 }
                                 else if (segments.length == 3)
                                 {
                                     // Contorno
                                     // Nombre, Precio, Visible
                                     Contorno n = new Contorno(segments[0], Float.parseFloat(segments[1]), (segments[2].equalsIgnoreCase("true")));
-                                    AppController.Instance.GetBillboard().GetSides().add(n);
+                                    Controller.GetBillboard().GetSides().add(n);
                                 }
 			}
 		} catch (IOException e) {
@@ -237,9 +237,9 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                     int i;
                     
                     // Specialities
-                    for (i = 0; i < AppController.Instance.GetBillboard().GetSpecialities().size(); i++)
+                    for (i = 0; i < Controller.GetBillboard().GetSpecialities().size(); i++)
                     {
-                        Especialidad d = AppController.Instance.GetBillboard().GetSpecialities().get(i);
+                        Especialidad d = Controller.GetBillboard().GetSpecialities().get(i);
                         bw.write(d.GetName());
                         bw.write(", ");
                         bw.write(d.GetPrice().toString());
@@ -257,9 +257,9 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                     bw.write("$  Sintaxis: Nombre, Precio, Visible\n\n");
                     
                     // Sides
-                    for (i = 0; i < AppController.Instance.GetBillboard().GetSides().size(); i++)
+                    for (i = 0; i < Controller.GetBillboard().GetSides().size(); i++)
                     {
-                        Contorno d = AppController.Instance.GetBillboard().GetSides().get(i);
+                        Contorno d = Controller.GetBillboard().GetSides().get(i);
                         bw.write(d.GetName());
                         bw.write(", ");
                         bw.write(d.GetPrice().toString());
@@ -282,23 +282,23 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         p.SetId(Integer.parseInt(txtOrderId.getText()));
         
         // Speciality=Pizza 4 Estaciones (x2)
-        ContadorEspecialidad sp = new ContadorEspecialidad(AppController.Instance.GetBillboard().GetSpecialities().get(2));
+        ContadorEspecialidad sp = new ContadorEspecialidad(Controller.GetBillboard().GetSpecialities().get(2));
         sp.SetCount(2);
         p.GetSpecialities().add(sp);
         
         // Speciality=Pizza Margarita (x1)
-        sp = new ContadorEspecialidad(AppController.Instance.GetBillboard().GetSpecialities().get(0));
+        sp = new ContadorEspecialidad(Controller.GetBillboard().GetSpecialities().get(0));
         sp.SetCount(1);
         p.GetSpecialities().add(sp);
         
         // Speciality=Pollo a la Canasta (x1) {Yuca Frita, Papas al Vapor}
         ArrayList<ContadorContorno> sides = new ArrayList<>();
-        sp = new ContadorEspecialidad(AppController.Instance.GetBillboard().GetSpecialities().get(3));
+        sp = new ContadorEspecialidad(Controller.GetBillboard().GetSpecialities().get(3));
         sp.AddCount(1);
-        ContadorContorno cont = new ContadorContorno(AppController.Instance.GetBillboard().GetSides().get(2));
+        ContadorContorno cont = new ContadorContorno(Controller.GetBillboard().GetSides().get(2));
         cont.SetCount(1);
         sides.add(cont);
-        cont = new ContadorContorno(AppController.Instance.GetBillboard().GetSides().get(1));
+        cont = new ContadorContorno(Controller.GetBillboard().GetSides().get(1));
         cont.SetCount(1);
         sides.add(cont);
         sp.SetSides(sides);
@@ -306,21 +306,21 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                 
         // Speciality=Pollo a la Canasta (x1) {Papas al Vapor (x2)}
         sides = new ArrayList<>();
-        sp = new ContadorEspecialidad(AppController.Instance.GetBillboard().GetSpecialities().get(3));
+        sp = new ContadorEspecialidad(Controller.GetBillboard().GetSpecialities().get(3));
         sp.AddCount(1);
-        cont = new ContadorContorno(AppController.Instance.GetBillboard().GetSides().get(1));
+        cont = new ContadorContorno(Controller.GetBillboard().GetSides().get(1));
         cont.SetCount(2);
         sides.add(cont);
         sp.SetSides(sides);
         p.GetSpecialities().add(sp);
         
         // Additional Side=Papas al Vapor (x1)
-        cont = new ContadorContorno(AppController.Instance.GetBillboard().GetSides().get(1));
+        cont = new ContadorContorno(Controller.GetBillboard().GetSides().get(1));
         cont.SetCount(1);
         p.GetSides().add(cont);
         
         // Add Order to UnpaidOrders
-        AppController.Instance.GetUnpaidOrders().add(p);
+        Controller.GetUnpaidOrders().add(p);
     }//GEN-LAST:event_cmdCreateDebugOrderActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

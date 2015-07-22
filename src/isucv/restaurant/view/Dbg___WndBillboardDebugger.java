@@ -5,7 +5,7 @@
  */
 package isucv.restaurant.view;
 
-import isucv.restaurant.controller.AppController;
+import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Contorno;
 import isucv.restaurant.model.Especialidad;
@@ -175,9 +175,8 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdEditSpecialitiesActionPerformed
 
     private void cmdBreakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBreakActionPerformed
-        ArrayList<Especialidad> k_backingField__Specialities = AppController.Instance.GetBillboard().GetSpecialities();
-        ArrayList<Contorno> k_backingField__Sides = AppController.Instance.GetBillboard().GetSides();
-        AppController k_backingField__LocalController = AppController.Instance;
+        ArrayList<Especialidad> k_backingField__Specialities = Controller.GetBillboard().GetSpecialities();
+        ArrayList<Contorno> k_backingField__Sides = Controller.GetBillboard().GetSides();
         
         int i = 0;
         i = 0 + 0;
@@ -189,9 +188,9 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
         
         int i;
         String line;
-        for (i = 0; i < AppController.Instance.GetBillboard().GetSpecialities().size(); i++)
+        for (i = 0; i < Controller.GetBillboard().GetSpecialities().size(); i++)
         {
-            Especialidad e = AppController.Instance.GetBillboard().GetSpecialities().get(i);
+            Especialidad e = Controller.GetBillboard().GetSpecialities().get(i);
             line = (e.GetVisible()? "V " : "  ");
             line += e.GetTotalSides() + "  [";
             line += e.GetTime() + " min]  ";
@@ -206,9 +205,9 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
         // Sides
         contents = new DefaultListModel<>();
 
-        for (i = 0; i < AppController.Instance.GetBillboard().GetSides().size(); i++)
+        for (i = 0; i < Controller.GetBillboard().GetSides().size(); i++)
         {
-            Contorno e = AppController.Instance.GetBillboard().GetSides().get(i);
+            Contorno e = Controller.GetBillboard().GetSides().get(i);
             line = (e.GetVisible()? "V  " : "   ");
             line += e.GetName() + "  (";
             line += Float.toString(e.GetPrice()) + " BsF)";
@@ -220,7 +219,7 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdRefreshActionPerformed
 
     private void cmdDetachFromAppControllerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDetachFromAppControllerActionPerformed
-        AppController.Instance.SetActiveWindow(null);
+        Controller.SetActiveWindow(null);
         this.cmdDetachFromAppController.setEnabled(false);
     }//GEN-LAST:event_cmdDetachFromAppControllerActionPerformed
 

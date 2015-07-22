@@ -5,7 +5,7 @@
  */
 package isucv.restaurant.view;
 
-import isucv.restaurant.controller.AppController;
+import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.Especialidad;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -39,14 +39,14 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         md.setRowCount(0); // Eliminar el contenido del Table
         
-        if (AppController.Instance.GetBillboard().GetSpecialities().size() > 0)
+        if (Controller.GetBillboard().GetSpecialities().size() > 0)
         {
             int i;
-            for (i = 0; i < AppController.Instance.GetBillboard().GetSpecialities().size(); i++)
+            for (i = 0; i < Controller.GetBillboard().GetSpecialities().size(); i++)
             {
                 // Celdas:
                 // Nombre, Contornos, Precio, Tiempo, Visible
-                Especialidad e = AppController.Instance.GetBillboard().GetSpecialities().get(i);
+                Especialidad e = Controller.GetBillboard().GetSpecialities().get(i);
                 
                 md.addRow(new Object[] {e.GetName(), e.GetTotalSides(), e.GetPrice(), e.GetTime(), e.GetVisible()});
             }
@@ -279,7 +279,7 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         // Elimina el contenido actual de la cartelera (Especialidades)
         // y lo sustituye con el almacenado en esta ventana
         
-        AppController.Instance.GetBillboard().SetSpecialities(new ArrayList<>());
+        Controller.GetBillboard().SetSpecialities(new ArrayList<>());
         
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         if (md.getRowCount() > 0)
@@ -296,11 +296,11 @@ public class WndEditorPlatos extends javax.swing.JFrame {
                     (Integer)md.getValueAt(i, 3),
                     (Boolean)md.getValueAt(i, 4));
                 
-                AppController.Instance.GetBillboard().GetSpecialities().add(d);
+                Controller.GetBillboard().GetSpecialities().add(d);
             }
         }
         
-        AppController.Instance.GetBillboard().SetTotalSpecialities(md.getRowCount());
+        Controller.GetBillboard().SetTotalSpecialities(md.getRowCount());
         this.setVisible(false);
     }//GEN-LAST:event_cmdApplyChangesActionPerformed
 
@@ -332,7 +332,7 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         
         if (!value)
         {
-            AppController.Instance.OpenSubTask(1);
+            Controller.OpenSubTask(1);
         }
     }
 

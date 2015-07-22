@@ -5,7 +5,7 @@
  */
 package isucv.restaurant.view;
 
-import isucv.restaurant.controller.AppController;
+import isucv.restaurant.controller.Controller;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -247,7 +247,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         
         if (!value)
         {
-            AppController.Instance.OpenSubTask(1);
+            Controller.OpenSubTask(1);
         }
     }
 

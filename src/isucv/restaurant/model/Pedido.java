@@ -19,8 +19,8 @@ public class Pedido
     
     private Integer id;
     private String status;
-    private ArrayList<ContadorEspecialidad> specialities;
-    private ArrayList<ContadorContorno> sides;
+    private ArrayList<ContadorEspecialidad> specialities = new ArrayList<>();
+    private ArrayList<ContadorContorno> sides = new ArrayList<>();
     
     
     /*//////////////

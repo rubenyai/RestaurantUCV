@@ -5,7 +5,7 @@
  */
 package isucv.restaurant.view;
 
-import isucv.restaurant.controller.AppController;
+import isucv.restaurant.controller.Controller;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -156,19 +156,19 @@ public class WndSelectorTareas extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdLogoutActionPerformed
 
     private void cmdStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdStatisticsActionPerformed
-        AppController.Instance.OpenSubTask(6); // Abrir sub-ventana de Estadisticas
+        Controller.OpenSubTask(6); // Abrir sub-ventana de Estadisticas
     }//GEN-LAST:event_cmdStatisticsActionPerformed
 
     private void cmdKitchenTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKitchenTaskActionPerformed
-        AppController.Instance.OpenSubTask(7); // Abrir sub-ventana de Cocina
+        Controller.OpenSubTask(7); // Abrir sub-ventana de Cocina
     }//GEN-LAST:event_cmdKitchenTaskActionPerformed
 
     private void cmdEditSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSidesActionPerformed
-        AppController.Instance.OpenSubTask(5); // Abrir Editor de Contornos
+        Controller.OpenSubTask(5); // Abrir Editor de Contornos
     }//GEN-LAST:event_cmdEditSidesActionPerformed
 
     private void cmdEditSpecialitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSpecialitiesActionPerformed
-        AppController.Instance.OpenSubTask(4); // Abrir Editor de Platos
+        Controller.OpenSubTask(4); // Abrir Editor de Platos
     }//GEN-LAST:event_cmdEditSpecialitiesActionPerformed
 
     // Establece el nombre de usuario a mostrar
