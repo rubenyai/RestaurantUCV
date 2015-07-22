@@ -11,6 +11,7 @@ import isucv.restaurant.view.*;
 //Import necesario para manejar arraylist
 import java.util.ArrayList;
 import java.util.Queue;
+import java.util.LinkedList;
 
 // Imports Adicionales
 import java.util.logging.Level;
@@ -125,6 +126,7 @@ public final class Controller {
         // Inicializar las Colas y Listas de Pedidos
         unpaidOrders = new ArrayList<>();
         pendingOrders = new ArrayList<>();
+        ordersReady = new LinkedList<Pedido>();
                 
         // Mostrar la ventana de Login siempre que no haya otra ventana activa
         while (true)

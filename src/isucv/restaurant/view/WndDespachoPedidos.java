@@ -5,8 +5,11 @@
  */
 package isucv.restaurant.view;
 
+import isucv.restaurant.controller.Controller;
+import isucv.restaurant.model.Pedido;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -53,6 +56,11 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Despacho de Pedidos");
         setMinimumSize(new java.awt.Dimension(586, 443));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Pedido");
@@ -69,6 +77,11 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
 
         jButton2.setText("Cerrar");
         jButton2.setToolTipText("");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -141,6 +154,38 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // Codigo al iniciar ventana
+        if(Controller.IsNextPendingOrderAvalaible()==true){
+            Pedido despacho;
+            despacho=Controller.GetNextOrderReady();
+            jLabel5.setText(Integer.toString(despacho.GetId()));
+            ///////Codigo llenado table////////////////////////
+        }
+        else
+        {
+            jLabel5.setText("No hay pedidos");
+            DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+            model1.setRowCount(0);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Codigo cerrar, esto actualizara la vaina
+        if(Controller.IsNextPendingOrderAvalaible()==true){
+            Pedido despacho;
+            despacho=Controller.GetNextOrderReady();
+        }
+        else
+        {
+            jLabel5.setText("No hay pedidos");
+            DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+            model1.setRowCount(0);
+            //Codigo Cerrar ventana
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
