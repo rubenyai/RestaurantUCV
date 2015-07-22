@@ -51,7 +51,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cmdDiscardChanges" alignment="1" pref="117" max="32767" attributes="0"/>
+                          <Component id="cmdDiscardChanges" alignment="1" max="32767" attributes="0"/>
                           <Component id="cmdDelete" alignment="1" max="32767" attributes="0"/>
                           <Component id="cmdAdd" alignment="0" max="32767" attributes="0"/>
                           <Component id="cmdDeleteAll" max="32767" attributes="0"/>

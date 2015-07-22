@@ -296,19 +296,6 @@ public class WndEditorPlatos extends javax.swing.JFrame {
                     (Integer)md.getValueAt(i, 3),
                     (Boolean)md.getValueAt(i, 4));
                 
-                if (d.GetVisible() == null)
-                    d.SetVisible(false);
-                ///////////////////////////////////////
-                if (d.GetPrice() == -1)
-                    d.SetPrice(0.0f);
-                
-                //Cuidado con estos dos
-                if (d.GetTime() == -1)
-                    d.SetTime(0);
-               ///////////////////////////////////// 
-                if (d.GetTotalSides() == -1)
-                    d.SetTotalSides(0);
-                //////////////////////////////////
                 AppController.Instance.GetBillboard().GetSpecialities().add(d);
             }
         }

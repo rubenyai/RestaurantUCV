@@ -30,6 +30,12 @@ public class Contorno
         //Time = T;
         visible = V;
         name = N;
+        
+        if (price == null)
+            price = 0.0f;
+        
+        if (visible == null)
+            visible = false;
     }
     
     public Float GetPrice(){

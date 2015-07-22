@@ -43,48 +43,48 @@ public class AppController {
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     // Ventana de Inicio de Sesion
-    private WndLogin loginwindow;
+    private WndLogin loginWindow;
         
     // Ventana de Rol o Subrol Activa
-    private  JFrame activewindow;
+    private  JFrame activeWindow;
     
     // Almacena el Nombre de usuario Actual (luego de Iniciar Sesion)
-    private  String activeusername;
+    private  String activeUsername;
     
     //Almacena las ordenes sin pagar
-    private  ArrayList<Pedido> unpaidorders;
+    private  ArrayList<Pedido> unpaidOrders;
     
      //Almacena las ordenes sin pagar
-    private  ArrayList<Pedido> pendingorders;
+    private  ArrayList<Pedido> pendingOrders;
     
     //Cola de despacho de ordenes
-    private  Queue<Pedido> ordersready;
+    private  Queue<Pedido> ordersReady;
     
     //Almacena la cartelera
     private Cartelera billboard;
     
     public WndLogin GetLoginWindow(){
-            return loginwindow;
+            return loginWindow;
     }
     
     public JFrame GetActiveWindow(){
-            return activewindow;
+            return activeWindow;
     }
     
     public String GetActiveUsername(){
-            return activeusername;
+            return activeUsername;
     }
     
     public ArrayList<Pedido> GetUnpaidOrders(){
-            return this.unpaidorders;
+            return this.unpaidOrders;
     }
     
     public ArrayList<Pedido> GetPendingOrders(){
-            return this.pendingorders;
+            return this.pendingOrders;
     }
     
     public Queue<Pedido> GetOrdersReady(){
-            return this.ordersready;
+            return this.ordersReady;
     }
     
     public Cartelera GetBillboard(){
@@ -92,7 +92,7 @@ public class AppController {
     } 
     
     public void SetActiveWindow(JFrame wnd){
-        activewindow=wnd;
+        activeWindow=wnd;
     }
       
     /*//////////////
@@ -102,8 +102,6 @@ public class AppController {
     // Punto de Entrada Principal de la Aplicacion
     public static void main(String[] args)
     {
-    
-        
         // Crear una nueva instancia de la clase Controller
         Instance = new AppController();
         
@@ -113,19 +111,19 @@ public class AppController {
         Instance.billboard.SetSides(new ArrayList<>());
         
         // Crear una nueva instancia de WndLogin
-        Instance.loginwindow = new WndLogin();
-        Instance.loginwindow.setLocationRelativeTo(null); // Centrar Ventana
+        Instance.loginWindow = new WndLogin();
+        Instance.loginWindow.setLocationRelativeTo(null); // Centrar Ventana
         
         // Inicializar las Colas y Listas de Pedidos
-        Instance.unpaidorders = new ArrayList<>();
-        Instance.pendingorders = new ArrayList<>();
+        Instance.unpaidOrders = new ArrayList<>();
+        Instance.pendingOrders = new ArrayList<>();
                 
         // Mostrar la ventana de Login siempre que no haya otra ventana activa
         while (true)
         {
             // Pausar la ejecucion del hilo por 500ms y reiniciar el ciclo
             // cuando haya otra ventana activa
-            if (Instance.activewindow != null && Instance.activewindow.isVisible())
+            if (Instance.activeWindow != null && Instance.activeWindow.isVisible())
             {
                 try {
                     Thread.sleep(500);
@@ -136,10 +134,10 @@ public class AppController {
             }
             
             // Mostrar la ventana de Login
-            Instance.loginwindow.setVisible(true);
+            Instance.loginWindow.setVisible(true);
 
             // Esperar a que la ventana se cierre
-            while (Instance.loginwindow.isVisible())
+            while (Instance.loginWindow.isVisible())
             {
                 try {
                     Thread.sleep(500);
@@ -150,12 +148,12 @@ public class AppController {
             
             // Determinar si se debe cerrar la aplicacion
             // Cierre por parte del usuario de la ventana Login
-            if (Instance.loginwindow.getCloseApp())
+            if (Instance.loginWindow.getCloseApp())
                 break;
         }
         
         // Cerrar la aplicacion
-        Instance.loginwindow.dispose();
+        Instance.loginWindow.dispose();
         Instance = null;
     }
    
@@ -172,7 +170,7 @@ public class AppController {
             int taskId = users.GetTaskForUser(username);
          
             // Almacenar el nombre de usuario Actual
-            Instance.activeusername = username;
+            Instance.activeUsername = username;
             
             switch (taskId)
             {
@@ -180,17 +178,17 @@ public class AppController {
                     WndSelectorTareas taskSelector = new WndSelectorTareas();
                     taskSelector.setLocationRelativeTo(null);
                     taskSelector.setUsername(username);
-                    Instance.activewindow = taskSelector;
+                    Instance.activeWindow = taskSelector;
                     break;
                 case 2: // Caja
                     WndCaja caja = new WndCaja();
                     caja.setLocationRelativeTo(null);
-                    Instance.activewindow = caja;
+                    Instance.activeWindow = caja;
                     break;
                 case 3: // Mesonero
                     WndDespachoPedidos mesonero = new WndDespachoPedidos();
                     mesonero.setLocationRelativeTo(null);
-                    Instance.activewindow = mesonero;
+                    Instance.activeWindow = mesonero;
                     break;
             }
         }
@@ -198,18 +196,18 @@ public class AppController {
         {
             WndGestorPedido gestor = new WndGestorPedido();
             gestor.setLocationRelativeTo(null);
-            Instance.activewindow = gestor;
+            Instance.activeWindow = gestor;
         }
         else
         {
             // Mostrar ventana de Error de Inicio de Sesion
             WndLoginFallido loginError = new WndLoginFallido();
-            Instance.activewindow = loginError;
+            Instance.activeWindow = loginError;
         }
         
         // Mostrar la Ventana Activa y ocultar la Ventana de Inicio de Sesion
-        Instance.activewindow.setVisible(true);
-        Instance.loginwindow.setVisible(false);
+        Instance.activeWindow.setVisible(true);
+        Instance.loginWindow.setVisible(false);
     }
     
     // Permite abrir una sub-ventana de rol para la instancia actual
@@ -221,7 +219,7 @@ public class AppController {
         switch (subTask)
         {
             case 1: // Regresar al selector de Tareas
-                wnd = new WndSelectorTareas(Instance.activeusername);
+                wnd = new WndSelectorTareas(Instance.activeUsername);
                 break;
             case 4: // Especialidades
                 wnd = new WndEditorPlatos();
@@ -241,8 +239,8 @@ public class AppController {
         
         wnd.setLocationRelativeTo(null); // Centrar sub-ventana
         wnd.setVisible(true); // Mostrar sub-ventana
-        JFrame prevWnd = Instance.activewindow; // Almacenar la ventana actual
-        Instance.activewindow = wnd; // Establecer la nueva ventana como Activa
+        JFrame prevWnd = Instance.activeWindow; // Almacenar la ventana actual
+        Instance.activeWindow = wnd; // Establecer la nueva ventana como Activa
         
         // Ocultar y desechar la ventana anterior
         prevWnd.setVisible(false);
@@ -291,19 +289,19 @@ public class AppController {
     //Busca un Order en los Arrays UnpaidOrders y PendingOrders y lo retorna
     public Pedido FindOrder(Integer ID)
     {
-        for( int i = 0 ; i  < unpaidorders.size(); i++)
+        for( int i = 0 ; i  < unpaidOrders.size(); i++)
         {
-            if(unpaidorders.get(i).GetId()==ID) 
+            if(unpaidOrders.get(i).GetId() == ID) 
             {
-                return (unpaidorders.get(i));
+                return (unpaidOrders.get(i));
             }
         }
         
-        for (int i = 0; i < pendingorders.size(); i++)
+        for (int i = 0; i < pendingOrders.size(); i++)
         {
-            if(pendingorders.get(i).GetId()==ID) 
+            if(pendingOrders.get(i).GetId() == ID) 
             {
-                return (pendingorders.get(i));
+                return (pendingOrders.get(i));
             } 
         }
         return null; 
@@ -316,7 +314,7 @@ public class AppController {
        ActualOrder = AppController.Instance.FindOrder(ID);
        //Falta validar
        Cliente Datos=new Cliente(Name,ClientID,BillingAdr,PhoneNumber);
-       WndCaja Caja = (WndCaja) activewindow;
+       WndCaja Caja = (WndCaja) activeWindow;
        Factura f= new Factura(ActualOrder,Datos, Caja.GetTotal());
     }
     
@@ -329,12 +327,12 @@ public class AppController {
     //Pedidos de chef a mesonero
     public void RequestDelivery(int ID)
     {
-        for( int i = 0 ; i  < unpaidorders.size(); i++){
-            if(pendingorders.get(i).GetId()==ID) {
+        for( int i = 0 ; i  < unpaidOrders.size(); i++){
+            if(pendingOrders.get(i).GetId() == ID) {
                     //Añadimos el pedido a la cola de despacho
-                    ordersready.add(pendingorders.get(i));
+                    ordersReady.add(pendingOrders.get(i));
                     //Borramos ya que movimos la orden a la cola de despacho
-                    pendingorders.remove(i);
+                    pendingOrders.remove(i);
             } 
         } 
     }
@@ -342,7 +340,7 @@ public class AppController {
     //Verifica si existe alguna orden en OrdersReady
     public boolean IsNextPendingOrderAvalaible()
     {
-        if(ordersready.isEmpty()==false)
+        if(ordersReady.isEmpty()==false)
         {
             return true;
         }
@@ -353,20 +351,20 @@ public class AppController {
     //Desencolando el pedido de OrdersReady
     public Pedido GetNextOrderReady()
     {
-        return ordersready.poll();
+        return ordersReady.poll();
     }
     
     public void RemoveOrder(int ID)
     {
-        for( int i = 0 ; i  < unpaidorders.size(); i++){
-            if(unpaidorders.get(i).GetId()==ID) {
-                   unpaidorders.remove(i);
+        for( int i = 0 ; i  < unpaidOrders.size(); i++){
+            if(unpaidOrders.get(i).GetId() == ID) {
+                   unpaidOrders.remove(i);
             }
         } 
         
-        for( int i = 0 ; i  < pendingorders.size(); i++){
-            if(pendingorders.get(i).GetId()==ID) {
-                       pendingorders.remove(i);
+        for( int i = 0 ; i  < pendingOrders.size(); i++){
+            if(pendingOrders.get(i).GetId() == ID) {
+                       pendingOrders.remove(i);
             }
         }
     }

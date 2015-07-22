@@ -244,13 +244,9 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                         bw.write(", ");
                         bw.write(d.GetPrice().toString());
                         bw.write(", ");
-                        ///////////////////////////////////////////////
-                       // bw.write(d.GetTotalSides().toString());
-                        //////////////////////////////////////////////
+                        bw.write(Integer.toString(d.GetTotalSides()));
                         bw.write(", ");
-                        //////////////////////////////////////////////
-                        //bw.write(d.GetTime().toString());
-                        //////////////////////////////////////////////
+                        bw.write(Integer.toString(d.GetTime()));
                         bw.write(", ");
                         bw.write(d.GetVisible().toString());
                         bw.write("\n");

@@ -16,7 +16,7 @@ public class Especialidad
     *////////////////////////////
     
     private Float price;
-    private Integer totalsides;
+    private Integer totalSides;
     private Integer time;
     private Boolean visible;
     private String name;
@@ -28,17 +28,29 @@ public class Especialidad
     public Especialidad (String N, Float P, Integer S, Integer T, Boolean V)
     {
         price = P;
-        totalsides = S;
+        totalSides = S;
         time = T;
         visible = V;
         name = N;
+        
+        if (price == null)
+            price = 0.0f;
+        
+        if (totalSides == null)
+            totalSides = 0;
+        
+        if (time == null)
+            time = 0;
+        
+        if (visible == null)
+            visible = false;
     }
     public Float GetPrice(){
             return this.price;
     }
     
     public int GetTotalSides(){
-            return this.totalsides;
+            return this.totalSides;
     }
     
     public int GetTime(){
@@ -58,7 +70,7 @@ public class Especialidad
     }
     
     public void SetTotalSides(int totalsid){
-            totalsides=totalsid;
+            totalSides=totalsid;
     }
     
     public void SetTime(int tim){
