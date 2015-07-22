@@ -17,9 +17,9 @@ public class Usuario
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    public String user;
-    public String pass;
-    public int task;   
+    private String user;
+    private String pass;
+    private int task;   
     
     /*//////////////
     //   METODOS  //

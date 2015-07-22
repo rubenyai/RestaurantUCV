@@ -17,9 +17,9 @@ public class ContadorEspecialidad
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    public Especialidad Speciality;
-    public Integer Count;
-    public ArrayList<ContadorContorno> Sides;
+    private Especialidad speciality;
+    private Integer count;
+    private ArrayList<ContadorContorno> sides;
     
     /*//////////////
     //   METODOS  //
@@ -27,30 +27,34 @@ public class ContadorEspecialidad
     
     public ContadorEspecialidad(Especialidad Name)
     {
-        Sides = new ArrayList<>();
-        Count = 0;
-        Speciality = Name;
+        sides = new ArrayList<>();
+        count = 0;
+        speciality = Name;
     }
     
     public void AddCount(Integer Count)
     {
-        this.Count += Count;
+        this.count += Count;
     }
     
     public void SetSides(ArrayList<ContadorContorno> Sides)
     {
-        this.Sides = Sides;
+        this.sides = Sides;
     }
     
     public Especialidad GetSpeciality(){
-            return this.Speciality;
+            return this.speciality;
     }
     
     public int GetCount(){
-            return this.Count;
+            return this.count;
     }
     
     public ArrayList<ContadorContorno> GetSides(){
-            return this.Sides;
+            return this.sides;
+    }
+    
+    public void SetCount(int cou){
+            count=cou;
     }
 }

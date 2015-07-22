@@ -175,8 +175,8 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdEditSpecialitiesActionPerformed
 
     private void cmdBreakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBreakActionPerformed
-        ArrayList<Especialidad> k_backingField__Specialities = AppController.Instance.Billboard.Specialities;
-        ArrayList<Contorno> k_backingField__Sides = AppController.Instance.Billboard.Sides;
+        ArrayList<Especialidad> k_backingField__Specialities = AppController.Instance.GetBillboard().GetSpecialities();
+        ArrayList<Contorno> k_backingField__Sides = AppController.Instance.GetBillboard().GetSides();
         AppController k_backingField__LocalController = AppController.Instance;
         
         int i = 0;
@@ -189,14 +189,14 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
         
         int i;
         String line;
-        for (i = 0; i < AppController.Instance.Billboard.Specialities.size(); i++)
+        for (i = 0; i < AppController.Instance.GetBillboard().GetSpecialities().size(); i++)
         {
-            Especialidad e = AppController.Instance.Billboard.Specialities.get(i);
-            line = (e.Visible? "V " : "  ");
-            line += e.TotalSides + "  [";
-            line += e.Time + " min]  ";
-            line += e.Name + "  (";
-            line += Float.toString(e.Price) + " BsF)";
+            Especialidad e = AppController.Instance.GetBillboard().GetSpecialities().get(i);
+            line = (e.GetVisible()? "V " : "  ");
+            line += e.GetTotalSides() + "  [";
+            line += e.GetTime() + " min]  ";
+            line += e.GetName() + "  (";
+            line += Float.toString(e.GetPrice()) + " BsF)";
             
             contents.addElement(line);
         }
@@ -206,12 +206,12 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
         // Sides
         contents = new DefaultListModel<>();
 
-        for (i = 0; i < AppController.Instance.Billboard.Sides.size(); i++)
+        for (i = 0; i < AppController.Instance.GetBillboard().GetSides().size(); i++)
         {
-            Contorno e = AppController.Instance.Billboard.Sides.get(i);
-            line = (e.Visible? "V  " : "   ");
-            line += e.Name + "  (";
-            line += Float.toString(e.Price) + " BsF)";
+            Contorno e = AppController.Instance.GetBillboard().GetSides().get(i);
+            line = (e.GetVisible()? "V  " : "   ");
+            line += e.GetName() + "  (";
+            line += Float.toString(e.GetPrice()) + " BsF)";
             
             contents.addElement(line);
         }
@@ -220,7 +220,7 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdRefreshActionPerformed
 
     private void cmdDetachFromAppControllerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDetachFromAppControllerActionPerformed
-        AppController.Instance.ActiveWindow = null;
+        AppController.Instance.SetActiveWindow(null);
         this.cmdDetachFromAppController.setEnabled(false);
     }//GEN-LAST:event_cmdDetachFromAppControllerActionPerformed
 

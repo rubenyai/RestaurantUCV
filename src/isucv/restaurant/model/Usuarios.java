@@ -27,16 +27,16 @@ public class Usuarios
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    private ArrayList <Usuario> Users=null;
-    private boolean FileLoaded=false;
+    private ArrayList <Usuario> users=null;
+    private boolean fileloaded=false;
     
     /*//////////////
     //   METODOS  //
     *///////////////
     
     public boolean CheckLogIn(String User, String Pass){
-                 for( int i = 0 ; i  < Users.size(); i++){
-                            if(Users.get(i).user.equals(User) && Users.get(i).pass.equals(Pass)){
+                 for( int i = 0 ; i  < users.size(); i++){
+                            if(users.get(i).GetUser().equals(User) && users.get(i).GetPass().equals(Pass)){
                                 return true;
                             }                        
                        }
@@ -45,7 +45,7 @@ public class Usuarios
     
     public void LoadFile(){
         //Creamos el objetos con new array list de usuario con los datos
-        Users=new ArrayList <Usuario> ();
+        users=new ArrayList <Usuario> ();
          try (BufferedReader br = new BufferedReader(new FileReader(".//users.txt")))
 		{
 			String sCurrentLine;
@@ -79,7 +79,7 @@ public class Usuarios
                                 else if (aux=='3')
                                     {tsk=3;}
                                 //Creamos un nuevo objeto al arraylist con los datos
-                                Users.add(new Usuario(usr,psw,tsk)); 
+                                users.add(new Usuario(usr,psw,tsk)); 
 			}
 		} catch (IOException e) {
                         throw new RuntimeException(e);
@@ -88,9 +88,9 @@ public class Usuarios
     
     public int GetTaskForUser(String User){
         int tsk=0;
-         for( int i = 0 ; i  < Users.size(); i++){
-                            if(Users.get(i).user.equals(User)) {
-                                tsk=Users.get(i).task;
+         for( int i = 0 ; i  < users.size(); i++){
+                            if(users.get(i).GetUser().equals(User)) {
+                                tsk=users.get(i).GetTask();
                             }                        
                        }
         return tsk;
@@ -98,9 +98,9 @@ public class Usuarios
     
     public int DBG__GetTotalUsersLoaded()
     {
-        if (Users == null)
+        if (users == null)
             return 0;
         else
-            return Users.size();
+            return users.size();
     }
 }

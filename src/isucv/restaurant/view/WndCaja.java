@@ -357,20 +357,20 @@ public class WndCaja extends javax.swing.JFrame {
             //Aqui sacamos los datos de especialidades
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
             modelo.setNumRows(0); // Se elimina el contenido del Table
-            for (i = 0; i < ActualOrder.Specialities.size(); i++)
+            for (i = 0; i < ActualOrder.GetSpecialities().size(); i++)
             {
-                Descripcion = ActualOrder.Specialities.get(i).Speciality.Name;
-                Costo = ActualOrder.Specialities.get(i).Speciality.Price;
-                Cantidad = ActualOrder.Specialities.get(i).Count;
+                Descripcion = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetName();
+                Costo = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetPrice();
+                Cantidad = ActualOrder.GetSpecialities().get(i).GetCount();
                 Balance = (Balance + (Cantidad * Costo));
                 Nuevo = new Object[] {Cantidad, Descripcion, Costo};
                 modelo.addRow(Nuevo);
                 ClearVariables(); //Se resetean las variables a status inciales
                 //Se añaden los contornos del plato al table
-                for (j = 0; j < ActualOrder.Specialities.get(i).Sides.size(); j++)
+                for (j = 0; j < ActualOrder.GetSpecialities().get(i).GetSides().size(); j++)
                 {
-                    Descripcion = ActualOrder.Specialities.get(i).Sides.get(j).Side.Name;
-                    Cantidad = ActualOrder.Specialities.get(i).Sides.get(j).Count;
+                    Descripcion = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
+                    Cantidad = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetCount();
                     if (Cantidad == 1)
                         Nuevo = new Object[] {null, Descripcion, null};
                     else
@@ -382,11 +382,11 @@ public class WndCaja extends javax.swing.JFrame {
                 ClearVariables();
             } 
             //Aqui la de los contornos ADICIONALES
-            for (i = 0; i < ActualOrder.Sides.size(); i++)
+            for (i = 0; i < ActualOrder.GetSides().size(); i++)
             {
-                Descripcion = ActualOrder.Sides.get(i).Side.Name;
-                Costo=ActualOrder.Sides.get(i).Side.Price;
-                Cantidad=ActualOrder.Sides.get(i).Count;
+                Descripcion = ActualOrder.GetSides().get(i).GetSide().GetName();
+                Costo=ActualOrder.GetSides().get(i).GetSide().GetPrice();
+                Cantidad=ActualOrder.GetSides().get(i).GetCount();
                 Balance = (Balance + (Cantidad * Costo));
                 Nuevo = new Object[] {Cantidad, Descripcion, Costo};
                 modelo.addRow(Nuevo);

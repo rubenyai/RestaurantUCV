@@ -132,7 +132,7 @@ public class WndLogin extends javax.swing.JFrame {
         CloseApp = false;
         
         // Establecer el Launcher como ventana activa
-        AppController.Instance.ActiveWindow = launcher;
+        AppController.Instance.SetActiveWindow(launcher);
         
         // Ocultar ventana de Inicio de Sesion
         this.setVisible(false);

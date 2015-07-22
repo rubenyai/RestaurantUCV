@@ -17,8 +17,8 @@ public class Estadisticas
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    public ArrayList<ContadorEspecialidad> TopSpecialities;
-    public ArrayList<ContadorContorno> TopSides;
+    private ArrayList<ContadorEspecialidad> topspecialities= new ArrayList<>();
+    private ArrayList<ContadorContorno> topsides= new ArrayList<>();
     
     /*//////////////
     //   METODOS  //
@@ -26,8 +26,8 @@ public class Estadisticas
     
     public void Reset()
     {   
-        TopSpecialities=new ArrayList<ContadorEspecialidad> ();
-        TopSides=new ArrayList<ContadorContorno> ();
+        topspecialities=new ArrayList<ContadorEspecialidad> ();
+        topsides=new ArrayList<ContadorContorno> ();
     }
     
     public void AddSpeciality(Especialidad Speciality, Integer Count)
@@ -50,10 +50,10 @@ public class Estadisticas
     }
     
     public ArrayList<ContadorEspecialidad> GetTopSpecialities(){
-            return this.TopSpecialities;
+            return this.topspecialities;
     }
     
     public ArrayList<ContadorContorno> GetTopSides(){
-            return this.TopSides;
+            return this.topsides;
     }
 }

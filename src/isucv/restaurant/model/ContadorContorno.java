@@ -15,8 +15,8 @@ public class ContadorContorno
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    public Integer Count;
-    public Contorno Side;
+    private Integer count;
+    private Contorno side;
     
     /*//////////////
     //   METODOS  //
@@ -24,20 +24,24 @@ public class ContadorContorno
     
     public ContadorContorno(Contorno Side)
     {
-        this.Side = Side;
-        Count = 0;
+        this.side = Side;
+        count = 0;
     }
     
     public void AddCount(Integer Count)
     {
-        this.Count += Count;
+        this.count += Count;
     }
     
     public int GetCount(){
-            return this.Count;
+            return this.count;
     }
     
     public Contorno GetSide(){
-            return this.Side;
+            return this.side;
+    }
+    
+    public void SetCount(int cou){
+            count=cou;
     }
 }

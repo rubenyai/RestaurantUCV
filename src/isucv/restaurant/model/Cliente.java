@@ -15,10 +15,10 @@ public class Cliente
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    private String Name;
-    private String ID;
-    private String BillingAddr;
-    private String PhoneNumber;
+    private String name;
+    private String id;
+    private String billingaddr;
+    private String phonenumber;
     
     /*//////////////
     //   METODOS  //
@@ -26,26 +26,26 @@ public class Cliente
     
     public Cliente(String N, String ID, String Addr, String P)
     {
-        Name = N;
-        this.ID = ID;
-        BillingAddr = Addr;
-        PhoneNumber = P;
+        name = N;
+        this.id = id;
+        billingaddr = Addr;
+        phonenumber = P;
     }
     
     public String GetName(){
-            return this.Name;
+            return this.name;
     }
         
     public String GetID(){
-            return this.ID;
+            return this.id;
     }
     
     public String GetBillingAddr(){
-            return this.BillingAddr;
+            return this.billingaddr;
     }
     
     public String GetPhoneNumber(){
-            return this.PhoneNumber;
+            return this.phonenumber;
     }
 }
 

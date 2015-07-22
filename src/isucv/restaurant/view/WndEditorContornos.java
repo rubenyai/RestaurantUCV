@@ -37,16 +37,16 @@ public class WndEditorContornos extends javax.swing.JFrame {
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         md.setRowCount(0); // Eliminar el contenido del Table
         
-        if (AppController.Instance.Billboard.Sides.size() > 0)
+        if (AppController.Instance.GetBillboard().GetSides().size() > 0)
         {
             int i;
-            for (i = 0; i < AppController.Instance.Billboard.Sides.size(); i++)
+            for (i = 0; i < AppController.Instance.GetBillboard().GetSides().size(); i++)
             {
                 // Celdas:
                 // Nombre, Precio, Visible
-                Contorno e = AppController.Instance.Billboard.Sides.get(i);
+                Contorno e = AppController.Instance.GetBillboard().GetSides().get(i);
                 
-                md.addRow(new Object[] {e.Name, e.Price, e.Visible});
+                md.addRow(new Object[] {e.GetName(), e.GetPrice(), e.GetVisible()});
             }
         }
         
@@ -274,7 +274,7 @@ public class WndEditorContornos extends javax.swing.JFrame {
         // Elimina el contenido actual de la cartelera (Contornos)
         // y lo sustituye con el almacenado en esta ventana
         
-        AppController.Instance.Billboard.Sides = new ArrayList<>();
+        AppController.Instance.GetBillboard().SetSides(new ArrayList<>());
         
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         if (md.getRowCount() > 0)
@@ -289,17 +289,17 @@ public class WndEditorContornos extends javax.swing.JFrame {
                     (Float)md.getValueAt(i, 1),
                     (Boolean)md.getValueAt(i, 2));
                 
-                if (d.Visible == null)
-                    d.Visible = false;
+                if (d.GetVisible() == null)
+                    d.SetVisible(false);
                 
-                if (d.Price == null)
-                    d.Price = 0.0f;
+                if (d.GetPrice() == null)
+                    d.SetPrice(0.0f);
                 
-                AppController.Instance.Billboard.Sides.add(d);
+                AppController.Instance.GetBillboard().GetSides().add(d);
             }
         }
         
-        AppController.Instance.Billboard.TotalSides = md.getRowCount();
+        AppController.Instance.GetBillboard().SetTotalSides(md.getRowCount());
         this.setVisible(false);
     }//GEN-LAST:event_cmdApplyChangesActionPerformed
 

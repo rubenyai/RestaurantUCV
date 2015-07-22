@@ -15,10 +15,10 @@ public class Contorno
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    public Float Price;
+    private Float price;
     //public Integer Time; TIEMPO CONSTANTE!
-    public Boolean Visible;
-    public String Name;
+    private Boolean visible;
+    private String name;
     
     /*//////////////
     //   METODOS  //
@@ -26,21 +26,33 @@ public class Contorno
     
     public Contorno(String N, Float P,/* Integer T,*/ Boolean V)
     {
-        Price = P;
+        price = P;
         //Time = T;
-        Visible = V;
-        Name = N;
+        visible = V;
+        name = N;
     }
     
     public Float GetPrice(){
-            return this.Price;
+            return this.price;
     }
     
     public Boolean GetVisible(){
-            return this.Visible;
+            return this.visible;
     }
     
     public String GetName(){
-            return this.Name;
+            return this.name;
+    }
+    
+    public void SetPrice(Float pr){
+            price=pr;
+    }
+            
+    public void SetVisible(Boolean vis){
+            visible=vis;
+    }
+    
+    public void SetName(String nam){
+            name=nam;
     }
 }

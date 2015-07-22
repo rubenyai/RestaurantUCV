@@ -17,34 +17,48 @@ public class Pedido
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    public Integer ID;
-    private String Status;
-    public ArrayList<ContadorEspecialidad> Specialities = new ArrayList<>();
-    public ArrayList<ContadorContorno> Sides = new ArrayList<>();
+    private Integer id;
+    private String status;
+    private ArrayList<ContadorEspecialidad> specialities;
+    private ArrayList<ContadorContorno> sides;
     
     
     /*//////////////
     //   METODOS  //
     *///////////////
-        
-    public void SetStatus(String Status)
-    {
-        this.Status = Status;
-    }
-    
-    public int GetID(){
-            return this.ID;
+           
+    public int GetId(){
+            return this.id;
     }
     
     public String GetStatus(){
-            return this.Status;
+            return this.status;
     }
     
     public ArrayList<ContadorEspecialidad> GetSpecialities(){
-            return this.Specialities;
+            return this.specialities;
     }
     
     public ArrayList<ContadorContorno> GetSides(){
-            return this.Sides;
+            return this.sides;
+    }
+    
+    public void SetId(int idd){
+            this.id=idd;
+    }
+    
+    public void SetStatus(String Status)
+    {
+        this.status = Status;
+    }
+    
+    public void SetSpecialities(ArrayList<ContadorEspecialidad> Spec)
+    {
+        this.specialities = Spec;
+    }
+    
+    public void SetSides(ArrayList<ContadorContorno> Con)
+    {
+        this.sides = Con;
     }
  }

@@ -15,9 +15,9 @@ public class Factura
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    private Pedido Order;
-    private Cliente Client;
-    private Float GrandTotal;
+    private Pedido order;
+    private Cliente client;
+    private Float grandtotal;
     
     /*//////////////
     //   METODOS  //
@@ -25,20 +25,20 @@ public class Factura
     
     public Factura(Pedido O, Cliente C, Float T)
     {
-        Order = O;
-        Client = C;
-        GrandTotal = T;
+        order = O;
+        client = C;
+        grandtotal = T;
     }
     
     public Pedido GetOrder(){
-            return this.Order;
+            return this.order;
     }
     
     public Cliente GetClient(){
-            return this.Client;
+            return this.client;
     }
     
     public Float GetGrandTotal(){
-            return this.GrandTotal;
+            return this.grandtotal;
     }
 }

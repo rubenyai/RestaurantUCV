@@ -15,11 +15,11 @@ public class Especialidad
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
     
-    public Float Price;
-    public Integer TotalSides;
-    public Integer Time;
-    public Boolean Visible;
-    public String Name;
+    private Float price;
+    private Integer totalsides;
+    private Integer time;
+    private Boolean visible;
+    private String name;
     
     /*//////////////
     //   METODOS  //
@@ -27,31 +27,49 @@ public class Especialidad
     
     public Especialidad (String N, Float P, Integer S, Integer T, Boolean V)
     {
-        Price = P;
-        TotalSides = S;
-        Time = T;
-        Visible = V;
-        Name = N;
+        price = P;
+        totalsides = S;
+        time = T;
+        visible = V;
+        name = N;
     }
     public Float GetPrice(){
-            return this.Price;
+            return this.price;
     }
     
     public int GetTotalSides(){
-            return this.TotalSides;
+            return this.totalsides;
     }
     
     public int GetTime(){
-            return this.Time;
+            return this.time;
     }
     
     public Boolean GetVisible(){
-            return this.Visible;
+            return this.visible;
     }
     
     public String GetName(){
-            return this.Name;
+            return this.name;
     }
     
+    public void SetPrice(Float pr){
+            price=pr;
+    }
     
+    public void SetTotalSides(int totalsid){
+            totalsides=totalsid;
+    }
+    
+    public void SetTime(int tim){
+            time=tim;
+    }
+    
+    public void SetVisible(Boolean vis){
+            visible=vis;
+    }
+    
+    public void SetName(String nam){
+            name=nam;
+    }
 }

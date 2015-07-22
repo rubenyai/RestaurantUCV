@@ -247,11 +247,11 @@ public class WndEstadisticas extends javax.swing.JFrame {
         statistics = AppController.Instance.GetStats();
 
         //llenamos los arraylists segun los cont que tengan, si estan vacios, no hacemos nada
-        if(statistics.TopSides.isEmpty()==false)
+        if(statistics.GetTopSpecialities().isEmpty()==false)
         {
             JOptionPane.showMessageDialog(null,"hola1");
         }
-        if(statistics.TopSides.isEmpty()==false)
+        if(statistics.GetTopSides().isEmpty()==false)
         {
              JOptionPane.showMessageDialog(null,"hola2");
         }

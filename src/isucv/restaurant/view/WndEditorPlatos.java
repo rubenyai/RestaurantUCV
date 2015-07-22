@@ -39,16 +39,16 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         md.setRowCount(0); // Eliminar el contenido del Table
         
-        if (AppController.Instance.Billboard.Specialities.size() > 0)
+        if (AppController.Instance.GetBillboard().GetSpecialities().size() > 0)
         {
             int i;
-            for (i = 0; i < AppController.Instance.Billboard.Specialities.size(); i++)
+            for (i = 0; i < AppController.Instance.GetBillboard().GetSpecialities().size(); i++)
             {
                 // Celdas:
                 // Nombre, Contornos, Precio, Tiempo, Visible
-                Especialidad e = AppController.Instance.Billboard.Specialities.get(i);
+                Especialidad e = AppController.Instance.GetBillboard().GetSpecialities().get(i);
                 
-                md.addRow(new Object[] {e.Name, e.TotalSides, e.Price, e.Time, e.Visible});
+                md.addRow(new Object[] {e.GetName(), e.GetTotalSides(), e.GetPrice(), e.GetTime(), e.GetVisible()});
             }
         }
         
@@ -279,7 +279,7 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         // Elimina el contenido actual de la cartelera (Especialidades)
         // y lo sustituye con el almacenado en esta ventana
         
-        AppController.Instance.Billboard.Specialities = new ArrayList<>();
+        AppController.Instance.GetBillboard().SetSpecialities(new ArrayList<>());
         
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         if (md.getRowCount() > 0)
@@ -296,23 +296,24 @@ public class WndEditorPlatos extends javax.swing.JFrame {
                     (Integer)md.getValueAt(i, 3),
                     (Boolean)md.getValueAt(i, 4));
                 
-                if (d.Visible == null)
-                    d.Visible = false;
+                if (d.GetVisible() == null)
+                    d.SetVisible(false);
+                ///////////////////////////////////////
+                if (d.GetPrice() == -1)
+                    d.SetPrice(0.0f);
                 
-                if (d.Price == null)
-                    d.Price = 0.0f;
-                
-                if (d.Time == null)
-                    d.Time = 0;
-                
-                if (d.TotalSides == null)
-                    d.TotalSides = 0;
-                
-                AppController.Instance.Billboard.Specialities.add(d);
+                //Cuidado con estos dos
+                if (d.GetTime() == -1)
+                    d.SetTime(0);
+               ///////////////////////////////////// 
+                if (d.GetTotalSides() == -1)
+                    d.SetTotalSides(0);
+                //////////////////////////////////
+                AppController.Instance.GetBillboard().GetSpecialities().add(d);
             }
         }
         
-        AppController.Instance.Billboard.TotalSpecialities = md.getRowCount();
+        AppController.Instance.GetBillboard().SetTotalSpecialities(md.getRowCount());
         this.setVisible(false);
     }//GEN-LAST:event_cmdApplyChangesActionPerformed
 
