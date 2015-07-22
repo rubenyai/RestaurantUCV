@@ -5,6 +5,8 @@
  */
 package isucv.restaurant.view;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author KDERazorback
@@ -80,6 +82,11 @@ public class WndGestorPedido extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(620, 633));
         setResizable(false);
         setSize(new java.awt.Dimension(620, 633));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -121,17 +128,37 @@ public class WndGestorPedido extends javax.swing.JFrame {
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         jButton7.setText("Eliminar Todo");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, 140, -1));
 
         jButton8.setText("<html>Agregar Contorno<br>Adicional");
         jButton8.setToolTipText("");
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 140, -1));
 
         jButton17.setText("Descartar Pedido");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, 169, 43));
 
         jButton18.setText("Finalizar Pedido");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 590, 169, 43));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menú del dia - Platos Disponibles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -247,10 +274,20 @@ public class WndGestorPedido extends javax.swing.JFrame {
 
         jButton9.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
         jButton9.setText("<");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 50, 210));
 
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
         jButton10.setText(">");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 50, 210));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 250));
@@ -277,15 +314,81 @@ public class WndGestorPedido extends javax.swing.JFrame {
 
         jButton11.setText("Eliminar");
         jButton11.setToolTipText("");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 140, -1));
 
         jButton12.setText("<html>Modificar<br>Contornos");
         jButton12.setToolTipText("");
         jButton12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        //Boton eliminar todo
+        //Borramos la table
+        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+        model1.setRowCount(0);
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+         // Boton eliminar 
+        //Elimina uno o varios elementos (filas) seleccionados de la tabla      
+        DefaultTableModel md = (DefaultTableModel) jTable1.getModel();
+        if (md.getRowCount() < 1)
+            return;
+        
+        int i;
+        for (i = md.getRowCount() - 1; i >= 0; i--)
+        {
+            if (jTable1.isRowSelected(i))
+                md.removeRow(i);
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //Borramos la table
+        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+        model1.setRowCount(0);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        //Boton Descartar pedido
+        //Borramos la table
+        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+        model1.setRowCount(0);
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // Boton Flecha izquierda:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // Boton Flecha Derecha:
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // Boton Agregar contorno adicional
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // Boton modificar contornos
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // Boton finalizar pedido
+    }//GEN-LAST:event_jButton18ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

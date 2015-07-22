@@ -5,6 +5,8 @@
  */
 package isucv.restaurant.view;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author KDERazorback
@@ -93,6 +95,11 @@ public class WndSelectorContornos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Selector de Contornos");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contornos del dia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -101,11 +108,21 @@ public class WndSelectorContornos extends javax.swing.JFrame {
         jButton9.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
         jButton9.setText("<");
         jButton9.setEnabled(false);
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 50, 260));
 
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
         jButton10.setText(">");
         jButton10.setEnabled(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 50, 260));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -325,13 +342,48 @@ public class WndSelectorContornos extends javax.swing.JFrame {
         getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 80, 50));
 
         jButton21.setText("Cancelar");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 510, 180, 40));
 
         jButton22.setText("Aceptar");
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 460, 180, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //Borramos la table
+        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+        model1.setRowCount(0);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        //Boton cancelar
+        //Borramos la table
+        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+        model1.setRowCount(0);
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        // Boton aceptar
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // Boton flecha izquierda
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // Boton flecha derecha
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
