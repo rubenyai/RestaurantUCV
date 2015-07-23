@@ -17,6 +17,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +26,8 @@ import java.util.ArrayList;
  */
 public class Dbg___WndLauncher extends javax.swing.JFrame {
 
+    private ArrayList<ContadorContorno> sideSelectorCache = null;
+    
     /**
      * Creates new form Dbg___WndLauncher
      */
@@ -49,6 +53,10 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         cmdCreateDebugOrder = new javax.swing.JButton();
         txtOrderId = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        cmdSelectSides = new javax.swing.JButton();
+        cmdClearSelectionCache = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtSideMaxCount = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lanzador de Ventanas");
@@ -104,6 +112,27 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
 
         jLabel1.setText("Order ID");
 
+        cmdSelectSides.setText("Select Sides");
+        cmdSelectSides.setEnabled(false);
+        cmdSelectSides.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdSelectSidesActionPerformed(evt);
+            }
+        });
+
+        cmdClearSelectionCache.setText("Clear Cache");
+        cmdClearSelectionCache.setEnabled(false);
+        cmdClearSelectionCache.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdClearSelectionCacheActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Max Count");
+
+        txtSideMaxCount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtSideMaxCount.setText("6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,8 +154,16 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmdBillboardSaveToFile)
-                            .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(70, Short.MAX_VALUE))
+                            .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmdSelectSides, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdClearSelectionCache, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSideMaxCount, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,12 +177,18 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdBillboardLoadFromFile, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdBillboardSaveToFile, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdCreateDebugOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdSelectSides, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdClearSelectionCache, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtSideMaxCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,6 +264,7 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
 		}
          
          cmdCreateDebugOrder.setEnabled(true);
+         cmdSelectSides.setEnabled(true);
     }//GEN-LAST:event_cmdBillboardLoadFromFileActionPerformed
 
     private void cmdBillboardSaveToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardSaveToFileActionPerformed
@@ -323,14 +367,62 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         Controller.GetUnpaidOrders().add(p);
     }//GEN-LAST:event_cmdCreateDebugOrderActionPerformed
 
+    private void cmdSelectSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSelectSidesActionPerformed
+        // Seleccionar contornos
+        WndSelectorContornos wnd = new WndSelectorContornos(sideSelectorCache, Integer.parseInt(txtSideMaxCount.getText()));
+        wnd.setVisible(true);
+        
+        // Lambda Expression: New Background Thread for Callback
+        /*
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    WaitForSideSelection_Background(wnd);
+                }
+            });
+        */
+        Thread t = new Thread(() -> {
+            WaitForSideSelection_Background(wnd);
+        });
+                
+        t.start();
+    }//GEN-LAST:event_cmdSelectSidesActionPerformed
+
+    private void WaitForSideSelection_Background(WndSelectorContornos wnd)
+    {
+        // Seleccionar contornos (Internal Thread)
+        while (wnd.isVisible())
+        {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Dbg___WndLauncher.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        sideSelectorCache = wnd.GetSelectedSides();
+        cmdClearSelectionCache.setEnabled(sideSelectorCache != null);
+        wnd.dispose();
+    }
+    
+    private void cmdClearSelectionCacheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClearSelectionCacheActionPerformed
+        // Clear Side Selector Cache
+        sideSelectorCache = null;
+        cmdClearSelectionCache.setEnabled(false);
+    }//GEN-LAST:event_cmdClearSelectionCacheActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBillboardLoadFromFile;
     private javax.swing.JButton cmdBillboardSaveToFile;
+    private javax.swing.JButton cmdClearSelectionCache;
     private javax.swing.JButton cmdCreateDebugOrder;
     private javax.swing.JButton cmdDebugSideSelector;
     private javax.swing.JButton cmdDebugUsers;
+    private javax.swing.JButton cmdSelectSides;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtOrderId;
+    private javax.swing.JTextField txtSideMaxCount;
     // End of variables declaration//GEN-END:variables
 }
