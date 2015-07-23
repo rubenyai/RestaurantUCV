@@ -27,3 +27,9 @@ Arroz Frito, 70.0, false
 Ensalada Rallada, 110.0, true
 Tajadas, 90.0, true
 Nestea Durazno, 90.0, true
+$ Contornos inventados
+Cochina al vapor, 50, true
+Yuca sancochada, 120, true
+Tostones, 160, true
+Papa horneada, 125,5, true
+Papa Remojada En Su Tinta, 200, true
