@@ -58,6 +58,70 @@ public class WndEstadisticas extends javax.swing.JFrame {
         
         sorter.setSortKeys(sortKeys);
         sorter.sort();
+        
+        //Se elimina el contenido de las jtable
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setNumRows(0);
+        DefaultTableModel modelo2 = (DefaultTableModel) jTable2.getModel();
+        modelo2.setNumRows(0);
+        
+        int i = 0, IndexToEliminate = 0, Count = 0;
+        ArrayList<ContadorEspecialidad> TopSpecialitiesCopy = new ArrayList<>(Controller.GetStats().GetTopSpecialities());
+        ArrayList<ContadorContorno> TopSidesCopy = new ArrayList<>(Controller.GetStats().GetTopSides());
+        Object[] Nuevo = new Object[2];
+        //Se comprueba que el ArrayList de especialidades contenga algo
+        if (TopSpecialitiesCopy.size() != 0)
+        {
+            //Mientras que exista mas de un elemento en el ArrayList se procede a comprobar el mayor
+            while (TopSpecialitiesCopy.size() != 0)
+            {
+                Count = TopSpecialitiesCopy.get(0).GetCount();
+                if (TopSpecialitiesCopy.size() != 0)
+                {
+                    for (i = 1; i < TopSpecialitiesCopy.size(); i++)
+                    {
+                        //Se verifica cual es el elemento de mas solicitado
+                        if ( TopSpecialitiesCopy.get(i).GetCount() > Count)
+                        {
+                            Count = TopSpecialitiesCopy.get(i).GetCount();
+                            IndexToEliminate = i;
+                        }
+                    }
+                } 
+                Nuevo = new Object[] {TopSpecialitiesCopy.get(IndexToEliminate).GetSpeciality().GetName(), TopSpecialitiesCopy.get(IndexToEliminate).GetCount()};
+                modelo.addRow(Nuevo);
+                TopSpecialitiesCopy.remove(IndexToEliminate);
+                IndexToEliminate = 0;
+                Count = 0;   
+            }
+        }
+        
+        //Se Comprueba que el ArrayList de contornos contenga algo
+        if (TopSidesCopy.size() != 0)
+        {
+            //Mientras que exista mas de un elemento en el ArrayList se procede a comprobar cual es el mayor
+            while (TopSidesCopy.size() != 0)
+            {
+                Count = TopSidesCopy.get(0).GetCount();
+                if (TopSidesCopy.size() != 0)
+                {
+                    for (i = 1; i < TopSidesCopy.size(); i++)
+                    {
+                        //Se verifica el elemento mas solicitado de la lista
+                        if (TopSidesCopy.get(i).GetCount() > Count)
+                        {
+                            Count = TopSidesCopy.get(i).GetCount();
+                            IndexToEliminate = i;
+                        }
+                    }
+                }
+                Nuevo = new Object[] {TopSidesCopy.get(IndexToEliminate).GetSide().GetName(), TopSidesCopy.get(IndexToEliminate).GetCount()};
+                modelo2.addRow(Nuevo);
+                TopSidesCopy.remove(IndexToEliminate);
+                IndexToEliminate = 0;
+                Count = 0;
+            }
+        }    
     }
 
     /**
@@ -165,6 +229,11 @@ public class WndEstadisticas extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable2);
 
         cmdClose.setText("Cerrar");
+        cmdClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCloseActionPerformed(evt);
+            }
+        });
 
         cmdResetStats.setText("Reiniciar Estadisticas");
         cmdResetStats.setToolTipText("");
@@ -223,13 +292,7 @@ public class WndEstadisticas extends javax.swing.JFrame {
 
     private void cmdResetStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdResetStatsActionPerformed
          Controller.ResetStats();
-        //Mostramos las tablas vacias
-        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
-        model1.setRowCount(0);
-        
-        DefaultTableModel model2 = (DefaultTableModel)this.jTable2.getModel();
-        model2.setRowCount(0);
-        
+         this.setVisible(false);
     }//GEN-LAST:event_cmdResetStatsActionPerformed
 //Aqui codigo al abrir la ventana estadisticas
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -256,6 +319,11 @@ public class WndEstadisticas extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null,"hola2");
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void cmdCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCloseActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdCloseActionPerformed
 
     // Almacena la ventana principal que muestra esta ventana
     private JFrame ParentWindow = null;

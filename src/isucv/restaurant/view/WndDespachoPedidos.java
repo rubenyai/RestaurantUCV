@@ -35,6 +35,7 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
         Table.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setPreferredWidth(40);
         Table.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
         Table.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);
+       
     }
 
     /**
@@ -168,13 +169,50 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
     private void QueryNextOrder()
     {
         // Codigo cerrar, esto actualizara la vaina
-        if(Controller.IsNextPendingOrderAvalaible()==true){
+        if(Controller.IsNextPendingOrderAvalaible()){
             Pedido despacho;
             despacho=Controller.GetNextOrderReady();
             lblOrderID.setText(Integer.toString(despacho.GetId()));
             
             DefaultTableModel md = (DefaultTableModel) Table.getModel();
             md.setRowCount(0); // Eliminar la tabla
+            //
+            String Descripcion;
+            int Cantidad;
+            Object[] Nuevo = new Object[2];
+
+            for (int i = 0; i < despacho.GetSpecialities().size(); i++)
+            {
+                Descripcion = despacho.GetSpecialities().get(i).GetSpeciality().GetName();
+                Cantidad = despacho.GetSpecialities().get(i).GetCount();
+                Nuevo = new Object[] {Cantidad, Descripcion};
+                md.addRow(Nuevo);
+                //Se añaden los contornos del plato al table
+                for (int j = 0; j < despacho.GetSpecialities().get(i).GetSides().size(); j++)
+                {
+                    Descripcion = despacho.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
+                    Cantidad = despacho.GetSpecialities().get(i).GetSides().get(j).GetCount();
+                    if (Cantidad == 1)
+                        Nuevo = new Object[] {null, Descripcion};
+                    else
+                    Nuevo = new Object[] {Cantidad, Descripcion};
+                    md.addRow(Nuevo);
+                }
+            } 
+            Cantidad = 0;
+            Descripcion = "";
+            Nuevo = new Object[] {"", ""};
+            for (int i = 0; i < despacho.GetSides().size(); i++)
+            {
+                Descripcion = despacho.GetSides().get(i).GetSide().GetName();
+                Cantidad=despacho.GetSides().get(i).GetCount();
+                Nuevo = new Object[] {Cantidad, Descripcion};
+                md.addRow(Nuevo);
+
+            }
+            Cantidad = 0;
+            Descripcion = "";
+            Nuevo = new Object[] {"", ""};
         }
         else
         {
@@ -184,7 +222,7 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
             //Codigo Cerrar ventana
         }
     }
-    
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table;
     private javax.swing.JButton cmdDiscard;
