@@ -238,7 +238,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonRemoveActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdRemove1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 40, -1));
+        jPanel1.add(cmdRemove1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 40, -1));
 
         cmdAdd1.setText("+");
         cmdAdd1.setName("1"); // NOI18N
@@ -247,7 +247,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+        jPanel1.add(cmdAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
         lblCount1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCount1.setText("1");
@@ -268,7 +268,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonRemoveActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdRemove4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 40, -1));
+        jPanel1.add(cmdRemove4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 40, -1));
 
         cmdAdd4.setText("+");
         cmdAdd4.setName("4"); // NOI18N
@@ -277,7 +277,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        jPanel1.add(cmdAdd4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, -1));
 
         lblCount4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCount4.setText("0");
@@ -298,7 +298,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonRemoveActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdRemove7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 40, -1));
+        jPanel1.add(cmdRemove7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 40, -1));
 
         cmdAdd7.setText("+");
         cmdAdd7.setName("7"); // NOI18N
@@ -307,7 +307,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
+        jPanel1.add(cmdAdd7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, -1, -1));
 
         lblCount7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCount7.setText("0");
@@ -328,7 +328,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonRemoveActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdRemove2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 40, -1));
+        jPanel1.add(cmdRemove2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 40, -1));
 
         cmdAdd2.setText("+");
         cmdAdd2.setName("2"); // NOI18N
@@ -337,7 +337,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
+        jPanel1.add(cmdAdd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, -1, -1));
 
         lblCount2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCount2.setText("0");
@@ -359,7 +359,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonRemoveActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdRemove5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 40, -1));
+        jPanel1.add(cmdRemove5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 40, -1));
 
         cmdAdd5.setText("+");
         cmdAdd5.setName("5"); // NOI18N
@@ -368,7 +368,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, -1));
+        jPanel1.add(cmdAdd5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
 
         lblCount5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCount5.setText("0");
@@ -389,7 +389,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonRemoveActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdRemove8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 40, -1));
+        jPanel1.add(cmdRemove8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 40, -1));
 
         cmdAdd8.setText("+");
         cmdAdd8.setName("8"); // NOI18N
@@ -398,7 +398,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, -1, -1));
+        jPanel1.add(cmdAdd8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, -1, -1));
 
         lblCount8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCount8.setText("0");
@@ -419,7 +419,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonRemoveActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdRemove3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 40, -1));
+        jPanel1.add(cmdRemove3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 40, -1));
 
         cmdAdd3.setText("+");
         cmdAdd3.setName("3"); // NOI18N
@@ -428,7 +428,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
+        jPanel1.add(cmdAdd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
 
         lblCount3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCount3.setText("0");
@@ -449,7 +449,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonRemoveActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdRemove6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 40, -1));
+        jPanel1.add(cmdRemove6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 40, -1));
 
         cmdAdd6.setText("+");
         cmdAdd6.setName("6"); // NOI18N
@@ -458,7 +458,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, -1, -1));
+        jPanel1.add(cmdAdd6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, -1, -1));
 
         lblCount6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCount6.setText("1");
@@ -480,7 +480,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonRemoveActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdRemove9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, 40, -1));
+        jPanel1.add(cmdRemove9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 40, -1));
 
         cmdAdd9.setText("+");
         cmdAdd9.setName("9"); // NOI18N
@@ -489,7 +489,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 ButtonAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, -1, -1));
+        jPanel1.add(cmdAdd9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, -1, -1));
 
         lblCount9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCount9.setText("0");
@@ -622,7 +622,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
     // Incrementa en 1 el contorno descrito pot el indice especificado
     // de la sub-pagina visible actualmente
     private void SideUpdateActionDispatcher(int index, boolean increment) {
-        int finalIndex = index * pageIndex;
+        int finalIndex = index + ((pageIndex - 1) * 9);
         finalIndex--; // Indice real del contorno a actualizar
         
         // Actualizar el indice en cache

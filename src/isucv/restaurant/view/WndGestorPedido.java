@@ -5,6 +5,10 @@
  */
 package isucv.restaurant.view;
 
+import isucv.restaurant.controller.Controller;
+import isucv.restaurant.model.ContadorContorno;
+import isucv.restaurant.model.ContadorEspecialidad;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,12 +17,74 @@ import javax.swing.table.DefaultTableModel;
  */
 public class WndGestorPedido extends javax.swing.JFrame {
 
+    // Contiene el siguiente identificador de pedido libre
+    private static int nextOrderId = 2456;
+    
+    // Contiene los Contornos adicionales seleccionados actualmente
+    ArrayList<ContadorContorno> addedSides;
+    
+    // Contiene las Especialidades seleccionadas actualmente
+    ArrayList<ContadorEspecialidad> addedSpecialities;
+    
     /**
      * Creates new form WndGestorPedido
      */
     public WndGestorPedido() {
         initComponents();
-        this.setSize(this.getWidth() + 10, this.getHeight() + 10);
+        this.setSize(this.getWidth() + 10, this.getHeight() + 10); // Incrementar el tamaño de la ventana
+        
+        // Crear las listas de especialidades y contornos
+        addedSides = new ArrayList<>();
+        addedSpecialities = new ArrayList<>();
+    }
+    
+    public int GetNextOrderId()
+    {
+        // Obtiene el identificador del siguiente pedido disponible para creacion
+        return nextOrderId;
+    }
+    
+    public void IncrementNextOrderId()
+    {
+        // Incrementa el identificador del siguiente pedido disponible
+        nextOrderId++;
+    }
+    
+    private void UpdateTable()
+    {
+        // Actualiza la tabla con la informacion de Especialidades y Contornos seleccionados
+        DefaultTableModel md = (DefaultTableModel) table.getModel();
+        md.setRowCount(0); // Eliminar el contenido actual de la tabla
+        
+        // Mostrar Especialidades
+        int i;
+        for (i = 0; i < addedSpecialities.size(); i++)
+        {
+            // Agregar especialidad
+            ContadorEspecialidad e = addedSpecialities.get(i);
+            md.addRow(new Object[] {e.GetCount(), e.GetSpeciality().GetName(), e.GetSpeciality().GetPrice()});
+            
+            // Agregar contornos incluidos
+            int sub;
+            if (e.GetSides() == null)
+                continue;
+            
+            for (sub = 0; sub < e.GetSides().size(); sub++)
+            {
+                ContadorContorno c = e.GetSides().get(sub);
+                int repeat;
+                for (repeat = 0; repeat < c.GetCount(); repeat++)
+                    md.addRow(new Object[] {null, c.GetSide().GetName(), 0});
+            }
+        }
+        
+        // Mostrar Contornos Adicionales
+        for (i = 0; i < addedSides.size(); i++)
+        {
+            // Agregar Contorno
+            ContadorContorno aux = addedSides.get(i);
+            md.addRow(new Object[] {aux.GetCount(), aux.GetSide().GetName(), aux.GetSide().GetPrice()});
+        }
     }
 
     /**
@@ -31,12 +97,12 @@ public class WndGestorPedido extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         jLabel25 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
+        cmdDeleteAll = new javax.swing.JButton();
+        cmdAddAdditionalSide = new javax.swing.JButton();
+        cmdDiscard = new javax.swing.JButton();
+        cmdGenerate = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -74,8 +140,8 @@ public class WndGestorPedido extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        cmdDelete = new javax.swing.JButton();
+        cmdEditSides = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestor de Pedidos");
@@ -89,7 +155,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(1), "Pollo a la Canasta",  new Integer(2),  new Float(580.4)},
                 {null, "Arroz Blanco", null, null},
@@ -119,7 +185,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 460, 280));
 
@@ -127,39 +193,39 @@ public class WndGestorPedido extends javax.swing.JFrame {
         jLabel25.setText("Platos Seleccionados");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
-        jButton7.setText("Eliminar Todo");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        cmdDeleteAll.setText("Eliminar Todo");
+        cmdDeleteAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                cmdDeleteAllActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, 140, -1));
+        getContentPane().add(cmdDeleteAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, 140, -1));
 
-        jButton8.setText("<html>Agregar Contorno<br>Adicional");
-        jButton8.setToolTipText("");
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        cmdAddAdditionalSide.setText("<html>Agregar Contorno<br>Adicional");
+        cmdAddAdditionalSide.setToolTipText("");
+        cmdAddAdditionalSide.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cmdAddAdditionalSide.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                cmdAddAdditionalSideActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 140, -1));
+        getContentPane().add(cmdAddAdditionalSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 140, -1));
 
-        jButton17.setText("Descartar Pedido");
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
+        cmdDiscard.setText("Descartar Pedido");
+        cmdDiscard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
+                cmdDiscardActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, 169, 43));
+        getContentPane().add(cmdDiscard, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, 169, 43));
 
-        jButton18.setText("Finalizar Pedido");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        cmdGenerate.setText("Finalizar Pedido");
+        cmdGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                cmdGenerateActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 590, 169, 43));
+        getContentPane().add(cmdGenerate, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 590, 169, 43));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menú del dia - Platos Disponibles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -312,63 +378,63 @@ public class WndGestorPedido extends javax.swing.JFrame {
         jLabel29.setText("4");
         getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 550, 140, -1));
 
-        jButton11.setText("Eliminar");
-        jButton11.setToolTipText("");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        cmdDelete.setText("Eliminar");
+        cmdDelete.setToolTipText("");
+        cmdDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                cmdDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 140, -1));
+        getContentPane().add(cmdDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 140, -1));
 
-        jButton12.setText("<html>Modificar<br>Contornos");
-        jButton12.setToolTipText("");
-        jButton12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        cmdEditSides.setText("<html>Modificar<br>Contornos");
+        cmdEditSides.setToolTipText("");
+        cmdEditSides.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cmdEditSides.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                cmdEditSidesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 140, -1));
+        getContentPane().add(cmdEditSides, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void cmdDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteAllActionPerformed
         //Boton eliminar todo
         //Borramos la table
-        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+        DefaultTableModel model1 = (DefaultTableModel)this.table.getModel();
         model1.setRowCount(0);
         
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_cmdDeleteAllActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
          // Boton eliminar 
         //Elimina uno o varios elementos (filas) seleccionados de la tabla      
-        DefaultTableModel md = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel md = (DefaultTableModel) table.getModel();
         if (md.getRowCount() < 1)
             return;
         
         int i;
         for (i = md.getRowCount() - 1; i >= 0; i--)
         {
-            if (jTable1.isRowSelected(i))
+            if (table.isRowSelected(i))
                 md.removeRow(i);
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_cmdDeleteActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //Borramos la table
-        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+        DefaultTableModel model1 = (DefaultTableModel)this.table.getModel();
         model1.setRowCount(0);
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+    private void cmdDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardActionPerformed
         //Boton Descartar pedido
         //Borramos la table
-        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
+        DefaultTableModel model1 = (DefaultTableModel)this.table.getModel();
         model1.setRowCount(0);
-    }//GEN-LAST:event_jButton17ActionPerformed
+    }//GEN-LAST:event_cmdDiscardActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // Boton Flecha izquierda:
@@ -378,32 +444,68 @@ public class WndGestorPedido extends javax.swing.JFrame {
         // Boton Flecha Derecha:
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void cmdAddAdditionalSideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddAdditionalSideActionPerformed
         // Boton Agregar contorno adicional
-    }//GEN-LAST:event_jButton8ActionPerformed
+        
+        // Preparar un hilo nuevo para ejecutar el metodo ChooseSides de manera asincronica
+        Thread t = new Thread(() -> {
+            ArrayList<ContadorContorno> sides = Controller.ChooseSides(0, null);
+            
+            if (sides == null)
+                return;
+            
+            // Combinar los arreglos addedSides y sides
+            int si, ti;
+            // Por cada contorno adicional seleccionado
+            for (si = 0; si < sides.size(); si++)
+            {
+                // Por cada contorno adicional ya existente
+                boolean found = false;
+                for (ti = 0; ti < addedSides.size(); ti++)
+                {
+                    // Comparacion de punteros detras de bambalinas
+                    if (addedSides.get(ti).GetSide() == sides.get(si).GetSide())
+                    {
+                        found = true;
+                        addedSides.get(ti).AddCount(sides.get(si).GetCount()); // Agregar Cantidad
+                        break; // Cortocircuitar ciclo
+                    }
+                }
+                
+                if (!found)
+                    addedSides.add(sides.get(si)); // Agregar nuevo contorno
+            }
+            
+            // Actualizar tabla de pedido
+            UpdateTable();
+        });
+        
+        // Ejecutar el hilo
+        t.start();
+    }//GEN-LAST:event_cmdAddAdditionalSideActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void cmdEditSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSidesActionPerformed
         // Boton modificar contornos
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_cmdEditSidesActionPerformed
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void cmdGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerateActionPerformed
         // Boton finalizar pedido
-    }//GEN-LAST:event_jButton18ActionPerformed
+    }//GEN-LAST:event_cmdGenerateActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdAddAdditionalSide;
+    private javax.swing.JButton cmdDelete;
+    private javax.swing.JButton cmdDeleteAll;
+    private javax.swing.JButton cmdDiscard;
+    private javax.swing.JButton cmdEditSides;
+    private javax.swing.JButton cmdGenerate;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -436,6 +538,6 @@ public class WndGestorPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

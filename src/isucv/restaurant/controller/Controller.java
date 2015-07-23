@@ -63,6 +63,9 @@ public final class Controller {
     //Almacena la cartelera
     private static Cartelera billboard;
     
+    //Almacena las Estadisticas
+    private static Estadisticas stats;
+    
     /*////////////////////////////////
     //    GET y SETS ELEMENTALES    //
     */////////////////////////////////
@@ -125,7 +128,10 @@ public final class Controller {
         // Inicializar las Colas y Listas de Pedidos
         unpaidOrders = new ArrayList<>();
         pendingOrders = new ArrayList<>();
-        ordersReady = new LinkedList<Pedido>();
+        ordersReady = new LinkedList<>();
+        
+        // Crear la clase Estadisticas
+        stats = new Estadisticas();
                 
         // Mostrar la ventana de Login siempre que no haya otra ventana activa
         while (true)
@@ -259,8 +265,22 @@ public final class Controller {
                
     public static ArrayList<ContadorContorno> ChooseSides(int TotalSides,ArrayList<ContadorContorno> SelectedSides)
     {
-        //TODO here       
-        return null; 
+        // Permite abrir la ventana de seleccion de Contornos y retornar una lista de Contornos seleccionados
+        //ADVERTENCIA!!: ESTE METODO DEBE SER LLAMADO DE MANERA ASINCRONICA UNICAMENTE
+        //               PARA EVITAR CUELGUES DEL THREAD DE UI DE JAVA
+        WndSelectorContornos wnd = new WndSelectorContornos(SelectedSides, TotalSides);
+        wnd.setVisible(true);
+        
+        while (wnd.isVisible())
+        {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return wnd.GetSelectedSides();
     }
     
     //Retorno arraylist de especialidades de la cartelera
@@ -293,7 +313,23 @@ public final class Controller {
     
     public static void GenerateOrder(ArrayList<ContadorEspecialidad> Specialities,ArrayList<ContadorContorno> Sides)
     {
-        //TODO here
+        // Crear un nuevo pedido basandose en el ultimo Identificador disponible
+        // Mostrar la interfaz de confirmacion de pedido y añadirlo a la cola de Pedidos Sin Pagar
+        
+        WndGestorPedido gestor = (WndGestorPedido) activeWindow;
+        
+        int id = gestor.GetNextOrderId();
+        gestor.IncrementNextOrderId();
+        
+        // Crear el nuevo pedido
+        Pedido p = new Pedido();
+        p.SetId(id);
+        p.SetSpecialities(Specialities);
+        p.SetSides(Sides);
+        p.SetStatus("Sin Pagar");
+        
+        // Agregar el pedido a la Lista de Pedidos sin Pagar
+        GetUnpaidOrders().add(p);
     }
     
     //Busca un Order en los Arrays UnpaidOrders y PendingOrders y lo retorna
@@ -375,20 +411,16 @@ public final class Controller {
         }
     }
      
+    // Obtiene las Estadisticas de la sesion actual
     public static Estadisticas GetStats()
     {
-        Estadisticas statistics;
-        statistics = new Estadisticas();      
-    
-        return statistics;
+        return stats;
     }
     
     //Reinicia las estadisticas
     //Vuelve a crear el arraylist de 0
     public static void ResetStats()
     {
-        Estadisticas statistics;
-        statistics = new Estadisticas();
-        statistics.Reset();
+        stats.Reset();
     }
 }
