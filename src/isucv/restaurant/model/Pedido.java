@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Flemidra
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class Pedido 
 {

@@ -9,7 +9,7 @@ import isucv.restaurant.model.Usuarios;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class Dbg___WndUserDebugger extends javax.swing.JFrame {
 

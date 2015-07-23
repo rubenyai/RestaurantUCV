@@ -7,7 +7,7 @@ package isucv.restaurant.model;
 
 /**
  *
- * @author Ruben
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 
 // Clase usuario, que sera objeto de usuarios para crear un array 

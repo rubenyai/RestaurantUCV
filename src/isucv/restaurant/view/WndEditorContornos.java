@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class WndEditorContornos extends javax.swing.JFrame {
 

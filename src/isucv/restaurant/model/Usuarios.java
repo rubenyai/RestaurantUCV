@@ -19,7 +19,7 @@ import java.io.IOException;
 
 /**
  *
- * @author Ruben
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class Usuarios 
 {

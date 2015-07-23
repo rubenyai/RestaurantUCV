@@ -7,7 +7,7 @@ package isucv.restaurant.view;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class WndLoginFallido extends javax.swing.JFrame {
 

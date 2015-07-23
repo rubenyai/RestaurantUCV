@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class Dbg___WndLauncher extends javax.swing.JFrame {
 

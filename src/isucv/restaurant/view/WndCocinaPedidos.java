@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class WndCocinaPedidos extends javax.swing.JFrame {
 
@@ -160,6 +160,11 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable2);
 
         jButton1.setText("Despachar Pedido");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         lblIdPedido.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblIdPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -298,6 +303,10 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 jLabel6.setText("Pedidos");
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Almacena la ventana principal que muestra esta ventana
     private JFrame ParentWindow = null;

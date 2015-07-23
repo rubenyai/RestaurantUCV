@@ -21,7 +21,7 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class WndEstadisticas extends javax.swing.JFrame {
 

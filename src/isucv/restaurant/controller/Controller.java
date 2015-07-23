@@ -33,7 +33,7 @@ import javax.swing.JFrame;
 */
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public final class Controller {
     /*// Instancia del Controlador Principal de la Aplicacion

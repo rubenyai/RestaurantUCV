@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class WndSelectorTareas extends javax.swing.JFrame {
     

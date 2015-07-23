@@ -15,7 +15,7 @@ import javax.swing.DefaultListModel;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
 

@@ -9,7 +9,7 @@ import isucv.restaurant.controller.Controller;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class WndLogin extends javax.swing.JFrame {
 

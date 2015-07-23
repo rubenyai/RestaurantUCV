@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class WndCaja extends javax.swing.JFrame {
 
@@ -90,6 +90,11 @@ public class WndCaja extends javax.swing.JFrame {
 
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setText("2456");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         cmdSearchOrder.setText("Buscar");
         cmdSearchOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -341,78 +346,112 @@ public class WndCaja extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     //Boton BUSCAR
     private void cmdSearchOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSearchOrderActionPerformed
-        //Se busca el pedido utilizando el ID
-        Integer i, j;
-        //VARIABLES PARA SER USADAS CUANDO SAQUES LOS DATOS DEL ARRAYLIST
-        String Descripcion;
-        Pedido ActualOrder;
-        ID = Integer.parseInt(jTextField1.getText());
-        ActualOrder = Controller.FindOrder(ID);
-        jTextField1.setBackground(Color.white);
-        if (Controller.FindOrder(ID) != null)
+            
+        //Verificamos si ID esta lleno con valores validos
+        if(!"".equals(jTextField2.getText()))
         {
-            Object[] Nuevo = new Object[3];
-            //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
-            //Aqui sacamos los datos de especialidades
-            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            modelo.setNumRows(0); // Se elimina el contenido del Table
-            for (i = 0; i < ActualOrder.GetSpecialities().size(); i++)
+            //Se busca el pedido utilizando el ID
+            Integer i, j;
+            //VARIABLES PARA SER USADAS CUANDO SAQUES LOS DATOS DEL ARRAYLIST
+            String Descripcion;
+            Pedido ActualOrder;
+            ID = Integer.parseInt(jTextField1.getText());
+            ActualOrder = Controller.FindOrder(ID);
+            jTextField1.setBackground(Color.white);
+            if (Controller.FindOrder(ID) != null)
             {
-                Descripcion = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetName();
-                Costo = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetPrice();
-                Cantidad = ActualOrder.GetSpecialities().get(i).GetCount();
-                Balance = (Balance + (Cantidad * Costo));
-                Nuevo = new Object[] {Cantidad, Descripcion, Costo};
-                modelo.addRow(Nuevo);
-                ClearVariables(); //Se resetean las variables a status inciales
-                //Se añaden los contornos del plato al table
-                for (j = 0; j < ActualOrder.GetSpecialities().get(i).GetSides().size(); j++)
+                Object[] Nuevo = new Object[3];
+                //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
+                //Aqui sacamos los datos de especialidades
+                DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+                modelo.setNumRows(0); // Se elimina el contenido del Table
+                for (i = 0; i < ActualOrder.GetSpecialities().size(); i++)
                 {
-                    Descripcion = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
-                    Cantidad = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetCount();
-                    if (Cantidad == 1)
-                        Nuevo = new Object[] {null, Descripcion, null};
-                    else
-                    Nuevo = new Object[] {Cantidad, Descripcion, null};
-
+                    Descripcion = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetName();
+                    Costo = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetPrice();
+                    Cantidad = ActualOrder.GetSpecialities().get(i).GetCount();
+                    Balance = (Balance + (Cantidad * Costo));
+                    Nuevo = new Object[] {Cantidad, Descripcion, Costo};
                     modelo.addRow(Nuevo);
-                    ClearVariables();
-                }
-                ClearVariables();
-            } 
-            //Aqui la de los contornos ADICIONALES
-            for (i = 0; i < ActualOrder.GetSides().size(); i++)
-            {
-                Descripcion = ActualOrder.GetSides().get(i).GetSide().GetName();
-                Costo=ActualOrder.GetSides().get(i).GetSide().GetPrice();
-                Cantidad=ActualOrder.GetSides().get(i).GetCount();
-                Balance = (Balance + (Cantidad * Costo));
-                Nuevo = new Object[] {Cantidad, Descripcion, Costo};
-                modelo.addRow(Nuevo);
-                ClearVariables(); ////Se resetean las variables a status inciales
-            }
+                    ClearVariables(); //Se resetean las variables a status inciales
+                    //Se añaden los contornos del plato al table
+                    for (j = 0; j < ActualOrder.GetSpecialities().get(i).GetSides().size(); j++)
+                    {
+                        Descripcion = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
+                        Cantidad = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetCount();
+                        if (Cantidad == 1)
+                            Nuevo = new Object[] {null, Descripcion, null};
+                        else
+                        Nuevo = new Object[] {Cantidad, Descripcion, null};
 
-            CalculateAmount(Balance);
-        }
-        else
-        {
+                        modelo.addRow(Nuevo);
+                        ClearVariables();
+                    }
+                    ClearVariables();
+                } 
+                //Aqui la de los contornos ADICIONALES
+                for (i = 0; i < ActualOrder.GetSides().size(); i++)
+                {
+                    Descripcion = ActualOrder.GetSides().get(i).GetSide().GetName();
+                    Costo=ActualOrder.GetSides().get(i).GetSide().GetPrice();
+                    Cantidad=ActualOrder.GetSides().get(i).GetCount();
+                    Balance = (Balance + (Cantidad * Costo));
+                    Nuevo = new Object[] {Cantidad, Descripcion, Costo};
+                    modelo.addRow(Nuevo);
+                    ClearVariables(); ////Se resetean las variables a status inciales
+                }
+
+                CalculateAmount(Balance);
+            }
+            else
+            {
+                jTextField1.setBackground(Color.red);
+                ClearFiles();
+            }
+        }else{
             jTextField1.setBackground(Color.red);
-            ClearFiles();
         }
     }//GEN-LAST:event_cmdSearchOrderActionPerformed
 
     private void cmdDiscardOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardOrderActionPerformed
-        Controller.RemoveOrder(Integer.parseInt(jTextField1.getText()));
+        if(!"".equals(jTextField1.getText()))
+        {
+            Controller.RemoveOrder(Integer.parseInt(jTextField1.getText()));
+        }
         ClearFiles();
         jTextField1.setText("");
     }//GEN-LAST:event_cmdDiscardOrderActionPerformed
 
     private void cmdGenerateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerateOrderActionPerformed
-        
-        PayForOrder();
-        ClearFiles();
-        jTextField1.setText("");
+        if(!"".equals(jTextField2.getText()) && !"".equals(jTextField3.getText()) && !"".equals(jTextField4.getText()) && !"".equals(jTextField5.getText()) && !"0 BsF ".equals(jLabel13.getText()))
+        {
+            PayForOrder();
+            ClearFiles();
+            jTextField1.setText("");
+        //Mostrar datos faltantes coloreados en rojo
+        }else{
+            if("".equals(jTextField2.getText()))
+            {
+                jTextField2.setBackground(Color.red);
+            }
+            if("".equals(jTextField3.getText()))
+            {
+                jTextField3.setBackground(Color.red);
+            }
+            if("".equals(jTextField4.getText()))
+            {
+                jTextField4.setBackground(Color.red);
+            }
+            if("".equals(jTextField5.getText()))
+            {
+                jTextField5.setBackground(Color.red);
+            }   
+        } 
     }//GEN-LAST:event_cmdGenerateOrderActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void CalculateAmount(float Balance)
     {

@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author KDERazorback
+ * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class WndDespachoPedidos extends javax.swing.JFrame {
 
@@ -163,6 +163,10 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
 
     private void cmdDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardActionPerformed
         QueryNextOrder(); // Cargar el siguiente pedido listo (si existe)
+        if("No hay pedidos".equals(lblOrderID.getText()))
+        {
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_cmdDiscardActionPerformed
 
     // Busca en la cola de Pedidos Listos si existe algun pedido pendiente.
