@@ -259,8 +259,14 @@ public final class Controller {
                
     public static ArrayList<ContadorContorno> ChooseSides(int TotalSides,ArrayList<ContadorContorno> SelectedSides)
     {
-        //TODO here       
-        return null; 
+        //ArrayList<ContadorContorno> ret= new ArrayList<>();
+        //for(int i=0; i<TotalSides;i++)
+        //{
+          // ret.get(i).GetSide();
+          // ret=SelectedSides;
+       // }
+        //return ret;
+        return SelectedSides;
     }
     
     //Retorno arraylist de especialidades de la cartelera
@@ -293,7 +299,20 @@ public final class Controller {
     
     public static void GenerateOrder(ArrayList<ContadorEspecialidad> Specialities,ArrayList<ContadorContorno> Sides)
     {
-        //TODO here
+        //Buscamos el tamaño del array
+        int tam=GetUnpaidOrders().size();
+        //Para ubicarnos en la ultima posicion, tam-1 ya que nos dan n elementos, y los array son de n-1
+        int id=GetUnpaidOrders().get(tam-1).GetId();
+        //Para obtener su ID, sumarle 1 y tener el nuevo numero de pedido
+        id=id+1;
+        //Creamos objeto ped pedido para guardar nuestra informacion e introducirla a getunpaidorders
+        Pedido ped=new Pedido();
+        ped.SetId(id);
+        ped.SetSides(Sides);
+        ped.SetSpecialities(Specialities);
+        //Añadimos el objeto pedido a unpaidorders
+        GetUnpaidOrders().add(ped);
+        
     }
     
     //Busca un Order en los Arrays UnpaidOrders y PendingOrders y lo retorna
