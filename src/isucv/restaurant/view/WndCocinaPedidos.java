@@ -6,9 +6,11 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
+import static isucv.restaurant.controller.Controller.GetPendingOrders;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -79,6 +81,9 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -234,6 +239,65 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // Al cargar la ventana
+        ////////
+        /////Este procedimiento se movera a un metodo, para que pueda refrescarse la ventana al remover una order del array
+        /////////
+        //Condicion, si no existen pedidos, no mostramos nada
+        if(GetPendingOrders().isEmpty()==false)
+        {
+            int tim=0;
+            int id;
+            int CantContorno;
+            int CantEspecialidad;
+            //Borramos todo para cargar
+            DefaultTableModel md2 = (DefaultTableModel) jTable2.getModel();
+                md2.setRowCount(0); // Eliminar la tabla
+
+            DefaultTableModel md1 = (DefaultTableModel) jTable1.getModel();
+                md1.setRowCount(0); // Eliminar la tabla
+
+                lblIdPedido.setText(" ");
+                jLabel5.setText("0 Platos");
+                jLabel6.setText("0 Contornos");
+
+                //Cargamos desde pendingorders
+                for(int i=0;i < GetPendingOrders().size();i++)
+                {
+                    //ID
+                    id=GetPendingOrders().get(i).GetId();
+                    //Cantidad platos
+                    CantEspecialidad=GetPendingOrders().get(i).GetSpecialities().size();
+                    //cantidad platos
+                    CantContorno=GetPendingOrders().get(i).GetSides().size();
+
+                    //Calculo total time
+                    //Suma de tiempos, si size nos devuelve q tiene elementos
+                    for(int j=0;j < GetPendingOrders().get(i).GetSpecialities().size();j++)
+                    {
+                            tim+=GetPendingOrders().get(i).GetSpecialities().get(j).GetSpeciality().GetTime();
+                    }
+
+                    //Suma de tiempos, cantidad de contornos adiciones
+                    //Multiplicamos por 2, ya que cada contorno adicional dura 2 min cocinandose
+                    tim+=(2)*GetPendingOrders().get(i).GetSides().size();
+
+                    //Codigo llenado de table
+                    //////////
+                }
+        }else{
+            DefaultTableModel md2 = (DefaultTableModel) jTable2.getModel();
+                md2.setRowCount(0); // Eliminar la tabla
+
+            DefaultTableModel md1 = (DefaultTableModel) jTable1.getModel();
+                md1.setRowCount(0); // Eliminar la tabla
+            lblIdPedido.setText("No");
+                jLabel5.setText("Existen");
+                jLabel6.setText("Pedidos");
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     // Almacena la ventana principal que muestra esta ventana
     private JFrame ParentWindow = null;

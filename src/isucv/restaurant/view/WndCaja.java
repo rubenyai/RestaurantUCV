@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.Pedido;
 import java.awt.Color;
-import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;
 
 /**

@@ -17,7 +17,6 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /*
     Roles Principales Disponibles para Usuarios
@@ -55,7 +54,7 @@ public final class Controller {
     //Almacena las ordenes sin pagar
     private static ArrayList<Pedido> unpaidOrders;
     
-     //Almacena las ordenes sin pagar
+     //Almacena las ordenes pagas
     private static ArrayList<Pedido> pendingOrders;
     
     //Cola de despacho de ordenes
