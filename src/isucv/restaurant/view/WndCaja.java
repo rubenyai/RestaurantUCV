@@ -419,7 +419,6 @@ public class WndCaja extends javax.swing.JFrame {
             Controller.RemoveOrder(Integer.parseInt(jTextField1.getText()));
         }
         ClearFiles();
-        jTextField1.setText("");
     }//GEN-LAST:event_cmdDiscardOrderActionPerformed
 
     private void cmdGenerateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerateOrderActionPerformed
@@ -482,6 +481,11 @@ public class WndCaja extends javax.swing.JFrame {
         jTextField4.setText("");
         jTextField5.setText("");
         jTextField6.setText("");
+        jTextField1.setBackground(Color.WHITE);
+        jTextField2.setBackground(Color.WHITE);
+        jTextField3.setBackground(Color.WHITE);
+        jTextField4.setBackground(Color.WHITE);
+        jTextField5.setBackground(Color.WHITE);
         jLabel9.setText("0 BsF ");
         jLabel11.setText("0 BsF ");
         jLabel13.setText("0 BsF ");
