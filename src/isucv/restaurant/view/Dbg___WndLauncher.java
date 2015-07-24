@@ -223,101 +223,11 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cmdBillboardLoadFromFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardLoadFromFileActionPerformed
-        Controller.GetBillboard().SetSpecialities(new ArrayList<>());
-        Controller.GetBillboard().SetSides(new ArrayList<>());
-        
-         try (BufferedReader br = new BufferedReader(new FileReader(".//billboard.txt")))
-		{
-			String line;
-                        String[] segments;
-			while ((line = br.readLine()) != null) {
-                                // Comprobar si la linea es un comentario o esta vacia o no contiene comas
-                                if (line.length() < 5 || line.charAt(0) == '$' || !line.contains(","))
-                                    continue;
-                            
-				segments = line.split(",");
-                                
-                                if (segments == null || segments.length < 1)
-                                    continue;
-                                
-                                int i;
-                                for (i = 0; i < segments.length; i++)
-                                    segments[i] = segments[i].trim();
-                                
-                                if (segments.length == 5)
-                                {
-                                    // Especialidad
-                                    // Nombre, Precio, Contornos, Tiempo, Visible
-                                    Especialidad n = new Especialidad(segments[0], Float.parseFloat(segments[1]), Integer.parseInt(segments[2]), Integer.parseInt(segments[3]), (segments[4].equalsIgnoreCase("true")));
-                                    Controller.GetBillboard().GetSpecialities().add(n);
-                                }
-                                else if (segments.length == 3)
-                                {
-                                    // Contorno
-                                    // Nombre, Precio, Visible
-                                    Contorno n = new Contorno(segments[0], Float.parseFloat(segments[1]), (segments[2].equalsIgnoreCase("true")));
-                                    Controller.GetBillboard().GetSides().add(n);
-                                }
-			}
-		} catch (IOException e) {
-                        throw new RuntimeException(e);
-		}
-         
-         cmdCreateDebugOrder.setEnabled(true);
-         cmdSelectSides.setEnabled(true);
+        Controller.GetBillboard().LoadBillboard();
     }//GEN-LAST:event_cmdBillboardLoadFromFileActionPerformed
 
     private void cmdBillboardSaveToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardSaveToFileActionPerformed
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(".//billboard.txt")))
-		{
-                    // Header
-                    bw.write("$ Archivo de Estado de Cartelera\n");
-                    bw.write("$ Aqui se almacena el ultimo estado guardado de la Cartelera de la Aplicacion\n");
-                    bw.write("\n\n");
-                            
-                    // Specialities Header
-                    bw.write("$ ESPECIALIDADES\n");
-                    bw.write("$  Sintaxis: Nombre, Precio, Contornos, Tiempo, Visible\n\n");
-                    int i;
-                    
-                    // Specialities
-                    for (i = 0; i < Controller.GetBillboard().GetSpecialities().size(); i++)
-                    {
-                        Especialidad d = Controller.GetBillboard().GetSpecialities().get(i);
-                        bw.write(d.GetName());
-                        bw.write(", ");
-                        bw.write(d.GetPrice().toString());
-                        bw.write(", ");
-                        bw.write(Integer.toString(d.GetTotalSides()));
-                        bw.write(", ");
-                        bw.write(Integer.toString(d.GetTime()));
-                        bw.write(", ");
-                        bw.write(d.GetVisible().toString());
-                        bw.write("\n");
-                    }
-                    
-                    // Sides Header
-                    bw.write("\n\n$ CONTORNOS\n");
-                    bw.write("$  Sintaxis: Nombre, Precio, Visible\n\n");
-                    
-                    // Sides
-                    for (i = 0; i < Controller.GetBillboard().GetSides().size(); i++)
-                    {
-                        Contorno d = Controller.GetBillboard().GetSides().get(i);
-                        bw.write(d.GetName());
-                        bw.write(", ");
-                        bw.write(d.GetPrice().toString());
-                        //bw.write(", ");
-                        //bw.write(d.Time.toString());
-                        bw.write(", ");
-                        bw.write(d.GetVisible().toString());
-                        bw.write("\n");
-                    }
-                    
-                    bw.flush(); // Sincronizar con el sistema de archivos
-		} catch (IOException e) {
-                        throw new RuntimeException(e);
-		}
+        Controller.GetBillboard().SaveBillboard();
     }//GEN-LAST:event_cmdBillboardSaveToFileActionPerformed
 
     private void cmdCreateDebugOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCreateDebugOrderActionPerformed

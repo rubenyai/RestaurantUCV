@@ -121,6 +121,9 @@ public final class Controller {
         billboard.SetSpecialities(new ArrayList<>());
         billboard.SetSides(new ArrayList<>());
         
+        //Cargamos la cartelera
+        billboard.LoadBillboard();
+        
         // Crear una nueva instancia de WndLogin
         loginWindow = new WndLogin();
         loginWindow.setLocationRelativeTo(null); // Centrar Ventana
