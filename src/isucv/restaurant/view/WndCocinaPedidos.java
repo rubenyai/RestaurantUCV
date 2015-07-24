@@ -6,7 +6,11 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
+import static isucv.restaurant.controller.Controller.FindOrder;
 import static isucv.restaurant.controller.Controller.GetPendingOrders;
+import isucv.restaurant.model.ContadorContorno;
+import isucv.restaurant.model.ContadorEspecialidad;
+import isucv.restaurant.model.Pedido;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -118,6 +122,11 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             }
         });
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         jLabel1.setText("Cola de Pedidos por Preparar");
@@ -240,16 +249,64 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Permite retornar a la ventana de seleccion de tarea al cerrar
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        this.setVisible(false);
-    }//GEN-LAST:event_formWindowClosing
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // Al cargar la ventana
+     private void UpdateTable(int id)
+    {
+        // Actualiza la tabla con la informacion de Especialidades y Contornos seleccionados
+        DefaultTableModel md = (DefaultTableModel) jTable2.getModel();
+        md.setRowCount(0); // Eliminar el contenido actual de la tabla
+        
+        //Contadores que se mostraran
+        int contSpecialities=0,contSides=0;
+        
+        //conseguir el pedido con ID
+        Pedido ped;
+        ped=FindOrder(id);
+        // Mostrar Especialidades
+        int i=0,sub=0;
+        for (i = 0; i < ped.GetSpecialities().size(); i++)
+        {
+            // Agregar especialidad
+            ContadorEspecialidad e = ped.GetSpecialities().get(i);
+            //Mostramos solo las especialidades que tienen un count mayor a 0 (que han sido pedidos)
+            //En finalizar orden removemos estos mismos que tienen count igual a 0 para tener el array solo con ordenes pedidas
+            if(e.GetCount()>0)
+            {
+            md.addRow(new Object[] {e.GetCount(), e.GetSpeciality().GetName()});
+            contSpecialities+=e.GetCount();
+            }
+            // Agregar contornos incluidos
+            //int sub;
+            if (e.GetSides() == null)
+                continue;
+            
+            for (sub = 0; sub < ped.GetSpecialities().size(); sub++)
+            {
+                ContadorContorno c = e.GetSides().get(sub);
+                int repeat;
+                for (repeat = 0; repeat < c.GetCount(); repeat++)
+                    md.addRow(new Object[] {null, c.GetSide().GetName(),"",""});
+            }
+        }
+        int a;
+        // Mostrar Contornos Adicionales
+        for (a = 0; a < ped.GetSides().size(); a++)
+        {
+            // Agregar Contorno
+            ContadorContorno aux = ped.GetSides().get(a);
+            md.addRow(new Object[] {aux.GetCount(), aux.GetSide().GetName(),"", aux.GetSide().GetPrice()});
+            contSides+=aux.GetCount();
+        } 
+        jLabel5.setText(String.format(Integer.toString(contSpecialities) + " Platos "));
+        jLabel6.setText(String.format(Integer.toString(contSides) + " Contornos ")); 
+    }
+    
+    public void UpdateTablePedidos(){
+                // Al cargar la ventana
         ////////
         /////Este procedimiento se movera a un metodo, para que pueda refrescarse la ventana al remover una order del array
         /////////
+        //Boton despachar pedido deshabilitado hasta q se seleccione un pedido
+        jButton1.setEnabled(false);
         //Condicion, si no existen pedidos, no mostramos nada
         if(GetPendingOrders().isEmpty()==false)
         {
@@ -302,11 +359,81 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 jLabel5.setText("Existen");
                 jLabel6.setText("Pedidos");
         }
+    }
+    // Permite retornar a la ventana de seleccion de tarea al cerrar
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setVisible(false);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        UpdateTablePedidos();
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        int idped=0;
+        if(lblIdPedido.getText()=="No")
+        {
+            //cerramos ventana
+            this.setVisible(false);
+        }
+        else
+        {
+                //Movemos la orden elegida a la cola de despacho de mesonero
+                DefaultTableModel md = (DefaultTableModel) jTable1.getModel();
+            if (md.getRowCount() < 1)
+                return;
+
+            int i;
+            for (i = md.getRowCount() - 1; i >= 0; i--)
+            {
+                if (jTable1.isRowSelected(i))
+                {
+                    //Encontramos la fila para obtener el num de pedido
+                    idped=Integer.parseInt(jTable1.getValueAt(i,0).toString());
+                }
+            }
+        }
+        Pedido p;
+        p=FindOrder(idped);
+        
+        //Movemos el pedido al mesonero ordersready y borramos el pedido de pendingorders
+        Controller.GetOrdersReady().add(p);
+        for(int y=0;y<Controller.GetPendingOrders().size();y++)
+        {
+            if(Controller.GetPendingOrders().get(y).GetId()==idped)
+            {
+                    Controller.GetPendingOrders().remove(y);
+            }
+        }
+        //Se actualiza nuevamente la table de pedidos
+        UpdateTablePedidos();
+        //Se deshabilita boton de despacho hasta q se seleccione otra opcion
+        jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int id=0;
+        DefaultTableModel md = (DefaultTableModel) jTable1.getModel();
+        if (md.getRowCount() < 1)
+            return;
+        
+        int i;
+        for (i = md.getRowCount() - 1; i >= 0; i--)
+        {
+            if (jTable1.isRowSelected(i))
+            {
+                //Codigo de llenado de jtable2, con especificacion de los platos del pedido
+                
+                //Habilitar boton Despachar pedido
+                jButton1.setEnabled(true);
+                id=Integer.parseInt(jTable1.getValueAt(i,0).toString());
+                int platos=Integer.parseInt(jTable1.getValueAt(i,1).toString());
+                int contornos=Integer.parseInt(jTable1.getValueAt(i,2).toString());
+                lblIdPedido.setText(Integer.toString(id));     
+            }
+        }
+        UpdateTable(id);
+    }//GEN-LAST:event_jTable1MouseClicked
 
     // Almacena la ventana principal que muestra esta ventana
     private JFrame ParentWindow = null;

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,13 +32,12 @@ public class WndGestorPedido extends javax.swing.JFrame {
     // Contiene las Especialidades seleccionadas actualmente
     ArrayList<ContadorEspecialidad> addedSpecialities;
     
-   private final static int COLUMN_COUNT = 0;
+    private final static int COLUMN_COUNT = 0;
     private final static int COLUMN_DESCRIPTION = 1;
-    
-    private ArrayList<ContadorEspecialidad> specialitiesLocalCache;
-    
+        
     private int availableSpecialities; // Cantidad de Contornos disponibles para seleccion
     private int selectedSpecialities; // Cantidad de Contornos seleccionados actualmente
+    private ArrayList<ContadorEspecialidad> initialSpecialitySelection;
     private int pageIndex; // Indice de la pagina actual en Base 1
     
     /** Lista de Controles en el ArrayList:
@@ -73,10 +73,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         // Ajustar el ancho de las columnas de la tabla
         table.getColumnModel().getColumn(COLUMN_COUNT).setPreferredWidth(40);
         table.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(240);
-        
-        // Inicializar la copia local (cache) de contornos
-        specialitiesLocalCache = new ArrayList<>();
-        
+                
         // Copiar contornos actuales (solo visibles)
         int i;
         ArrayList<Especialidad> billboardSpecialities = Controller.GetBillboard().GetSpecialities();
@@ -88,7 +85,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
                 ContadorEspecialidad ce = new ContadorEspecialidad(billboardSpecialities.get(i));
                 ce.SetCount(0);
                 
-                specialitiesLocalCache.add(ce);
+                addedSpecialities.add(ce);
             }
         }
         
@@ -97,7 +94,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         
         pageIndex = 1; // Comenzar desde la Pagina 1
         UpdateButtonLayout(); // Actualizar botones de seleccion
-        UpdateSelectionTable(); // Actualizar tabla de seleccion y estadisticas 
+        UpdateTable();
     }
     
     public int GetNextOrderId()
@@ -114,20 +111,32 @@ public class WndGestorPedido extends javax.swing.JFrame {
     
     private void UpdateTable()
     {
+        //Boton modificar contorno deshabilitado
+        cmdEditSides.setEnabled(false);
+        //Boton eliminar deshabilitado
+        cmdDelete.setEnabled(false);
         // Actualiza la tabla con la informacion de Especialidades y Contornos seleccionados
         DefaultTableModel md = (DefaultTableModel) table.getModel();
         md.setRowCount(0); // Eliminar el contenido actual de la tabla
         
+        //contadores para mostrarlos en los labels cantidad de platos y contornos adicionales
+        int contSpecialities=0,contSides=0;
+        
         // Mostrar Especialidades
-        int i;
+        int i=0,sub=0;
         for (i = 0; i < addedSpecialities.size(); i++)
         {
             // Agregar especialidad
             ContadorEspecialidad e = addedSpecialities.get(i);
-            md.addRow(new Object[] {e.GetCount(), e.GetSpeciality().GetName(), e.GetSpeciality().GetPrice()});
-            
+            //Mostramos solo las especialidades que tienen un count mayor a 0 (que han sido pedidos)
+            //En finalizar orden removemos estos mismos que tienen count igual a 0 para tener el array solo con ordenes pedidas
+            if(e.GetCount()>0)
+            {
+            md.addRow(new Object[] {e.GetCount(), e.GetSpeciality().GetName(),e.GetSpeciality().GetTotalSides(), e.GetSpeciality().GetPrice()});
+            contSpecialities+=e.GetCount();
+            }
             // Agregar contornos incluidos
-            int sub;
+            //int sub;
             if (e.GetSides() == null)
                 continue;
             
@@ -136,17 +145,21 @@ public class WndGestorPedido extends javax.swing.JFrame {
                 ContadorContorno c = e.GetSides().get(sub);
                 int repeat;
                 for (repeat = 0; repeat < c.GetCount(); repeat++)
-                    md.addRow(new Object[] {null, c.GetSide().GetName(), 0});
+                    md.addRow(new Object[] {null, c.GetSide().GetName(),"",""});
             }
         }
-        
+        int a;
         // Mostrar Contornos Adicionales
-        for (i = 0; i < addedSides.size(); i++)
+        for (a = 0; a < addedSides.size(); a++)
         {
             // Agregar Contorno
-            ContadorContorno aux = addedSides.get(i);
-            md.addRow(new Object[] {aux.GetCount(), aux.GetSide().GetName(), aux.GetSide().GetPrice()});
+            ContadorContorno aux = addedSides.get(a);
+            md.addRow(new Object[] {aux.GetCount(), aux.GetSide().GetName(),"", aux.GetSide().GetPrice()});
+            contSides+=aux.GetCount();
         }
+        //Buscamos la cantidad de contornos adicionales y platos para mostrarlos en el indicador
+        lblSelectedSpecialities.setText(Integer.toString(contSpecialities));
+        lblSelectedSidesAditionals.setText(Integer.toString(contSides)); 
     }
 
     /**
@@ -248,6 +261,14 @@ public class WndGestorPedido extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tableMouseEntered(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 460, 280));
@@ -309,6 +330,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         jPanel1.add(lblPrice1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 127, -1));
 
         cmdAdd1.setText("Agregar");
+        cmdAdd1.setName("1"); // NOI18N
         cmdAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAddActionPerformed(evt);
@@ -332,6 +354,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         jPanel1.add(lblPrice2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 127, -1));
 
         cmdAdd2.setText("Agregar");
+        cmdAdd2.setName("2"); // NOI18N
         cmdAdd2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAddActionPerformed(evt);
@@ -355,6 +378,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         jPanel1.add(lblPrice3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 127, -1));
 
         cmdAdd3.setText("Agregar");
+        cmdAdd3.setName("3"); // NOI18N
         cmdAdd3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAddActionPerformed(evt);
@@ -378,6 +402,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         jPanel1.add(lblPrice5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 127, -1));
 
         cmdAdd5.setText("Agregar");
+        cmdAdd5.setName("5"); // NOI18N
         cmdAdd5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAddActionPerformed(evt);
@@ -416,6 +441,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         jPanel1.add(lblPrice4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 127, -1));
 
         cmdAdd6.setText("Agregar");
+        cmdAdd6.setName("6"); // NOI18N
         cmdAdd6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAddActionPerformed(evt);
@@ -424,6 +450,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         jPanel1.add(cmdAdd6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 127, -1));
 
         cmdAdd4.setText("Agregar");
+        cmdAdd4.setName("4"); // NOI18N
         cmdAdd4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAddActionPerformed(evt);
@@ -501,7 +528,10 @@ public class WndGestorPedido extends javax.swing.JFrame {
         //Borramos la table
         DefaultTableModel model1 = (DefaultTableModel)this.table.getModel();
         model1.setRowCount(0);
-        
+        addedSides = new ArrayList<>();
+        addedSpecialities = new ArrayList<>();   
+        lblSelectedSpecialities.setText("0");
+        lblSelectedSidesAditionals.setText("0");
     }//GEN-LAST:event_cmdDeleteAllActionPerformed
 
     private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
@@ -528,10 +558,12 @@ public class WndGestorPedido extends javax.swing.JFrame {
     private void cmdDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardActionPerformed
         //Boton Descartar pedido
         //Borramos la table
-        DefaultTableModel model1 = (DefaultTableModel)this.table.getModel();
-        model1.setRowCount(0);
         lblSelectedSpecialities.setText("0");
         lblSelectedSidesAditionals.setText("0");
+        DefaultTableModel model1 = (DefaultTableModel)this.table.getModel();
+        model1.setRowCount(0);
+        addedSides = new ArrayList<>();
+        addedSpecialities = new ArrayList<>();    
     }//GEN-LAST:event_cmdDiscardActionPerformed
 
     private void cmdPreviousPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPreviousPageActionPerformed
@@ -587,11 +619,94 @@ public class WndGestorPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdAddAdditionalSideActionPerformed
 
     private void cmdEditSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSidesActionPerformed
-        // Boton modificar contornos
+        // Boton modificar contornos      
+        
+        //Variables que pasaremos
+        ArrayList<ContadorContorno> baseSides=new ArrayList<>();
+        int maxSides=0;
+        
+        //Averiguamos si el contorno elegido es propio de una especialidad o es un contorno adicional
+        DefaultTableModel md = (DefaultTableModel) table.getModel();
+        if (md.getRowCount() < 1)
+            return;
+        
+        int i;
+        for (i = md.getRowCount() - 1; i >= 0; i--)
+        {
+            if (table.isRowSelected(i))
+            {
+                //si esta vacio en price, es un contorno de una especialidad
+                //al contrario, es un contorno adicional
+                if(table.getValueAt(i, 3)=="")
+                {
+                    //Buscamos el array de contornos de esta especialidad
+                    
+                    //Buscamos la cantidad de contornos que tiene esta especialidad
+                    //maxSides=table.getValueAt(i, 2);
+                }
+                else
+                {
+                    //Buscamos el array de contornos de esta especialidad
+                    //baseSides=addedSides;
+                    //ArrayList baseSides = (ArrayList) addedSides.clone();
+                    //max sides le asignamos 0, no hay limite
+                    maxSides=0;
+                }
+            }
+        }
+        // Preparar un hilo nuevo para ejecutar el metodo ChooseSides de manera asincronica
+        Thread w = new Thread(() -> {
+            //ArrayList<ContadorContorno> sides1 = Controller.ChooseSides(maxSides, baseSides);
+            ArrayList<ContadorContorno> sides1 =addedSides;
+            if (sides1 == null)
+                return;
+            
+            // Combinar los arreglos addedSides y sides
+            int si, ti;
+            // Por cada contorno adicional seleccionado
+            for (si = 0; si < sides1.size(); si++)
+            {
+                // Por cada contorno adicional ya existente
+                boolean found = false;
+                for (ti = 0; ti < addedSides.size(); ti++)
+                {
+                    // Comparacion de punteros detras de bambalinas
+                    if (addedSides.get(ti).GetSide() == sides1.get(si).GetSide())
+                    {
+                        found = true;
+                        addedSides.get(ti).AddCount(sides1.get(si).GetCount()); // Agregar Cantidad
+                        break; // Cortocircuitar ciclo
+                    }
+                }
+                
+                if (!found)
+                    addedSides.add(sides1.get(si)); // Agregar nuevo contorno
+            }
+            
+            // Actualizar tabla de pedido
+            UpdateTable();
+        });
+        
+        // Ejecutar el hilo
+        w.start();
     }//GEN-LAST:event_cmdEditSidesActionPerformed
 
     private void cmdGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerateActionPerformed
         // Boton finalizar pedido
+        //Borramos ordenes sin count
+        for(int i=0;i<addedSpecialities.size();i++)
+        {
+            if(addedSpecialities.get(i).GetCount()==0)
+            {
+                addedSpecialities.remove(i);
+            }
+        }
+       //Obtencion de ID
+        
+       //Generate Order a unpaid
+       
+       //Mostrar confirmacion de pedido
+        
     }//GEN-LAST:event_cmdGenerateActionPerformed
  
     private void cmdAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddActionPerformed
@@ -600,9 +715,45 @@ public class WndGestorPedido extends javax.swing.JFrame {
         
         JButton source = (JButton) evt.getSource(); // Obtener el control primario que genero este evento
         Integer specialityIndex = Integer.parseInt(source.getName()); // Obtener el indice del elemento en esta sub-pagina
-        
+ 
         SpecialityUpdateActionDispatcher(specialityIndex, true); // Llamar al metodo principal de adicion
     }//GEN-LAST:event_cmdAddActionPerformed
+
+    private void tableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableMouseEntered
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+      DefaultTableModel md = (DefaultTableModel) table.getModel();
+        if (md.getRowCount() < 1)
+            return;
+        
+        int i;
+        for (i = md.getRowCount() - 1; i >= 0; i--)
+        {
+            if (table.isRowSelected(i))
+            {
+                //Ver si es un contorno, activa boton modificar
+                if(table.getValueAt(i, 2)=="")
+                {
+                    cmdEditSides.setEnabled(true);
+                }
+                else
+                {
+                    cmdEditSides.setEnabled(false);
+                }
+                //Ver si es una especialidad, activar boton eliminar
+                if(table.getValueAt(i, 2)!="")
+                {
+                    cmdDelete.setEnabled(true);
+                }
+                else
+                {
+                    cmdDelete.setEnabled(false);
+                } 
+            }
+        }
+    }//GEN-LAST:event_tableMouseClicked
 
        // Incrementa en 1 el contorno descrito pot el indice especificado
     // de la sub-pagina visible actualmente
@@ -611,43 +762,15 @@ public class WndGestorPedido extends javax.swing.JFrame {
         finalIndex--; // Indice real del contorno a actualizar
         
         // Actualizar el indice en cache
-        specialitiesLocalCache.get(finalIndex).AddCount(increment ? 1 : -1);
-        
+        addedSpecialities.get(finalIndex).AddCount(increment ? 1 : -1);
+                
         // Refrescar la tabla de contornos seleccionados
-        UpdateSelectionTable();
+        UpdateTable();
         
         // Actualizar contadores de seleccion en los Botones
         UpdateButtonLayout(); 
     }
-    
-    private void UpdateSelectionTable()
-    {
-        // Actualiza la Tabla de contornos seleccionados con la informacion en Cache
         
-        int i;
-        DefaultTableModel md = (DefaultTableModel) table.getModel();
-        md.setRowCount(0); // Eliminar el contenido de la Tabla
-        int selected = 0;
-        
-        // Agregar contornos si su cantidad es mayor a 1
-        for (i = 0; i < specialitiesLocalCache.size(); i++)
-        {
-            if (specialitiesLocalCache.get(i).GetCount() > 0)
-            {
-                md.addRow(new Object[] {specialitiesLocalCache.get(i).GetCount(),
-                    specialitiesLocalCache.get(i).GetSpeciality().GetName()});
-                selected += specialitiesLocalCache.get(i).GetCount();
-            }
-        }
-        
-        // Actualizar estadisticas
-        lblSelectedSpecialities.setText(String.valueOf(selected));
-        selectedSpecialities = selected;
-        lblSelectedSidesAditionals.setText("0");
-        
-        lblNoSelection.setVisible(md.getRowCount() < 1);
-    }
-    
     private void UpdateButtonLayout()
     {
         // Actualiza la disposicion y el texto de los controles de Adicion/Substraccion de Contornos
@@ -664,10 +787,10 @@ public class WndGestorPedido extends javax.swing.JFrame {
             JLabel time = (JLabel) controlMap.get(logicalIndex)[3];
             JButton addButton = (JButton) controlMap.get(logicalIndex)[4];
             
-            if (realIndex < specialitiesLocalCache.size())
+            if (realIndex < addedSpecialities.size())
             {
                 // Existe un elemento para el control
-                ContadorEspecialidad c = specialitiesLocalCache.get(realIndex);
+                ContadorEspecialidad c = addedSpecialities.get(realIndex);
                 
                 title.setText(c.GetSpeciality().GetName());
                 price.setText(String.format("%.2f", c.GetSpeciality().GetPrice()) + " BsF ");
@@ -690,14 +813,13 @@ public class WndGestorPedido extends javax.swing.JFrame {
                 cont.setVisible(false);
                 time.setVisible(false);
                 addButton.setVisible(false);
-            }
-                
+            }    
             realIndex++;
         }
         
         // Comprobacion de limite para realIndex
         // (Comprobar si existen mas paginas a la derecha/izquierda)
-        cmdNextPage.setEnabled(realIndex < specialitiesLocalCache.size());
+        cmdNextPage.setEnabled(realIndex < addedSpecialities.size());
         cmdPreviousPage.setEnabled(realIndex > 6);
     }
     
@@ -706,16 +828,16 @@ public class WndGestorPedido extends javax.swing.JFrame {
         // Obtiene una lista de los Contornos seleccionados
         // La lista es pre-procesada desde el cache eliminando los items no seleccionados
         
-        if (specialitiesLocalCache == null)
+        if (addedSpecialities == null)
             return null;
         
         ArrayList<ContadorEspecialidad> output = new ArrayList<>();
         
         int i;
-        for (i = 0; i < specialitiesLocalCache.size(); i++) 
+        for (i = 0; i < addedSpecialities.size(); i++) 
         {
-            if (specialitiesLocalCache.get(i).GetCount() > 0)
-                output.add(specialitiesLocalCache.get(i));   
+            if (addedSpecialities.get(i).GetCount() > 0)
+                output.add(addedSpecialities.get(i));   
         }
         
         if (output.size() > 0)
@@ -723,8 +845,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         else
             return null;
     }
-    
-    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAdd1;
     private javax.swing.JButton cmdAdd2;
