@@ -755,7 +755,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         addedSpecialities=baseSpecialities;
         
        //Generate Order a unpaid
-       if(addedSpecialities.isEmpty()!=false || addedSides.isEmpty()!=false)
+       if((addedSpecialities.isEmpty()!=true || addedSides.isEmpty()!=true))
        {
            Controller.GenerateOrder(addedSpecialities, addedSides);
        }
