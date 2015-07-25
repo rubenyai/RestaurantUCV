@@ -6,9 +6,6 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
 
 /**
  *

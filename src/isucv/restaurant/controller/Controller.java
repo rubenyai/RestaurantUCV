@@ -113,9 +113,6 @@ public final class Controller {
     // Punto de Entrada Principal de la Aplicacion
     public static void main(String[] args)
     {
-        //// Crear una nueva instancia de la clase Controller
-        //Instance = new Controller();
-        
         // Crear una nueva instancia de la Cartelera
         billboard = new Cartelera();
         billboard.SetSpecialities(new ArrayList<>());
@@ -167,7 +164,11 @@ public final class Controller {
             // Determinar si se debe cerrar la aplicacion
             // Cierre por parte del usuario de la ventana Login
             if (loginWindow.getCloseApp())
+            {
+                //Se guarda la billboard antes de cerrar la aplicacion
+                billboard.SaveBillboard();
                 break;
+            }
         }
         
         // Cerrar la aplicacion
@@ -333,6 +334,14 @@ public final class Controller {
         
         // Agregar el pedido a la Lista de Pedidos sin Pagar
         GetUnpaidOrders().add(p);
+        
+        WndConfirmacionPedido confirmacion = new WndConfirmacionPedido();
+        //confirmacion.setLocationRelativeTo(null);
+        activeWindow = confirmacion;
+        confirmacion.IDPedido(id);
+        activeWindow.setVisible(true);
+        activeWindow= gestor;
+        activeWindow.setVisible(true);
     }
     
     //Busca un Order en los Arrays UnpaidOrders y PendingOrders y lo retorna
