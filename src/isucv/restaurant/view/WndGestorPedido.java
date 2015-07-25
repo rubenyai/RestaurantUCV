@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -551,8 +552,23 @@ public class WndGestorPedido extends javax.swing.JFrame {
         for (i = md.getRowCount() - 1; i >= 0; i--)
         {
             if (table.isRowSelected(i))
-                md.removeRow(i);
+            {
+                if(Integer.parseInt(table.getValueAt(i, 0).toString())>0)
+                {
+                    //Decrementamos cont -1 pero aun asi se muestra en la table
+                    //Para esto buscamos con el nombre cual es el objeto
+                    String name=table.getValueAt(i, 1).toString();
+                    for(int j=0;j<addedSpecialities.size();j++)
+                    {
+                        if(addedSpecialities.get(j).GetSpeciality().GetName()==name)
+                        {
+                            addedSpecialities.get(j).SetCount( ((addedSpecialities.get(j).GetCount()))-1);
+                        }
+                    }
+                }
+            }
         }
+     UpdateTable();
     }//GEN-LAST:event_cmdDeleteActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -661,13 +677,12 @@ public class WndGestorPedido extends javax.swing.JFrame {
                     //Buscamos el array de contornos de esta especialidad
                     
                     //Buscamos la cantidad de contornos que tiene esta especialidad
-                    //maxSides=table.getValueAt(i, 2);
+                    maxSides=Integer.parseInt(table.getValueAt(i, 2).toString());
                 }
                 else
                 {
                     //Buscamos el array de contornos de esta especialidad
-                    //baseSides=addedSides;
-                    //ArrayList baseSides = (ArrayList) addedSides.clone();
+                    baseSides=addedSides;
                     //max sides le asignamos 0, no hay limite
                     maxSides=0;
                 }
@@ -675,8 +690,12 @@ public class WndGestorPedido extends javax.swing.JFrame {
         }
         // Preparar un hilo nuevo para ejecutar el metodo ChooseSides de manera asincronica
         Thread w = new Thread(() -> {
+            //////////////////////////////
+            ////////////////////////////
             //ArrayList<ContadorContorno> sides1 = Controller.ChooseSides(maxSides, baseSides);
-            ArrayList<ContadorContorno> sides1 =addedSides;
+            ////////////////////////// Da error npi why
+            //////////////////////////////////////////
+            ArrayList<ContadorContorno> sides1 =addedSides; ///esta linea no sirve para nada, es para que no explote
             if (sides1 == null)
                 return;
             

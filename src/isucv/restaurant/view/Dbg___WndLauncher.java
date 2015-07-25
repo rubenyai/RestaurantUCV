@@ -224,6 +224,7 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
 
     private void cmdBillboardLoadFromFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardLoadFromFileActionPerformed
         Controller.GetBillboard().LoadBillboard();
+        cmdCreateDebugOrder.setEnabled(true);
     }//GEN-LAST:event_cmdBillboardLoadFromFileActionPerformed
 
     private void cmdBillboardSaveToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardSaveToFileActionPerformed
@@ -231,6 +232,7 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdBillboardSaveToFileActionPerformed
 
     private void cmdCreateDebugOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCreateDebugOrderActionPerformed
+        cmdSelectSides.setEnabled(true);
         // Order
         Pedido p = new Pedido();
         p.SetId(Integer.parseInt(txtOrderId.getText()));
