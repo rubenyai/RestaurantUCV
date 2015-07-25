@@ -82,7 +82,7 @@ public class WndCaja extends javax.swing.JFrame {
         cmdGenerateOrder = new javax.swing.JButton();
         cmdDiscardOrder = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pago de Pedidos");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -348,7 +348,7 @@ public class WndCaja extends javax.swing.JFrame {
     private void cmdSearchOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSearchOrderActionPerformed
             
         //Verificamos si ID esta lleno con valores validos
-        if(!"".equals(jTextField2.getText()))
+        if(!"".equals(jTextField1.getText()))
         {
             //Se busca el pedido utilizando el ID
             Integer i, j;
@@ -360,6 +360,13 @@ public class WndCaja extends javax.swing.JFrame {
             jTextField1.setBackground(Color.white);
             if (Controller.FindOrder(ID) != null)
             {
+                jTextField2.setEnabled(true);
+                jTextField3.setEnabled(true);
+                jTextField4.setEnabled(true);
+                jTextField5.setEnabled(true);
+                jTextField6.setEnabled(true);
+                cmdGenerateOrder.setEnabled(true);
+                cmdDiscardOrder.setEnabled(true);
                 Object[] Nuevo = new Object[3];
                 //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
                 //Aqui sacamos los datos de especialidades
@@ -481,6 +488,13 @@ public class WndCaja extends javax.swing.JFrame {
         jTextField4.setText("");
         jTextField5.setText("");
         jTextField6.setText("");
+        jTextField2.setEnabled(false);
+        jTextField3.setEnabled(false);
+        jTextField4.setEnabled(false);
+        jTextField5.setEnabled(false);
+        jTextField6.setEnabled(false);
+        cmdGenerateOrder.setEnabled(false);
+        cmdDiscardOrder.setEnabled(false);
         jTextField1.setBackground(Color.WHITE);
         jTextField2.setBackground(Color.WHITE);
         jTextField3.setBackground(Color.WHITE);

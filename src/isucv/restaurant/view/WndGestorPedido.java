@@ -22,19 +22,23 @@ import javax.swing.table.DefaultTableModel;
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class WndGestorPedido extends javax.swing.JFrame {
-
+        
     // Contiene el siguiente identificador de pedido libre
     private static int nextOrderId = 2456;
     
     // Contiene los Contornos adicionales seleccionados actualmente
     ArrayList<ContadorContorno> addedSides;
+    ArrayList<ContadorContorno> baseSides;
+    ArrayList<ContadorEspecialidad> baseSpecialities;
     
     // Contiene las Especialidades seleccionadas actualmente
     ArrayList<ContadorEspecialidad> addedSpecialities;
+        
+    int maxSides=0;
     
     private final static int COLUMN_COUNT = 0;
     private final static int COLUMN_DESCRIPTION = 1;
-        
+       
     private int pageIndex; // Indice de la pagina actual en Base 1
     
     /** Lista de Controles en el ArrayList:
@@ -50,10 +54,11 @@ public class WndGestorPedido extends javax.swing.JFrame {
     public WndGestorPedido() {
         initComponents();
         this.setSize(this.getWidth() + 10, this.getHeight() + 10); // Incrementar el tamaño de la ventana
-        
+                
         // Crear las listas de especialidades y contornos
         addedSides = new ArrayList<>();
         addedSpecialities = new ArrayList<>();
+        baseSides=new ArrayList<>();
         
         //boton finalizar pedido disabled hasta q haya algo q mandar
         cmdGenerate.setEnabled(false);
@@ -211,7 +216,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         cmdDelete = new javax.swing.JButton();
         cmdEditSides = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestor de Pedidos");
         setMinimumSize(new java.awt.Dimension(620, 633));
         setResizable(false);
@@ -654,11 +659,9 @@ public class WndGestorPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdAddAdditionalSideActionPerformed
 
     private void cmdEditSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSidesActionPerformed
-        // Boton modificar contornos      
-        
+        // Boton modificar contornos            
         //Variables que pasaremos
-        ArrayList<ContadorContorno> baseSides=new ArrayList<>();
-        int maxSides=0;
+        maxSides=0;
         
         //Averiguamos si el contorno elegido es propio de una especialidad o es un contorno adicional
         DefaultTableModel md = (DefaultTableModel) table.getModel();
@@ -682,7 +685,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
                 else
                 {
                     //Buscamos el array de contornos de esta especialidad
-                    baseSides=addedSides;
+                    baseSides = addedSides;  
                     //max sides le asignamos 0, no hay limite
                     maxSides=0;
                 }
@@ -690,12 +693,8 @@ public class WndGestorPedido extends javax.swing.JFrame {
         }
         // Preparar un hilo nuevo para ejecutar el metodo ChooseSides de manera asincronica
         Thread w = new Thread(() -> {
-            //////////////////////////////
-            ////////////////////////////
-            //ArrayList<ContadorContorno> sides1 = Controller.ChooseSides(maxSides, baseSides);
-            ////////////////////////// Da error npi why
-            //////////////////////////////////////////
-            ArrayList<ContadorContorno> sides1 =addedSides; ///esta linea no sirve para nada, es para que no explote
+            //falta implementar
+            ArrayList<ContadorContorno> sides1 = Controller.ChooseSides(maxSides, baseSides);
             if (sides1 == null)
                 return;
             
@@ -722,6 +721,10 @@ public class WndGestorPedido extends javax.swing.JFrame {
             }
             
             // Actualizar tabla de pedido
+            if(maxSides==0)
+            { 
+                addedSides=baseSides;
+            }
             UpdateTable();
         });
         
@@ -732,13 +735,18 @@ public class WndGestorPedido extends javax.swing.JFrame {
     private void cmdGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerateActionPerformed
         // Boton finalizar pedido
         //Borramos ordenes sin count
+        baseSpecialities=new ArrayList<>();
+        
         for(int i=0;i<addedSpecialities.size();i++)
         {
-            if(addedSpecialities.get(i).GetCount()==0)
+            if(addedSpecialities.get(i).GetCount()>0)
             {
-                addedSpecialities.remove(i);
+                baseSpecialities.add(addedSpecialities.get(i));
             }
         }
+        //Se pasan las ordenes
+        addedSpecialities=baseSpecialities;
+        
        //Generate Order a unpaid
        if(addedSpecialities.isEmpty()!=false || addedSides.isEmpty()!=false)
        {
@@ -813,11 +821,11 @@ public class WndGestorPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_tableMouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
+
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-
+      
     }//GEN-LAST:event_formWindowClosing
 
        // Incrementa en 1 el contorno descrito pot el indice especificado

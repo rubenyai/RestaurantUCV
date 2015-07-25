@@ -47,18 +47,18 @@ public class Pedido
             this.id=idd;
     }
     
-    public void SetStatus(String Status)
+    public void SetStatus(String stat)
     {
-        this.status = Status;
+        this.status = stat;
     }
     
-    public void SetSpecialities(ArrayList<ContadorEspecialidad> Spec)
+    public void SetSpecialities(ArrayList<ContadorEspecialidad> spec)
     {
-        this.specialities = Spec;
+        this.specialities = spec;
     }
     
-    public void SetSides(ArrayList<ContadorContorno> Con)
+    public void SetSides(ArrayList<ContadorContorno> con)
     {
-        this.sides = Con;
+        this.sides = con;
     }
  }

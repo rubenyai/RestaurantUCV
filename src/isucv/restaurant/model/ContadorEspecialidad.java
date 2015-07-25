@@ -36,7 +36,7 @@ public class ContadorEspecialidad
     {
         this.count += Count;
     }
-    
+        
     public void SetSides(ArrayList<ContadorContorno> Sides)
     {
         this.sides = Sides;

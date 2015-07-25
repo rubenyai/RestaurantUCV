@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /*
     Roles Principales Disponibles para Usuarios
@@ -36,8 +37,6 @@ import javax.swing.JFrame;
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public final class Controller {
-    /*// Instancia del Controlador Principal de la Aplicacion
-    public static Controller Instance;*/ // OBSOLETO
 
     /*///////////////////////////
     //    ATRIBUTOS INTERNOS   //
@@ -173,7 +172,6 @@ public final class Controller {
         
         // Cerrar la aplicacion
         loginWindow.dispose();
-        // Instance = null;
         System.exit(0); // Salir de la Aplicacion
     }
    
@@ -336,12 +334,11 @@ public final class Controller {
         GetUnpaidOrders().add(p);
         
         WndConfirmacionPedido confirmacion = new WndConfirmacionPedido();
-        //confirmacion.setLocationRelativeTo(null);
+        confirmacion.setLocationRelativeTo(null);
         activeWindow = confirmacion;
         confirmacion.IDPedido(id);
         activeWindow.setVisible(true);
         activeWindow= gestor;
-        activeWindow.setVisible(true);
     }
     
     //Busca un Order en los Arrays UnpaidOrders y PendingOrders y lo retorna
@@ -374,13 +371,12 @@ public final class Controller {
        Cliente Datos=new Cliente(Name,ClientID,BillingAdr,PhoneNumber);
        WndCaja Caja = (WndCaja) activeWindow;
        Factura f= new Factura(ActualOrder,Datos, Caja.GetTotal());
+       //Remove the actual order of unpaid
+       RemoveOrder(ID);
+       //Agregamos a la lista del chef
+       pendingOrders.add(ActualOrder);
     }
-    
-   /* public ArrayList<Pedido> GetPendingOrders()
-    {
-        return GetPendingOrders();
-    }*/
-    
+        
     //Mueve el pedido de PendingdOrders a OrdersReady
     //Pedidos de chef a mesonero
     public static void RequestDelivery(int ID)

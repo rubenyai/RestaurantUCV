@@ -32,7 +32,7 @@ public class ContadorContorno
     {
         this.count += Count;
     }
-    
+      
     public int GetCount(){
             return this.count;
     }

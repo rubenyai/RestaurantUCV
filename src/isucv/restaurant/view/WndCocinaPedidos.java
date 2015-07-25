@@ -281,8 +281,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             for (int sub = 0; sub < ped.GetSpecialities().size(); sub++)
             {
                 ContadorContorno c = e.GetSides().get(sub);
-                int repeat;
-                for (repeat = 0; repeat < c.GetCount(); repeat++)
+                for (int repeat = 0; repeat < c.GetCount(); repeat++)
                     md.addRow(new Object[] {null, c.GetSide().GetName()});
             }
         }
@@ -301,6 +300,11 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
     public void UpdateTablePedidos(){
         //Boton despachar pedido deshabilitado hasta q se seleccione un pedido
         jButton1.setEnabled(false);
+        DefaultTableModel md1 = (DefaultTableModel) jTable1.getModel();
+            md1.setRowCount(0); // Eliminar la tabla
+            
+            DefaultTableModel md2 = (DefaultTableModel) jTable2.getModel();
+            md2.setRowCount(0); // Eliminar la tabla
         //Condicion, si no existen pedidos, no mostramos nada
         if(GetPendingOrders().isEmpty()==false)
         {
@@ -309,10 +313,6 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             int CantContorno;
             int CantEspecialidad;
             //Borramos todo para cargar
-
-            DefaultTableModel md1 = (DefaultTableModel) jTable1.getModel();
-            md1.setRowCount(0); // Eliminar la tabla
-
                 lblIdPedido.setText(" ");
                 jLabel5.setText("0 Platos");
                 jLabel6.setText("0 Contornos");
@@ -342,12 +342,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                       md1.addRow(new Object[] {id,CantEspecialidad,CantContorno,tim});   
                 }
         }else{
-            DefaultTableModel md2 = (DefaultTableModel) jTable2.getModel();
-                md2.setRowCount(0); // Eliminar la tabla
-
-            DefaultTableModel md1 = (DefaultTableModel) jTable1.getModel();
-                md1.setRowCount(0); // Eliminar la tabla
-            lblIdPedido.setText("No");
+                lblIdPedido.setText("No");
                 jLabel5.setText("Existen");
                 jLabel6.setText("Pedidos");
         }

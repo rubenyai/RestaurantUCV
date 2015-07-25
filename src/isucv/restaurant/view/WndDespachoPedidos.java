@@ -54,7 +54,7 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Despacho de Pedidos");
         setMinimumSize(new java.awt.Dimension(586, 443));
         addWindowListener(new java.awt.event.WindowAdapter() {

@@ -38,22 +38,22 @@ NO DEBERIAN EXISTIR CONFLICTOS NI DEPENDENCIAS CRUZADAS ENTRE LOS ELEMENTOS DE L
 
 
 ============
-== FASE 1 ==
+== FASE 1 == DONE
 ============
- 1.1   // RUBEN
+ 1.1   // RUBEN ------- LISTA
      - Definicion de Constantes
 	   + Enumeracion con los roles de los usuarios
 	   + Estructura del Archivo de Usuarios (Como se almacenan los atributos: Usuario + Contrasena + Rol)
      - CLS::Usuario
 	 - CLS::Usuarios
 	   + Lectura y validacion del archivo de usuarios
- 1.2   // DAVID
-     - CLS::Cliente
+ 1.2   // DAVID ------ LISTA
+     - CLS::Cliente 
 	 - CLS::Especialidad
 	 - CLS::Contorno
 	 - CLS::ContadorEspecialidad
 	 - CLS::ContadorContorno
- 1.3   // FABIAN
+ 1.3   // FABIAN ------ LISTA 
 	 - CTRL::Logica de EntryPoint de la aplicacion
 	 - CTRL::Logica del Controlador de Ventanas
 	 - UI::Logica de ILogin + IErrorLogin PARCIAL
@@ -62,58 +62,64 @@ NO DEBERIAN EXISTIR CONFLICTOS NI DEPENDENCIAS CRUZADAS ENTRE LOS ELEMENTOS DE L
 	 - CTRL::Definicion de metodos sin cuerpo
 
 ============
-== FASE 2 ==
+== FASE 2 == DONE
 ============
  2.1
-     - CLS::Cartelera
-	 - CLS::Estadisticas
-	 - CLS::Pedido
-	 - CLS::Factura (assoc)
- 2.2
-     - UI::Logica de ISelectorContornos COMPLETA
-	 - UI::Logica de ILogin + IErrorLogin COMPLETA con soporte de archivo de credenciales (clase Usuarios)
-	 - UI::Logica de IEstadisticas COMPLETA
- 2.3
-     - UI::Logica de IEditorPlatos COMPLETA
-	 - UI::Logica de IEditorContornos COMPLETA
+	//DAVID
+     - CLS::Cartelera ------ LISTA
+	 - CLS::Estadisticas ------ LISTA
+	 - CLS::Pedido ------ LISTA 
+	 - CLS::Factura (assoc) ------ LISTA
+ 2.2    // RUBEN
+     - UI::Logica de ISelectorContornos COMPLETA ------ LISTA
+	 - UI::Logica de ILogin + IErrorLogin COMPLETA con soporte de archivo de credenciales (clase Usuarios) ------ LISTA
+	 - UI::Logica de IEstadisticas COMPLETA ------ LISTA
+ 2.3    // FABIAN
+     - UI::Logica de IEditorPlatos COMPLETA ------ LISTA
+	 - UI::Logica de IEditorContornos COMPLETA ------ LISTA
 
 ============
-== FASE 3 ==
+== FASE 3 ==  DONE
 ============
- 3.1
-	 - UI::Logica de IPedido COMPLETA
-	 - UI::Logica de ICocina COMPLETA
-	 - UI::Logica de IDespachoPedidos COMPLETA
- 3.2
-	 - UI::Logica de IGestorPedidos COMPLETA
- 3.3
-     - UI::Logica de ICaja COMPLETA
- 3.4
-	 - CTRL::Completar todos los metodos sin cuerpo
+ 3.1	//RUBEN
+	 - UI::Logica de IPedido COMPLETA ------ LISTA
+	 - UI::Logica de ICocina COMPLETA ------ LISTA
+	 - UI::Logica de IGestorPedidos COMPLETA -------- LISTA
+ 3.2     // DAVID
+         - UI::Logica de ICaja COMPLETA ------ LISTA
+	 - UI::Logica de IDespachoPedidos COMPLETA ------ LISTA
+ 3.3    // FABIAN
+	 - CTRL::Completar todos los metodos sin cuerpo ------ LISTA
 
 ============
-== FASE 4 ==
+== FASE 4 == ON WORK
 ============
  4.1
+
      - TEST:Pruebas Unitarias del Actor:Chef
  4.2
+
      - TEST::Pruebas Unitarias del Actor:Cajero
 	 - TEST::Pruebas Unitarias del Actor:Mesonero
  4.3
+
      - TEST::Pruebas Unitarias del Actor:Cliente
 
 ============
 == FASE 5 ==
 ============
  5.1
+	// FABIAN
     - Enlace y Limpieza de codigo obsoleto
 	  + Repasar todos los metodos y eliminar el codigo comentado/obsoleto
  5.2
+	// FABIAN
     - Refactorizar codigo
 	  + Aplicar sugerencias de netbeans
 	  + Aplicar optimizaciones que se encuentren sobre la marcha
 	  + Renombrar elementos con nombres ambiguos o genericos y colocarles nombres mas intuitivos
  5.3
+	//FABIAN Y DAVID Y RUBEN
     - Eliminar Interfaces y codigo auxiliar para depuracion
     - DOCUMENTAR (BIEN DOCUMENTADO) BIIIIENNNNNNNNN DOCUMENTADOOOOOOOO!!!!
 
@@ -121,10 +127,13 @@ NO DEBERIAN EXISTIR CONFLICTOS NI DEPENDENCIAS CRUZADAS ENTRE LOS ELEMENTOS DE L
 == FASE 6 ==
 ============
  6.1
+	//DAVID
     - Ensamblado de paquete JAR y prueba bajo Windows
  6.2
+	//FABIAN
     - Ensamblado de paquete JAR y prueba bajo LINUX (Ubuntu)
  6.3
+	//RUBEN
     - Construccion de Archivo MARKDOWN para el programa con lo siguiente:
 	  + Requisitos del Proyecto
 	  + Documentacion de Compilacion bajo Windows
