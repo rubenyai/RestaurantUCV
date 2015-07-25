@@ -262,8 +262,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         Pedido ped;
         ped=FindOrder(id);
         // Mostrar Especialidades
-        int i=0,sub=0;
-        for (i = 0; i < ped.GetSpecialities().size(); i++)
+        for (int i = 0; i < ped.GetSpecialities().size(); i++)
         {
             // Agregar especialidad
             ContadorEspecialidad e = ped.GetSpecialities().get(i);
@@ -279,21 +278,20 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             if (e.GetSides() == null)
                 continue;
             
-            for (sub = 0; sub < ped.GetSpecialities().size(); sub++)
+            for (int sub = 0; sub < ped.GetSpecialities().size(); sub++)
             {
                 ContadorContorno c = e.GetSides().get(sub);
                 int repeat;
                 for (repeat = 0; repeat < c.GetCount(); repeat++)
-                    md.addRow(new Object[] {null, c.GetSide().GetName(),"",""});
+                    md.addRow(new Object[] {null, c.GetSide().GetName()});
             }
         }
-        int a;
         // Mostrar Contornos Adicionales
-        for (a = 0; a < ped.GetSides().size(); a++)
+        for (int a = 0; a < ped.GetSides().size(); a++)
         {
             // Agregar Contorno
             ContadorContorno aux = ped.GetSides().get(a);
-            md.addRow(new Object[] {aux.GetCount(), aux.GetSide().GetName(),"", aux.GetSide().GetPrice()});
+            md.addRow(new Object[] {aux.GetCount(), aux.GetSide().GetName()});
             contSides+=aux.GetCount();
         } 
         jLabel5.setText(String.format(Integer.toString(contSpecialities) + " Platos "));
@@ -301,10 +299,6 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
     }
     
     public void UpdateTablePedidos(){
-                // Al cargar la ventana
-        ////////
-        /////Este procedimiento se movera a un metodo, para que pueda refrescarse la ventana al remover una order del array
-        /////////
         //Boton despachar pedido deshabilitado hasta q se seleccione un pedido
         jButton1.setEnabled(false);
         //Condicion, si no existen pedidos, no mostramos nada
@@ -315,11 +309,9 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             int CantContorno;
             int CantEspecialidad;
             //Borramos todo para cargar
-            DefaultTableModel md2 = (DefaultTableModel) jTable2.getModel();
-                md2.setRowCount(0); // Eliminar la tabla
 
             DefaultTableModel md1 = (DefaultTableModel) jTable1.getModel();
-                md1.setRowCount(0); // Eliminar la tabla
+            md1.setRowCount(0); // Eliminar la tabla
 
                 lblIdPedido.setText(" ");
                 jLabel5.setText("0 Platos");
@@ -347,7 +339,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                     tim+=(2)*GetPendingOrders().get(i).GetSides().size();
 
                     //Codigo llenado de table
-                    //////////
+                      md1.addRow(new Object[] {id,CantEspecialidad,CantContorno,tim});   
                 }
         }else{
             DefaultTableModel md2 = (DefaultTableModel) jTable2.getModel();
@@ -383,8 +375,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             if (md.getRowCount() < 1)
                 return;
 
-            int i;
-            for (i = md.getRowCount() - 1; i >= 0; i--)
+            for (int i = md.getRowCount() - 1; i >= 0; i--)
             {
                 if (jTable1.isRowSelected(i))
                 {
@@ -405,6 +396,9 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                     Controller.GetPendingOrders().remove(y);
             }
         }
+        //Borramos la 2da table
+        DefaultTableModel md2 = (DefaultTableModel) jTable2.getModel();
+        md2.setRowCount(0);
         //Se actualiza nuevamente la table de pedidos
         UpdateTablePedidos();
         //Se deshabilita boton de despacho hasta q se seleccione otra opcion
@@ -417,18 +411,13 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         if (md.getRowCount() < 1)
             return;
         
-        int i;
-        for (i = md.getRowCount() - 1; i >= 0; i--)
+        for (int i = md.getRowCount() - 1; i >= 0; i--)
         {
             if (jTable1.isRowSelected(i))
             {
-                //Codigo de llenado de jtable2, con especificacion de los platos del pedido
-                
                 //Habilitar boton Despachar pedido
                 jButton1.setEnabled(true);
                 id=Integer.parseInt(jTable1.getValueAt(i,0).toString());
-                int platos=Integer.parseInt(jTable1.getValueAt(i,1).toString());
-                int contornos=Integer.parseInt(jTable1.getValueAt(i,2).toString());
                 lblIdPedido.setText(Integer.toString(id));     
             }
         }
