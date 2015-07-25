@@ -275,7 +275,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 contSpecialities+=e.GetCount();
             }
             // Agregar contornos incluidos
-            if (e.GetSides() == null)
+            if (e.GetSides() == null || e.GetSides().size()==0)
                 continue;
             
             for (int sub = 0; sub < ped.GetSpecialities().size(); sub++)

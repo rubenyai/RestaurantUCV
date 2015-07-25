@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class WndGestorPedido extends javax.swing.JFrame {
         
     // Contiene el siguiente identificador de pedido libre
-    private static int nextOrderId = 2456;
+    private static int nextOrderId = 1;
     
     // Contiene los Contornos adicionales seleccionados actualmente
     ArrayList<ContadorContorno> addedSides;
