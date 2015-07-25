@@ -12,6 +12,7 @@ import isucv.restaurant.model.ContadorContorno;
 import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Pedido;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -270,11 +271,10 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             //En finalizar orden removemos estos mismos que tienen count igual a 0 para tener el array solo con ordenes pedidas
             if(e.GetCount()>0)
             {
-            md.addRow(new Object[] {e.GetCount(), e.GetSpeciality().GetName()});
-            contSpecialities+=e.GetCount();
+                md.addRow(new Object[] {e.GetCount(), e.GetSpeciality().GetName()});
+                contSpecialities+=e.GetCount();
             }
             // Agregar contornos incluidos
-            //int sub;
             if (e.GetSides() == null)
                 continue;
             

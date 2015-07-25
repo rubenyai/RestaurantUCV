@@ -62,6 +62,8 @@ public class WndGestorPedido extends javax.swing.JFrame {
         
         //boton finalizar pedido disabled hasta q haya algo q mandar
         cmdGenerate.setEnabled(false);
+        cmdDiscard.setEnabled(false);
+        cmdDeleteAll.setEnabled(false);
         
         this.setLocationRelativeTo(null); // Centrar ventana
         
@@ -526,6 +528,8 @@ public class WndGestorPedido extends javax.swing.JFrame {
     private void cmdDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteAllActionPerformed
         //Boton eliminar todo
         cmdGenerate.setEnabled(false);
+        cmdDiscard.setEnabled(false);
+        cmdDeleteAll.setEnabled(false);
         addedSides = new ArrayList<>();
         addedSpecialities = new ArrayList<>();
         int i;
@@ -586,6 +590,8 @@ public class WndGestorPedido extends javax.swing.JFrame {
         //Boton Descartar pedido
         //Borramos la table
         cmdGenerate.setEnabled(false);
+        cmdDiscard.setEnabled(false);
+        cmdDeleteAll.setEnabled(false);
         addedSides = new ArrayList<>();
         addedSpecialities = new ArrayList<>();
         int i;
@@ -621,6 +627,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
     private void cmdAddAdditionalSideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddAdditionalSideActionPerformed
         // Boton Agregar contorno adicional
         cmdGenerate.setEnabled(true);
+        cmdDiscard.setEnabled(true);
         // Preparar un hilo nuevo para ejecutar el metodo ChooseSides de manera asincronica
         Thread t = new Thread(() -> {
             ArrayList<ContadorContorno> sides = Controller.ChooseSides(0, null);
@@ -753,6 +760,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
            Controller.GenerateOrder(addedSpecialities, addedSides);
        }
         cmdGenerate.setEnabled(false);
+        cmdDiscard.setEnabled(false);
         addedSides = new ArrayList<>();
         addedSpecialities = new ArrayList<>();
         int i;
@@ -777,6 +785,8 @@ public class WndGestorPedido extends javax.swing.JFrame {
          // Recibe los eventos de Adicion de contornos, y los redirije al metodo
         // de incremento de seleccion
         cmdGenerate.setEnabled(true);
+        cmdDiscard.setEnabled(true);
+        cmdDeleteAll.setEnabled(true);
         JButton source = (JButton) evt.getSource(); // Obtener el control primario que genero este evento
         Integer specialityIndex = Integer.parseInt(source.getName()); // Obtener el indice del elemento en esta sub-pagina
  
