@@ -275,15 +275,15 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 contSpecialities+=e.GetCount();
             }
             // Agregar contornos incluidos
+            // Agregar contornos incluidos
             if (e.GetSides() == null || e.GetSides().size()==0)
                 continue;
-            
-            for (int sub = 0; sub < ped.GetSpecialities().size(); sub++)
+
+            for (int sub = 0; sub < ped.GetSpecialities().get(i).GetSides().size(); sub++)
             {
                 ContadorContorno c = e.GetSides().get(sub);
-                for (int repeat = 0; repeat < c.GetCount(); repeat++)
-                    md.addRow(new Object[] {null, c.GetSide().GetName()});
-            }
+                md.addRow(new Object[] {c.GetCount(), "          " + c.GetSide().GetName(), null, null});
+             }
         }
         // Mostrar Contornos Adicionales
         for (int a = 0; a < ped.GetSides().size(); a++)
