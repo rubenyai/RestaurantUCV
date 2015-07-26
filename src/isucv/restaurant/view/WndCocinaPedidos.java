@@ -282,7 +282,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             {
                 ContadorContorno c = e.GetSides().get(sub);
                 for (int repeat = 0; repeat < c.GetCount(); repeat++)
-                    md.addRow(new Object[] {null, c.GetSide().GetName()});
+                    md.addRow(new Object[] {null, "          " + c.GetSide().GetName()});
             }
         }
         // Mostrar Contornos Adicionales

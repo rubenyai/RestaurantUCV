@@ -396,7 +396,7 @@ public class WndCaja extends javax.swing.JFrame {
                     //Se añaden los contornos del plato al table
                     for (j = 0; j < ActualOrder.GetSpecialities().get(i).GetSides().size(); j++)
                     {
-                        Descripcion = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
+                        Descripcion = "          " + ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
                         Cantidad = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetCount();
                         if (Cantidad == 1)
                             Nuevo = new Object[] {null, Descripcion, null};

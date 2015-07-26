@@ -195,7 +195,7 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
                 //Se añaden los contornos del plato al table
                 for (int j = 0; j < despacho.GetSpecialities().get(i).GetSides().size(); j++)
                 {
-                    Descripcion = despacho.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
+                    Descripcion = "          " + despacho.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
                     Cantidad = despacho.GetSpecialities().get(i).GetSides().get(j).GetCount();
                     if (Cantidad == 1)
                     {
