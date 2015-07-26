@@ -199,11 +199,11 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
                     Cantidad = despacho.GetSpecialities().get(i).GetSides().get(j).GetCount();
                     if (Cantidad == 1)
                     {
-                        Nuevo = new Object[] {null, Descripcion};
+                        Nuevo = new Object[] {null, "          " +  Descripcion};
                     }
                     else
                     {
-                        Nuevo = new Object[] {Cantidad, Descripcion};
+                        Nuevo = new Object[] {Cantidad, "          " +  Descripcion};
                     }
                     md.addRow(Nuevo);
                 }
