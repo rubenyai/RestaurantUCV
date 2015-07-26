@@ -399,9 +399,9 @@ public class WndCaja extends javax.swing.JFrame {
                         Descripcion = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
                         Cantidad = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetCount();
                         if (Cantidad == 1)
-                            Nuevo = new Object[] {null, Descripcion, null};
+                            Nuevo = new Object[] {null,"          " + Descripcion, null};
                         else
-                        Nuevo = new Object[] {Cantidad, Descripcion, null};
+                        Nuevo = new Object[] {Cantidad, "          " +Descripcion, null};
 
                         modelo.addRow(Nuevo);
                         ClearVariables();
