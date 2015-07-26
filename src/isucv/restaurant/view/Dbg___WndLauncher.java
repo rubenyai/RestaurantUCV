@@ -287,16 +287,6 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         // Seleccionar contornos
         WndSelectorContornos wnd = new WndSelectorContornos(sideSelectorCache, Integer.parseInt(txtSideMaxCount.getText()));
         wnd.setVisible(true);
-        
-        // Lambda Expression: New Background Thread for Callback
-        /*
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    WaitForSideSelection_Background(wnd);
-                }
-            });
-        */
         Thread t = new Thread(() -> {
             WaitForSideSelection_Background(wnd);
         });
