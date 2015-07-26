@@ -38,6 +38,8 @@ public class WndGestorPedido extends javax.swing.JFrame {
     
     private final static int COLUMN_COUNT = 0;
     private final static int COLUMN_DESCRIPTION = 1;
+    private final static int COLUMN_SIDES = 2;
+    private final static int COLUMN_PRICE = 3;
        
     private int pageIndex; // Indice de la pagina actual en Base 1
     
@@ -47,6 +49,21 @@ public class WndGestorPedido extends javax.swing.JFrame {
      *    lblTitleX  lblPriceX  lblCountX  cmdAddX     cmdRemoveX
     **/ 
     private ArrayList<JComponent[]> controlMap; // Contiene todos los Controles de la ventana ordenados por indice logico a los contornos
+    
+    /**
+     * Mapa de Filas en el JTable para enlazar cada una de ellas inequivocamente
+     * con las especialidades y los contornos adicionales agregados al pedido.
+     * 
+     * Solo se registran las especialidades y contornos adicionales en la Tabla.
+     * Las referencias a los contornos incluidos no se almacenan y sus indices en el mapa
+     * se establecen a null. Esto no deberia cusar problema ya que el boton Eliminar
+     * siempre esta deshabilitado para filas Contorno incluidas.
+     * 
+     * El tipo de objeto debe deducirse por el valor de la columna "Contorno" perteneciente
+     * a la fila que se accesa en el metodo, para poder hacer la conversion de tipo de dato
+     * apropiada para el objeto
+     */
+    private ArrayList<Integer> tableRowMap; // Contiene todas las especialidades y Contornos adicionales agregados por indice real a la tabla
     
     /**
      * Creates new form WndGestorPedido
@@ -117,6 +134,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         cmdEditSides.setEnabled(false);
         //Boton eliminar deshabilitado
         cmdDelete.setEnabled(false);
+        
         // Actualiza la tabla con la informacion de Especialidades y Contornos seleccionados
         DefaultTableModel md = (DefaultTableModel) table.getModel();
         md.setRowCount(0); // Eliminar el contenido actual de la tabla
@@ -124,47 +142,70 @@ public class WndGestorPedido extends javax.swing.JFrame {
         //contadores para mostrarlos en los labels cantidad de platos y contornos adicionales
         int contSpecialities=0,contSides=0;
         
+        // Crear mapa de Especialidades y Contornos contra Filas del Table
+        tableRowMap = new ArrayList<>();
+        
         // Mostrar Especialidades
         for (int i = 0; i < addedSpecialities.size(); i++)
         {
+            // Sincronizar la tabla con su mapa de filas
+            while (tableRowMap.size() < md.getRowCount())
+                tableRowMap.add(null);
+            
             // Agregar especialidad
             ContadorEspecialidad e = addedSpecialities.get(i);
             //Mostramos solo las especialidades que tienen un count mayor a 0 (que han sido pedidos)
             //En finalizar orden removemos estos mismos que tienen count igual a 0 para tener el array solo con ordenes pedidas
-            if(e.GetCount()>0)
+            if(e.GetCount() > 0)
             {
-            md.addRow(new Object[] {e.GetCount(), e.GetSpeciality().GetName(),e.GetSpeciality().GetTotalSides(), e.GetSpeciality().GetPrice()});
-            contSpecialities+=e.GetCount();
-            }
-            // Agregar contornos incluidos
-            //int sub;
-            if (e.GetSides() == null)
-                continue;
-            
-            for (int sub = 0; sub < e.GetSides().size(); sub++)
-            {
-                ContadorContorno c = e.GetSides().get(sub);
-                int repeat;
-                for (repeat = 0; repeat < c.GetCount(); repeat++)
-                    md.addRow(new Object[] {null, c.GetSide().GetName(),"",""});
+                tableRowMap.add(i); // Agregar una entrada al mapa de filas apuntando a la Especialidad
+                md.addRow(new Object[] {e.GetCount(), e.GetSpeciality().GetName(),e.GetSpeciality().GetTotalSides(), e.GetSpeciality().GetPrice()});
+                contSpecialities+=e.GetCount();
+                
+                // Agregar contornos incluidos
+                //int sub;
+                if (e.GetSides() == null)
+                    continue;
+
+                for (int sub = 0; sub < e.GetSides().size(); sub++)
+                {
+                    ContadorContorno c = e.GetSides().get(sub);
+
+                    /* CODIGO DESHABILITADO - NO BORRAR
+                       SE ESTA PROBANDO AGREGAR CONTORNOS INCLUIDOS CON SU INDICADOR DE CANTIDAD
+                    int repeat;
+                    for (repeat = 0; repeat < c.GetCount(); repeat++)
+                        md.addRow(new Object[] {null, c.GetSide().GetName(), null, null});
+                    */
+
+                    // Codigo en PRUEBA
+                    md.addRow(new Object[] {c.GetCount(), "          " + c.GetSide().GetName(), null, null});
+                }
             }
         }
         // Mostrar Contornos Adicionales
         for (int a = 0; a < addedSides.size(); a++)
         {
+            // Sincronizar la tabla con su mapa de filas
+            while (tableRowMap.size() < md.getRowCount())
+                tableRowMap.add(null);
+            
             // Agregar Contorno
             ContadorContorno aux = addedSides.get(a);
-            md.addRow(new Object[] {aux.GetCount(), aux.GetSide().GetName(),"", aux.GetSide().GetPrice()});
+            tableRowMap.add(a); // Agregar una entrada al mapa de filas apuntando al Contorno
+            md.addRow(new Object[] {aux.GetCount(), aux.GetSide().GetName(), null, aux.GetSide().GetPrice()});
             contSides+=aux.GetCount();
         }
+        
         //Buscamos la cantidad de contornos adicionales y platos para mostrarlos en el indicador
         lblSelectedSpecialities.setText(Integer.toString(contSpecialities));
         lblSelectedSidesAditionals.setText(Integer.toString(contSides)); 
         //Deshabilitar boton eliminar todo si no hay mas filas
-        if(md.getRowCount()==0)
-        {
-            cmdDeleteAll.setEnabled(false);
-        }
+        cmdDeleteAll.setEnabled(md.getRowCount() > 0);
+        
+        // DEBUG: Comprobar si el mapa sigue sincronizado con la tabla.
+        // De no estarlo, detener y solicitar un depurador
+        assert md.getRowCount() == tableRowMap.size(); 
     }
 
     /**
@@ -271,12 +312,10 @@ public class WndGestorPedido extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tableMouseEntered(evt);
             }
         });
         jScrollPane1.setViewportView(table);
@@ -556,12 +595,42 @@ public class WndGestorPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdDeleteAllActionPerformed
 
     private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
-         // Boton eliminar 
-        //Elimina uno o varios elementos (filas) seleccionados de la tabla      
+        // Boton Eliminar 
+        // Elimina uno o varios elementos (filas) seleccionados de la tabla      
+        // independientemente si son Especialidad o Contorno
+        
         DefaultTableModel md = (DefaultTableModel) table.getModel();
+        
         if (md.getRowCount() < 1)
             return;
         
+        // Obtener la fila seleccionada
+        int selectedIndex = table.getSelectedRow();
+        
+        if (selectedIndex < 0)
+            return;
+        
+        // Obtener el indice del elemento a eliminar. Local al ArrayList correspondiente
+        Integer index = tableRowMap.get(selectedIndex);
+        
+        if (index == null)
+            return;
+        
+        // Si la fila es una Especialidad
+        if (md.getValueAt(selectedIndex, COLUMN_SIDES) != null)
+        {
+            addedSpecialities.get(index).AddCount(-1);
+            addedSpecialities.get(index).SetSides(null); // Reiniciar contornos incluidos
+        }
+        // Si la fila es un Contorno Adicional (sides=null, price!=null)
+        else if (md.getValueAt(selectedIndex, COLUMN_SIDES) == null &&
+                md.getValueAt(selectedIndex, COLUMN_COUNT) != null)
+            addedSides.remove(index.intValue());
+        // La fila seleccionada es un contorno incluido en una especialidad. No borrarla
+        else
+            return;
+        
+        /* CODIGO OBSOLETO
         int i;
         for (i = md.getRowCount() - 1; i >= 0; i--)
         {
@@ -581,7 +650,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
                     }
                 }
             }
-        }
+        }*/
      UpdateTable();
     }//GEN-LAST:event_cmdDeleteActionPerformed
 
@@ -672,71 +741,63 @@ public class WndGestorPedido extends javax.swing.JFrame {
 
     private void cmdEditSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSidesActionPerformed
         // Boton modificar contornos            
-        //Variables que pasaremos
-        maxSides=0;
         
         //Averiguamos si el contorno elegido es propio de una especialidad o es un contorno adicional
         DefaultTableModel md = (DefaultTableModel) table.getModel();
+        
         if (md.getRowCount() < 1)
             return;
         
-        int i;
-        for (i = md.getRowCount() - 1; i >= 0; i--)
+        int selectedIndex = table.getSelectedRow();
+        
+        if (selectedIndex < 0)
+            return;
+        
+        //si esta vacio en price, es un contorno de una especialidad
+        //al contrario, es un contorno adicional
+        if(table.getValueAt(selectedIndex, COLUMN_PRICE) == null)
         {
-            if (table.isRowSelected(i))
+            //Buscamos la especialidad a la que pertenece este contorno
+            while (selectedIndex >= 0)
             {
-                //si esta vacio en price, es un contorno de una especialidad
-                //al contrario, es un contorno adicional
-                if(table.getValueAt(i, 3)=="")
-                {
-                    //Buscamos el array de contornos de esta especialidad
-                    
-                    //Buscamos la cantidad de contornos que tiene esta especialidad
-                    maxSides=Integer.parseInt(table.getValueAt(i, 2).toString());
-                }
-                else
-                {
-                    //Buscamos el array de contornos de esta especialidad
-                    baseSides = addedSides;  
-                    //max sides le asignamos 0, no hay limite
-                    maxSides=0;
-                }
+                selectedIndex--;
+                
+                // Ubicar una celda superior que contenga precio
+                if (table.getValueAt(selectedIndex, COLUMN_PRICE) != null)
+                    break;
             }
+            
+            if (selectedIndex < 0)
+                return;
+
+            //Buscamos la cantidad de contornos que tiene esta especialidad
+            maxSides=Integer.parseInt(table.getValueAt(selectedIndex, 2).toString());
         }
+        
+        // Comprobar si la fila tiene un valor de null en la columna "Contornos"
+        // Es decir, si no es realmente una especialidad.
+        if (table.getValueAt(selectedIndex, COLUMN_SIDES) == null)
+        {
+            return;
+        }
+               
+        maxSides = (int)table.getValueAt(selectedIndex, COLUMN_SIDES);
+        // Comprobar si la fila tiene una cantidad maxima de contornos Mayor a 0
+        if (maxSides < 1)
+            return;
+
+        // Resolvemos el indice del contorno desde el mapa de filas
+        ContadorEspecialidad ce = addedSpecialities.get(tableRowMap.get(selectedIndex));
+
         // Preparar un hilo nuevo para ejecutar el metodo ChooseSides de manera asincronica
         Thread w = new Thread(() -> {
             //falta implementar
-            ArrayList<ContadorContorno> sides1 = Controller.ChooseSides(maxSides, baseSides);
+            ArrayList<ContadorContorno> sides1 = Controller.ChooseSides(maxSides, ce.GetSides());
             if (sides1 == null)
                 return;
             
-            // Combinar los arreglos addedSides y sides
-            int si, ti;
-            // Por cada contorno adicional seleccionado
-            for (si = 0; si < sides1.size(); si++)
-            {
-                // Por cada contorno adicional ya existente
-                boolean found = false;
-                for (ti = 0; ti < addedSides.size(); ti++)
-                {
-                    // Comparacion de punteros detras de bambalinas
-                    if (addedSides.get(ti).GetSide() == sides1.get(si).GetSide())
-                    {
-                        found = true;
-                        addedSides.get(ti).AddCount(sides1.get(si).GetCount()); // Agregar Cantidad
-                        break; // Cortocircuitar ciclo
-                    }
-                }
-                
-                if (!found)
-                    addedSides.add(sides1.get(si)); // Agregar nuevo contorno
-            }
+            ce.SetSides(sides1);
             
-            // Actualizar tabla de pedido
-            if(maxSides==0)
-            { 
-                addedSides=baseSides;
-            }
             UpdateTable();
         });
         
@@ -798,16 +859,40 @@ public class WndGestorPedido extends javax.swing.JFrame {
         SpecialityUpdateActionDispatcher(specialityIndex, true); // Llamar al metodo principal de adicion
     }//GEN-LAST:event_cmdAddActionPerformed
 
-    private void tableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tableMouseEntered
-
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        // Actualizar los botones de edicion basandose en la seleccion actual
         DefaultTableModel md = (DefaultTableModel) table.getModel();
+        
         if (md.getRowCount() < 1)
             return;
-        if (md.getRowCount() > 1)
-            cmdGenerate.setEnabled(true);
+        
+        cmdGenerate.setEnabled(md.getRowCount() > 0);
+        
+        // Obtener la fila seleccionada
+        int selectedIndex = table.getSelectedRow();
+        
+        // Comprobacion multiple:
+        /**
+         * Se comprueba si el indice seleccionado actualmente es >= 0.
+         * De ser asi entonces existe una fila seleccionada.
+         * Luego comprobar si se debe habilitar el boton de Editar Contornos
+         * 
+         * Este boton solo sebe estar desactivado cuando:
+         *    COLUMN_PRICE != null   y   COLUMN_SIDES == null       [Contorno Adicional seleccionado]
+         *    o si:   COLUMN_SIDES < 1
+         */
+        boolean baseConditional = (selectedIndex >= 0 /*&& md.getValueAt(selectedIndex, COLUMN_SIDES) != null*/); // CODIGO DESHABILITADO. PROBANDO LA OPCION DE MODIFICAR CONTORNOS DE UN PLATO, TENIENDO SELECCIONADO UNO DE SUS CONTORNOS
+        boolean enableSideEdit = (md.getValueAt(selectedIndex, COLUMN_SIDES) != null && (int)md.getValueAt(selectedIndex, COLUMN_SIDES) > 0);
+        enableSideEdit = enableSideEdit || (md.getValueAt(selectedIndex, COLUMN_PRICE) == null);
+        
+        // Comprobacion adicional. La celda price debe ser distinta de null para ser eliminable
+        // Esto permite la seleccion y eliminacion de filas con Contornos Adicionales que poseen la celda
+        // de "Contornos" en null
+        cmdDelete.setEnabled(baseConditional /*||*/ && md.getValueAt(selectedIndex, COLUMN_PRICE) != null); // CODIGO DE PRUEBA INVERTIDO. LEER ARRIBA
+        // Comprobacion adicional. La celda "Contornos" debe ser distinta a null y contener un numero > 0
+        cmdEditSides.setEnabled(baseConditional && enableSideEdit); // CODIGO DE PRUEBA: Esto era ...((Integer)md.getValueAt(selectedIndex, COLUMN_SIDES)) > 0
+        
+        /*  CODIGO OBSOLETO
         int i;
         for (i = md.getRowCount() - 1; i >= 0; i--)
         {
@@ -832,7 +917,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
                     cmdDelete.setEnabled(false);
                 } 
             }
-        }
+        }*/
     }//GEN-LAST:event_tableMouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -843,7 +928,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
       
     }//GEN-LAST:event_formWindowClosing
 
-       // Incrementa en 1 el contorno descrito pot el indice especificado
+    // Incrementa en 1 el contorno descrito pot el indice especificado
     // de la sub-pagina visible actualmente
     private void SpecialityUpdateActionDispatcher(int index, boolean increment) {
         int finalIndex = index + ((pageIndex - 1) * 6);
