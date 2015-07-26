@@ -6,6 +6,7 @@
 package isucv.restaurant.model;
 
 import isucv.restaurant.controller.Controller;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,14 +31,46 @@ public class Factura
         order = O;
         client = C;
         grandtotal = T;
+        boolean comp;
+        int cont;
              //Agregamos los platos y contornos adicionales a estadisticas
             for(int i=0;i<order.GetSpecialities().size();i++)
             {
-                Controller.GetStats().AddSpeciality(order.GetSpecialities().get(i).GetSpeciality(), order.GetSpecialities().get(i).GetCount());
+                comp=false;
+                cont=0;
+                for(int j=0;j<Controller.GetStats().GetTopSpecialities().size();j++)
+                {
+                    if(Controller.GetStats().GetTopSpecialities().get(j).GetSpeciality().GetName().equals(order.GetSpecialities().get(i).GetSpeciality().GetName()))
+                    {
+                        comp=true;
+                        cont=Controller.GetStats().GetTopSpecialities().get(j).GetCount();
+                        cont=cont+order.GetSpecialities().get(i).GetCount();
+                        Controller.GetStats().GetTopSpecialities().get(j).SetCount(cont);
+                    }
+                }
+                if(comp==false)
+                {
+                    Controller.GetStats().AddSpeciality(order.GetSpecialities().get(i).GetSpeciality(), order.GetSpecialities().get(i).GetCount());
+                }
             }
             for(int i=0;i<order.GetSides().size();i++)
             {
-                 Controller.GetStats().AddSides(order.GetSides().get(i).GetSide(), order.GetSides().get(i).GetCount());
+                comp=false;
+                cont=0;
+                for(int j=0;j<Controller.GetStats().GetTopSides().size();j++)
+                {
+                    if(Controller.GetStats().GetTopSides().get(j).GetSide().GetName().equals(order.GetSides().get(i).GetSide().GetName()))
+                    {
+                        comp=true;
+                        cont=Controller.GetStats().GetTopSides().get(j).GetCount();
+                        cont=cont+order.GetSides().get(i).GetCount();
+                        Controller.GetStats().GetTopSides().get(j).SetCount(cont);
+                    }
+                }
+                if(comp==false)
+                {
+                    Controller.GetStats().AddSides(order.GetSides().get(i).GetSide(), order.GetSides().get(i).GetCount());
+                }
             }
     }
     
