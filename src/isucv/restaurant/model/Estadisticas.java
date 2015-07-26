@@ -38,6 +38,7 @@ public class Estadisticas
         //Introducimos el count
         contesp.AddCount(Count);
         //Introducimos los contornos del mismo
+        topspecialities.add(contesp);
     }
     
     public void AddSides(Contorno Sides, Integer Count)
@@ -47,6 +48,8 @@ public class Estadisticas
         contcon = new ContadorContorno(Sides);
         //Introducimos el count
         contcon.AddCount(Count);
+        //Introducimos los contornos
+        topsides.add(contcon);
     }
     
     public ArrayList<ContadorEspecialidad> GetTopSpecialities(){

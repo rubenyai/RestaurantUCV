@@ -328,11 +328,12 @@ public final class Controller {
         p.SetId(id);
         p.SetSpecialities(Specialities);
         p.SetSides(Sides);
-        p.SetStatus("Sin Pagar");
+        p.SetStatus("Generado");
         
         // Agregar el pedido a la Lista de Pedidos sin Pagar
         GetUnpaidOrders().add(p);
-        
+                
+        //se muestra el pop up con el nro de pedido
         WndConfirmacionPedido confirmacion = new WndConfirmacionPedido();
         confirmacion.setLocationRelativeTo(null);
         activeWindow = confirmacion;
@@ -368,13 +369,14 @@ public final class Controller {
        Pedido ActualOrder;
        ActualOrder = FindOrder(ID);
        //Falta validar
-       Cliente Datos=new Cliente(Name,ClientID,BillingAdr,PhoneNumber);
-       WndCaja Caja = (WndCaja) activeWindow;
-       Factura f= new Factura(ActualOrder,Datos, Caja.GetTotal());
-       //Remove the actual order of unpaid
-       RemoveOrder(ID);
-       //Agregamos a la lista del chef
-       pendingOrders.add(ActualOrder);
+            ActualOrder.SetStatus("Pagado");
+            Cliente Datos=new Cliente(Name,ClientID,BillingAdr,PhoneNumber);
+            WndCaja Caja = (WndCaja) activeWindow;
+            Factura f= new Factura(ActualOrder,Datos, Caja.GetTotal());
+            //Remove the actual order of unpaid
+            RemoveOrder(ID);
+            //Agregamos a la lista del chef
+            pendingOrders.add(ActualOrder);
     }
         
     //Mueve el pedido de PendingdOrders a OrdersReady

@@ -9,10 +9,8 @@ import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.ContadorContorno;
 import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Estadisticas;
-import java.awt.List;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
@@ -296,28 +294,7 @@ public class WndEstadisticas extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdResetStatsActionPerformed
 //Aqui codigo al abrir la ventana estadisticas
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       //codigo que vacia las tables
-        DefaultTableModel model1 = (DefaultTableModel)this.jTable1.getModel();
-        model1.setRowCount(0);
-        
-        DefaultTableModel model2 = (DefaultTableModel)this.jTable2.getModel();
-        model2.setRowCount(0);
-        
-        Estadisticas statistics;
-        statistics = new Estadisticas();
-        
-        //Nos devuelve nuestros arraylists
-        statistics = Controller.GetStats();
 
-        //llenamos los arraylists segun los cont que tengan, si estan vacios, no hacemos nada
-        if(statistics.GetTopSpecialities().isEmpty()==false)
-        {
-            JOptionPane.showMessageDialog(null,"hola1");
-        }
-        if(statistics.GetTopSides().isEmpty()==false)
-        {
-             JOptionPane.showMessageDialog(null,"hola2");
-        }
     }//GEN-LAST:event_formWindowOpened
 
     private void cmdCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCloseActionPerformed
@@ -334,7 +311,6 @@ public class WndEstadisticas extends javax.swing.JFrame {
     public void setVisible(boolean value)
     {        
         super.setVisible(value);
-        
         if (!value)
         {
             Controller.OpenSubTask(1);

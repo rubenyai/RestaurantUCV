@@ -5,6 +5,8 @@
  */
 package isucv.restaurant.model;
 
+import isucv.restaurant.controller.Controller;
+
 /**
  *
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
@@ -28,6 +30,15 @@ public class Factura
         order = O;
         client = C;
         grandtotal = T;
+             //Agregamos los platos y contornos adicionales a estadisticas
+            for(int i=0;i<order.GetSpecialities().size();i++)
+            {
+                Controller.GetStats().AddSpeciality(order.GetSpecialities().get(i).GetSpeciality(), order.GetSpecialities().get(i).GetCount());
+            }
+            for(int i=0;i<order.GetSides().size();i++)
+            {
+                 Controller.GetStats().AddSides(order.GetSides().get(i).GetSide(), order.GetSides().get(i).GetCount());
+            }
     }
     
     public Pedido GetOrder(){

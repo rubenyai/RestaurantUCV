@@ -346,7 +346,9 @@ public class WndCaja extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     //Boton BUSCAR
     private void cmdSearchOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSearchOrderActionPerformed
-            
+        //Se inicializa balance
+        Balance=0;
+        ClearFiles();
         //Verificamos si ID esta lleno con valores validos
         if(!"".equals(jTextField1.getText()))
         {
@@ -358,7 +360,7 @@ public class WndCaja extends javax.swing.JFrame {
             ID = Integer.parseInt(jTextField1.getText());
             ActualOrder = Controller.FindOrder(ID);
             jTextField1.setBackground(Color.white);
-            if (Controller.FindOrder(ID) != null)
+            if (Controller.FindOrder(ID) != null && "Generado".equals(ActualOrder.GetStatus()))
             {
                 jTextField2.setEnabled(true);
                 jTextField3.setEnabled(true);
