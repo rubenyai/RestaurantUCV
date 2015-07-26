@@ -11,6 +11,7 @@ import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Contorno;
 import isucv.restaurant.model.Especialidad;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -731,8 +732,44 @@ public class WndGestorPedido extends javax.swing.JFrame {
         // Boton finalizar pedido.
         // Generar un nuevo pedido y almacenarlo en la lista de Pedidos sin Pagar
         
+        // Generar una nueva lista de Especialidades para unir aquellas que son identicas
+        // Esto permite que varios elementos con el mismo playo y mismos contornos se muestren
+        // como un solo elemento en las demas ventanas, con la cantidad apropiada.
+        ArrayList<ContadorEspecialidad> finalSpecialities = new ArrayList<>();
+        
+        int i;
+        // Para cada especialidad agregada...
+        for (i = 0; i < addedSpecialities.size(); i++)
+        {
+            ContadorEspecialidad a = addedSpecialities.get(i);
+                
+            int j;
+            boolean found = false;
+            // Comprobar si ya existe un elemento identico...
+            for (j = 0; j < finalSpecialities.size(); j++)
+            {
+                ContadorEspecialidad b = finalSpecialities.get(j);
+                
+                // Comparar los elementos
+                found = CountSpecialitiesEquals(a, b);
+                
+                if (found)
+                    break;
+            }
+            
+            // Agregar la Especialidad si no existe, o sumarla en caso que si exista
+            if (found)
+            {
+                finalSpecialities.get(j).AddCount(1);
+            }
+            else
+            {
+                finalSpecialities.add(addedSpecialities.get(i));
+            }
+        }
+        
         //Generate Order a unpaid
-        Controller.GenerateOrder(addedSpecialities, addedSides);
+        Controller.GenerateOrder(finalSpecialities, addedSides);
         cmdGenerate.setEnabled(false);
         cmdDiscard.setEnabled(false);
         
@@ -913,7 +950,43 @@ public class WndGestorPedido extends javax.swing.JFrame {
             return null;
     }
     
-        /**
+    // Comprueba si dos instancias de ContadorEspecialidad contienen la misma informacion
+    // Comparando cada uno de sus campos
+    private boolean CountSpecialitiesEquals(ContadorEspecialidad a, ContadorEspecialidad b)
+    {
+        // Comprobar las propiedades basicas
+        if (!a.GetSpeciality().GetName().equals(b.GetSpeciality().GetName())
+                || a.GetSpeciality().GetPrice() != b.GetSpeciality().GetPrice()
+                || a.GetSpeciality().GetTotalSides() != b.GetSpeciality().GetTotalSides()
+                || a.GetSpeciality().GetTime() != b.GetSpeciality().GetTime())
+            return false;
+        
+        // Comprobar cantidad de Contornos seleccionados
+        if (a.GetSides().size() != b.GetSides().size())
+            return false;
+        
+        int i;
+        // Comprobar Contornos
+        for (i = 0; i < a.GetSides().size(); i++)
+        {
+            // Comprobar cantidad de ese contorno seleccionado
+            if (a.GetSides().get(i).GetCount() != b.GetSides().get(i).GetCount())
+                return false;
+            
+            // Comprobar el nombre de ese contorno seleccionado
+            if (!a.GetSides().get(i).GetSide().GetName().equals(b.GetSides().get(i).GetSide().GetName()))
+                return false;
+            
+            // Comprobar el precio de ese contorno seleccionado
+            if (a.GetSides().get(i).GetSide().GetPrice() != b.GetSides().get(i).GetSide().GetPrice())
+                return false;
+        }
+        
+        // Los ContadorEspecialidad son identicos
+        return true;
+    }
+    
+     /**
      * Creates new form WndGestorPedido
      */
     public WndGestorPedido() {
