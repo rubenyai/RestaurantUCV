@@ -424,8 +424,8 @@ public class WndCaja extends javax.swing.JFrame {
             }
             else
             {
-                jTextField1.setBackground(Color.red);
                 ClearFiles();
+                jTextField1.setBackground(Color.red);
             }
         }else{
             jTextField1.setBackground(Color.red);
