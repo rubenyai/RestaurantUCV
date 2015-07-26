@@ -220,6 +220,7 @@ public final class Controller {
         {
             // Mostrar ventana de Error de Inicio de Sesion
             WndLoginFallido loginError = new WndLoginFallido();
+            loginError.setLocationRelativeTo(null);
             activeWindow = loginError;
         }
         

@@ -10,6 +10,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.Pedido;
 import java.awt.Color;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -84,6 +88,7 @@ public class WndCaja extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pago de Pedidos");
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Identificador de Pedido");
@@ -350,7 +355,7 @@ public class WndCaja extends javax.swing.JFrame {
         Balance=0;
         ClearFiles();
         //Verificamos si ID esta lleno con valores validos
-        if(!"".equals(jTextField1.getText()))
+        if(!"".equals(jTextField1.getText()) && isNumeric(jTextField1.getText()))
         {
             //Se busca el pedido utilizando el ID
             Integer i, j;
@@ -516,6 +521,17 @@ public class WndCaja extends javax.swing.JFrame {
         Descripcion = "";
         Object Nuevo[]= {"", "", ""};
     }
+    
+    public static boolean isNumeric(String str)
+    {
+      NumberFormat formatter = NumberFormat.getInstance();
+      ParsePosition pos = new ParsePosition(0);
+      formatter.parse(str, pos);
+      return str.length() == pos.getIndex();
+    }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdDiscardOrder;
     private javax.swing.JButton cmdGenerateOrder;

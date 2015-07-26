@@ -49,6 +49,7 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Billboard Debugger");
+        setResizable(false);
 
         cmdEditSides.setText("Edit Sides");
         cmdEditSides.addActionListener(new java.awt.event.ActionListener() {

@@ -47,6 +47,7 @@ public class WndSelectorTareas extends javax.swing.JFrame {
         cmdLogout = new javax.swing.JButton();
 
         setTitle("Selector de Tarea");
+        setResizable(false);
 
         lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUsername.setText("Usuario Actual: Angel Lozano");

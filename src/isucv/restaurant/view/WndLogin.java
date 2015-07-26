@@ -43,6 +43,7 @@ public class WndLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inicio de Sesion");
+        setResizable(false);
 
         txtUsername.setText("chef1");
         txtUsername.setToolTipText("");

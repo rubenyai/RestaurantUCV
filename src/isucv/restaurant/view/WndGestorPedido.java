@@ -160,6 +160,11 @@ public class WndGestorPedido extends javax.swing.JFrame {
         //Buscamos la cantidad de contornos adicionales y platos para mostrarlos en el indicador
         lblSelectedSpecialities.setText(Integer.toString(contSpecialities));
         lblSelectedSidesAditionals.setText(Integer.toString(contSides)); 
+        //Deshabilitar boton eliminar todo si no hay mas filas
+        if(md.getRowCount()==0)
+        {
+            cmdDeleteAll.setEnabled(false);
+        }
     }
 
     /**

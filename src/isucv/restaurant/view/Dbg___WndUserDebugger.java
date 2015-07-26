@@ -59,6 +59,7 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("User Debugger");
+        setResizable(false);
 
         txtUserFile.setEditable(false);
         txtUserFile.setText("OBSOLETE");

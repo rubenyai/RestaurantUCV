@@ -42,6 +42,7 @@ public class Dbg___WndSideSelectorDebugger extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Depurador del Selector de Contornos");
+        setResizable(false);
 
         cmdOpenSubWindow.setText("Seleccionar Contornos");
         cmdOpenSubWindow.addActionListener(new java.awt.event.ActionListener() {
