@@ -28,105 +28,50 @@ public class WndGestorPedido extends javax.swing.JFrame {
     
     // Contiene los Contornos adicionales seleccionados actualmente
     ArrayList<ContadorContorno> addedSides;
-    ArrayList<ContadorContorno> baseSides;
-    ArrayList<ContadorEspecialidad> baseSpecialities;
+    
+    // Contiene todas las especialidades visibles en cartelera.
+    // Este arreglo permite realizar el enlace con los botones de "Agregar"
+    ArrayList<Especialidad> baseSpecialities;
     
     // Contiene las Especialidades seleccionadas actualmente
     ArrayList<ContadorEspecialidad> addedSpecialities;
-        
-    int maxSides=0;
     
+    // Constantes para acceder a las columnas de la tabla por Nombre
     private final static int COLUMN_COUNT = 0;
     private final static int COLUMN_DESCRIPTION = 1;
     private final static int COLUMN_SIDES = 2;
     private final static int COLUMN_PRICE = 3;
+    
+    // Variable global a la clase para poder ser accesible por metodos Lambda
+    private Integer maxSides = 0;
        
     private int pageIndex; // Indice de la pagina actual en Base 1
     
-    /** Lista de Controles en el ArrayList:
+    /**  Contiene todos los Controles de la ventana ordenados por indice logico a los contornos 
+     * Lista de Controles en el ArrayList:
      * 
      *    JLabel     JLabel     JLabel     JButton     JButton
      *    lblTitleX  lblPriceX  lblCountX  cmdAddX     cmdRemoveX
     **/ 
-    private ArrayList<JComponent[]> controlMap; // Contiene todos los Controles de la ventana ordenados por indice logico a los contornos
+    private ArrayList<JComponent[]> controlMap;
     
     /**
      * Mapa de Filas en el JTable para enlazar cada una de ellas inequivocamente
      * con las especialidades y los contornos adicionales agregados al pedido.
      * 
-     * Solo se registran las especialidades y contornos adicionales en la Tabla.
-     * Las referencias a los contornos incluidos no se almacenan y sus indices en el mapa
-     * se establecen a null. Esto no deberia cusar problema ya que el boton Eliminar
-     * siempre esta deshabilitado para filas Contorno incluidas.
+     * Solo se registran las especialidades y contornos adicionales en el Mapa.
+     * Las referencias a los contornos incluidos en una especialidad no se almacenan
+     * y sus indices en el mapa se establecen a null.
+     * Esto no deberia causar problema ya que el boton Eliminar siempre esta deshabilitado
+     * para filas Contorno incluidas.
      * 
      * El tipo de objeto debe deducirse por el valor de la columna "Contorno" perteneciente
      * a la fila que se accesa en el metodo, para poder hacer la conversion de tipo de dato
-     * apropiada para el objeto
+     * apropiada para el objeto. Es decir, el mapa no hace ninguna distincion explicita sobre
+     * si el elemento referenciado es una Especialidad o un Contorno. Corresponde al codigo
+     * del metodo en cuestion deducir el tipo de objeto dependiendo de los demas valores de las celdas
      */
     private ArrayList<Integer> tableRowMap; // Contiene todas las especialidades y Contornos adicionales agregados por indice real a la tabla
-    
-    /**
-     * Creates new form WndGestorPedido
-     */
-    public WndGestorPedido() {
-        initComponents();
-        this.setSize(this.getWidth() + 10, this.getHeight() + 10); // Incrementar el tamaño de la ventana
-                
-        // Crear las listas de especialidades y contornos
-        addedSides = new ArrayList<>();
-        addedSpecialities = new ArrayList<>();
-        baseSides=new ArrayList<>();
-        
-        //boton finalizar pedido disabled hasta q haya algo q mandar
-        cmdGenerate.setEnabled(false);
-        cmdDiscard.setEnabled(false);
-        cmdDeleteAll.setEnabled(false);
-        
-        this.setLocationRelativeTo(null); // Centrar ventana
-        
-        // Construir mapa de Controles
-        controlMap = new ArrayList<>();
-        controlMap.add(new JComponent[] {lblTitle1, lblPrice1, lblCont1, lblTime1, cmdAdd1});
-        controlMap.add(new JComponent[] {lblTitle2, lblPrice2, lblCont2, lblTime2, cmdAdd2});
-        controlMap.add(new JComponent[] {lblTitle3, lblPrice3, lblCont3, lblTime3, cmdAdd3});
-        controlMap.add(new JComponent[] {lblTitle4, lblPrice4, lblCont4, lblTime4, cmdAdd4});
-        controlMap.add(new JComponent[] {lblTitle5, lblPrice5, lblCont5, lblTime5, cmdAdd5});
-        controlMap.add(new JComponent[] {lblTitle6, lblPrice6, lblCont6, lblTime6, cmdAdd6});
-        
-        // Ajustar el ancho de las columnas de la tabla
-        table.getColumnModel().getColumn(COLUMN_COUNT).setPreferredWidth(40);
-        table.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(240);
-                
-        // Copiar contornos actuales (solo visibles)
-        int i;
-        ArrayList<Especialidad> billboardSpecialities = Controller.GetBillboard().GetSpecialities();
-        for (i = 0; i < billboardSpecialities.size(); i++)
-        {
-            // Agregar el contorno al cache
-            if (billboardSpecialities.get(i).GetVisible())
-            {
-                ContadorEspecialidad ce = new ContadorEspecialidad(billboardSpecialities.get(i));
-                ce.SetCount(0);
-                
-                addedSpecialities.add(ce);
-            }
-        }       
-        pageIndex = 1; // Comenzar desde la Pagina 1
-        UpdateButtonLayout(); // Actualizar botones de seleccion
-        UpdateTable();
-    }
-    
-    public int GetNextOrderId()
-    {
-        // Obtiene el identificador del siguiente pedido disponible para creacion
-        return nextOrderId;
-    }
-    
-    public void IncrementNextOrderId()
-    {
-        // Incrementa el identificador del siguiente pedido disponible
-        nextOrderId++;
-    }
     
     private void UpdateTable()
     {
@@ -140,7 +85,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         md.setRowCount(0); // Eliminar el contenido actual de la tabla
         
         //contadores para mostrarlos en los labels cantidad de platos y contornos adicionales
-        int contSpecialities=0,contSides=0;
+        int contSpecialities=0, contSides=0;
         
         // Crear mapa de Especialidades y Contornos contra Filas del Table
         tableRowMap = new ArrayList<>();
@@ -270,12 +215,6 @@ public class WndGestorPedido extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(620, 633));
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -576,19 +515,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         cmdDeleteAll.setEnabled(false);
         addedSides = new ArrayList<>();
         addedSpecialities = new ArrayList<>();
-        int i;
-        ArrayList<Especialidad> billboardSpecialities = Controller.GetBillboard().GetSpecialities();
-        for (i = 0; i < billboardSpecialities.size(); i++)
-        {
-            // Agregar el contorno al cache
-            if (billboardSpecialities.get(i).GetVisible())
-            {
-                ContadorEspecialidad ce = new ContadorEspecialidad(billboardSpecialities.get(i));
-                ce.SetCount(0);
-                
-                addedSpecialities.add(ce);
-            }
-        }
+
         lblSelectedSpecialities.setText("0");
         lblSelectedSidesAditionals.setText("0");
         UpdateTable();
@@ -616,11 +543,10 @@ public class WndGestorPedido extends javax.swing.JFrame {
         if (index == null)
             return;
         
-        // Si la fila es una Especialidad
+        // Si la fila es una Especialidad removerla del ArrayList
         if (md.getValueAt(selectedIndex, COLUMN_SIDES) != null)
         {
-            addedSpecialities.get(index).AddCount(-1);
-            addedSpecialities.get(index).SetSides(null); // Reiniciar contornos incluidos
+            addedSpecialities.remove(index.intValue());
         }
         // Si la fila es un Contorno Adicional (sides=null, price!=null)
         else if (md.getValueAt(selectedIndex, COLUMN_SIDES) == null &&
@@ -769,22 +695,18 @@ public class WndGestorPedido extends javax.swing.JFrame {
             
             if (selectedIndex < 0)
                 return;
-
-            //Buscamos la cantidad de contornos que tiene esta especialidad
-            maxSides=Integer.parseInt(table.getValueAt(selectedIndex, 2).toString());
         }
         
+        //Buscamos la cantidad de contornos que puede tener esta especialidad
+        maxSides = (Integer)(table.getValueAt(selectedIndex, COLUMN_SIDES));
+        
         // Comprobar si la fila tiene un valor de null en la columna "Contornos"
-        // Es decir, si no es realmente una especialidad.
-        if (table.getValueAt(selectedIndex, COLUMN_SIDES) == null)
+        // Es decir, si no es realmente una especialidad. Y adicionalmente si puede
+        // tener contornos (mayor a 0)
+        if (maxSides == null || maxSides < 1)
         {
             return;
         }
-               
-        maxSides = (int)table.getValueAt(selectedIndex, COLUMN_SIDES);
-        // Comprobar si la fila tiene una cantidad maxima de contornos Mayor a 0
-        if (maxSides < 1)
-            return;
 
         // Resolvemos el indice del contorno desde el mapa de filas
         ContadorEspecialidad ce = addedSpecialities.get(tableRowMap.get(selectedIndex));
@@ -806,44 +728,24 @@ public class WndGestorPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdEditSidesActionPerformed
 
     private void cmdGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerateActionPerformed
-        // Boton finalizar pedido
-        //Borramos ordenes sin count
-        baseSpecialities=new ArrayList<>();
+        // Boton finalizar pedido.
+        // Generar un nuevo pedido y almacenarlo en la lista de Pedidos sin Pagar
         
-        for(int i=0;i<addedSpecialities.size();i++)
-        {
-            if(addedSpecialities.get(i).GetCount()>0)
-            {
-                baseSpecialities.add(addedSpecialities.get(i));
-            }
-        }
-        //Se pasan las ordenes
-        addedSpecialities=baseSpecialities;
-        
-       //Generate Order a unpaid
-       if((addedSpecialities.isEmpty()!=true || addedSides.isEmpty()!=true))
-       {
-           Controller.GenerateOrder(addedSpecialities, addedSides);
-       }
+        //Generate Order a unpaid
+        Controller.GenerateOrder(addedSpecialities, addedSides);
         cmdGenerate.setEnabled(false);
         cmdDiscard.setEnabled(false);
+        
+        // Reiniciar las listas internas
         addedSides = new ArrayList<>();
         addedSpecialities = new ArrayList<>();
-        int i;
-        ArrayList<Especialidad> billboardSpecialities = Controller.GetBillboard().GetSpecialities();
-        for (i = 0; i < billboardSpecialities.size(); i++)
-        {
-            // Agregar el contorno al cache
-            if (billboardSpecialities.get(i).GetVisible())
-            {
-                ContadorEspecialidad ce = new ContadorEspecialidad(billboardSpecialities.get(i));
-                ce.SetCount(0);
-                
-                addedSpecialities.add(ce);
-            }
-        }
+        
+        /*
+          YA INCLUIDO EN EL UpdateTable()
         lblSelectedSpecialities.setText("0");
         lblSelectedSidesAditionals.setText("0");
+        */
+        
         UpdateTable();
     }//GEN-LAST:event_cmdGenerateActionPerformed
  
@@ -920,28 +822,22 @@ public class WndGestorPedido extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_tableMouseClicked
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
-    }//GEN-LAST:event_formWindowClosed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-      
-    }//GEN-LAST:event_formWindowClosing
-
-    // Incrementa en 1 el contorno descrito pot el indice especificado
-    // de la sub-pagina visible actualmente
+    // Agrega una nueva especialidad basandose en el indice del boton Agregar
     private void SpecialityUpdateActionDispatcher(int index, boolean increment) {
         int finalIndex = index + ((pageIndex - 1) * 6);
-        finalIndex--; // Indice real del contorno a actualizar
+        finalIndex--; // Indice real de la especialidad a agregar
         
-        // Actualizar el indice en cache
-        addedSpecialities.get(finalIndex).AddCount(increment ? 1 : -1);
+        ContadorEspecialidad ce = new ContadorEspecialidad(baseSpecialities.get(finalIndex));
+        ce.SetCount(1);
+        
+        // Agregar la Especialidad
+        addedSpecialities.add(ce);
                 
         // Refrescar la tabla de contornos seleccionados
         UpdateTable();
         
-        // Actualizar contadores de seleccion en los Botones
-        UpdateButtonLayout(); 
+        // Actualizar contadores de seleccion en los Botones (Innecesario?)
+        //UpdateButtonLayout(); 
     }
         
     private void UpdateButtonLayout()
@@ -960,15 +856,15 @@ public class WndGestorPedido extends javax.swing.JFrame {
             JLabel time = (JLabel) controlMap.get(logicalIndex)[3];
             JButton addButton = (JButton) controlMap.get(logicalIndex)[4];
             
-            if (realIndex < addedSpecialities.size())
+            if (realIndex < baseSpecialities.size())
             {
                 // Existe un elemento para el control
-                ContadorEspecialidad c = addedSpecialities.get(realIndex);
+                Especialidad c = baseSpecialities.get(realIndex);
                 
-                title.setText(c.GetSpeciality().GetName());
-                price.setText(String.format("%.2f", c.GetSpeciality().GetPrice()) + " BsF ");
-                cont.setText(String.format(c.GetSpeciality().GetTotalSides() + " Contornos "));
-                time.setText(String.format(c.GetSpeciality().GetTime() + " Min "));
+                title.setText(c.GetName());
+                price.setText(String.format("%.2f", c.GetPrice()) + " BsF ");
+                cont.setText(String.format(c.GetTotalSides() + " Contornos "));
+                time.setText(String.format(c.GetTime() + " Min "));
                 
                 title.setVisible(true);
                 price.setVisible(true);
@@ -990,7 +886,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         
         // Comprobacion de limite para realIndex
         // (Comprobar si existen mas paginas a la derecha/izquierda)
-        cmdNextPage.setEnabled(realIndex < addedSpecialities.size());
+        cmdNextPage.setEnabled(realIndex < baseSpecialities.size());
         cmdPreviousPage.setEnabled(realIndex > 6);
     }
     
@@ -1015,6 +911,66 @@ public class WndGestorPedido extends javax.swing.JFrame {
             return output;
         else
             return null;
+    }
+    
+        /**
+     * Creates new form WndGestorPedido
+     */
+    public WndGestorPedido() {
+        initComponents();
+        this.setSize(this.getWidth() + 10, this.getHeight() + 10); // Incrementar el tamaño de la ventana
+                
+        // Crear las listas de especialidades y contornos
+        addedSides = new ArrayList<>();
+        addedSpecialities = new ArrayList<>();
+        baseSpecialities = new ArrayList<>();
+        
+        //boton finalizar pedido disabled hasta q haya algo q mandar
+        cmdGenerate.setEnabled(false);
+        cmdDiscard.setEnabled(false);
+        cmdDeleteAll.setEnabled(false);
+        
+        this.setLocationRelativeTo(null); // Centrar ventana
+        
+        // Construir mapa de Controles
+        controlMap = new ArrayList<>();
+        controlMap.add(new JComponent[] {lblTitle1, lblPrice1, lblCont1, lblTime1, cmdAdd1});
+        controlMap.add(new JComponent[] {lblTitle2, lblPrice2, lblCont2, lblTime2, cmdAdd2});
+        controlMap.add(new JComponent[] {lblTitle3, lblPrice3, lblCont3, lblTime3, cmdAdd3});
+        controlMap.add(new JComponent[] {lblTitle4, lblPrice4, lblCont4, lblTime4, cmdAdd4});
+        controlMap.add(new JComponent[] {lblTitle5, lblPrice5, lblCont5, lblTime5, cmdAdd5});
+        controlMap.add(new JComponent[] {lblTitle6, lblPrice6, lblCont6, lblTime6, cmdAdd6});
+        
+        // Ajustar el ancho de las columnas de la tabla
+        table.getColumnModel().getColumn(COLUMN_COUNT).setPreferredWidth(40);
+        table.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(240);
+                
+        // Copiar contornos actuales (solo visibles)
+        int i;
+        ArrayList<Especialidad> billboardSpecialities = Controller.GetBillboard().GetSpecialities();
+        for (i = 0; i < billboardSpecialities.size(); i++)
+        {
+            // Agregar el contorno al cache
+            if (billboardSpecialities.get(i).GetVisible())
+            {                
+                baseSpecialities.add(billboardSpecialities.get(i));
+            }
+        }       
+        pageIndex = 1; // Comenzar desde la Pagina 1
+        UpdateButtonLayout(); // Actualizar botones de seleccion
+        UpdateTable();
+    }
+    
+    public int GetNextOrderId()
+    {
+        // Obtiene el identificador del siguiente pedido disponible para creacion
+        return nextOrderId;
+    }
+    
+    public void IncrementNextOrderId()
+    {
+        // Incrementa el identificador del siguiente pedido disponible
+        nextOrderId++;
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
