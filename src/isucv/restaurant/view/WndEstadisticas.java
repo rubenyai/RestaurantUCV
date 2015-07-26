@@ -8,7 +8,6 @@ package isucv.restaurant.view;
 import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.ContadorContorno;
 import isucv.restaurant.model.ContadorEspecialidad;
-import isucv.restaurant.model.Estadisticas;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.RowSorter;

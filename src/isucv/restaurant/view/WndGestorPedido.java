@@ -8,13 +8,11 @@ package isucv.restaurant.view;
 import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.ContadorContorno;
 import isucv.restaurant.model.ContadorEspecialidad;
-import isucv.restaurant.model.Contorno;
 import isucv.restaurant.model.Especialidad;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**

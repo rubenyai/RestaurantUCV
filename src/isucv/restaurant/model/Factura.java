@@ -6,7 +6,6 @@
 package isucv.restaurant.model;
 
 import isucv.restaurant.controller.Controller;
-import javax.swing.JOptionPane;
 
 /**
  *

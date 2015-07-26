@@ -6,10 +6,8 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
-import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Contorno;
 import isucv.restaurant.model.Especialidad;
-import isucv.restaurant.model.Pedido;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 

@@ -11,7 +11,6 @@ import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Pedido;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
