@@ -57,6 +57,7 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         cmdClearSelectionCache = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtSideMaxCount = new javax.swing.JTextField();
+        cmdArrayListViewer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lanzador de Ventanas");
@@ -133,6 +134,13 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         txtSideMaxCount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtSideMaxCount.setText("6");
 
+        cmdArrayListViewer.setText("OrderList Viewer");
+        cmdArrayListViewer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdArrayListViewerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,7 +149,7 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cmdDebugSideSelector, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                        .addComponent(cmdDebugSideSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 150, Short.MAX_VALUE)
                         .addComponent(cmdDebugUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +170,8 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSideMaxCount, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtSideMaxCount, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmdArrayListViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -188,7 +197,9 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                     .addComponent(cmdClearSelectionCache, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txtSideMaxCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmdArrayListViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -323,7 +334,18 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         cmdClearSelectionCache.setEnabled(false);
     }//GEN-LAST:event_cmdClearSelectionCacheActionPerformed
 
+    private void cmdArrayListViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdArrayListViewerActionPerformed
+        Dbg___OrderListDebugger wnd = new Dbg___OrderListDebugger();
+        Controller.SetActiveWindow(wnd);
+        Controller.GetActiveWindow().setVisible(true);
+        wnd.setLocationRelativeTo(null); // Center Window
+
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_cmdArrayListViewerActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdArrayListViewer;
     private javax.swing.JButton cmdBillboardLoadFromFile;
     private javax.swing.JButton cmdBillboardSaveToFile;
     private javax.swing.JButton cmdClearSelectionCache;
