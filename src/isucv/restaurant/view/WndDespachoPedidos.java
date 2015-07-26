@@ -203,7 +203,7 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
                     }
                     else
                     {
-                        Nuevo = new Object[] {Cantidad, "          " + Descripcion};
+                        Nuevo = new Object[] {Cantidad, Descripcion};
                     }
                     md.addRow(Nuevo);
                 }
