@@ -163,11 +163,11 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void cmdDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardActionPerformed
-        QueryNextOrder(); // Cargar el siguiente pedido listo (si existe)
         if("No hay pedidos".equals(lblOrderID.getText()))
         {
             this.setVisible(false);
         }
+        QueryNextOrder(); // Cargar el siguiente pedido listo (si existe)
     }//GEN-LAST:event_cmdDiscardActionPerformed
 
     // Busca en la cola de Pedidos Listos si existe algun pedido pendiente.
@@ -228,7 +228,6 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
             lblOrderID.setText("No hay pedidos");
             DefaultTableModel model1 = (DefaultTableModel)this.Table.getModel();
             model1.setRowCount(0);
-            //Codigo Cerrar ventana
         }
     }
         
