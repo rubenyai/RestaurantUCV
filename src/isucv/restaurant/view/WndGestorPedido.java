@@ -113,6 +113,15 @@ public class WndGestorPedido extends javax.swing.JFrame {
                 for (int sub = 0; sub < e.GetSides().size(); sub++)
                 {
                     ContadorContorno c = e.GetSides().get(sub);
+
+                    /* CODIGO DESHABILITADO - NO BORRAR
+                       SE ESTA PROBANDO AGREGAR CONTORNOS INCLUIDOS CON SU INDICADOR DE CANTIDAD
+                    int repeat;
+                    for (repeat = 0; repeat < c.GetCount(); repeat++)
+                        md.addRow(new Object[] {null, c.GetSide().GetName(), null, null});
+                    */
+
+                    // Codigo en PRUEBA
                     md.addRow(new Object[] {c.GetCount(), "          " + c.GetSide().GetName(), null, null});
                 }
             }
@@ -544,6 +553,28 @@ public class WndGestorPedido extends javax.swing.JFrame {
         // La fila seleccionada es un contorno incluido en una especialidad. No borrarla
         else
             return;
+        
+        /* CODIGO OBSOLETO
+        int i;
+        for (i = md.getRowCount() - 1; i >= 0; i--)
+        {
+            if (table.isRowSelected(i))
+            {
+                if(Integer.parseInt(table.getValueAt(i, 0).toString())>0)
+                {
+                    //Decrementamos cont -1 pero aun asi se muestra en la table
+                    //Para esto buscamos con el nombre cual es el objeto
+                    String name=table.getValueAt(i, 1).toString();
+                    for(int j=0;j<addedSpecialities.size();j++)
+                    {
+                        if(addedSpecialities.get(j).GetSpeciality().GetName()==name)
+                        {
+                            addedSpecialities.get(j).SetCount( ((addedSpecialities.get(j).GetCount()))-1);
+                        }
+                    }
+                }
+            }
+        }*/
      UpdateTable();
     }//GEN-LAST:event_cmdDeleteActionPerformed
 
@@ -706,7 +737,13 @@ public class WndGestorPedido extends javax.swing.JFrame {
         // Reiniciar las listas internas
         addedSides = new ArrayList<>();
         addedSpecialities = new ArrayList<>();
-
+        
+        /*
+          YA INCLUIDO EN EL UpdateTable()
+        lblSelectedSpecialities.setText("0");
+        lblSelectedSidesAditionals.setText("0");
+        */
+        
         UpdateTable();
     }//GEN-LAST:event_cmdGenerateActionPerformed
  
@@ -754,6 +791,33 @@ public class WndGestorPedido extends javax.swing.JFrame {
         cmdDelete.setEnabled(baseConditional /*||*/ && md.getValueAt(selectedIndex, COLUMN_PRICE) != null); // CODIGO DE PRUEBA INVERTIDO. LEER ARRIBA
         // Comprobacion adicional. La celda "Contornos" debe ser distinta a null y contener un numero > 0
         cmdEditSides.setEnabled(baseConditional && enableSideEdit); // CODIGO DE PRUEBA: Esto era ...((Integer)md.getValueAt(selectedIndex, COLUMN_SIDES)) > 0
+        
+        /*  CODIGO OBSOLETO
+        int i;
+        for (i = md.getRowCount() - 1; i >= 0; i--)
+        {
+            if (table.isRowSelected(i))
+            {
+                //Ver si es un contorno, activa boton modificar
+                if(table.getValueAt(i, 2)=="")
+                {
+                    cmdEditSides.setEnabled(true);
+                }
+                else
+                {
+                    cmdEditSides.setEnabled(false);
+                }
+                //Ver si es una especialidad, activar boton eliminar
+                if(table.getValueAt(i, 2)!="")
+                {
+                    cmdDelete.setEnabled(true);
+                }
+                else
+                {
+                    cmdDelete.setEnabled(false);
+                } 
+            }
+        }*/
     }//GEN-LAST:event_tableMouseClicked
 
     // Agrega una nueva especialidad basandose en el indice del boton Agregar
@@ -769,6 +833,9 @@ public class WndGestorPedido extends javax.swing.JFrame {
                 
         // Refrescar la tabla de contornos seleccionados
         UpdateTable();
+        
+        // Actualizar contadores de seleccion en los Botones (Innecesario?)
+        //UpdateButtonLayout(); 
     }
         
     private void UpdateButtonLayout()

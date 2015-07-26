@@ -16,6 +16,7 @@ public class Contorno
     *////////////////////////////
     
     private Float price;
+    //public Integer Time; TIEMPO CONSTANTE!
     private Boolean visible;
     private String name;
     
@@ -26,6 +27,7 @@ public class Contorno
     public Contorno(String N, Float P,/* Integer T,*/ Boolean V)
     {
         price = P;
+        //Time = T;
         visible = V;
         name = N;
         
