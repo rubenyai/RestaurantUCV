@@ -10,10 +10,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.Pedido;
 import java.awt.Color;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -354,8 +352,15 @@ public class WndCaja extends javax.swing.JFrame {
         //Se inicializa balance
         Balance=0;
         ClearFiles();
+        //Verificamos si es un decimal
+        boolean esdecimal=false;
+         for (int n=0;n<jTextField1.getText().length(); n ++) 
+         { 
+             if(jTextField1.getText().charAt(n)=='.' || jTextField1.getText().charAt(n)==',')
+             {esdecimal= true;}
+         }
         //Verificamos si ID esta lleno con valores validos
-        if(!"".equals(jTextField1.getText()) && isNumeric(jTextField1.getText()))
+        if(!"".equals(jTextField1.getText()) && isNumeric(jTextField1.getText()) && esdecimal==false)
         {
             //Se busca el pedido utilizando el ID
             Integer i, j;
