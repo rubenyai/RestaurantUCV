@@ -1,7 +1,7 @@
 ##*El Restaurant - Proyecto Ingenieria Del Software*##
 
 ##
-##*Sistemas en la que la Aplicacion fue Probada*##
+##*Sistemas en Donde la Aplicacion fue Probada*##
 Windows 7 / Windows 8 / Windows 8.1 / Ubuntu 15.04
 
 Java 8
