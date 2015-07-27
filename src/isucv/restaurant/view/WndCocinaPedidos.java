@@ -319,13 +319,18 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 //Cargamos desde pendingorders
                 for(int i=0;i < GetPendingOrders().size();i++)
                 {
+                    CantEspecialidad=0;
+                    //cantidad platos
+                    CantContorno=0;
                     //ID
                     id=GetPendingOrders().get(i).GetId();
                     //Cantidad platos
-                    CantEspecialidad=GetPendingOrders().get(i).GetSpecialities().size();
+                    CantEspecialidad+=GetPendingOrders().get(i).GetSpecialities().size();
                     //cantidad platos
-                    CantContorno=GetPendingOrders().get(i).GetSides().size();
-
+                    for(int j=0;j<GetPendingOrders().get(i).GetSides().size();j++)
+                    {
+                        CantContorno+=GetPendingOrders().get(i).GetSides().get(j).GetCount();
+                    }
                     //Calculo total time
                     //Suma de tiempos, si size nos devuelve q tiene elementos
                     for(int j=0;j < GetPendingOrders().get(i).GetSpecialities().size();j++)
@@ -335,8 +340,10 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
 
                     //Suma de tiempos, cantidad de contornos adiciones
                     //Multiplicamos por 2, ya que cada contorno adicional dura 2 min cocinandose
-                    tim+=(2)*GetPendingOrders().get(i).GetSides().size();
-
+                    tim+=(2)*CantContorno;
+                    
+                    //Suma cantidad de especialidades y contornos adicionales para mostrar en array
+                    
                     //Codigo llenado de table
                       md1.addRow(new Object[] {id,CantEspecialidad,CantContorno,tim});   
                 }
