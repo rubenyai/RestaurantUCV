@@ -4,10 +4,9 @@
 ##*Sistemas en Donde la Aplicacion fue Probada*##
 Windows 7 / Windows 8 / Windows 8.1 / Ubuntu 15.04
 
-Java 8
+##*Version de JRE y JDK Utilizados*##
 
-NetBeans IDE 8.0.2
-
+JRE & JDK= Java 8 build 51
 
 ##
 ##*Nota Importante*##
