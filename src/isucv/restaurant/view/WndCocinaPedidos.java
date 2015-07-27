@@ -76,7 +76,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         lblIdPedido = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblAdditionalSides = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Preparación de Pedidos");
@@ -189,10 +189,10 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         jLabel5.setText("8 Platos");
         jLabel5.setToolTipText("");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("<html>3 Contornos<br>Adicionalex");
-        jLabel6.setToolTipText("");
+        lblAdditionalSides.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblAdditionalSides.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAdditionalSides.setText("<html>3 Contornos<br>Adicionales");
+        lblAdditionalSides.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -217,7 +217,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGap(2, 2, 2))
                                 .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6))))
+                            .addComponent(lblAdditionalSides))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -241,7 +241,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblAdditionalSides, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 7, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -292,7 +292,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             contSides+=aux.GetCount();
         } 
         jLabel5.setText(String.format(Integer.toString(contSpecialities) + " Platos "));
-        jLabel6.setText(String.format(Integer.toString(contSides) + " Contornos ")); 
+        lblAdditionalSides.setText("<html>" + String.format(Integer.toString(contSides) + " Contornos<br>Adicionales")); 
     }
     
     public void UpdateTablePedidos(){
@@ -313,7 +313,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             //Borramos todo para cargar
                 lblIdPedido.setText(" ");
                 jLabel5.setText("0 Platos");
-                jLabel6.setText("0 Contornos");
+                lblAdditionalSides.setText("<html>0 Contornos<br>Adicionales");
 
                 //Cargamos desde pendingorders
                 for(int i=0;i < GetPendingOrders().size();i++)
@@ -347,9 +347,9 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                       md1.addRow(new Object[] {id,CantEspecialidad,CantContorno,tim});   
                 }
         }else{
-                lblIdPedido.setText("No");
-                jLabel5.setText("Existen");
-                jLabel6.setText("Pedidos");
+                lblIdPedido.setText("---");
+                jLabel5.setText("<html>No Existen<br>Pedidos");
+                lblAdditionalSides.setText("");
         }
     }
     // Permite retornar a la ventana de seleccion de tarea al cerrar
@@ -438,11 +438,11 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lblAdditionalSides;
     private javax.swing.JLabel lblIdPedido;
     // End of variables declaration//GEN-END:variables
 }
