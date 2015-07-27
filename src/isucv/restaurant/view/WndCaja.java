@@ -534,9 +534,7 @@ public class WndCaja extends javax.swing.JFrame {
       formatter.parse(str, pos);
       return str.length() == pos.getIndex();
     }
-    
-    
-    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdDiscardOrder;
     private javax.swing.JButton cmdGenerateOrder;

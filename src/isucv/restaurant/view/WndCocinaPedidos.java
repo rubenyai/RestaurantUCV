@@ -274,8 +274,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 contSpecialities+=e.GetCount();
             }
             // Agregar contornos incluidos
-            // Agregar contornos incluidos
-            if (e.GetSides() == null || e.GetSides().size()==0)
+            if (e.GetSides() == null || e.GetSides().isEmpty())
                 continue;
 
             for (int sub = 0; sub < ped.GetSpecialities().get(i).GetSides().size(); sub++)
@@ -364,19 +363,12 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int idped=0;
-        if(lblIdPedido.getText()=="No")
-        {
-            //cerramos ventana
-            this.setVisible(false);
-        }
-        else
-        {
-                //Movemos la orden elegida a la cola de despacho de mesonero
-                DefaultTableModel md = (DefaultTableModel) jTable1.getModel();
-            if (md.getRowCount() < 1)
-                return;
+        //Movemos la orden elegida a la cola de despacho de mesonero
+        DefaultTableModel md = (DefaultTableModel) jTable1.getModel();
+        if (md.getRowCount() < 1)
+            return;
 
-            for (int i = md.getRowCount() - 1; i >= 0; i--)
+        for (int i = md.getRowCount() - 1; i >= 0; i--)
             {
                 if (jTable1.isRowSelected(i))
                 {
@@ -384,7 +376,6 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                     idped=Integer.parseInt(jTable1.getValueAt(i,0).toString());
                 }
             }
-        }
         Pedido p;
         p=FindOrder(idped);
         

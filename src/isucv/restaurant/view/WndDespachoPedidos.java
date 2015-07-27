@@ -34,8 +34,7 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
         // Setup Column Width for both JTables
         Table.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setPreferredWidth(40);
         Table.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
-        Table.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);
-       
+        Table.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);  
     }
 
     /**

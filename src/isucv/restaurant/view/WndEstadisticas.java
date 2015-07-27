@@ -67,13 +67,13 @@ public class WndEstadisticas extends javax.swing.JFrame {
         ArrayList<ContadorContorno> TopSidesCopy = new ArrayList<>(Controller.GetStats().GetTopSides());
         Object[] Nuevo = new Object[2];
         //Se comprueba que el ArrayList de especialidades contenga algo
-        if (TopSpecialitiesCopy.size() != 0)
+        if (!TopSpecialitiesCopy.isEmpty())
         {
             //Mientras que exista mas de un elemento en el ArrayList se procede a comprobar el mayor
-            while (TopSpecialitiesCopy.size() != 0)
+            while (!TopSpecialitiesCopy.isEmpty())
             {
                 Count = TopSpecialitiesCopy.get(0).GetCount();
-                if (TopSpecialitiesCopy.size() != 0)
+                if (!TopSpecialitiesCopy.isEmpty())
                 {
                     for (i = 1; i < TopSpecialitiesCopy.size(); i++)
                     {
@@ -94,13 +94,13 @@ public class WndEstadisticas extends javax.swing.JFrame {
         }
         
         //Se Comprueba que el ArrayList de contornos contenga algo
-        if (TopSidesCopy.size() != 0)
+        if (!TopSidesCopy.isEmpty())
         {
             //Mientras que exista mas de un elemento en el ArrayList se procede a comprobar cual es el mayor
-            while (TopSidesCopy.size() != 0)
+            while (!TopSidesCopy.isEmpty())
             {
                 Count = TopSidesCopy.get(0).GetCount();
-                if (TopSidesCopy.size() != 0)
+                if (!TopSidesCopy.isEmpty())
                 {
                     for (i = 1; i < TopSidesCopy.size(); i++)
                     {
