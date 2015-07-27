@@ -37,15 +37,15 @@ public class WndCaja extends javax.swing.JFrame {
         // Center Column text for the JTable
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        jTable1.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setCellRenderer(centerRenderer);
+        tableResumen.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setCellRenderer(centerRenderer);
         
         // Setup Column Width for the JTable
-        jTable1.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setPreferredWidth(40);
-        jTable1.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
-        jTable1.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);
-        jTable1.getColumnModel().getColumn(ORDER_COLUMN_PRICE).setPreferredWidth(120);
+        tableResumen.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setPreferredWidth(40);
+        tableResumen.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
+        tableResumen.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);
+        tableResumen.getColumnModel().getColumn(ORDER_COLUMN_PRICE).setPreferredWidth(120);
         
-        jTextField1.setText("");
+        lblId.setText("");
         ClearFiles(); //Se elimina el contenido de los Files y jTable
     }
 
@@ -58,29 +58,29 @@ public class WndCaja extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblTextId = new javax.swing.JLabel();
+        lblId = new javax.swing.JTextField();
         cmdSearchOrder = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        lblTextDatosdeCliente = new javax.swing.JLabel();
+        lblTextNombre = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JTextField();
+        lblTextCedula = new javax.swing.JLabel();
+        lblCedula = new javax.swing.JTextField();
+        lblTextDireccion = new javax.swing.JLabel();
+        lblTextTelefono = new javax.swing.JLabel();
+        lblTelefono = new javax.swing.JTextField();
+        lblDireccion1 = new javax.swing.JTextField();
+        lblDireccion2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        tableResumen = new javax.swing.JTable();
+        lblTextResumen = new javax.swing.JLabel();
+        panelSubIvaTotal = new javax.swing.JPanel();
+        lblTextSubtotal = new javax.swing.JLabel();
+        lblSubtotal = new javax.swing.JLabel();
+        lblTextIVA = new javax.swing.JLabel();
+        lblIva = new javax.swing.JLabel();
+        lblTextTotalaPagar = new javax.swing.JLabel();
+        lblTotalaPagar = new javax.swing.JLabel();
         cmdGenerateOrder = new javax.swing.JButton();
         cmdDiscardOrder = new javax.swing.JButton();
 
@@ -88,14 +88,14 @@ public class WndCaja extends javax.swing.JFrame {
         setTitle("Pago de Pedidos");
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Identificador de Pedido");
+        lblTextId.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTextId.setText("Identificador de Pedido");
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("2456");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        lblId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lblId.setText("2456");
+        lblId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                lblIdActionPerformed(evt);
             }
         });
 
@@ -106,29 +106,29 @@ public class WndCaja extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("Datos de Cliente");
+        lblTextDatosdeCliente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTextDatosdeCliente.setText("Datos de Cliente");
 
-        jLabel3.setText("Nombre o Razon Social");
+        lblTextNombre.setText("Nombre o Razon Social");
 
-        jTextField2.setText("Paulo Perez");
+        lblNombre.setText("Paulo Perez");
 
-        jLabel4.setText("Cedula o RIF");
+        lblTextCedula.setText("Cedula o RIF");
 
-        jTextField3.setText("V-14.587.655");
+        lblCedula.setText("V-14.587.655");
 
-        jLabel5.setText("Direccion");
+        lblTextDireccion.setText("Direccion");
 
-        jLabel6.setText("Teléfono");
+        lblTextTelefono.setText("Teléfono");
 
-        jTextField4.setText("0416-7172772");
+        lblTelefono.setText("0416-7172772");
 
-        jTextField5.setText("Universidad Central de Venezuela");
+        lblDireccion1.setText("Universidad Central de Venezuela");
 
-        jTextField6.setText("Distrito Capital, Zona Postal 1050");
+        lblDireccion2.setText("Distrito Capital, Zona Postal 1050");
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableResumen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tableResumen.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(1), "Pollo a la Canasta",  new Float(580.4)},
                 {null, "Arroz Blanco",  new Float(0.0)},
@@ -158,74 +158,74 @@ public class WndCaja extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableResumen);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("Resumen de Pedido");
+        lblTextResumen.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTextResumen.setText("Resumen de Pedido");
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        panelSubIvaTotal.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
-        jLabel8.setText("Subtotal");
+        lblTextSubtotal.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        lblTextSubtotal.setText("Subtotal");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("3157.10 BsF");
+        lblSubtotal.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        lblSubtotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSubtotal.setText("3157.10 BsF");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
-        jLabel10.setText("IVA (12%)");
+        lblTextIVA.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        lblTextIVA.setText("IVA (12%)");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("378.85 BsF");
+        lblIva.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        lblIva.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblIva.setText("378.85 BsF");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        jLabel12.setText("Total a Pagar");
+        lblTextTotalaPagar.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        lblTextTotalaPagar.setText("Total a Pagar");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel13.setText("3535.95 BsF");
+        lblTotalaPagar.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        lblTotalaPagar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotalaPagar.setText("3535.95 BsF");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelSubIvaTotalLayout = new javax.swing.GroupLayout(panelSubIvaTotal);
+        panelSubIvaTotal.setLayout(panelSubIvaTotalLayout);
+        panelSubIvaTotalLayout.setHorizontalGroup(
+            panelSubIvaTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSubIvaTotalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelSubIvaTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSubIvaTotalLayout.createSequentialGroup()
+                        .addComponent(lblTextSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSubtotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelSubIvaTotalLayout.createSequentialGroup()
+                        .addComponent(lblTextIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblIva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSubIvaTotalLayout.createSequentialGroup()
+                        .addComponent(lblTextTotalaPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblTotalaPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelSubIvaTotalLayout.setVerticalGroup(
+            panelSubIvaTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSubIvaTotalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelSubIvaTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(panelSubIvaTotalLayout.createSequentialGroup()
+                        .addComponent(lblSubtotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(1, 1, 1))
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTextSubtotal, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(panelSubIvaTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(panelSubIvaTotalLayout.createSequentialGroup()
+                        .addComponent(lblIva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(1, 1, 1))
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTextIVA, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(panelSubIvaTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(panelSubIvaTotalLayout.createSequentialGroup()
+                        .addComponent(lblTotalaPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(1, 1, 1))
-                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(lblTextTotalaPagar, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -251,21 +251,21 @@ public class WndCaja extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel1)
+                        .addComponent(lblTextId)
                         .addGap(10, 10, 10)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(cmdSearchOrder)
                         .addGap(52, 234, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jTextField6))
+                        .addComponent(lblDireccion2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelSubIvaTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmdGenerateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,24 +273,24 @@ public class WndCaja extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(lblTextNombre)
+                            .addComponent(lblTextCedula)
+                            .addComponent(lblTextDireccion))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5)
+                            .addComponent(lblDireccion1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField3)
+                                .addComponent(lblCedula)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel6)
+                                .addComponent(lblTextTelefono)
                                 .addGap(10, 10, 10)
-                                .addComponent(jTextField4))
-                            .addComponent(jTextField2)))
+                                .addComponent(lblTelefono))
+                            .addComponent(lblNombre)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel7))
+                            .addComponent(lblTextDatosdeCliente)
+                            .addComponent(lblTextResumen))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
         );
@@ -301,43 +301,43 @@ public class WndCaja extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(jLabel1))
+                        .addComponent(lblTextId))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cmdSearchOrder))
                 .addGap(11, 11, 11)
-                .addComponent(jLabel2)
+                .addComponent(lblTextDatosdeCliente)
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jLabel3))
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblTextNombre))
+                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))))
+                            .addComponent(lblTextCedula)
+                            .addComponent(lblTextTelefono))))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jLabel5))
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblTextDireccion))
+                    .addComponent(lblDireccion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblDireccion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(jLabel7)
+                .addComponent(lblTextResumen)
                 .addGap(1, 1, 1)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelSubIvaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmdGenerateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
@@ -354,35 +354,35 @@ public class WndCaja extends javax.swing.JFrame {
         ClearFiles();
         //Verificamos si es un decimal
         boolean esdecimal=false;
-         for (int n=0;n<jTextField1.getText().length(); n ++) 
+         for (int n=0;n<lblId.getText().length(); n ++) 
          { 
-             if(jTextField1.getText().charAt(n)=='.' || jTextField1.getText().charAt(n)==',')
+             if(lblId.getText().charAt(n)=='.' || lblId.getText().charAt(n)==',')
              {esdecimal= true;}
          }
         //Verificamos si ID esta lleno con valores validos
-        if(!"".equals(jTextField1.getText()) && isNumeric(jTextField1.getText()) && esdecimal==false)
+        if(!"".equals(lblId.getText()) && isNumeric(lblId.getText()) && esdecimal==false)
         {
             //Se busca el pedido utilizando el ID
             Integer i, j;
             //VARIABLES PARA SER USADAS CUANDO SAQUES LOS DATOS DEL ARRAYLIST
             String Descripcion;
             Pedido ActualOrder;
-            ID = Integer.parseInt(jTextField1.getText());
+            ID = Integer.parseInt(lblId.getText());
             ActualOrder = Controller.FindOrder(ID);
-            jTextField1.setBackground(Color.white);
+            lblId.setBackground(Color.white);
             if (Controller.FindOrder(ID) != null && "Generado".equals(ActualOrder.GetStatus()))
             {
-                jTextField2.setEnabled(true);
-                jTextField3.setEnabled(true);
-                jTextField4.setEnabled(true);
-                jTextField5.setEnabled(true);
-                jTextField6.setEnabled(true);
+                lblNombre.setEnabled(true);
+                lblCedula.setEnabled(true);
+                lblTelefono.setEnabled(true);
+                lblDireccion1.setEnabled(true);
+                lblDireccion2.setEnabled(true);
                 cmdGenerateOrder.setEnabled(true);
                 cmdDiscardOrder.setEnabled(true);
                 Object[] Nuevo = new Object[3];
                 //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
                 //Aqui sacamos los datos de especialidades
-                DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+                DefaultTableModel modelo = (DefaultTableModel) tableResumen.getModel();
                 modelo.setNumRows(0); // Se elimina el contenido del Table
                 for (i = 0; i < ActualOrder.GetSpecialities().size(); i++)
                 {
@@ -425,51 +425,51 @@ public class WndCaja extends javax.swing.JFrame {
             else
             {
                 ClearFiles();
-                jTextField1.setBackground(Color.red);
+                lblId.setBackground(Color.red);
             }
         }else{
-            jTextField1.setBackground(Color.red);
+            lblId.setBackground(Color.red);
         }
     }//GEN-LAST:event_cmdSearchOrderActionPerformed
 
     private void cmdDiscardOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDiscardOrderActionPerformed
-        if(!"".equals(jTextField1.getText()))
+        if(!"".equals(lblId.getText()))
         {
-            Controller.RemoveOrder(Integer.parseInt(jTextField1.getText()));
+            Controller.RemoveOrder(Integer.parseInt(lblId.getText()));
         }
         ClearFiles();
     }//GEN-LAST:event_cmdDiscardOrderActionPerformed
 
     private void cmdGenerateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerateOrderActionPerformed
-        if(!"".equals(jTextField2.getText()) && !"".equals(jTextField3.getText()) && !"".equals(jTextField4.getText()) && !"".equals(jTextField5.getText()) && !"0 BsF ".equals(jLabel13.getText()))
+        if(!"".equals(lblNombre.getText()) && !"".equals(lblCedula.getText()) && !"".equals(lblTelefono.getText()) && !"".equals(lblDireccion1.getText()) && !"0 BsF ".equals(lblTotalaPagar.getText()))
         {
             PayForOrder();
             ClearFiles();
-            jTextField1.setText("");
+            lblId.setText("");
         //Mostrar datos faltantes coloreados en rojo
         }else{
-            if("".equals(jTextField2.getText()))
+            if("".equals(lblNombre.getText()))
             {
-                jTextField2.setBackground(Color.red);
+                lblNombre.setBackground(Color.red);
             }
-            if("".equals(jTextField3.getText()))
+            if("".equals(lblCedula.getText()))
             {
-                jTextField3.setBackground(Color.red);
+                lblCedula.setBackground(Color.red);
             }
-            if("".equals(jTextField4.getText()))
+            if("".equals(lblTelefono.getText()))
             {
-                jTextField4.setBackground(Color.red);
+                lblTelefono.setBackground(Color.red);
             }
-            if("".equals(jTextField5.getText()))
+            if("".equals(lblDireccion1.getText()))
             {
-                jTextField5.setBackground(Color.red);
+                lblDireccion1.setBackground(Color.red);
             }   
         } 
     }//GEN-LAST:event_cmdGenerateOrderActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void lblIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_lblIdActionPerformed
 
     private void CalculateAmount(float Balance)
     {
@@ -478,15 +478,15 @@ public class WndCaja extends javax.swing.JFrame {
         float aux = 0;
         aux = (float) (Balance * 0.12);
         //Se empiezan a llenar los campos del subtotal, iva y total
-        jLabel9.setText(String.format("%.2f", Balance) + " BsF ");
-        jLabel11.setText(String.format("%.2f", aux) + " BsF ");
+        lblSubtotal.setText(String.format("%.2f", Balance) + " BsF ");
+        lblIva.setText(String.format("%.2f", aux) + " BsF ");
         aux = aux + Balance;
         Total = aux;
-        jLabel13.setText(String.format("%.2f", aux) + " BsF ");    
+        lblTotalaPagar.setText(String.format("%.2f", aux) + " BsF ");    
     }
     private void PayForOrder()
     {//Se envian los datos del cliente al metodo payorder para poder generar  la factura
-        Controller.PayOrder(jTextField2.getText(), Integer.parseInt(jTextField1.getText()) , jTextField3.getText(), (jTextField5.getText() + " " + jTextField6.getText()), jTextField4.getText());
+        Controller.PayOrder(lblNombre.getText(), Integer.parseInt(lblId.getText()) , lblCedula.getText(), (lblDireccion1.getText() + " " + lblDireccion2.getText()), lblTelefono.getText());
     }
     public float GetTotal()
     {
@@ -495,27 +495,27 @@ public class WndCaja extends javax.swing.JFrame {
     
     public final void ClearFiles()
     {
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");
-        jTextField2.setEnabled(false);
-        jTextField3.setEnabled(false);
-        jTextField4.setEnabled(false);
-        jTextField5.setEnabled(false);
-        jTextField6.setEnabled(false);
+        lblNombre.setText("");
+        lblCedula.setText("");
+        lblTelefono.setText("");
+        lblDireccion1.setText("");
+        lblDireccion2.setText("");
+        lblNombre.setEnabled(false);
+        lblCedula.setEnabled(false);
+        lblTelefono.setEnabled(false);
+        lblDireccion1.setEnabled(false);
+        lblDireccion2.setEnabled(false);
         cmdGenerateOrder.setEnabled(false);
         cmdDiscardOrder.setEnabled(false);
-        jTextField1.setBackground(Color.WHITE);
-        jTextField2.setBackground(Color.WHITE);
-        jTextField3.setBackground(Color.WHITE);
-        jTextField4.setBackground(Color.WHITE);
-        jTextField5.setBackground(Color.WHITE);
-        jLabel9.setText("0 BsF ");
-        jLabel11.setText("0 BsF ");
-        jLabel13.setText("0 BsF ");
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        lblId.setBackground(Color.WHITE);
+        lblNombre.setBackground(Color.WHITE);
+        lblCedula.setBackground(Color.WHITE);
+        lblTelefono.setBackground(Color.WHITE);
+        lblDireccion1.setBackground(Color.WHITE);
+        lblSubtotal.setText("0 BsF ");
+        lblIva.setText("0 BsF ");
+        lblTotalaPagar.setText("0 BsF ");
+        DefaultTableModel modelo = (DefaultTableModel) tableResumen.getModel();
         modelo.setNumRows(0); // Se elimina el contenido del Table
     }
     
@@ -539,27 +539,27 @@ public class WndCaja extends javax.swing.JFrame {
     private javax.swing.JButton cmdDiscardOrder;
     private javax.swing.JButton cmdGenerateOrder;
     private javax.swing.JButton cmdSearchOrder;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField lblCedula;
+    private javax.swing.JTextField lblDireccion1;
+    private javax.swing.JTextField lblDireccion2;
+    private javax.swing.JTextField lblId;
+    private javax.swing.JLabel lblIva;
+    private javax.swing.JTextField lblNombre;
+    private javax.swing.JLabel lblSubtotal;
+    private javax.swing.JTextField lblTelefono;
+    private javax.swing.JLabel lblTextCedula;
+    private javax.swing.JLabel lblTextDatosdeCliente;
+    private javax.swing.JLabel lblTextDireccion;
+    private javax.swing.JLabel lblTextIVA;
+    private javax.swing.JLabel lblTextId;
+    private javax.swing.JLabel lblTextNombre;
+    private javax.swing.JLabel lblTextResumen;
+    private javax.swing.JLabel lblTextSubtotal;
+    private javax.swing.JLabel lblTextTelefono;
+    private javax.swing.JLabel lblTextTotalaPagar;
+    private javax.swing.JLabel lblTotalaPagar;
+    private javax.swing.JPanel panelSubIvaTotal;
+    private javax.swing.JTable tableResumen;
     // End of variables declaration//GEN-END:variables
 }

@@ -185,7 +185,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
         cmdAdd9 = new javax.swing.JButton();
         lblCount9 = new javax.swing.JLabel();
         lblNoSelection = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        lblTextResumenContornos = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
         jLabel28 = new javax.swing.JLabel();
         lblAvailableSidesTitle = new javax.swing.JLabel();
@@ -526,9 +526,9 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Table);
+        lblTextResumenContornos.setViewportView(Table);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 360, 210));
+        getContentPane().add(lblTextResumenContornos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 360, 210));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel28.setText("Contornos Seleccionados Actualmente");
@@ -766,7 +766,6 @@ public class WndSelectorContornos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAvailableSides;
     private javax.swing.JLabel lblAvailableSidesTitle;
     private javax.swing.JLabel lblCount1;
@@ -789,6 +788,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
     private javax.swing.JLabel lblPrice8;
     private javax.swing.JLabel lblPrice9;
     private javax.swing.JLabel lblSelectedSides;
+    private javax.swing.JScrollPane lblTextResumenContornos;
     private javax.swing.JLabel lblTitle1;
     private javax.swing.JLabel lblTitle2;
     private javax.swing.JLabel lblTitle3;

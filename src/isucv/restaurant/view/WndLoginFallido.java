@@ -27,19 +27,19 @@ public class WndLoginFallido extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblTextError = new javax.swing.JLabel();
+        lblTextDescripcion = new javax.swing.JLabel();
         cmdOk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Credenciales Invalidos");
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Error de Inicio de sesión");
+        lblTextError.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTextError.setText("Error de Inicio de sesión");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("El usuario o contraseña introducidos no son correctos.");
+        lblTextDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblTextDescripcion.setText("El usuario o contraseña introducidos no son correctos.");
 
         cmdOk.setText("Aceptar");
         cmdOk.addActionListener(new java.awt.event.ActionListener() {
@@ -54,13 +54,13 @@ public class WndLoginFallido extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
+                .addComponent(lblTextError)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblTextDescripcion)
                         .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cmdOk, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -70,9 +70,9 @@ public class WndLoginFallido extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel1)
+                .addComponent(lblTextError)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(lblTextDescripcion)
                 .addGap(18, 18, 18)
                 .addComponent(cmdOk)
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -88,7 +88,7 @@ public class WndLoginFallido extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdOk;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblTextDescripcion;
+    private javax.swing.JLabel lblTextError;
     // End of variables declaration//GEN-END:variables
 }

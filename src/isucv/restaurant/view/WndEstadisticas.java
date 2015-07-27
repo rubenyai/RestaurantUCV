@@ -32,13 +32,13 @@ public class WndEstadisticas extends javax.swing.JFrame {
         initComponents();
         
         // Adjust Table's Column width
-        jTable1.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(160);
-        jTable1.getColumnModel().getColumn(COLUMN_COUNT).setPreferredWidth(60);
+        tableTopEspecialidades.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(160);
+        tableTopEspecialidades.getColumnModel().getColumn(COLUMN_COUNT).setPreferredWidth(60);
         
         // Enable Table Auto-sorting for Count column
         // jTable1
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
-        jTable1.setRowSorter(sorter);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableTopEspecialidades.getModel());
+        tableTopEspecialidades.setRowSorter(sorter);
         ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
         
         sortKeys.add(new RowSorter.SortKey(COLUMN_COUNT, SortOrder.DESCENDING));
@@ -47,8 +47,8 @@ public class WndEstadisticas extends javax.swing.JFrame {
         sorter.sort();
         
         // jTable2
-        sorter = new TableRowSorter<>(jTable2.getModel());
-        jTable2.setRowSorter(sorter);
+        sorter = new TableRowSorter<>(tableTopContornos.getModel());
+        tableTopContornos.setRowSorter(sorter);
         sortKeys = new ArrayList<>();
         
         sortKeys.add(new RowSorter.SortKey(COLUMN_COUNT, SortOrder.DESCENDING));
@@ -57,9 +57,9 @@ public class WndEstadisticas extends javax.swing.JFrame {
         sorter.sort();
         
         //Se elimina el contenido de las jtable
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tableTopEspecialidades.getModel();
         modelo.setNumRows(0);
-        DefaultTableModel modelo2 = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel modelo2 = (DefaultTableModel) tableTopContornos.getModel();
         modelo2.setNumRows(0);
         
         int i = 0, IndexToEliminate = 0, Count = 0;
@@ -130,12 +130,12 @@ public class WndEstadisticas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblTextEspecialidades = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        tableTopEspecialidades = new javax.swing.JTable();
+        lblTextContornos = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableTopContornos = new javax.swing.JTable();
         cmdClose = new javax.swing.JButton();
         cmdResetStats = new javax.swing.JButton();
 
@@ -151,11 +151,11 @@ public class WndEstadisticas extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Especialidades mas Solicitadas");
-        jLabel1.setToolTipText("");
+        lblTextEspecialidades.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTextEspecialidades.setText("Especialidades mas Solicitadas");
+        lblTextEspecialidades.setToolTipText("");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableTopEspecialidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Pizza Margarita",  new Integer(4)},
                 {"Pizza Vegetariana",  new Integer(0)},
@@ -186,14 +186,14 @@ public class WndEstadisticas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTable1);
+        tableTopEspecialidades.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tableTopEspecialidades);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("Contornos mas Solicitados");
-        jLabel2.setToolTipText("");
+        lblTextContornos.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTextContornos.setText("Contornos mas Solicitados");
+        lblTextContornos.setToolTipText("");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableTopContornos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Papas Fritas",  new Integer(11)},
                 {"Papas al Vapor",  new Integer(15)},
@@ -223,8 +223,8 @@ public class WndEstadisticas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane4.setViewportView(jTable2);
+        tableTopContornos.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(tableTopContornos);
 
         cmdClose.setText("Cerrar");
         cmdClose.addActionListener(new java.awt.event.ActionListener() {
@@ -256,8 +256,8 @@ public class WndEstadisticas extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(lblTextEspecialidades, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTextContornos, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(0, 248, Short.MAX_VALUE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -266,11 +266,11 @@ public class WndEstadisticas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblTextEspecialidades)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblTextContornos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,11 +320,11 @@ public class WndEstadisticas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdClose;
     private javax.swing.JButton cmdResetStats;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lblTextContornos;
+    private javax.swing.JLabel lblTextEspecialidades;
+    private javax.swing.JTable tableTopContornos;
+    private javax.swing.JTable tableTopEspecialidades;
     // End of variables declaration//GEN-END:variables
 }

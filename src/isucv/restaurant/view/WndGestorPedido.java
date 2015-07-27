@@ -201,8 +201,8 @@ public class WndGestorPedido extends javax.swing.JFrame {
         cmdPreviousPage = new javax.swing.JButton();
         cmdNextPage = new javax.swing.JButton();
         lblSelectedSpecialities = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
+        lblTextPlatos = new javax.swing.JLabel();
+        lblTextContornosadd = new javax.swing.JLabel();
         lblSelectedSidesAditionals = new javax.swing.JLabel();
         cmdDelete = new javax.swing.JButton();
         cmdEditSides = new javax.swing.JButton();
@@ -469,15 +469,15 @@ public class WndGestorPedido extends javax.swing.JFrame {
         lblSelectedSpecialities.setText("4");
         getContentPane().add(lblSelectedSpecialities, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, 140, -1));
 
-        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel27.setText("Platos");
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 460, 140, -1));
+        lblTextPlatos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTextPlatos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTextPlatos.setText("Platos");
+        getContentPane().add(lblTextPlatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 460, 140, -1));
 
-        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("<html>Contornos<br>Adicionales");
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, 140, 40));
+        lblTextContornosadd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTextContornosadd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTextContornosadd.setText("<html>Contornos<br>Adicionales");
+        getContentPane().add(lblTextContornosadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, 140, 40));
 
         lblSelectedSidesAditionals.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSelectedSidesAditionals.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -987,8 +987,6 @@ public class WndGestorPedido extends javax.swing.JFrame {
     private javax.swing.JButton cmdNextPage;
     private javax.swing.JButton cmdPreviousPage;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCont1;
@@ -1005,6 +1003,8 @@ public class WndGestorPedido extends javax.swing.JFrame {
     private javax.swing.JLabel lblPrice6;
     private javax.swing.JLabel lblSelectedSidesAditionals;
     private javax.swing.JLabel lblSelectedSpecialities;
+    private javax.swing.JLabel lblTextContornosadd;
+    private javax.swing.JLabel lblTextPlatos;
     private javax.swing.JLabel lblTime1;
     private javax.swing.JLabel lblTime2;
     private javax.swing.JLabel lblTime3;

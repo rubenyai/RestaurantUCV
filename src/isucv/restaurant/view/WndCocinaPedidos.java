@@ -39,22 +39,22 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         // Center Column text for both JTables
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        jTable1.getColumnModel().getColumn(ORDERS_COLUMN_ID).setCellRenderer(centerRenderer);
-        jTable1.getColumnModel().getColumn(ORDERS_COLUMN_DISHES).setCellRenderer(centerRenderer);
-        jTable1.getColumnModel().getColumn(ORDERS_COLUMN_SIDES).setCellRenderer(centerRenderer);
-        jTable1.getColumnModel().getColumn(ORDERS_COLUMN_TIME).setCellRenderer(centerRenderer);
-        jTable2.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setCellRenderer(centerRenderer);
+        tableColaPedidos.getColumnModel().getColumn(ORDERS_COLUMN_ID).setCellRenderer(centerRenderer);
+        tableColaPedidos.getColumnModel().getColumn(ORDERS_COLUMN_DISHES).setCellRenderer(centerRenderer);
+        tableColaPedidos.getColumnModel().getColumn(ORDERS_COLUMN_SIDES).setCellRenderer(centerRenderer);
+        tableColaPedidos.getColumnModel().getColumn(ORDERS_COLUMN_TIME).setCellRenderer(centerRenderer);
+        tablePedido.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setCellRenderer(centerRenderer);
         
         // Setup Column Width for both JTables
-        jTable1.getColumnModel().getColumn(ORDERS_COLUMN_ID).setPreferredWidth(80);
-        jTable1.getColumnModel().getColumn(ORDERS_COLUMN_ID).setMaxWidth(120);
-        jTable1.getColumnModel().getColumn(ORDERS_COLUMN_DISHES).setPreferredWidth(80);
-        jTable1.getColumnModel().getColumn(ORDERS_COLUMN_SIDES).setPreferredWidth(80);
-        jTable1.getColumnModel().getColumn(ORDERS_COLUMN_TIME).setPreferredWidth(80);
+        tableColaPedidos.getColumnModel().getColumn(ORDERS_COLUMN_ID).setPreferredWidth(80);
+        tableColaPedidos.getColumnModel().getColumn(ORDERS_COLUMN_ID).setMaxWidth(120);
+        tableColaPedidos.getColumnModel().getColumn(ORDERS_COLUMN_DISHES).setPreferredWidth(80);
+        tableColaPedidos.getColumnModel().getColumn(ORDERS_COLUMN_SIDES).setPreferredWidth(80);
+        tableColaPedidos.getColumnModel().getColumn(ORDERS_COLUMN_TIME).setPreferredWidth(80);
         
-        jTable2.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setPreferredWidth(40);
-        jTable2.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
-        jTable2.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);
+        tablePedido.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setPreferredWidth(40);
+        tablePedido.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
+        tablePedido.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);
     }
 
     /**
@@ -67,15 +67,15 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        tableColaPedidos = new javax.swing.JTable();
+        lblTextColadePedidos = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tablePedido = new javax.swing.JTable();
+        cmdDespacharPedido = new javax.swing.JButton();
         lblIdPedido = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblTextPedido = new javax.swing.JLabel();
+        lblCantPlatos = new javax.swing.JLabel();
         lblAdditionalSides = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -91,8 +91,8 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableColaPedidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tableColaPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(2454),  new Integer(1),  new Integer(0),  new Float(15.0)},
                 { new Integer(2455),  new Integer(1),  new Integer(1),  new Float(17.0)},
@@ -121,22 +121,22 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableColaPedidos.getTableHeader().setReorderingAllowed(false);
+        tableColaPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tableColaPedidosMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tableColaPedidos);
 
-        jLabel1.setText("Cola de Pedidos por Preparar");
+        lblTextColadePedidos.setText("Cola de Pedidos por Preparar");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Pedido");
         jLabel3.setToolTipText("");
 
-        jTable2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablePedido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tablePedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(1), "Pollo a la Canasta"},
                 {null, "Arroz Blanco"},
@@ -166,12 +166,12 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable2);
+        jScrollPane1.setViewportView(tablePedido);
 
-        jButton1.setText("Despachar Pedido");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cmdDespacharPedido.setText("Despachar Pedido");
+        cmdDespacharPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cmdDespacharPedidoActionPerformed(evt);
             }
         });
 
@@ -180,14 +180,14 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         lblIdPedido.setText("2456");
         lblIdPedido.setToolTipText("");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Pedido");
+        lblTextPedido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblTextPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTextPedido.setText("Pedido");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("8 Platos");
-        jLabel5.setToolTipText("");
+        lblCantPlatos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblCantPlatos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCantPlatos.setText("8 Platos");
+        lblCantPlatos.setToolTipText("");
 
         lblAdditionalSides.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblAdditionalSides.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -205,18 +205,18 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel1)
+                            .addComponent(lblTextColadePedidos)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                                        .addComponent(cmdDespacharPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                                         .addComponent(lblIdPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(lblTextPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGap(2, 2, 2))
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblCantPlatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblAdditionalSides))))
                 .addContainerGap())
         );
@@ -224,7 +224,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblTextColadePedidos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -233,13 +233,13 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmdDespacharPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTextPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
+                        .addComponent(lblCantPlatos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAdditionalSides, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 7, Short.MAX_VALUE)))
@@ -252,7 +252,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
      private void UpdateTable(int id)
     {
         // Actualiza la tabla con la informacion de Especialidades y Contornos seleccionados
-        DefaultTableModel md = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel md = (DefaultTableModel) tablePedido.getModel();
         md.setRowCount(0); // Eliminar el contenido actual de la tabla
         
         //Contadores que se mostraran
@@ -291,17 +291,17 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             md.addRow(new Object[] {aux.GetCount(), aux.GetSide().GetName()});
             contSides+=aux.GetCount();
         } 
-        jLabel5.setText(String.format(Integer.toString(contSpecialities) + " Platos "));
+        lblCantPlatos.setText(String.format(Integer.toString(contSpecialities) + " Platos "));
         lblAdditionalSides.setText("<html>" + String.format(Integer.toString(contSides) + " Contornos<br>Adicionales")); 
     }
     
     public void UpdateTablePedidos(){
         //Boton despachar pedido deshabilitado hasta q se seleccione un pedido
-        jButton1.setEnabled(false);
-        DefaultTableModel md1 = (DefaultTableModel) jTable1.getModel();
+        cmdDespacharPedido.setEnabled(false);
+        DefaultTableModel md1 = (DefaultTableModel) tableColaPedidos.getModel();
             md1.setRowCount(0); // Eliminar la tabla
             
-            DefaultTableModel md2 = (DefaultTableModel) jTable2.getModel();
+            DefaultTableModel md2 = (DefaultTableModel) tablePedido.getModel();
             md2.setRowCount(0); // Eliminar la tabla
         //Condicion, si no existen pedidos, no mostramos nada
         if(GetPendingOrders().isEmpty()==false)
@@ -312,7 +312,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             int CantEspecialidad;
             //Borramos todo para cargar
                 lblIdPedido.setText(" ");
-                jLabel5.setText("0 Platos");
+                lblCantPlatos.setText("0 Platos");
                 lblAdditionalSides.setText("<html>0 Contornos<br>Adicionales");
 
                 //Cargamos desde pendingorders
@@ -348,7 +348,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 }
         }else{
                 lblIdPedido.setText("---");
-                jLabel5.setText("<html>No Existen<br>Pedidos");
+                lblCantPlatos.setText("<html>No Existen<br>Pedidos");
                 lblAdditionalSides.setText("");
         }
     }
@@ -361,19 +361,19 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         UpdateTablePedidos();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cmdDespacharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDespacharPedidoActionPerformed
         int idped=0;
         //Movemos la orden elegida a la cola de despacho de mesonero
-        DefaultTableModel md = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel md = (DefaultTableModel) tableColaPedidos.getModel();
         if (md.getRowCount() < 1)
             return;
 
         for (int i = md.getRowCount() - 1; i >= 0; i--)
             {
-                if (jTable1.isRowSelected(i))
+                if (tableColaPedidos.isRowSelected(i))
                 {
                     //Encontramos la fila para obtener el num de pedido
-                    idped=Integer.parseInt(jTable1.getValueAt(i,0).toString());
+                    idped=Integer.parseInt(tableColaPedidos.getValueAt(i,0).toString());
                 }
             }
         Pedido p;
@@ -389,32 +389,32 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
             }
         }
         //Borramos la 2da table
-        DefaultTableModel md2 = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel md2 = (DefaultTableModel) tablePedido.getModel();
         md2.setRowCount(0);
         //Se actualiza nuevamente la table de pedidos
         UpdateTablePedidos();
         //Se deshabilita boton de despacho hasta q se seleccione otra opcion
-        jButton1.setEnabled(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        cmdDespacharPedido.setEnabled(false);
+    }//GEN-LAST:event_cmdDespacharPedidoActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void tableColaPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableColaPedidosMouseClicked
         int id=0;
-        DefaultTableModel md = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel md = (DefaultTableModel) tableColaPedidos.getModel();
         if (md.getRowCount() < 1)
             return;
         
         for (int i = md.getRowCount() - 1; i >= 0; i--)
         {
-            if (jTable1.isRowSelected(i))
+            if (tableColaPedidos.isRowSelected(i))
             {
                 //Habilitar boton Despachar pedido
-                jButton1.setEnabled(true);
-                id=Integer.parseInt(jTable1.getValueAt(i,0).toString());
+                cmdDespacharPedido.setEnabled(true);
+                id=Integer.parseInt(tableColaPedidos.getValueAt(i,0).toString());
                 lblIdPedido.setText(Integer.toString(id));     
             }
         }
         UpdateTable(id);
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tableColaPedidosMouseClicked
 
     // Almacena la ventana principal que muestra esta ventana
     private JFrame ParentWindow = null;
@@ -433,16 +433,16 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton cmdDespacharPedido;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblAdditionalSides;
+    private javax.swing.JLabel lblCantPlatos;
     private javax.swing.JLabel lblIdPedido;
+    private javax.swing.JLabel lblTextColadePedidos;
+    private javax.swing.JLabel lblTextPedido;
+    private javax.swing.JTable tableColaPedidos;
+    private javax.swing.JTable tablePedido;
     // End of variables declaration//GEN-END:variables
 }

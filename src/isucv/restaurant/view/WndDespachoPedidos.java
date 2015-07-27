@@ -29,12 +29,12 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
         // Center Column text for both JTables
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        Table.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setCellRenderer(centerRenderer);
+        tablePedidoDEspacho.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setCellRenderer(centerRenderer);
         
         // Setup Column Width for both JTables
-        Table.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setPreferredWidth(40);
-        Table.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
-        Table.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);  
+        tablePedidoDEspacho.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setPreferredWidth(40);
+        tablePedidoDEspacho.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
+        tablePedidoDEspacho.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);  
     }
 
     /**
@@ -46,12 +46,12 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblTextPedidoTable = new javax.swing.JLabel();
+        lblTextPedido = new javax.swing.JLabel();
         lblOrderID = new javax.swing.JLabel();
         cmdDiscard = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        tablePedidoDEspacho = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Despacho de Pedidos");
@@ -63,13 +63,13 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Pedido");
-        jLabel3.setToolTipText("");
+        lblTextPedidoTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblTextPedidoTable.setText("Pedido");
+        lblTextPedidoTable.setToolTipText("");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Pedido");
+        lblTextPedido.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblTextPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTextPedido.setText("Pedido");
 
         lblOrderID.setFont(new java.awt.Font("Tahoma", 0, 62)); // NOI18N
         lblOrderID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -84,8 +84,8 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
             }
         });
 
-        Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Table.setModel(new javax.swing.table.DefaultTableModel(
+        tablePedidoDEspacho.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tablePedidoDEspacho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(1), "Pollo a la Canasta"},
                 {null, "Arroz Blanco"},
@@ -115,7 +115,7 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Table);
+        jScrollPane1.setViewportView(tablePedidoDEspacho);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,20 +130,20 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cmdDiscard, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(lblTextPedidoTable)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblTextPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel4)
+                .addComponent(lblTextPedido)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
-                .addComponent(jLabel3)
+                .addComponent(lblTextPedidoTable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -178,7 +178,7 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
             despacho=Controller.GetNextOrderReady();
             lblOrderID.setText(Integer.toString(despacho.GetId()));
             
-            DefaultTableModel md = (DefaultTableModel) Table.getModel();
+            DefaultTableModel md = (DefaultTableModel) tablePedidoDEspacho.getModel();
             md.setRowCount(0); // Eliminar la tabla
             //
             String Descripcion;
@@ -225,17 +225,17 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
         else
         {
             lblOrderID.setText("No hay pedidos");
-            DefaultTableModel model1 = (DefaultTableModel)this.Table.getModel();
+            DefaultTableModel model1 = (DefaultTableModel)this.tablePedidoDEspacho.getModel();
             model1.setRowCount(0);
         }
     }
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table;
     private javax.swing.JButton cmdDiscard;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblOrderID;
+    private javax.swing.JLabel lblTextPedido;
+    private javax.swing.JLabel lblTextPedidoTable;
+    private javax.swing.JTable tablePedidoDEspacho;
     // End of variables declaration//GEN-END:variables
 }
