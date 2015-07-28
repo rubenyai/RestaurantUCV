@@ -185,9 +185,9 @@ public class WndSelectorContornos extends javax.swing.JFrame {
         cmdAdd9 = new javax.swing.JButton();
         lblCount9 = new javax.swing.JLabel();
         lblNoSelection = new javax.swing.JLabel();
-        lblTextResumenContornos = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
-        jLabel28 = new javax.swing.JLabel();
+        lblTextResumenContornosSel = new javax.swing.JLabel();
         lblAvailableSidesTitle = new javax.swing.JLabel();
         lblAvailableSides = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -526,13 +526,13 @@ public class WndSelectorContornos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        lblTextResumenContornos.setViewportView(Table);
+        jScrollPane1.setViewportView(Table);
 
-        getContentPane().add(lblTextResumenContornos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 360, 210));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 360, 210));
 
-        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel28.setText("Contornos Seleccionados Actualmente");
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+        lblTextResumenContornosSel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTextResumenContornosSel.setText("Contornos Seleccionados Actualmente");
+        getContentPane().add(lblTextResumenContornosSel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
         lblAvailableSidesTitle.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblAvailableSidesTitle.setText("<html>Contornos disponibles para el plato");
@@ -763,9 +763,9 @@ public class WndSelectorContornos extends javax.swing.JFrame {
     private javax.swing.JButton cmdRemove7;
     private javax.swing.JButton cmdRemove8;
     private javax.swing.JButton cmdRemove9;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAvailableSides;
     private javax.swing.JLabel lblAvailableSidesTitle;
     private javax.swing.JLabel lblCount1;
@@ -788,7 +788,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
     private javax.swing.JLabel lblPrice8;
     private javax.swing.JLabel lblPrice9;
     private javax.swing.JLabel lblSelectedSides;
-    private javax.swing.JScrollPane lblTextResumenContornos;
+    private javax.swing.JLabel lblTextResumenContornosSel;
     private javax.swing.JLabel lblTitle1;
     private javax.swing.JLabel lblTitle2;
     private javax.swing.JLabel lblTitle3;
