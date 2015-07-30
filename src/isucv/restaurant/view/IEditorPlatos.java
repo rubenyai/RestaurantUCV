@@ -51,6 +51,9 @@ public class IEditorPlatos extends javax.swing.JFrame {
     public IEditorPlatos() {
         initComponents();
         
+        // Configurar el Table para que actualize su Modelo al perder el Foco
+        Table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        
         // Establecer ancho de columnas para la Tabla
         Table.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(160);
         Table.getColumnModel().getColumn(COLUMN_SIDES).setPreferredWidth(60);
@@ -331,6 +334,9 @@ public class IEditorPlatos extends javax.swing.JFrame {
     private void cmdApplyChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdApplyChangesActionPerformed
         // Elimina el contenido actual de la cartelera (Especialidades)
         // y lo sustituye con el almacenado en esta ventana
+        
+        if (Table.isEditing())
+            return;
         
         Controller.SetBillboardSpecialities(new ArrayList<>());
         

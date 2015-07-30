@@ -33,8 +33,8 @@ public class Cliente
     
     private final String name;
     private final String id;
-    private final String billingaddr;
-    private final String phonenumber;
+    private final String billingAddr;
+    private final String phone;
     
     
     
@@ -44,8 +44,8 @@ public class Cliente
     
     public String GetName() { return this.name; } 
     public String GetID() { return this.id; }
-    public String GetBillingAddr() { return this.billingaddr; }
-    public String GetPhoneNumber() { return this.phonenumber; }
+    public String GetBillingAddr() { return this.billingAddr; }
+    public String GetPhoneNumber() { return this.phone; }
     
     
     
@@ -57,8 +57,8 @@ public class Cliente
     {
         name = n;
         this.id = id;
-        billingaddr = addr;
-        phonenumber = p;
+        billingAddr = addr;
+        phone = p;
     }
 }
 

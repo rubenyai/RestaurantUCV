@@ -22,6 +22,7 @@
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
+import java.awt.event.KeyEvent;
 
 /**
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
@@ -88,8 +89,12 @@ public class ILogIn extends javax.swing.JFrame {
         setTitle("Inicio de Sesion");
         setResizable(false);
 
-        txtUsername.setText("chef1");
         txtUsername.setToolTipText("");
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nombre de Usuario");
@@ -97,7 +102,11 @@ public class ILogIn extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Contraseña");
 
-        txtPassword.setText("chef2");
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
+        });
 
         cmdClientTask.setText("Cliente");
         cmdClientTask.addActionListener(new java.awt.event.ActionListener() {
@@ -201,6 +210,12 @@ public class ILogIn extends javax.swing.JFrame {
         
         Controller.Login(GetUsername(), GetPassword());
     }//GEN-LAST:event_cmdLoginActionPerformed
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        // Hacer click automaticamente en el boton LogIn al presionar enter
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            cmdLogin.doClick();
+    }//GEN-LAST:event_txtPasswordKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdClientTask;

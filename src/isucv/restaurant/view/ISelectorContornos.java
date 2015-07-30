@@ -73,6 +73,7 @@ public class ISelectorContornos extends javax.swing.JFrame {
      */
     public ISelectorContornos(ArrayList<ContadorContorno> baseSides, int maxSides) {
         initComponents();
+        this.setSize(this.getWidth() + 10, this.getHeight() + 10); // Incrementar el tamaño de la ventana
         
         this.setLocationRelativeTo(null); // Centrar ventana
         
@@ -213,6 +214,7 @@ public class ISelectorContornos extends javax.swing.JFrame {
                 ContadorContorno c = sidesLocalCache.get(realIndex);
                 
                 title.setText(c.GetSide().GetName());
+                title.setToolTipText(c.GetSide().GetName());
                 price.setText(String.format("%.2f", c.GetSide().GetPrice()) + " BsF ");
                 count.setText(String.valueOf(c.GetCount()));
                 

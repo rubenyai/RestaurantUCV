@@ -49,6 +49,9 @@ public class IEditorContornos extends javax.swing.JFrame {
     public IEditorContornos() {
         initComponents();
         
+        // Configurar el Table para que actualize su Modelo al perder el Foco
+        Table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        
         // Establecer ancho de columnas para la Tabla
         Table.getColumnModel().getColumn(COLUMN_DESCRIPTION).setPreferredWidth(160);
         Table.getColumnModel().getColumn(COLUMN_PRICE).setPreferredWidth(60);
@@ -324,6 +327,9 @@ public class IEditorContornos extends javax.swing.JFrame {
     private void cmdApplyChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdApplyChangesActionPerformed
         // Elimina el contenido actual de la cartelera (Contornos)
         // y lo sustituye con el almacenado en esta ventana
+        
+        if (Table.isEditing())
+            return;
         
         Controller.SetBillboardSides(new ArrayList<>());
         

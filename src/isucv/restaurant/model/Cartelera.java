@@ -36,8 +36,8 @@ public class Cartelera
     
     private ArrayList<Especialidad> specialities;
     private ArrayList<Contorno> sides;
-    private Integer totalspecialities;
-    private Integer totalsides;
+    private Integer totalSpecialities;
+    private Integer totalSides;
     
     
     
@@ -47,12 +47,12 @@ public class Cartelera
     
     public ArrayList<Especialidad> GetSpecialities() { return this.specialities; }
     public ArrayList<Contorno> GetSides() { return this.sides; }  
-    public int GetTotalSpecialities() { return this.totalspecialities; }
-    public int GetTotalSides() { return this.totalsides; }
+    public int GetTotalSpecialities() { return this.totalSpecialities; }
+    public int GetTotalSides() { return this.totalSides; }
     public void SetSpecialities(ArrayList<Especialidad> spec) { this.specialities=spec; }
     public void SetSides(ArrayList<Contorno> con) { this.sides=con; }
-    public void SetTotalSpecialities(int totalspe) { this.totalspecialities=totalspe; }
-    public void SetTotalSides(int totalcon) { this.totalsides=totalcon; }
+    public void SetTotalSpecialities(int totalspe) { this.totalSpecialities=totalspe; }
+    public void SetTotalSides(int totalcon) { this.totalSides=totalcon; }
     
     
     
@@ -66,7 +66,7 @@ public class Cartelera
         //Se actualizan las especialidades pasandole por parametro un ArrayList con las especialidades completas
         specialities = esp;
         //Se totaliza el numero de especialidades dentro de la cartelera
-        totalspecialities = specialities.size();
+        totalSpecialities = specialities.size();
     }
    
     // Actualizar Contornos
@@ -75,6 +75,6 @@ public class Cartelera
         //Se actualizan los contornos pasandole por parametro un ArrayList con los contornos completos
         sides = con;
         //Se totaliza el numero de contornos dentro de la cartelera
-        totalsides = sides.size();
+        totalSides = sides.size();
     }
 }

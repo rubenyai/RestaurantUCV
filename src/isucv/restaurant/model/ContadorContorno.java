@@ -56,5 +56,5 @@ public class ContadorContorno
         count = 0;
     }
     
-    public void AddCount(Integer Count) { this.count += count; }
+    public void AddCount(Integer Count) { this.count += Count; }
 }

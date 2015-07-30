@@ -189,6 +189,7 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 Especialidad c = baseSpecialities.get(realIndex);
                 
                 title.setText(c.GetName());
+                title.setToolTipText(c.GetName());
                 price.setText(String.format("%.2f", c.GetPrice()) + " BsF ");
                 cont.setText(String.format(c.GetTotalSides() + " Contornos "));
                 time.setText(String.format(c.GetTime() + " Min "));
@@ -418,7 +419,7 @@ public class IGestorPedidos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 460, 280));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 530, 280));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel25.setText("Platos Seleccionados");
@@ -430,7 +431,7 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdDeleteAllActionPerformed(evt);
             }
         });
-        getContentPane().add(cmdDeleteAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, 140, -1));
+        getContentPane().add(cmdDeleteAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 140, -1));
 
         cmdAddAdditionalSide.setText("<html>Agregar Contorno<br>Adicional");
         cmdAddAdditionalSide.setToolTipText("");
@@ -440,7 +441,7 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdAddAdditionalSideActionPerformed(evt);
             }
         });
-        getContentPane().add(cmdAddAdditionalSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 140, -1));
+        getContentPane().add(cmdAddAdditionalSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 140, -1));
 
         cmdDiscard.setText("Descartar Pedido");
         cmdDiscard.addActionListener(new java.awt.event.ActionListener() {
@@ -448,7 +449,7 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdDiscardActionPerformed(evt);
             }
         });
-        getContentPane().add(cmdDiscard, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, 169, 43));
+        getContentPane().add(cmdDiscard, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 590, 169, 43));
 
         cmdGenerate.setText("Finalizar Pedido");
         cmdGenerate.addActionListener(new java.awt.event.ActionListener() {
@@ -456,25 +457,26 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdGenerateActionPerformed(evt);
             }
         });
-        getContentPane().add(cmdGenerate, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 590, 169, 43));
+        getContentPane().add(cmdGenerate, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 590, 169, 43));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menú del dia - Platos Disponibles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTitle1.setText("Pizza Margarita");
-        jPanel1.add(lblTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+        jPanel1.add(lblTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 160, -1));
 
         lblCont1.setText("S/C");
         jPanel1.add(lblCont1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
+        lblTime1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblTime1.setText("25 Min");
-        jPanel1.add(lblTime1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
+        jPanel1.add(lblTime1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
 
         lblPrice1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPrice1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrice1.setText("580,40 BsF");
-        jPanel1.add(lblPrice1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 127, -1));
+        jPanel1.add(lblPrice1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 160, -1));
 
         cmdAdd1.setText("Agregar");
         cmdAdd1.setName("1"); // NOI18N
@@ -483,22 +485,23 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 127, -1));
+        jPanel1.add(cmdAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 160, -1));
 
         lblTitle2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTitle2.setText("Pizza Vegetariana");
-        jPanel1.add(lblTitle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
+        jPanel1.add(lblTitle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 160, -1));
 
         lblCont2.setText("S/C");
-        jPanel1.add(lblCont2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, -1));
+        jPanel1.add(lblCont2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
 
+        lblTime2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblTime2.setText("25 Min");
-        jPanel1.add(lblTime2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, -1));
+        jPanel1.add(lblTime2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
 
         lblPrice2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPrice2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrice2.setText("590,00 BsF");
-        jPanel1.add(lblPrice2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 127, -1));
+        jPanel1.add(lblPrice2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 160, -1));
 
         cmdAdd2.setText("Agregar");
         cmdAdd2.setName("2"); // NOI18N
@@ -507,22 +510,23 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 127, -1));
+        jPanel1.add(cmdAdd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 160, -1));
 
         lblTitle3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTitle3.setText("Pizza 4 Estaciones");
-        jPanel1.add(lblTitle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
+        jPanel1.add(lblTitle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 160, -1));
 
         lblCont3.setText("S/C");
-        jPanel1.add(lblCont3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, -1, -1));
+        jPanel1.add(lblCont3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, -1));
 
+        lblTime3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblTime3.setText("25 Min");
-        jPanel1.add(lblTime3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, -1));
+        jPanel1.add(lblTime3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, -1, -1));
 
         lblPrice3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPrice3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrice3.setText("759,90 BsF");
-        jPanel1.add(lblPrice3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 127, -1));
+        jPanel1.add(lblPrice3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 160, -1));
 
         cmdAdd3.setText("Agregar");
         cmdAdd3.setName("3"); // NOI18N
@@ -531,22 +535,23 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 127, -1));
+        jPanel1.add(cmdAdd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 160, -1));
 
         lblTitle5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTitle5.setText("Haburguesa de Carne");
-        jPanel1.add(lblTitle5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, -1, -1));
+        jPanel1.add(lblTitle5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 160, -1));
 
         lblCont5.setText("1 Contornos");
-        jPanel1.add(lblCont5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, -1, -1));
+        jPanel1.add(lblCont5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
+        lblTime5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblTime5.setText("10 Min");
-        jPanel1.add(lblTime5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, -1, -1));
+        jPanel1.add(lblTime5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, -1, -1));
 
         lblPrice5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPrice5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrice5.setText("483,80 BsF");
-        jPanel1.add(lblPrice5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 127, -1));
+        jPanel1.add(lblPrice5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 160, -1));
 
         cmdAdd5.setText("Agregar");
         cmdAdd5.setName("5"); // NOI18N
@@ -555,37 +560,39 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 127, -1));
+        jPanel1.add(cmdAdd5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 160, -1));
 
         lblTitle4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTitle4.setText("Pollo a la Canasta");
-        jPanel1.add(lblTitle4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
+        jPanel1.add(lblTitle4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 160, -1));
 
         lblTitle6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTitle6.setText("Hamburguesa de Pollo");
-        jPanel1.add(lblTitle6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, -1, -1));
+        jPanel1.add(lblTitle6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 160, -1));
 
         lblCont4.setText("2 Contornos");
         jPanel1.add(lblCont4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
         lblCont6.setText("1 Contornos");
-        jPanel1.add(lblCont6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, -1, -1));
+        jPanel1.add(lblCont6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 80, -1));
 
+        lblTime6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblTime6.setText("10 Min");
-        jPanel1.add(lblTime6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, -1, -1));
+        jPanel1.add(lblTime6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 170, -1, -1));
 
+        lblTime4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblTime4.setText("15 Min");
-        jPanel1.add(lblTime4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+        jPanel1.add(lblTime4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
 
         lblPrice6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPrice6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrice6.setText("410,00 BsF");
-        jPanel1.add(lblPrice6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 127, -1));
+        jPanel1.add(lblPrice6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 160, -1));
 
         lblPrice4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPrice4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrice4.setText("580,40 BsF");
-        jPanel1.add(lblPrice4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 127, -1));
+        jPanel1.add(lblPrice4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 160, -1));
 
         cmdAdd6.setText("Agregar");
         cmdAdd6.setName("6"); // NOI18N
@@ -594,7 +601,7 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 127, -1));
+        jPanel1.add(cmdAdd6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, 160, -1));
 
         cmdAdd4.setText("Agregar");
         cmdAdd4.setName("4"); // NOI18N
@@ -603,7 +610,7 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdAddActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdAdd4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 127, -1));
+        jPanel1.add(cmdAdd4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 160, -1));
 
         cmdPreviousPage.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
         cmdPreviousPage.setText("<");
@@ -621,29 +628,29 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdNextPageActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdNextPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 50, 210));
+        jPanel1.add(cmdNextPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 50, 210));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 250));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, 250));
 
         lblSelectedSpecialities.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSelectedSpecialities.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSelectedSpecialities.setText("4");
-        getContentPane().add(lblSelectedSpecialities, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, 140, -1));
+        getContentPane().add(lblSelectedSpecialities, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 480, 140, -1));
 
         lblTextPlatos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTextPlatos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTextPlatos.setText("Platos");
-        getContentPane().add(lblTextPlatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 460, 140, -1));
+        getContentPane().add(lblTextPlatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 460, 140, -1));
 
         lblTextContornosadd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTextContornosadd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTextContornosadd.setText("<html>Contornos<br>Adicionales");
-        getContentPane().add(lblTextContornosadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, 140, 40));
+        getContentPane().add(lblTextContornosadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 510, 140, 40));
 
         lblSelectedSidesAditionals.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSelectedSidesAditionals.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSelectedSidesAditionals.setText("4");
-        getContentPane().add(lblSelectedSidesAditionals, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 550, 140, -1));
+        getContentPane().add(lblSelectedSidesAditionals, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 550, 140, -1));
 
         cmdDelete.setText("Eliminar");
         cmdDelete.setToolTipText("");
@@ -652,7 +659,7 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(cmdDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 140, -1));
+        getContentPane().add(cmdDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 140, -1));
 
         cmdEditSides.setText("<html>Modificar<br>Contornos");
         cmdEditSides.setToolTipText("");
@@ -662,7 +669,7 @@ public class IGestorPedidos extends javax.swing.JFrame {
                 cmdEditSidesActionPerformed(evt);
             }
         });
-        getContentPane().add(cmdEditSides, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 140, -1));
+        getContentPane().add(cmdEditSides, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
