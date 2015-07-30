@@ -83,7 +83,6 @@ public class ILogIn extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         cmdClientTask = new javax.swing.JButton();
         cmdLogin = new javax.swing.JButton();
-        cmdDebugWnd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inicio de Sesion");
@@ -122,13 +121,6 @@ public class ILogIn extends javax.swing.JFrame {
             }
         });
 
-        cmdDebugWnd.setText("DEBUG");
-        cmdDebugWnd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdDebugWndActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,8 +141,6 @@ public class ILogIn extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(cmdClientTask)
-                        .addGap(43, 43, 43)
-                        .addComponent(cmdDebugWnd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cmdLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -169,28 +159,12 @@ public class ILogIn extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdClientTask)
-                    .addComponent(cmdLogin)
-                    .addComponent(cmdDebugWnd))
+                    .addComponent(cmdLogin))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    // Abrir ventana de Depuracion
-    private void cmdDebugWndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDebugWndActionPerformed
-        // Crear una nueva ventana Debug Launcher
-        Dbg___WndLauncher launcher = new Dbg___WndLauncher();
-        launcher.setVisible(true);
-        CloseApp = false;
-        
-        // Establecer el Launcher como ventana activa
-        Controller.SetActiveWindow(launcher);
-        
-        // Ocultar ventana de Inicio de Sesion
-        this.setVisible(false);
-        this.dispose();
-    }//GEN-LAST:event_cmdDebugWndActionPerformed
 
     // Iniciar sesion como Cliente
     private void cmdClientTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClientTaskActionPerformed
@@ -219,7 +193,6 @@ public class ILogIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdClientTask;
-    private javax.swing.JButton cmdDebugWnd;
     private javax.swing.JButton cmdLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
