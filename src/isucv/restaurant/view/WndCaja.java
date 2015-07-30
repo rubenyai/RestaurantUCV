@@ -1,8 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015
+ *  Fabian Ramos
+ *  Ruben Maza
+ *  David Contreras
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 package isucv.restaurant.view;
 
 import javax.swing.SwingConstants;
@@ -15,25 +31,42 @@ import java.text.ParsePosition;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
+
 public class WndCaja extends javax.swing.JFrame {
 
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private final static int ORDER_COLUMN_QUANTITY = 0;
     private final static int ORDER_COLUMN_DESCRIPTION = 1;
     private final static int ORDER_COLUMN_PRICE = 2;
-    // ATRIBUTOS INTERNOS
+    
     Integer ID;
     float Total = 0;
     float Costo, Balance = 0;
     int Cantidad;
     String Descripcion;
-    /**
-     * Creates new form WndCaja
-     */
+    
+    
+    
+    /*////////////////////////////////
+    //    GET / SETS ELEMENTALES    //
+    */////////////////////////////////
+    
+    public float GetTotal() { return (Total); }
+    
+    
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
+    
     public WndCaja() {
         initComponents();
+        
         // Center Column text for the JTable
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -93,11 +126,6 @@ public class WndCaja extends javax.swing.JFrame {
 
         lblId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lblId.setText("2456");
-        lblId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lblIdActionPerformed(evt);
-            }
-        });
 
         cmdSearchOrder.setText("Buscar");
         cmdSearchOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -347,11 +375,13 @@ public class WndCaja extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
     //Boton BUSCAR
     private void cmdSearchOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSearchOrderActionPerformed
         //Se inicializa balance
         Balance=0;
         ClearFiles();
+        
         //Verificamos si es un decimal
         boolean esdecimal=false;
          for (int n=0;n<lblId.getText().length(); n ++) 
@@ -359,13 +389,14 @@ public class WndCaja extends javax.swing.JFrame {
              if(lblId.getText().charAt(n)=='.' || lblId.getText().charAt(n)==',')
              {esdecimal= true;}
          }
+         
         //Verificamos si ID esta lleno con valores validos
         if(!"".equals(lblId.getText()) && isNumeric(lblId.getText()) && esdecimal==false)
         {
             //Se busca el pedido utilizando el ID
             Integer i, j;
             //VARIABLES PARA SER USADAS CUANDO SAQUES LOS DATOS DEL ARRAYLIST
-            String Descripcion;
+            String descr;
             Pedido ActualOrder;
             ID = Integer.parseInt(lblId.getText());
             ActualOrder = Controller.FindOrder(ID);
@@ -379,29 +410,30 @@ public class WndCaja extends javax.swing.JFrame {
                 lblDireccion2.setEnabled(true);
                 cmdGenerateOrder.setEnabled(true);
                 cmdDiscardOrder.setEnabled(true);
-                Object[] Nuevo = new Object[3];
+                Object[] Nuevo;
                 //Se empieza a hacer el llenado del jTable1 que contiene el Resumen del Pedido
                 //Aqui sacamos los datos de especialidades
                 DefaultTableModel modelo = (DefaultTableModel) tableResumen.getModel();
                 modelo.setNumRows(0); // Se elimina el contenido del Table
+                
                 for (i = 0; i < ActualOrder.GetSpecialities().size(); i++)
                 {
-                    Descripcion = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetName();
+                    descr = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetName();
                     Costo = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetPrice();
                     Cantidad = ActualOrder.GetSpecialities().get(i).GetCount();
                     Balance = (Balance + (Cantidad * Costo));
-                    Nuevo = new Object[] {Cantidad, Descripcion, Costo};
+                    Nuevo = new Object[] {Cantidad, descr, Costo};
                     modelo.addRow(Nuevo);
                     ClearVariables(); //Se resetean las variables a status inciales
                     //Se añaden los contornos del plato al table
                     for (j = 0; j < ActualOrder.GetSpecialities().get(i).GetSides().size(); j++)
                     {
-                        Descripcion = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
+                        descr = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
                         Cantidad = ActualOrder.GetSpecialities().get(i).GetSides().get(j).GetCount();
                         if (Cantidad == 1)
-                            Nuevo = new Object[] {null, "          " +  Descripcion, null};
+                            Nuevo = new Object[] {null, "          " +  descr, null};
                         else
-                            Nuevo = new Object[] {Cantidad, "          " +  Descripcion, null};
+                            Nuevo = new Object[] {Cantidad, "          " +  descr, null};
 
                         modelo.addRow(Nuevo);
                         ClearVariables();
@@ -411,11 +443,11 @@ public class WndCaja extends javax.swing.JFrame {
                 //Aqui la de los contornos ADICIONALES
                 for (i = 0; i < ActualOrder.GetSides().size(); i++)
                 {
-                    Descripcion = ActualOrder.GetSides().get(i).GetSide().GetName();
+                    descr = ActualOrder.GetSides().get(i).GetSide().GetName();
                     Costo=ActualOrder.GetSides().get(i).GetSide().GetPrice();
                     Cantidad=ActualOrder.GetSides().get(i).GetCount();
                     Balance = (Balance + (Cantidad * Costo));
-                    Nuevo = new Object[] {Cantidad, Descripcion, Costo};
+                    Nuevo = new Object[] {Cantidad, descr, Costo};
                     modelo.addRow(Nuevo);
                     ClearVariables(); ////Se resetean las variables a status inciales
                 }
@@ -467,15 +499,11 @@ public class WndCaja extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_cmdGenerateOrderActionPerformed
 
-    private void lblIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblIdActionPerformed
-
     private void CalculateAmount(float Balance)
     {
         //Se encarga de calcular el Subtotal de la orden
         //Falta agregar que sume todas las columnas de precio del jtable
-        float aux = 0;
+        float aux;
         aux = (float) (Balance * 0.12);
         //Se empiezan a llenar los campos del subtotal, iva y total
         lblSubtotal.setText(String.format("%.2f", Balance) + " BsF ");
@@ -484,13 +512,10 @@ public class WndCaja extends javax.swing.JFrame {
         Total = aux;
         lblTotalaPagar.setText(String.format("%.2f", aux) + " BsF ");    
     }
+    
     private void PayForOrder()
     {//Se envian los datos del cliente al metodo payorder para poder generar  la factura
         Controller.PayOrder(lblNombre.getText(), Integer.parseInt(lblId.getText()) , lblCedula.getText(), (lblDireccion1.getText() + " " + lblDireccion2.getText()), lblTelefono.getText());
-    }
-    public float GetTotal()
-    {
-        return (Total);
     }
     
     public final void ClearFiles()
@@ -524,7 +549,6 @@ public class WndCaja extends javax.swing.JFrame {
         Costo = 0;
         Cantidad = 0;
         Descripcion = "";
-        Object Nuevo[]= {"", "", ""};
     }
     
     public static boolean isNumeric(String str)

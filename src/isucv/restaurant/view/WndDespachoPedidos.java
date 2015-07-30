@@ -1,8 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015
+ *  Fabian Ramos
+ *  Ruben Maza
+ *  David Contreras
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
@@ -12,17 +28,24 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
+
 public class WndDespachoPedidos extends javax.swing.JFrame {
 
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private final static int ORDER_COLUMN_QUANTITY = 0;
     private final static int ORDER_COLUMN_DESCRIPTION = 1;
     
-    /**
-     * Creates new form WndDespachoPedidos
-     */
+    
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
+    
     public WndDespachoPedidos() {
         initComponents();
         
@@ -35,6 +58,61 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
         tablePedidoDEspacho.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setPreferredWidth(40);
         tablePedidoDEspacho.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
         tablePedidoDEspacho.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);  
+    }
+    
+    // Busca en la cola de Pedidos Listos si existe algun pedido pendiente.
+    private void QueryNextOrder()
+    {
+        // Codigo cerrar, esto actualizara la vaina
+        if(Controller.IsNextPendingOrderAvalaible()){
+            Pedido despacho;
+            despacho=Controller.GetNextOrderReady();
+            lblOrderID.setText(Integer.toString(despacho.GetId()));
+            
+            DefaultTableModel md = (DefaultTableModel) tablePedidoDEspacho.getModel();
+            md.setRowCount(0); // Eliminar la tabla
+            //
+            String Descripcion;
+            int Cantidad;
+            Object[] Nuevo;
+
+            for (int i = 0; i < despacho.GetSpecialities().size(); i++)
+            {
+                Descripcion = despacho.GetSpecialities().get(i).GetSpeciality().GetName();
+                Cantidad = despacho.GetSpecialities().get(i).GetCount();
+                Nuevo = new Object[] {Cantidad, Descripcion};
+                md.addRow(Nuevo);
+                //Se añaden los contornos del plato al table
+                for (int j = 0; j < despacho.GetSpecialities().get(i).GetSides().size(); j++)
+                {
+                    Descripcion = despacho.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
+                    Cantidad = despacho.GetSpecialities().get(i).GetSides().get(j).GetCount();
+                    if (Cantidad == 1)
+                    {
+                        Nuevo = new Object[] {null, "          " +  Descripcion};
+                    }
+                    else
+                    {
+                        Nuevo = new Object[] {Cantidad, "          " +  Descripcion};
+                    }
+                    md.addRow(Nuevo);
+                }
+            } 
+            for (int i = 0; i < despacho.GetSides().size(); i++)
+            {
+                Descripcion = despacho.GetSides().get(i).GetSide().GetName();
+                Cantidad=despacho.GetSides().get(i).GetCount();
+                Nuevo = new Object[] {Cantidad, Descripcion};
+                md.addRow(Nuevo);
+
+            }
+        }
+        else
+        {
+            lblOrderID.setText("No hay pedidos");
+            DefaultTableModel model1 = (DefaultTableModel)this.tablePedidoDEspacho.getModel();
+            model1.setRowCount(0);
+        }
     }
 
     /**
@@ -168,67 +246,6 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
         }
         QueryNextOrder(); // Cargar el siguiente pedido listo (si existe)
     }//GEN-LAST:event_cmdDiscardActionPerformed
-
-    // Busca en la cola de Pedidos Listos si existe algun pedido pendiente.
-    private void QueryNextOrder()
-    {
-        // Codigo cerrar, esto actualizara la vaina
-        if(Controller.IsNextPendingOrderAvalaible()){
-            Pedido despacho;
-            despacho=Controller.GetNextOrderReady();
-            lblOrderID.setText(Integer.toString(despacho.GetId()));
-            
-            DefaultTableModel md = (DefaultTableModel) tablePedidoDEspacho.getModel();
-            md.setRowCount(0); // Eliminar la tabla
-            //
-            String Descripcion;
-            int Cantidad;
-            Object[] Nuevo = new Object[2];
-
-            for (int i = 0; i < despacho.GetSpecialities().size(); i++)
-            {
-                Descripcion = despacho.GetSpecialities().get(i).GetSpeciality().GetName();
-                Cantidad = despacho.GetSpecialities().get(i).GetCount();
-                Nuevo = new Object[] {Cantidad, Descripcion};
-                md.addRow(Nuevo);
-                //Se añaden los contornos del plato al table
-                for (int j = 0; j < despacho.GetSpecialities().get(i).GetSides().size(); j++)
-                {
-                    Descripcion = despacho.GetSpecialities().get(i).GetSides().get(j).GetSide().GetName();
-                    Cantidad = despacho.GetSpecialities().get(i).GetSides().get(j).GetCount();
-                    if (Cantidad == 1)
-                    {
-                        Nuevo = new Object[] {null, "          " +  Descripcion};
-                    }
-                    else
-                    {
-                        Nuevo = new Object[] {Cantidad, "          " +  Descripcion};
-                    }
-                    md.addRow(Nuevo);
-                }
-            } 
-            Cantidad = 0;
-            Descripcion = "";
-            Nuevo = new Object[] {"", ""};
-            for (int i = 0; i < despacho.GetSides().size(); i++)
-            {
-                Descripcion = despacho.GetSides().get(i).GetSide().GetName();
-                Cantidad=despacho.GetSides().get(i).GetCount();
-                Nuevo = new Object[] {Cantidad, Descripcion};
-                md.addRow(Nuevo);
-
-            }
-            Cantidad = 0;
-            Descripcion = "";
-            Nuevo = new Object[] {"", ""};
-        }
-        else
-        {
-            lblOrderID.setText("No hay pedidos");
-            DefaultTableModel model1 = (DefaultTableModel)this.tablePedidoDEspacho.getModel();
-            model1.setRowCount(0);
-        }
-    }
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdDiscard;

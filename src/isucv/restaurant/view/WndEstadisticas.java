@@ -1,15 +1,30 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015
+ *  Fabian Ramos
+ *  Ruben Maza
+ *  David Contreras
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.ContadorContorno;
 import isucv.restaurant.model.ContadorEspecialidad;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
@@ -17,17 +32,23 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
- *
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 public class WndEstadisticas extends javax.swing.JFrame {
 
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private final static int COLUMN_DESCRIPTION = 0;
     private final static int COLUMN_COUNT = 1;
     
-    /**
-     * Creates new form WndEstadisticas
-     */
+    
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
+    
     public WndEstadisticas() {
         initComponents();
         
@@ -62,10 +83,11 @@ public class WndEstadisticas extends javax.swing.JFrame {
         DefaultTableModel modelo2 = (DefaultTableModel) tableTopContornos.getModel();
         modelo2.setNumRows(0);
         
-        int i = 0, IndexToEliminate = 0, Count = 0;
+        int i, IndexToEliminate = 0, Count;
         ArrayList<ContadorEspecialidad> TopSpecialitiesCopy = new ArrayList<>(Controller.GetStats().GetTopSpecialities());
         ArrayList<ContadorContorno> TopSidesCopy = new ArrayList<>(Controller.GetStats().GetTopSides());
-        Object[] Nuevo = new Object[2];
+        Object[] Nuevo;
+        
         //Se comprueba que el ArrayList de especialidades contenga algo
         if (!TopSpecialitiesCopy.isEmpty())
         {
@@ -89,7 +111,6 @@ public class WndEstadisticas extends javax.swing.JFrame {
                 modelo.addRow(Nuevo);
                 TopSpecialitiesCopy.remove(IndexToEliminate);
                 IndexToEliminate = 0;
-                Count = 0;   
             }
         }
         
@@ -116,11 +137,22 @@ public class WndEstadisticas extends javax.swing.JFrame {
                 modelo2.addRow(Nuevo);
                 TopSidesCopy.remove(IndexToEliminate);
                 IndexToEliminate = 0;
-                Count = 0;
             }
         }    
     }
 
+    // Permite intercambiar las ventanas activas del controlador al mostrarse
+    // y ocultarse
+    @Override
+    public void setVisible(boolean value)
+    {        
+        super.setVisible(value);
+        if (!value)
+        {
+            Controller.OpenSubTask(1);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -145,9 +177,6 @@ public class WndEstadisticas extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
-            }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
             }
         });
 
@@ -292,30 +321,11 @@ public class WndEstadisticas extends javax.swing.JFrame {
          Controller.ResetStats();
          this.setVisible(false);
     }//GEN-LAST:event_cmdResetStatsActionPerformed
-//Aqui codigo al abrir la ventana estadisticas
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-
-    }//GEN-LAST:event_formWindowOpened
 
     private void cmdCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCloseActionPerformed
-        // TODO add your handling code here:
+        // Codigo al cerrar la ventana
         this.setVisible(false);
     }//GEN-LAST:event_cmdCloseActionPerformed
-
-    // Almacena la ventana principal que muestra esta ventana
-    private JFrame ParentWindow = null;
-    
-    // Permite intercambiar las ventanas activas del controlador al mostrarse
-    // y ocultarse
-    @Override
-    public void setVisible(boolean value)
-    {        
-        super.setVisible(value);
-        if (!value)
-        {
-            Controller.OpenSubTask(1);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdClose;

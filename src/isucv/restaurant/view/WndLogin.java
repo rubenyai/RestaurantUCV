@@ -1,29 +1,72 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015
+ *  Fabian Ramos
+ *  Ruben Maza
+ *  David Contreras
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
 
 /**
- *
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
+
 public class WndLogin extends javax.swing.JFrame {
 
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     // Indica si se ha cerrado la ventana de login y la app debe terminar
     // De ser falso, se debe iniciar una subventana dependiendo del rol activo
     private boolean CloseApp = true;
     
-    /**
-     * Creates new form WndLogin
-     */
+    
+    
+    /*////////////////////////////////
+    //    GET / SETS ELEMENTALES    //
+    */////////////////////////////////
+    
+    public boolean GetCloseApp() { return CloseApp; }
+    public String GetUsername() { return this.txtUsername.getText(); }
+    public String GetPassword() { return String.copyValueOf(this.txtPassword.getPassword()); }
+    
+    
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
+
     public WndLogin() {
         initComponents();
     }
 
+    // Permite establecer el valor de CloseApp en true al mostrar la ventana
+    @Override
+    public void setVisible(boolean value)
+    {
+        if (value)
+            CloseApp = true;
+        
+        super.setVisible(value);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,36 +199,8 @@ public class WndLogin extends javax.swing.JFrame {
         // Iniciar sesion con los credenciales proporcionados
         CloseApp = false;     
         
-        Controller.Login(getUsername(), getPassword());
+        Controller.Login(GetUsername(), GetPassword());
     }//GEN-LAST:event_cmdLoginActionPerformed
-
-    // Retorna el valor de CloseApp
-    public boolean getCloseApp()
-    {
-        return CloseApp;
-    }
-    
-    // Permite establecer el valor de CloseApp en true al mostrar la ventana
-    @Override
-    public void setVisible(boolean value)
-    {
-        if (value)
-            CloseApp = true;
-        
-        super.setVisible(value);
-    }
-    
-    // Obtiene el nombre de usuario escrito en el TextField
-    public String getUsername()
-    {
-        return this.txtUsername.getText();
-    }
-    
-    // Obtiene la contraseña escrita en el TextField
-    public String getPassword()
-    {
-        return String.copyValueOf(this.txtPassword.getPassword());
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdClientTask;

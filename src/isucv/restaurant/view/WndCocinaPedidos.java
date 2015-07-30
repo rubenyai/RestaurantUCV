@@ -1,8 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015
+ *  Fabian Ramos
+ *  Ruben Maza
+ *  David Contreras
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
@@ -11,17 +27,20 @@ import static isucv.restaurant.controller.Controller.GetPendingOrders;
 import isucv.restaurant.model.ContadorContorno;
 import isucv.restaurant.model.ContadorEspecialidad;
 import isucv.restaurant.model.Pedido;
-import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
+
 public class WndCocinaPedidos extends javax.swing.JFrame {
 
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private final static int ORDERS_COLUMN_ID = 0;
     private final static int ORDERS_COLUMN_DISHES = 1;
     private final static int ORDERS_COLUMN_SIDES = 2;
@@ -29,10 +48,13 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
     
     private final static int ORDER_COLUMN_QUANTITY = 0;
     private final static int ORDER_COLUMN_DESCRIPTION = 1;
+
     
-    /**
-     * Creates new form WndCocinaPedidos
-     */
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
+    
     public WndCocinaPedidos() {
         initComponents();
         
@@ -55,6 +77,19 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         tablePedido.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setPreferredWidth(40);
         tablePedido.getColumnModel().getColumn(ORDER_COLUMN_QUANTITY).setMaxWidth(80);
         tablePedido.getColumnModel().getColumn(ORDER_COLUMN_DESCRIPTION).setPreferredWidth(360);
+    }
+    
+    // Permite intercambiar las ventanas activas del controlador al mostrarse
+    // y ocultarse
+    @Override
+    public void setVisible(boolean value)
+    {        
+        super.setVisible(value);
+        
+        if (!value)
+        {
+            Controller.OpenSubTask(1);
+        }
     }
 
     /**
@@ -352,6 +387,7 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
                 lblAdditionalSides.setText("");
         }
     }
+    
     // Permite retornar a la ventana de seleccion de tarea al cerrar
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         this.setVisible(false);
@@ -415,22 +451,6 @@ public class WndCocinaPedidos extends javax.swing.JFrame {
         }
         UpdateTable(id);
     }//GEN-LAST:event_tableColaPedidosMouseClicked
-
-    // Almacena la ventana principal que muestra esta ventana
-    private JFrame ParentWindow = null;
-    
-    // Permite intercambiar las ventanas activas del controlador al mostrarse
-    // y ocultarse
-    @Override
-    public void setVisible(boolean value)
-    {        
-        super.setVisible(value);
-        
-        if (!value)
-        {
-            Controller.OpenSubTask(1);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdDespacharPedido;

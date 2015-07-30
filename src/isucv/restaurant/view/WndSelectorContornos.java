@@ -1,8 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015
+ *  Fabian Ramos
+ *  Ruben Maza
+ *  David Contreras
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
@@ -15,11 +31,15 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
+
 public class WndSelectorContornos extends javax.swing.JFrame {
 
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private final static int COLUMN_COUNT = 0;
     private final static int COLUMN_DESCRIPTION = 1;
     
@@ -38,12 +58,13 @@ public class WndSelectorContornos extends javax.swing.JFrame {
     private ArrayList<ContadorContorno> sidesLocalCache;
     private ArrayList<ContadorContorno> initialSideSelection;
     
-    /**
-     * Creates new form WndSelectorContornos
-    **/
-    public WndSelectorContornos() {
-        this(null, 0);
-    }
+    
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
+    
+    public WndSelectorContornos() { this(null, 0); }
     
     /**
      * Creates new form WndSelectorContornos with preselected Sides
@@ -127,6 +148,125 @@ public class WndSelectorContornos extends javax.swing.JFrame {
         UpdateSelectionTable(); // Actualizar tabla de seleccion y estadisticas
     }
 
+    // Incrementa en 1 el contorno descrito pot el indice especificado
+    // de la sub-pagina visible actualmente
+    private void SideUpdateActionDispatcher(int index, boolean increment) {
+        int finalIndex = index + ((pageIndex - 1) * 9);
+        finalIndex--; // Indice real del contorno a actualizar
+        
+        // Actualizar el indice en cache
+        sidesLocalCache.get(finalIndex).AddCount(increment ? 1 : -1);
+        
+        // Refrescar la tabla de contornos seleccionados
+        UpdateSelectionTable();
+        
+        // Actualizar contadores de seleccion en los Botones
+        UpdateButtonLayout(); 
+    }
+    
+    private void UpdateSelectionTable()
+    {
+        // Actualiza la Tabla de contornos seleccionados con la informacion en Cache
+        
+        int i;
+        DefaultTableModel md = (DefaultTableModel) Table.getModel();
+        md.setRowCount(0); // Eliminar el contenido de la Tabla
+        int selected = 0;
+        
+        // Agregar contornos si su cantidad es mayor a 1
+        for (i = 0; i < sidesLocalCache.size(); i++)
+        {
+            if (sidesLocalCache.get(i).GetCount() > 0)
+            {
+                md.addRow(new Object[] {sidesLocalCache.get(i).GetCount(),
+                    sidesLocalCache.get(i).GetSide().GetName()});
+                selected += sidesLocalCache.get(i).GetCount();
+            }
+        }
+        
+        // Actualizar estadisticas
+        lblSelectedSides.setText(String.valueOf(selected));
+        selectedSides = selected;
+        
+        lblNoSelection.setVisible(md.getRowCount() < 1);
+    }
+    
+    private void UpdateButtonLayout()
+    {
+        // Actualiza la disposicion y el texto de los controles de Adicion/Substraccion de Contornos
+        // agregando soporte para Paginacion y Selecciones Dinamicas
+        
+        int realIndex = 9 * (pageIndex - 1);
+        int logicalIndex;
+        
+        for (logicalIndex = 0; logicalIndex < 9; logicalIndex++)
+        {
+            JLabel title = (JLabel) controlMap.get(logicalIndex)[0];
+            JLabel price = (JLabel) controlMap.get(logicalIndex)[1];
+            JLabel count = (JLabel) controlMap.get(logicalIndex)[2];
+            JButton addButton = (JButton) controlMap.get(logicalIndex)[3];
+            JButton removeButton = (JButton) controlMap.get(logicalIndex)[4];
+            
+            if (realIndex < sidesLocalCache.size())
+            {
+                // Existe un elemento para el control
+                ContadorContorno c = sidesLocalCache.get(realIndex);
+                
+                title.setText(c.GetSide().GetName());
+                price.setText(String.format("%.2f", c.GetSide().GetPrice()) + " BsF ");
+                count.setText(String.valueOf(c.GetCount()));
+                
+                title.setVisible(true);
+                price.setVisible(true);
+                count.setVisible(true);
+                addButton.setVisible(true);
+                removeButton.setVisible(true);
+                
+                addButton.setEnabled(selectedSides < availableSides || availableSides == 0);
+                removeButton.setEnabled(c.GetCount() > 0);
+            }
+            else
+            {
+                // No existe un contorno para el control. Ocultar todos sus componentes
+                title.setVisible(false);
+                price.setVisible(false);
+                count.setVisible(false);
+                addButton.setVisible(false);
+                removeButton.setVisible(false);
+            }
+                
+            realIndex++;
+        }
+        
+        // Comprobacion de limite para realIndex
+        // (Comprobar si existen mas paginas a la derecha/izquierda)
+        cmdNextPage.setEnabled(realIndex < sidesLocalCache.size());
+        cmdPreviousPage.setEnabled(realIndex > 9);
+    }
+    
+    public ArrayList<ContadorContorno> GetSelectedSides()
+    {
+        // Obtiene una lista de los Contornos seleccionados
+        // La lista es pre-procesada desde el cache eliminando los items no seleccionados
+        
+        if (sidesLocalCache == null)
+            return null;
+        
+        ArrayList<ContadorContorno> output = new ArrayList<>();
+        
+        int i;
+        for (i = 0; i < sidesLocalCache.size(); i++) 
+        {
+            if (sidesLocalCache.get(i).GetCount() > 0)
+                output.add(sidesLocalCache.get(i));   
+        }
+        
+        if (output.size() > 0)
+            return output;
+        else
+            return null;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -618,126 +758,6 @@ public class WndSelectorContornos extends javax.swing.JFrame {
         
         SideUpdateActionDispatcher(sideIndex, false); // Llamar al metodo principal de substraccion
     }//GEN-LAST:event_ButtonRemoveActionPerformed
-    
-    // Incrementa en 1 el contorno descrito pot el indice especificado
-    // de la sub-pagina visible actualmente
-    private void SideUpdateActionDispatcher(int index, boolean increment) {
-        int finalIndex = index + ((pageIndex - 1) * 9);
-        finalIndex--; // Indice real del contorno a actualizar
-        
-        // Actualizar el indice en cache
-        sidesLocalCache.get(finalIndex).AddCount(increment ? 1 : -1);
-        
-        // Refrescar la tabla de contornos seleccionados
-        UpdateSelectionTable();
-        
-        // Actualizar contadores de seleccion en los Botones
-        UpdateButtonLayout(); 
-    }
-    
-    private void UpdateSelectionTable()
-    {
-        // Actualiza la Tabla de contornos seleccionados con la informacion en Cache
-        
-        int i;
-        DefaultTableModel md = (DefaultTableModel) Table.getModel();
-        md.setRowCount(0); // Eliminar el contenido de la Tabla
-        int selected = 0;
-        
-        // Agregar contornos si su cantidad es mayor a 1
-        for (i = 0; i < sidesLocalCache.size(); i++)
-        {
-            if (sidesLocalCache.get(i).GetCount() > 0)
-            {
-                md.addRow(new Object[] {sidesLocalCache.get(i).GetCount(),
-                    sidesLocalCache.get(i).GetSide().GetName()});
-                selected += sidesLocalCache.get(i).GetCount();
-            }
-        }
-        
-        // Actualizar estadisticas
-        lblSelectedSides.setText(String.valueOf(selected));
-        selectedSides = selected;
-        
-        lblNoSelection.setVisible(md.getRowCount() < 1);
-    }
-    
-    private void UpdateButtonLayout()
-    {
-        // Actualiza la disposicion y el texto de los controles de Adicion/Substraccion de Contornos
-        // agregando soporte para Paginacion y Selecciones Dinamicas
-        
-        int realIndex = 9 * (pageIndex - 1);
-        int logicalIndex = 0;
-        
-        for (logicalIndex = 0; logicalIndex < 9; logicalIndex++)
-        {
-            JLabel title = (JLabel) controlMap.get(logicalIndex)[0];
-            JLabel price = (JLabel) controlMap.get(logicalIndex)[1];
-            JLabel count = (JLabel) controlMap.get(logicalIndex)[2];
-            JButton addButton = (JButton) controlMap.get(logicalIndex)[3];
-            JButton removeButton = (JButton) controlMap.get(logicalIndex)[4];
-            
-            if (realIndex < sidesLocalCache.size())
-            {
-                // Existe un elemento para el control
-                ContadorContorno c = sidesLocalCache.get(realIndex);
-                
-                title.setText(c.GetSide().GetName());
-                price.setText(String.format("%.2f", c.GetSide().GetPrice()) + " BsF ");
-                count.setText(String.valueOf(c.GetCount()));
-                
-                title.setVisible(true);
-                price.setVisible(true);
-                count.setVisible(true);
-                addButton.setVisible(true);
-                removeButton.setVisible(true);
-                
-                addButton.setEnabled(selectedSides < availableSides || availableSides == 0);
-                removeButton.setEnabled(c.GetCount() > 0);
-            }
-            else
-            {
-                // No existe un contorno para el control. Ocultar todos sus componentes
-                title.setVisible(false);
-                price.setVisible(false);
-                count.setVisible(false);
-                addButton.setVisible(false);
-                removeButton.setVisible(false);
-            }
-                
-            realIndex++;
-        }
-        
-        // Comprobacion de limite para realIndex
-        // (Comprobar si existen mas paginas a la derecha/izquierda)
-        cmdNextPage.setEnabled(realIndex < sidesLocalCache.size());
-        cmdPreviousPage.setEnabled(realIndex > 9);
-    }
-    
-    public ArrayList<ContadorContorno> GetSelectedSides()
-    {
-        // Obtiene una lista de los Contornos seleccionados
-        // La lista es pre-procesada desde el cache eliminando los items no seleccionados
-        
-        if (sidesLocalCache == null)
-            return null;
-        
-        ArrayList<ContadorContorno> output = new ArrayList<>();
-        
-        int i;
-        for (i = 0; i < sidesLocalCache.size(); i++) 
-        {
-            if (sidesLocalCache.get(i).GetCount() > 0)
-                output.add(sidesLocalCache.get(i));   
-        }
-        
-        if (output.size() > 0)
-            return output;
-        else
-            return null;
-    }
-            
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table;

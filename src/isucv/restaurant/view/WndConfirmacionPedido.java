@@ -1,21 +1,40 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015
+ *  Fabian Ramos
+ *  Ruben Maza
+ *  David Contreras
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 package isucv.restaurant.view;
 
 /**
- *
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
+
 public class WndConfirmacionPedido extends javax.swing.JFrame {
 
-    /**
-     * Creates new form WndConfirmacionPedido
-     */
-    public WndConfirmacionPedido() {
+    /*//////////////
+    //   METODOS  //
+    *///////////////
+    
+    public WndConfirmacionPedido(int id) {
         initComponents();
+        
+        lblIdPedido.setText(String.valueOf(id));
     }
 
     /**
@@ -82,11 +101,6 @@ public class WndConfirmacionPedido extends javax.swing.JFrame {
     private void cmdAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAceptarActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_cmdAceptarActionPerformed
-
-    public void IDPedido(int ped)
-    {
-        lblIdPedido.setText(Integer.toString(ped));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAceptar;

@@ -165,9 +165,6 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="2456"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lblIdActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cmdSearchOrder">
       <Properties>

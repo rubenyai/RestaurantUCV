@@ -1,30 +1,53 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015
+ *  Fabian Ramos
+ *  Ruben Maza
+ *  David Contreras
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 package isucv.restaurant.view;
 
 import isucv.restaurant.controller.Controller;
 import isucv.restaurant.model.Especialidad;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
+
 public class WndEditorPlatos extends javax.swing.JFrame {
 
+    /*///////////////////////////
+    //    ATRIBUTOS INTERNOS   //
+    *////////////////////////////
+    
     private final static int COLUMN_DESCRIPTION = 0;
     private final static int COLUMN_SIDES = 1;
     private final static int COLUMN_PRICE = 2;
     private final static int COLUMN_TIME = 3;
     private final static int COLUMN_AVAILABLE = 4;
-    /**
-     * Creates new form wndPrincipal
-     */
+
+    
+    
+    /*//////////////
+    //   METODOS  //
+    *///////////////
+    
     public WndEditorPlatos() {
         initComponents();
         
@@ -65,6 +88,35 @@ public class WndEditorPlatos extends javax.swing.JFrame {
                 count++;
         }
         lblVisible.setText(count + " Especialidades Visibles en Cartelera.");
+    }
+    
+    // Actualiza las estadisticas sobre contornos totales y visibles
+    // mostradas en los Labels de la ventana
+    private void UpdateInternalStatistics()
+    {
+        lblTotal.setText(Table.getRowCount() + " Especialidades totales.");
+        int i;
+        int count = 0;
+        for (i = 0; i < Table.getRowCount(); i++)
+        {
+            Object val = Table.getModel().getValueAt(i, COLUMN_AVAILABLE);
+            if (val != null && (boolean)val)
+                count++;
+        }
+        lblVisible.setText(count + " Especialidades Visibles en Cartelera.");
+    }
+    
+    // Permite intercambiar las ventanas activas del controlador al mostrarse
+    // y ocultarse
+    @Override
+    public void setVisible(boolean value)
+    {        
+        super.setVisible(value);
+        
+        if (!value)
+        {
+            Controller.OpenSubTask(1);
+        }
     }
 
     /**
@@ -301,43 +353,9 @@ public class WndEditorPlatos extends javax.swing.JFrame {
             }
         }
         
-        // REFACTOR:change
-        //Controller.GetBillboard().SetTotalSpecialities(md.getRowCount());
         this.setVisible(false);
     }//GEN-LAST:event_cmdApplyChangesActionPerformed
-
-    // Actualiza las estadisticas sobre contornos totales y visibles
-    // mostradas en los Labels de la ventana
-    private void UpdateInternalStatistics()
-    {
-        lblTotal.setText(Table.getRowCount() + " Especialidades totales.");
-        int i;
-        int count = 0;
-        for (i = 0; i < Table.getRowCount(); i++)
-        {
-            Object val = Table.getModel().getValueAt(i, COLUMN_AVAILABLE);
-            if (val != null && (boolean)val)
-                count++;
-        }
-        lblVisible.setText(count + " Especialidades Visibles en Cartelera.");
-    }
-    
-    // Almacena la ventana principal que muestra esta ventana
-    private JFrame ParentWindow = null;
-    
-    // Permite intercambiar las ventanas activas del controlador al mostrarse
-    // y ocultarse
-    @Override
-    public void setVisible(boolean value)
-    {        
-        super.setVisible(value);
-        
-        if (!value)
-        {
-            Controller.OpenSubTask(1);
-        }
-    }
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table;
     private javax.swing.JButton cmdAdd;

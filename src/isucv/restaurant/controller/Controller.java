@@ -167,7 +167,7 @@ public final class Controller {
             
             // Determinar si se debe cerrar la aplicacion
             // Cierre por parte del usuario de la ventana Login
-            if (loginWindow.getCloseApp())
+            if (loginWindow.GetCloseApp())
             {
                 //Se guarda la billboard antes de cerrar la aplicacion
                 SaveBillboard();
@@ -417,10 +417,9 @@ public final class Controller {
         GetUnpaidOrders().add(p);
                 
         //se muestra el pop up con el nro de pedido
-        WndConfirmacionPedido confirmacion = new WndConfirmacionPedido();
+        WndConfirmacionPedido confirmacion = new WndConfirmacionPedido(id);
         confirmacion.setLocationRelativeTo(null);
         activeWindow = confirmacion;
-        confirmacion.IDPedido(id);
         activeWindow.setVisible(true);
         activeWindow= gestor;
     }
