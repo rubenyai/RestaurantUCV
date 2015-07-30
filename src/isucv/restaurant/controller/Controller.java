@@ -1,14 +1,36 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015
+ *  Fabian Ramos
+ *  Ruben Maza
+ *  David Contreras
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 package isucv.restaurant.controller;
 
 // Importar el Paquete "view" y "model" completo
 import isucv.restaurant.model.*;
 import isucv.restaurant.view.*;
-//Import necesario para manejar arraylist
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+//Import necesario para manejar ArrayList
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
@@ -31,15 +53,17 @@ import javax.swing.JFrame;
         6. Visualizador de Estadisticas
         7. Preparacion de Pedidos
 */
+
 /**
- *
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
+
 public final class Controller {
 
     /*///////////////////////////
     //    ATRIBUTOS INTERNOS   //
     *////////////////////////////
+    
     // Ventana de Inicio de Sesion
     private static WndLogin loginWindow;
         
@@ -52,7 +76,7 @@ public final class Controller {
     //Almacena las ordenes sin pagar
     private static ArrayList<Pedido> unpaidOrders;
     
-     //Almacena las ordenes pagas
+     //Almacena las ordenes pagadas
     private static ArrayList<Pedido> pendingOrders;
     
     //Cola de despacho de ordenes
@@ -64,46 +88,28 @@ public final class Controller {
     //Almacena las Estadisticas
     private static Estadisticas stats;
     
+    
+    
     /*////////////////////////////////
-    //    GET y SETS ELEMENTALES    //
+    //    GET / SETS ELEMENTALES    //
     */////////////////////////////////
     
-    public static WndLogin GetLoginWindow(){
-            return loginWindow;
-    }
+    public static WndLogin GetLoginWindow(){ return loginWindow; }
+    public static void SetLoginWindow(WndLogin newWnd) { loginWindow = newWnd; }
+    public static JFrame GetActiveWindow(){ return activeWindow; }
+    public static void SetActiveWindow(JFrame wnd){ activeWindow = wnd; }
+    public static String GetActiveUsername(){ return activeUsername; }
+    public static ArrayList<Pedido> GetUnpaidOrders(){ return unpaidOrders; }
+    public static ArrayList<Pedido> GetPendingOrders(){ return pendingOrders; }
+    public static Queue<Pedido> GetOrdersReady(){ return ordersReady; }
+    public static ArrayList<Especialidad> GetBillboardSpecialities() { return billboard.GetSpecialities(); }
+    public static void SetBillboardSpecialities(ArrayList<Especialidad> Specialities) { billboard.SetSpecialities(Specialities); }
+    public static ArrayList<Contorno> GetBillboardSides() { return billboard.GetSides(); }
+    public static void SetBillboardSides(ArrayList<Contorno> Sides) { billboard.SetSides(Sides); }
+    public static Estadisticas GetStats() { return stats; }
     
-    public static void SetLoginWindow(WndLogin newWnd) {
-        loginWindow = newWnd;
-    }
     
-    public static JFrame GetActiveWindow(){
-            return activeWindow;
-    }
     
-    public static String GetActiveUsername(){
-            return activeUsername;
-    }
-    
-    public static ArrayList<Pedido> GetUnpaidOrders(){
-            return unpaidOrders;
-    }
-    
-    public static ArrayList<Pedido> GetPendingOrders(){
-            return pendingOrders;
-    }
-    
-    public static Queue<Pedido> GetOrdersReady(){
-            return ordersReady;
-    }
-    
-    public static Cartelera GetBillboard(){
-            return billboard;
-    } 
-    
-    public static void SetActiveWindow(JFrame wnd){
-        activeWindow = wnd;
-    }
-      
     /*//////////////
     //   METODOS  //
     *///////////////
@@ -117,7 +123,7 @@ public final class Controller {
         billboard.SetSides(new ArrayList<>());
         
         //Cargamos la cartelera
-        billboard.LoadBillboard();
+        LoadBillboard();
         
         // Crear una nueva instancia de WndLogin
         loginWindow = new WndLogin();
@@ -164,7 +170,7 @@ public final class Controller {
             if (loginWindow.getCloseApp())
             {
                 //Se guarda la billboard antes de cerrar la aplicacion
-                billboard.SaveBillboard();
+                SaveBillboard();
                 break;
             }
         }
@@ -180,7 +186,9 @@ public final class Controller {
     {
         Usuarios users;
         users = new Usuarios();
-        users.LoadFile();
+        
+        users.LoadFile(); // Cargar el archivo de credenciales
+        
         boolean result = users.CheckLogIn(username, password);
         if (result)
         {
@@ -270,6 +278,7 @@ public final class Controller {
         // Permite abrir la ventana de seleccion de Contornos y retornar una lista de Contornos seleccionados
         //ADVERTENCIA!!: ESTE METODO DEBE SER LLAMADO DE MANERA ASINCRONICA UNICAMENTE
         //               PARA EVITAR CUELGUES DEL THREAD DE UI DE JAVA
+        
         WndSelectorContornos wnd = new WndSelectorContornos(SelectedSides, TotalSides);
         wnd.setVisible(true);
         
@@ -285,39 +294,113 @@ public final class Controller {
         return wnd.GetSelectedSides();
     }
     
-    //Retorno arraylist de especialidades de la cartelera
-    public static ArrayList<Especialidad> GetBillboardSpecialities()
+    // Carga los datos guardados de la Cartelera desde un archivo de Cartelera en el disco
+    public static void LoadBillboard()
     {
-        return billboard.GetSpecialities();
+        ArrayList<Especialidad> newSpecialities = new ArrayList<>();
+        ArrayList<Contorno> newSides = new ArrayList<>();
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(".//billboard.txt")))
+        {
+            String line;
+            String[] segments;
+            while ((line = br.readLine()) != null) {
+                // Comprobar si la linea es un comentario o esta vacia o no contiene comas
+                if (line.length() < 5 || line.charAt(0) == '$' || !line.contains(","))
+                    continue;
+
+                segments = line.split(",");
+
+                if (segments == null || segments.length < 1)
+                    continue;
+
+                int i;
+                for (i = 0; i < segments.length; i++)
+                    segments[i] = segments[i].trim();
+
+                if (segments.length == 5)
+                {
+                    // Especialidad
+                    // Nombre, Precio, Contornos, Tiempo, Visible
+                    Especialidad n = new Especialidad(segments[0], Float.parseFloat(segments[1]), Integer.parseInt(segments[2]), Integer.parseInt(segments[3]), (segments[4].equalsIgnoreCase("true")));
+                    Controller.GetBillboardSpecialities().add(n);
+                }
+                else if (segments.length == 3)
+                {
+                    // Contorno
+                    // Nombre, Precio, Visible
+                    Contorno n = new Contorno(segments[0], Float.parseFloat(segments[1]), (segments[2].equalsIgnoreCase("true")));
+                    Controller.GetBillboardSides().add(n);
+                }
+            }
+        } catch (IOException e) {
+                    throw new RuntimeException(e);
+	}
+         
+        // Aplicar cambios
+         SetBillboardSpecialities(newSpecialities);
+         SetBillboardSides(newSides);
+     }
+    
+    // Guarda el estado actual de la Cartelera en un archivo en disco
+    public static void SaveBillboard()
+    {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(".//billboard.txt")))
+        {
+            // Header
+            bw.write("$ Archivo de Estado de Cartelera\n");
+            bw.write("$ Aqui se almacena el ultimo estado guardado de la Cartelera de la Aplicacion\n");
+            bw.write("\n\n");
+
+            // Specialities Header
+            bw.write("$ ESPECIALIDADES\n");
+            bw.write("$  Sintaxis: Nombre, Precio, Contornos, Tiempo, Visible\n\n");
+            int i;
+
+            // Specialities
+            for (i = 0; i < Controller.GetBillboardSpecialities().size(); i++)
+            {
+                Especialidad d = Controller.GetBillboardSpecialities().get(i);
+                bw.write(d.GetName());
+                bw.write(", ");
+                bw.write(d.GetPrice().toString());
+                bw.write(", ");
+                bw.write(Integer.toString(d.GetTotalSides()));
+                bw.write(", ");
+                bw.write(Integer.toString(d.GetTime()));
+                bw.write(", ");
+                bw.write(d.GetVisible().toString());
+                bw.write("\n");
+            }
+
+            // Sides Header
+            bw.write("\n\n$ CONTORNOS\n");
+            bw.write("$  Sintaxis: Nombre, Precio, Visible\n\n");
+
+            // Sides
+            for (i = 0; i < Controller.GetBillboardSides().size(); i++)
+            {
+                Contorno d = Controller.GetBillboardSides().get(i);
+                bw.write(d.GetName());
+                bw.write(", ");
+                bw.write(d.GetPrice().toString());
+                //bw.write(", ");
+                //bw.write(d.Time.toString());
+                bw.write(", ");
+                bw.write(d.GetVisible().toString());
+                bw.write("\n");
+            }
+
+            bw.flush(); // Sincronizar con el sistema de archivos
+        } catch (IOException e) {
+                throw new RuntimeException(e);
+        }
     }
     
-    //Retorno arraylist de contornos de la cartelera
-    public static ArrayList<Contorno> GetBillboardSides()
-    {
-        return billboard.GetSides();
-    }
-    
-    //Se actualiza el arraylist de especialidades de la cartelera
-    public static void SetBillboardSpecialities(ArrayList<Especialidad> Specialities)
-    {
-        Cartelera cart;
-        cart = new Cartelera();
-        cart.UpdateSpecialities(Specialities);     
-    }
-    
-    //Se actualiza el arraylist de contornos de la cartelera
-     public static void SetBillboardSides(ArrayList<Contorno> Sides)
-    {
-        Cartelera cart;
-        cart = new Cartelera();
-        cart.UpdateSides(Sides);
-    }
-    
+    // Crear un nuevo pedido basandose en el ultimo Identificador disponible     
     public static void GenerateOrder(ArrayList<ContadorEspecialidad> Specialities,ArrayList<ContadorContorno> Sides)
     {
-        // Crear un nuevo pedido basandose en el ultimo Identificador disponible
         // Mostrar la interfaz de confirmacion de pedido y añadirlo a la cola de Pedidos Sin Pagar
-        
         WndGestorPedido gestor = (WndGestorPedido) activeWindow;
         
         int id = gestor.GetNextOrderId();
@@ -345,30 +428,29 @@ public final class Controller {
     //Busca un Order en los Arrays UnpaidOrders y PendingOrders y lo retorna
     public static Pedido FindOrder(Integer ID)
     {
-        for( int i = 0 ; i  < unpaidOrders.size(); i++)
-        {
-            if(unpaidOrders.get(i).GetId() == ID) 
-            {
-                return (unpaidOrders.get(i));
+        // UnpaidOrders
+        for (Pedido unpaidOrder : unpaidOrders) {
+            if (unpaidOrder.GetId() == ID) {
+                return unpaidOrder;
             }
         }
         
-        for (int i = 0; i < pendingOrders.size(); i++)
-        {
-            if(pendingOrders.get(i).GetId() == ID) 
-            {
-                return (pendingOrders.get(i));
+        // PendingOrders
+        for (Pedido pendingOrder : pendingOrders) {
+            if (pendingOrder.GetId() == ID) {
+                return pendingOrder;
             } 
         }
         return null; 
     }
     
     //Obtiene datos del cliente y crea factura en la ventana caja
-    public static void PayOrder(String Name,int ID,String ClientID, String BillingAdr, String PhoneNumber)
+    public static void PayOrder(String Name, int ID, String ClientID, String BillingAdr, String PhoneNumber)
     {
        Pedido ActualOrder;
        ActualOrder = FindOrder(ID);
-       //Falta validar
+       
+       // TODO: Falta validar
             ActualOrder.SetStatus("Pagado");
             Cliente Datos=new Cliente(Name,ClientID,BillingAdr,PhoneNumber);
             WndCaja Caja = (WndCaja) activeWindow;
@@ -394,43 +476,32 @@ public final class Controller {
     }
     
     //Verifica si existe alguna orden en OrdersReady
-    public static boolean IsNextPendingOrderAvalaible()
-    {
-        return ordersReady.isEmpty()==false;
-    }
+    public static boolean IsNextPendingOrderAvalaible() { return !ordersReady.isEmpty(); }
     
     //Obtiene la proxima orden por despachar por el mesonero
     //Desencolando el pedido de OrdersReady
-    public static Pedido GetNextOrderReady()
-    {
-        return ordersReady.poll();
-    }
+    public static Pedido GetNextOrderReady() { return ordersReady.poll(); }
     
+    // Ubica un pedido en la lista UnpaidOrders o PendingOrders y lo elimina
     public static void RemoveOrder(int ID)
     {
+        // Unpaid Orders
         for( int i = 0 ; i  < unpaidOrders.size(); i++){
             if(unpaidOrders.get(i).GetId() == ID) {
-                   unpaidOrders.remove(i);
+                unpaidOrders.remove(i);
+                return; // Cortocircuitar ciclo
             }
         } 
         
+        // Pending Orders
         for( int i = 0 ; i  < pendingOrders.size(); i++){
             if(pendingOrders.get(i).GetId() == ID) {
-                       pendingOrders.remove(i);
+                pendingOrders.remove(i);
+                return; // Cortocircuitar ciclo
             }
         }
     }
      
-    // Obtiene las Estadisticas de la sesion actual
-    public static Estadisticas GetStats()
-    {
-        return stats;
-    }
-    
     //Reinicia las estadisticas
-    //Vuelve a crear el arraylist de 0
-    public static void ResetStats()
-    {
-        stats.Reset();
-    }
+    public static void ResetStats() { stats.Reset(); }
 }

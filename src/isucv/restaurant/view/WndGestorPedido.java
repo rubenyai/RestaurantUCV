@@ -593,7 +593,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         addedSides = new ArrayList<>();
         addedSpecialities = new ArrayList<>();
         int i;
-        ArrayList<Especialidad> billboardSpecialities = Controller.GetBillboard().GetSpecialities();
+        ArrayList<Especialidad> billboardSpecialities = Controller.GetBillboardSpecialities();
         for (i = 0; i < billboardSpecialities.size(); i++)
         {
             // Agregar el contorno al cache
@@ -945,7 +945,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
                 
         // Copiar contornos actuales (solo visibles)
         int i;
-        ArrayList<Especialidad> billboardSpecialities = Controller.GetBillboard().GetSpecialities();
+        ArrayList<Especialidad> billboardSpecialities = Controller.GetBillboardSpecialities();
         for (i = 0; i < billboardSpecialities.size(); i++)
         {
             // Agregar el contorno al cache

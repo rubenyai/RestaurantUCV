@@ -12,12 +12,12 @@ $      3 = Mesonero
 
 $ CHEFS
 chef,angel_lozano,1
-chef1,chef2,1
+chef1,chef1,1
 
 $ CAJEROS
 caja,soyuncajero,2
-caja1,caja2,2
+caja1,caja1,2
 
 $ MESONEROS
 mesonero12,mesa,3
-mesonero1,mesonero2,3
+mesonero1,mesonero1,3

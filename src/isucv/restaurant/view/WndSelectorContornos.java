@@ -86,7 +86,7 @@ public class WndSelectorContornos extends javax.swing.JFrame {
         
         // Copiar contornos actuales (solo visibles)
         int i;
-        ArrayList<Contorno> billboardSides = Controller.GetBillboard().GetSides();
+        ArrayList<Contorno> billboardSides = Controller.GetBillboardSides();
         for (i = 0; i < billboardSides.size(); i++)
         {
             // Agregar el contorno al cache

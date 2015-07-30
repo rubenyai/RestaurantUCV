@@ -227,12 +227,12 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cmdBillboardLoadFromFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardLoadFromFileActionPerformed
-        Controller.GetBillboard().LoadBillboard();
+        Controller.LoadBillboard();
         cmdCreateDebugOrder.setEnabled(true);
     }//GEN-LAST:event_cmdBillboardLoadFromFileActionPerformed
 
     private void cmdBillboardSaveToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBillboardSaveToFileActionPerformed
-        Controller.GetBillboard().SaveBillboard();
+        Controller.SaveBillboard();
     }//GEN-LAST:event_cmdBillboardSaveToFileActionPerformed
 
     private void cmdCreateDebugOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCreateDebugOrderActionPerformed
@@ -242,23 +242,23 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         p.SetId(Integer.parseInt(txtOrderId.getText()));
         
         // Speciality=Pizza 4 Estaciones (x2)
-        ContadorEspecialidad sp = new ContadorEspecialidad(Controller.GetBillboard().GetSpecialities().get(2));
+        ContadorEspecialidad sp = new ContadorEspecialidad(Controller.GetBillboardSpecialities().get(2));
         sp.SetCount(2);
         p.GetSpecialities().add(sp);
         
         // Speciality=Pizza Margarita (x1)
-        sp = new ContadorEspecialidad(Controller.GetBillboard().GetSpecialities().get(0));
+        sp = new ContadorEspecialidad(Controller.GetBillboardSpecialities().get(0));
         sp.SetCount(1);
         p.GetSpecialities().add(sp);
         
         // Speciality=Pollo a la Canasta (x1) {Yuca Frita, Papas al Vapor}
         ArrayList<ContadorContorno> sides = new ArrayList<>();
-        sp = new ContadorEspecialidad(Controller.GetBillboard().GetSpecialities().get(3));
+        sp = new ContadorEspecialidad(Controller.GetBillboardSpecialities().get(3));
         sp.AddCount(1);
-        ContadorContorno cont = new ContadorContorno(Controller.GetBillboard().GetSides().get(2));
+        ContadorContorno cont = new ContadorContorno(Controller.GetBillboardSides().get(2));
         cont.SetCount(1);
         sides.add(cont);
-        cont = new ContadorContorno(Controller.GetBillboard().GetSides().get(1));
+        cont = new ContadorContorno(Controller.GetBillboardSides().get(1));
         cont.SetCount(1);
         sides.add(cont);
         sp.SetSides(sides);
@@ -266,16 +266,16 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
                 
         // Speciality=Pollo a la Canasta (x1) {Papas al Vapor (x2)}
         sides = new ArrayList<>();
-        sp = new ContadorEspecialidad(Controller.GetBillboard().GetSpecialities().get(3));
+        sp = new ContadorEspecialidad(Controller.GetBillboardSpecialities().get(3));
         sp.AddCount(1);
-        cont = new ContadorContorno(Controller.GetBillboard().GetSides().get(1));
+        cont = new ContadorContorno(Controller.GetBillboardSides().get(1));
         cont.SetCount(2);
         sides.add(cont);
         sp.SetSides(sides);
         p.GetSpecialities().add(sp);
         
         // Additional Side=Papas al Vapor (x1)
-        cont = new ContadorContorno(Controller.GetBillboard().GetSides().get(1));
+        cont = new ContadorContorno(Controller.GetBillboardSides().get(1));
         cont.SetCount(1);
         p.GetSides().add(cont);
         

@@ -174,22 +174,21 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdEditSpecialitiesActionPerformed
 
     private void cmdBreakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBreakActionPerformed
-        ArrayList<Especialidad> k_backingField__Specialities = Controller.GetBillboard().GetSpecialities();
-        ArrayList<Contorno> k_backingField__Sides = Controller.GetBillboard().GetSides();
+        ArrayList<Especialidad> k_backingField__Specialities = Controller.GetBillboardSpecialities();
+        ArrayList<Contorno> k_backingField__Sides = Controller.GetBillboardSides();
         
         int i = 0;
         i = 0 + 0;
     }//GEN-LAST:event_cmdBreakActionPerformed
-
     private void cmdRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRefreshActionPerformed
         // Specialities
         DefaultListModel<String> contents = new DefaultListModel<>();
         
         int i;
         String line;
-        for (i = 0; i < Controller.GetBillboard().GetSpecialities().size(); i++)
+        for (i = 0; i < Controller.GetBillboardSpecialities().size(); i++)
         {
-            Especialidad e = Controller.GetBillboard().GetSpecialities().get(i);
+            Especialidad e = Controller.GetBillboardSpecialities().get(i);
             line = (e.GetVisible()? "V " : "  ");
             line += e.GetTotalSides() + "  [";
             line += e.GetTime() + " min]  ";
@@ -204,9 +203,9 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
         // Sides
         contents = new DefaultListModel<>();
 
-        for (i = 0; i < Controller.GetBillboard().GetSides().size(); i++)
+        for (i = 0; i < Controller.GetBillboardSides().size(); i++)
         {
-            Contorno e = Controller.GetBillboard().GetSides().get(i);
+            Contorno e = Controller.GetBillboardSides().get(i);
             line = (e.GetVisible()? "V  " : "   ");
             line += e.GetName() + "  (";
             line += Float.toString(e.GetPrice()) + " BsF)";

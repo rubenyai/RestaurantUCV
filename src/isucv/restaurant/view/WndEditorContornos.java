@@ -36,14 +36,14 @@ public class WndEditorContornos extends javax.swing.JFrame {
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         md.setRowCount(0); // Eliminar el contenido del Table
         
-        if (Controller.GetBillboard().GetSides().size() > 0)
+        if (Controller.GetBillboardSides().size() > 0)
         {
             int i;
-            for (i = 0; i < Controller.GetBillboard().GetSides().size(); i++)
+            for (i = 0; i < Controller.GetBillboardSides().size(); i++)
             {
                 // Celdas:
                 // Nombre, Precio, Visible
-                Contorno e = Controller.GetBillboard().GetSides().get(i);
+                Contorno e = Controller.GetBillboardSides().get(i);
                 
                 md.addRow(new Object[] {e.GetName(), e.GetPrice(), e.GetVisible()});
             }
@@ -274,7 +274,7 @@ public class WndEditorContornos extends javax.swing.JFrame {
         // Elimina el contenido actual de la cartelera (Contornos)
         // y lo sustituye con el almacenado en esta ventana
         
-        Controller.GetBillboard().SetSides(new ArrayList<>());
+        Controller.SetBillboardSides(new ArrayList<>());
         
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         if (md.getRowCount() > 0)
@@ -295,11 +295,12 @@ public class WndEditorContornos extends javax.swing.JFrame {
                 if (d.GetPrice() == null)
                     d.SetPrice(0.0f);
                 
-                Controller.GetBillboard().GetSides().add(d);
+                Controller.GetBillboardSides().add(d);
             }
         }
         
-        Controller.GetBillboard().SetTotalSides(md.getRowCount());
+        // REFACTOR:change
+        //Controller.GetBillboard().SetTotalSides(md.getRowCount());
         this.setVisible(false);
     }//GEN-LAST:event_cmdApplyChangesActionPerformed
 

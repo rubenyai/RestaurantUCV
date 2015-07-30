@@ -39,14 +39,14 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         md.setRowCount(0); // Eliminar el contenido del Table
         
-        if (Controller.GetBillboard().GetSpecialities().size() > 0)
+        if (Controller.GetBillboardSpecialities().size() > 0)
         {
             int i;
-            for (i = 0; i < Controller.GetBillboard().GetSpecialities().size(); i++)
+            for (i = 0; i < Controller.GetBillboardSpecialities().size(); i++)
             {
                 // Celdas:
                 // Nombre, Contornos, Precio, Tiempo, Visible
-                Especialidad e = Controller.GetBillboard().GetSpecialities().get(i);
+                Especialidad e = Controller.GetBillboardSpecialities().get(i);
                 
                 md.addRow(new Object[] {e.GetName(), e.GetTotalSides(), e.GetPrice(), e.GetTime(), e.GetVisible()});
             }
@@ -280,7 +280,7 @@ public class WndEditorPlatos extends javax.swing.JFrame {
         // Elimina el contenido actual de la cartelera (Especialidades)
         // y lo sustituye con el almacenado en esta ventana
         
-        Controller.GetBillboard().SetSpecialities(new ArrayList<>());
+        Controller.SetBillboardSpecialities(new ArrayList<>());
         
         DefaultTableModel md = (DefaultTableModel) Table.getModel();
         if (md.getRowCount() > 0)
@@ -297,11 +297,12 @@ public class WndEditorPlatos extends javax.swing.JFrame {
                     (Integer)md.getValueAt(i, 3),
                     (Boolean)md.getValueAt(i, 4));
                 
-                Controller.GetBillboard().GetSpecialities().add(d);
+                Controller.GetBillboardSpecialities().add(d);
             }
         }
         
-        Controller.GetBillboard().SetTotalSpecialities(md.getRowCount());
+        // REFACTOR:change
+        //Controller.GetBillboard().SetTotalSpecialities(md.getRowCount());
         this.setVisible(false);
     }//GEN-LAST:event_cmdApplyChangesActionPerformed
 
