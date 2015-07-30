@@ -25,14 +25,16 @@ package isucv.restaurant.view;
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 
-public class WndLoginFallido extends javax.swing.JFrame {
+public class IPedido extends javax.swing.JFrame {
 
     /*//////////////
     //   METODOS  //
     *///////////////
     
-    public WndLoginFallido() {
+    public IPedido(int id) {
         initComponents();
+        
+        lblIdPedido.setText(String.valueOf(id));
     }
 
     /**
@@ -44,68 +46,65 @@ public class WndLoginFallido extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTextError = new javax.swing.JLabel();
-        lblTextDescripcion = new javax.swing.JLabel();
-        cmdOk = new javax.swing.JButton();
+        cmdAceptar = new javax.swing.JButton();
+        lblTextSuPedidoes = new javax.swing.JLabel();
+        lblIdPedido = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Credenciales Invalidos");
+        setTitle("Identificador de Pedido");
         setResizable(false);
 
-        lblTextError.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblTextError.setText("Error de Inicio de sesión");
-
-        lblTextDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblTextDescripcion.setText("El usuario o contraseña introducidos no son correctos.");
-
-        cmdOk.setText("Aceptar");
-        cmdOk.addActionListener(new java.awt.event.ActionListener() {
+        cmdAceptar.setText("Aceptar");
+        cmdAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdOkActionPerformed(evt);
+                cmdAceptarActionPerformed(evt);
             }
         });
+
+        lblTextSuPedidoes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTextSuPedidoes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTextSuPedidoes.setText("Su pedido es el número:");
+
+        lblIdPedido.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lblIdPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIdPedido.setText("2456");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblIdPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblTextError)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTextSuPedidoes, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTextDescripcion)
-                        .addGap(45, 45, 45))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cmdOk, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(152, 152, 152))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cmdAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(lblTextError)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTextSuPedidoes, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lblTextDescripcion)
-                .addGap(18, 18, 18)
-                .addComponent(cmdOk)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(lblIdPedido)
+                .addGap(30, 30, 30)
+                .addComponent(cmdAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmdOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdOkActionPerformed
-        // Cerrar la ventana
+    private void cmdAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAceptarActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_cmdOkActionPerformed
+    }//GEN-LAST:event_cmdAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdOk;
-    private javax.swing.JLabel lblTextDescripcion;
-    private javax.swing.JLabel lblTextError;
+    private javax.swing.JButton cmdAceptar;
+    private javax.swing.JLabel lblIdPedido;
+    private javax.swing.JLabel lblTextSuPedidoes;
     // End of variables declaration//GEN-END:variables
 }

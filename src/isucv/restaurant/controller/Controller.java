@@ -65,7 +65,7 @@ public final class Controller {
     *////////////////////////////
     
     // Ventana de Inicio de Sesion
-    private static WndLogin loginWindow;
+    private static ILogIn loginWindow;
         
     // Ventana de Rol o Subrol Activa
     private static JFrame activeWindow;
@@ -94,8 +94,8 @@ public final class Controller {
     //    GET / SETS ELEMENTALES    //
     */////////////////////////////////
     
-    public static WndLogin GetLoginWindow(){ return loginWindow; }
-    public static void SetLoginWindow(WndLogin newWnd) { loginWindow = newWnd; }
+    public static ILogIn GetLoginWindow(){ return loginWindow; }
+    public static void SetLoginWindow(ILogIn newWnd) { loginWindow = newWnd; }
     public static JFrame GetActiveWindow(){ return activeWindow; }
     public static void SetActiveWindow(JFrame wnd){ activeWindow = wnd; }
     public static String GetActiveUsername(){ return activeUsername; }
@@ -125,8 +125,8 @@ public final class Controller {
         //Cargamos la cartelera
         LoadBillboard();
         
-        // Crear una nueva instancia de WndLogin
-        loginWindow = new WndLogin();
+        // Crear una nueva instancia de ILogIn
+        loginWindow = new ILogIn();
         loginWindow.setLocationRelativeTo(null); // Centrar Ventana
         
         // Inicializar las Colas y Listas de Pedidos
@@ -200,18 +200,18 @@ public final class Controller {
             switch (taskId)
             {
                 case 1: // Chef
-                    WndSelectorTareas taskSelector = new WndSelectorTareas();
+                    ISelectorTarea taskSelector = new ISelectorTarea();
                     taskSelector.setLocationRelativeTo(null);
                     taskSelector.setUsername(username);
                     activeWindow = taskSelector;
                     break;
                 case 2: // Caja
-                    WndCaja caja = new WndCaja();
+                    ICaja caja = new ICaja();
                     caja.setLocationRelativeTo(null);
                     activeWindow = caja;
                     break;
                 case 3: // Mesonero
-                    WndDespachoPedidos mesonero = new WndDespachoPedidos();
+                    IDespachoPedidos mesonero = new IDespachoPedidos();
                     mesonero.setLocationRelativeTo(null);
                     activeWindow = mesonero;
                     break;
@@ -219,14 +219,14 @@ public final class Controller {
         }
         else if(username==null && password==null)
         {
-            WndGestorPedido gestor = new WndGestorPedido();
+            IGestorPedidos gestor = new IGestorPedidos();
             gestor.setLocationRelativeTo(null);
             activeWindow = gestor;
         }
         else
         {
             // Mostrar ventana de Error de Inicio de Sesion
-            WndLoginFallido loginError = new WndLoginFallido();
+            IErrorLogIn loginError = new IErrorLogIn();
             loginError.setLocationRelativeTo(null);
             activeWindow = loginError;
         }
@@ -245,19 +245,19 @@ public final class Controller {
         switch (subTask)
         {
             case 1: // Regresar al selector de Tareas
-                wnd = new WndSelectorTareas(activeUsername);
+                wnd = new ISelectorTarea(activeUsername);
                 break;
             case 4: // Especialidades
-                wnd = new WndEditorPlatos();
+                wnd = new IEditorPlatos();
                 break;
             case 5: // Contornos
-                wnd = new WndEditorContornos();
+                wnd = new IEditorContornos();
                 break;
             case 6: // Estadisticas
-                wnd = new WndEstadisticas();
+                wnd = new IEstadisticas();
                 break;
             case 7: // Preparacion de Pedidos
-                wnd = new WndCocinaPedidos();
+                wnd = new ICocina();
                 break;
             default: // Ignorar
                 return;
@@ -279,7 +279,7 @@ public final class Controller {
         //ADVERTENCIA!!: ESTE METODO DEBE SER LLAMADO DE MANERA ASINCRONICA UNICAMENTE
         //               PARA EVITAR CUELGUES DEL THREAD DE UI DE JAVA
         
-        WndSelectorContornos wnd = new WndSelectorContornos(selectedSides, TotalSides);
+        ISelectorContornos wnd = new ISelectorContornos(selectedSides, TotalSides);
         wnd.setVisible(true);
         
         while (wnd.isVisible())
@@ -401,7 +401,7 @@ public final class Controller {
     public static void GenerateOrder(ArrayList<ContadorEspecialidad> specialities,ArrayList<ContadorContorno> sides)
     {
         // Mostrar la interfaz de confirmacion de pedido y añadirlo a la cola de Pedidos Sin Pagar
-        WndGestorPedido gestor = (WndGestorPedido) activeWindow;
+        IGestorPedidos gestor = (IGestorPedidos) activeWindow;
         
         int id = gestor.GetNextOrderId();
         gestor.IncrementNextOrderId();
@@ -417,7 +417,7 @@ public final class Controller {
         GetUnpaidOrders().add(p);
                 
         //se muestra el pop up con el nro de pedido
-        WndConfirmacionPedido confirmacion = new WndConfirmacionPedido(id);
+        IPedido confirmacion = new IPedido(id);
         confirmacion.setLocationRelativeTo(null);
         activeWindow = confirmacion;
         activeWindow.setVisible(true);
@@ -446,18 +446,17 @@ public final class Controller {
     //Obtiene datos del cliente y crea factura en la ventana caja
     public static void PayOrder(String name, int id, String clientID, String billingAdr, String phoneNumber)
     {
-       Pedido ActualOrder;
-       ActualOrder = FindOrder(id);
+        Pedido ActualOrder;
+        ActualOrder = FindOrder(id);
        
-       // TODO: Falta validar
-            ActualOrder.SetStatus("Pagado");
-            Cliente Datos=new Cliente(name,clientID,billingAdr,phoneNumber);
-            WndCaja Caja = (WndCaja) activeWindow;
-            Factura f= new Factura(ActualOrder,Datos, Caja.GetTotal());
-            //Remove the actual order of unpaid
-            RemoveOrder(id);
-            //Agregamos a la lista del chef
-            pendingOrders.add(ActualOrder);
+        ActualOrder.SetStatus("Pagado");
+        Cliente Datos=new Cliente(name,clientID,billingAdr,phoneNumber);
+        ICaja Caja = (ICaja) activeWindow;
+        Factura f= new Factura(ActualOrder,Datos, Caja.GetTotal());
+        //Remove the actual order of unpaid
+        RemoveOrder(id);
+        //Agregamos a la lista del chef
+        pendingOrders.add(ActualOrder);
     }
         
     //Mueve el pedido de PendingdOrders a OrdersReady

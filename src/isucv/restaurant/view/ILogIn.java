@@ -27,7 +27,7 @@ import isucv.restaurant.controller.Controller;
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 
-public class WndLogin extends javax.swing.JFrame {
+public class ILogIn extends javax.swing.JFrame {
 
     /*///////////////////////////
     //    ATRIBUTOS INTERNOS   //
@@ -53,7 +53,7 @@ public class WndLogin extends javax.swing.JFrame {
     //   METODOS  //
     *///////////////
 
-    public WndLogin() {
+    public ILogIn() {
         initComponents();
     }
 

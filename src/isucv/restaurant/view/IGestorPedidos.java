@@ -35,7 +35,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 
-public class WndGestorPedido extends javax.swing.JFrame {
+public class IGestorPedidos extends javax.swing.JFrame {
         
     /*///////////////////////////
     //    ATRIBUTOS INTERNOS   //
@@ -106,7 +106,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
     //   METODOS  //
     *///////////////
     
-    public WndGestorPedido() {
+    public IGestorPedidos() {
         initComponents();
         this.setSize(this.getWidth() + 10, this.getHeight() + 10); // Incrementar el tamaño de la ventana
                 

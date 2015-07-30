@@ -34,7 +34,7 @@ import javax.swing.table.TableRowSorter;
 /**
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
-public class WndEstadisticas extends javax.swing.JFrame {
+public class IEstadisticas extends javax.swing.JFrame {
 
     /*///////////////////////////
     //    ATRIBUTOS INTERNOS   //
@@ -49,7 +49,7 @@ public class WndEstadisticas extends javax.swing.JFrame {
     //   METODOS  //
     *///////////////
     
-    public WndEstadisticas() {
+    public IEstadisticas() {
         initComponents();
         
         // Adjust Table's Column width

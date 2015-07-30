@@ -31,7 +31,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 
-public class WndDespachoPedidos extends javax.swing.JFrame {
+public class IDespachoPedidos extends javax.swing.JFrame {
 
     /*///////////////////////////
     //    ATRIBUTOS INTERNOS   //
@@ -46,7 +46,7 @@ public class WndDespachoPedidos extends javax.swing.JFrame {
     //   METODOS  //
     *///////////////
     
-    public WndDespachoPedidos() {
+    public IDespachoPedidos() {
         initComponents();
         
         // Center Column text for both JTables

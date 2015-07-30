@@ -162,13 +162,13 @@ public class Dbg___WndBillboardDebugger extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdEditSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSidesActionPerformed
-        WndEditorContornos wnd = new WndEditorContornos();
+        IEditorContornos wnd = new IEditorContornos();
         wnd.setLocationRelativeTo(null);
         wnd.setVisible(true);
     }//GEN-LAST:event_cmdEditSidesActionPerformed
 
     private void cmdEditSpecialitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditSpecialitiesActionPerformed
-        WndEditorPlatos wnd = new WndEditorPlatos();
+        IEditorPlatos wnd = new IEditorPlatos();
         wnd.setLocationRelativeTo(null);
         wnd.setVisible(true);
     }//GEN-LAST:event_cmdEditSpecialitiesActionPerformed

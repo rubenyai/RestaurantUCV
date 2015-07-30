@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 
-public class WndSelectorContornos extends javax.swing.JFrame {
+public class ISelectorContornos extends javax.swing.JFrame {
 
     /*///////////////////////////
     //    ATRIBUTOS INTERNOS   //
@@ -64,14 +64,14 @@ public class WndSelectorContornos extends javax.swing.JFrame {
     //   METODOS  //
     *///////////////
     
-    public WndSelectorContornos() { this(null, 0); }
+    public ISelectorContornos() { this(null, 0); }
     
     /**
      * Creates new form WndSelectorContornos with preselected Sides
      * @param baseSides
      * @param maxSides
      */
-    public WndSelectorContornos(ArrayList<ContadorContorno> baseSides, int maxSides) {
+    public ISelectorContornos(ArrayList<ContadorContorno> baseSides, int maxSides) {
         initComponents();
         
         this.setLocationRelativeTo(null); // Centrar ventana
@@ -336,7 +336,6 @@ public class WndSelectorContornos extends javax.swing.JFrame {
         cmdOk = new javax.swing.JButton();
 
         setTitle("Selector de Contornos");
-        setPreferredSize(new java.awt.Dimension(575, 590));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

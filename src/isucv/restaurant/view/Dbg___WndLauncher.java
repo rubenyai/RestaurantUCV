@@ -285,7 +285,7 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
 
     private void cmdSelectSidesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSelectSidesActionPerformed
         // Seleccionar contornos
-        WndSelectorContornos wnd = new WndSelectorContornos(sideSelectorCache, Integer.parseInt(txtSideMaxCount.getText()));
+        ISelectorContornos wnd = new ISelectorContornos(sideSelectorCache, Integer.parseInt(txtSideMaxCount.getText()));
         wnd.setVisible(true);
         
         // Lambda Expression: New Background Thread for Callback
@@ -304,7 +304,7 @@ public class Dbg___WndLauncher extends javax.swing.JFrame {
         t.start();
     }//GEN-LAST:event_cmdSelectSidesActionPerformed
 
-    private void WaitForSideSelection_Background(WndSelectorContornos wnd)
+    private void WaitForSideSelection_Background(ISelectorContornos wnd)
     {
         // Seleccionar contornos (Internal Thread)
         while (wnd.isVisible())

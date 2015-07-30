@@ -27,7 +27,7 @@ import isucv.restaurant.controller.Controller;
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 
-public class WndSelectorTareas extends javax.swing.JFrame {
+public class ISelectorTarea extends javax.swing.JFrame {
     
     /*////////////////////////////////
     //    GET / SETS ELEMENTALES    //
@@ -42,14 +42,14 @@ public class WndSelectorTareas extends javax.swing.JFrame {
     //   METODOS  //
     *///////////////
     
-    public WndSelectorTareas() {
+    public ISelectorTarea() {
         initComponents();
     }
     
     /*
      * Crea una nueva instancia de la Ventana especificando el nombre de Usuario
      */
-    public WndSelectorTareas(String username)
+    public ISelectorTarea(String username)
     {
         this();
         setUsername(username);

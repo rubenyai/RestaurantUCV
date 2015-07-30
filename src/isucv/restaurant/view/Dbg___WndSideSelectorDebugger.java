@@ -117,7 +117,7 @@ public class Dbg___WndSideSelectorDebugger extends javax.swing.JFrame {
         // ABRIR LA VENTANA DE SELECCION DE CONTORNOS Y RECUPERAR LOS RESULTADOS
         
         int maxSides = Integer.getInteger(txtMaximumSides.getText());
-        WndSelectorContornos wnd = new WndSelectorContornos();
+        ISelectorContornos wnd = new ISelectorContornos();
         // FALTA ESTABLECER LA CANTIDAD MAXIMA DE CONTORNOS POSIBLES
         // DENTRO DE LA INSTANCIA DE LA CLASE SelectorContornos A TRAVES
         // DE UN ATRIBUTO DE DICHA CLASE

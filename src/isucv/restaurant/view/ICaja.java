@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 
-public class WndCaja extends javax.swing.JFrame {
+public class ICaja extends javax.swing.JFrame {
 
     /*///////////////////////////
     //    ATRIBUTOS INTERNOS   //
@@ -64,7 +64,7 @@ public class WndCaja extends javax.swing.JFrame {
     //   METODOS  //
     *///////////////
     
-    public WndCaja() {
+    public ICaja() {
         initComponents();
         
         // Center Column text for the JTable

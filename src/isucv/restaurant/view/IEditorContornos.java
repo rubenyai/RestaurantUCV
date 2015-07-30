@@ -30,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Equipo Ingenieria de Software <David Contreras, Fabian Ramos, Ruben Maza>
  */
 
-public class WndEditorContornos extends javax.swing.JFrame {
+public class IEditorContornos extends javax.swing.JFrame {
 
     /*///////////////////////////
     //    ATRIBUTOS INTERNOS   //
@@ -46,7 +46,7 @@ public class WndEditorContornos extends javax.swing.JFrame {
     //   METODOS  //
     *///////////////
     
-    public WndEditorContornos() {
+    public IEditorContornos() {
         initComponents();
         
         // Establecer ancho de columnas para la Tabla
