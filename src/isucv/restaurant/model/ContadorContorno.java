@@ -50,11 +50,11 @@ public class ContadorContorno
     //   METODOS  //
     *///////////////
     
-    public ContadorContorno(Contorno Side)
+    public ContadorContorno(Contorno side)
     {
-        this.side = Side;
+        this.side = side;
         count = 0;
     }
     
-    public void AddCount(Integer Count) { this.count += Count; }
+    public void AddCount(Integer Count) { this.count += count; }
 }

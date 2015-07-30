@@ -53,12 +53,12 @@ public class Cliente
     //   METODOS  //
     *///////////////
     
-    public Cliente(String N, String ID, String Addr, String P)
+    public Cliente(String n, String id, String addr, String p)
     {
-        name = N;
-        this.id = ID;
-        billingaddr = Addr;
-        phonenumber = P;
+        name = n;
+        this.id = id;
+        billingaddr = addr;
+        phonenumber = p;
     }
 }
 

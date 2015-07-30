@@ -103,9 +103,9 @@ public final class Controller {
     public static ArrayList<Pedido> GetPendingOrders(){ return pendingOrders; }
     public static Queue<Pedido> GetOrdersReady(){ return ordersReady; }
     public static ArrayList<Especialidad> GetBillboardSpecialities() { return billboard.GetSpecialities(); }
-    public static void SetBillboardSpecialities(ArrayList<Especialidad> Specialities) { billboard.SetSpecialities(Specialities); }
+    public static void SetBillboardSpecialities(ArrayList<Especialidad> specialities) { billboard.SetSpecialities(specialities); }
     public static ArrayList<Contorno> GetBillboardSides() { return billboard.GetSides(); }
-    public static void SetBillboardSides(ArrayList<Contorno> Sides) { billboard.SetSides(Sides); }
+    public static void SetBillboardSides(ArrayList<Contorno> sides) { billboard.SetSides(sides); }
     public static Estadisticas GetStats() { return stats; }
     
     
@@ -273,13 +273,13 @@ public final class Controller {
         prevWnd.dispose();
     }
                
-    public static ArrayList<ContadorContorno> ChooseSides(int TotalSides,ArrayList<ContadorContorno> SelectedSides)
+    public static ArrayList<ContadorContorno> chooseSides(int TotalSides,ArrayList<ContadorContorno> selectedSides)
     {
         // Permite abrir la ventana de seleccion de Contornos y retornar una lista de Contornos seleccionados
         //ADVERTENCIA!!: ESTE METODO DEBE SER LLAMADO DE MANERA ASINCRONICA UNICAMENTE
         //               PARA EVITAR CUELGUES DEL THREAD DE UI DE JAVA
         
-        WndSelectorContornos wnd = new WndSelectorContornos(SelectedSides, TotalSides);
+        WndSelectorContornos wnd = new WndSelectorContornos(selectedSides, TotalSides);
         wnd.setVisible(true);
         
         while (wnd.isVisible())
@@ -398,7 +398,7 @@ public final class Controller {
     }
     
     // Crear un nuevo pedido basandose en el ultimo Identificador disponible     
-    public static void GenerateOrder(ArrayList<ContadorEspecialidad> Specialities,ArrayList<ContadorContorno> Sides)
+    public static void GenerateOrder(ArrayList<ContadorEspecialidad> specialities,ArrayList<ContadorContorno> sides)
     {
         // Mostrar la interfaz de confirmacion de pedido y añadirlo a la cola de Pedidos Sin Pagar
         WndGestorPedido gestor = (WndGestorPedido) activeWindow;
@@ -409,8 +409,8 @@ public final class Controller {
         // Crear el nuevo pedido
         Pedido p = new Pedido();
         p.SetId(id);
-        p.SetSpecialities(Specialities);
-        p.SetSides(Sides);
+        p.SetSpecialities(specialities);
+        p.SetSides(sides);
         p.SetStatus("Generado");
         
         // Agregar el pedido a la Lista de Pedidos sin Pagar
@@ -426,18 +426,18 @@ public final class Controller {
     }
     
     //Busca un Order en los Arrays UnpaidOrders y PendingOrders y lo retorna
-    public static Pedido FindOrder(Integer ID)
+    public static Pedido FindOrder(Integer id)
     {
         // UnpaidOrders
         for (Pedido unpaidOrder : unpaidOrders) {
-            if (unpaidOrder.GetId() == ID) {
+            if (unpaidOrder.GetId() == id) {
                 return unpaidOrder;
             }
         }
         
         // PendingOrders
         for (Pedido pendingOrder : pendingOrders) {
-            if (pendingOrder.GetId() == ID) {
+            if (pendingOrder.GetId() == id) {
                 return pendingOrder;
             } 
         }
@@ -445,28 +445,28 @@ public final class Controller {
     }
     
     //Obtiene datos del cliente y crea factura en la ventana caja
-    public static void PayOrder(String Name, int ID, String ClientID, String BillingAdr, String PhoneNumber)
+    public static void PayOrder(String name, int id, String clientID, String billingAdr, String phoneNumber)
     {
        Pedido ActualOrder;
-       ActualOrder = FindOrder(ID);
+       ActualOrder = FindOrder(id);
        
        // TODO: Falta validar
             ActualOrder.SetStatus("Pagado");
-            Cliente Datos=new Cliente(Name,ClientID,BillingAdr,PhoneNumber);
+            Cliente Datos=new Cliente(name,clientID,billingAdr,phoneNumber);
             WndCaja Caja = (WndCaja) activeWindow;
             Factura f= new Factura(ActualOrder,Datos, Caja.GetTotal());
             //Remove the actual order of unpaid
-            RemoveOrder(ID);
+            RemoveOrder(id);
             //Agregamos a la lista del chef
             pendingOrders.add(ActualOrder);
     }
         
     //Mueve el pedido de PendingdOrders a OrdersReady
     //Pedidos de chef a mesonero
-    public static void RequestDelivery(int ID)
+    public static void RequestDelivery(int id)
     {
         for( int i = 0 ; i  < unpaidOrders.size(); i++){
-            if(pendingOrders.get(i).GetId() == ID) {
+            if(pendingOrders.get(i).GetId() == id) {
                     //Añadimos el pedido a la cola de despacho
                     ordersReady.add(pendingOrders.get(i));
                     //Borramos ya que movimos la orden a la cola de despacho
@@ -483,11 +483,11 @@ public final class Controller {
     public static Pedido GetNextOrderReady() { return ordersReady.poll(); }
     
     // Ubica un pedido en la lista UnpaidOrders o PendingOrders y lo elimina
-    public static void RemoveOrder(int ID)
+    public static void RemoveOrder(int id)
     {
         // Unpaid Orders
         for( int i = 0 ; i  < unpaidOrders.size(); i++){
-            if(unpaidOrders.get(i).GetId() == ID) {
+            if(unpaidOrders.get(i).GetId() == id) {
                 unpaidOrders.remove(i);
                 return; // Cortocircuitar ciclo
             }
@@ -495,7 +495,7 @@ public final class Controller {
         
         // Pending Orders
         for( int i = 0 ; i  < pendingOrders.size(); i++){
-            if(pendingOrders.get(i).GetId() == ID) {
+            if(pendingOrders.get(i).GetId() == id) {
                 pendingOrders.remove(i);
                 return; // Cortocircuitar ciclo
             }

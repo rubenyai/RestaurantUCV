@@ -628,7 +628,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         cmdDiscard.setEnabled(true);
         // Preparar un hilo nuevo para ejecutar el metodo ChooseSides de manera asincronica
         Thread t = new Thread(() -> {
-            ArrayList<ContadorContorno> sides = Controller.ChooseSides(0, null);
+            ArrayList<ContadorContorno> sides = Controller.chooseSides(0, null);
             
             if (sides == null)
                 return;
@@ -712,7 +712,7 @@ public class WndGestorPedido extends javax.swing.JFrame {
         // Preparar un hilo nuevo para ejecutar el metodo ChooseSides de manera asincronica
         Thread w = new Thread(() -> {
             //falta implementar
-            ArrayList<ContadorContorno> sides1 = Controller.ChooseSides(maxSides, ce.GetSides());
+            ArrayList<ContadorContorno> sides1 = Controller.chooseSides(maxSides, ce.GetSides());
             if (sides1 == null)
                 return;
             
