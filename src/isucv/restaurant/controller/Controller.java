@@ -323,14 +323,14 @@ public final class Controller {
                     // Especialidad
                     // Nombre, Precio, Contornos, Tiempo, Visible
                     Especialidad n = new Especialidad(segments[0], Float.parseFloat(segments[1]), Integer.parseInt(segments[2]), Integer.parseInt(segments[3]), (segments[4].equalsIgnoreCase("true")));
-                    Controller.GetBillboardSpecialities().add(n);
+                    newSpecialities.add(n);
                 }
                 else if (segments.length == 3)
                 {
                     // Contorno
                     // Nombre, Precio, Visible
                     Contorno n = new Contorno(segments[0], Float.parseFloat(segments[1]), (segments[2].equalsIgnoreCase("true")));
-                    Controller.GetBillboardSides().add(n);
+                    newSides.add(n);
                 }
             }
         } catch (IOException e) {
