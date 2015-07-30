@@ -54,8 +54,6 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
         cmdGetTask = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         lblTaskType = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        lblTotalUsers = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("User Debugger");
@@ -110,10 +108,6 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
 
         lblTaskType.setText("0");
 
-        jLabel6.setText("Total de usuarios cargados");
-
-        lblTotalUsers.setText("0");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -140,11 +134,7 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblTaskType))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblTotalUsers)))
+                        .addComponent(lblTaskType)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,11 +159,7 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addComponent(lblTaskType))
                     .addComponent(cmdGetTask, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(lblTotalUsers))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,7 +201,6 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
         // CARGAR UN NUEVO ARCHIVO DE USUARIOS
 
         users.LoadFile();
-        lblTotalUsers.setText(String.valueOf(users.DBG__GetTotalUsersLoaded()));
     }//GEN-LAST:event_cmdLoadActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -296,11 +281,9 @@ public class Dbg___WndUserDebugger extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblLoginResult;
     private javax.swing.JLabel lblTaskType;
-    private javax.swing.JLabel lblTotalUsers;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUserFile;
     private javax.swing.JTextField txtUsername;
