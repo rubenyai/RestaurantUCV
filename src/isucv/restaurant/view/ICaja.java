@@ -421,6 +421,10 @@ public class ICaja extends javax.swing.JFrame {
                     descr = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetName();
                     Costo = ActualOrder.GetSpecialities().get(i).GetSpeciality().GetPrice();
                     Cantidad = ActualOrder.GetSpecialities().get(i).GetCount();
+                    
+                    if (Cantidad < 1)
+                        continue;
+                    
                     Balance = (Balance + (Cantidad * Costo));
                     Nuevo = new Object[] {Cantidad, descr, Costo};
                     modelo.addRow(Nuevo);
