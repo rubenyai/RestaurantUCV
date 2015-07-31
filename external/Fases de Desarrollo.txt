@@ -92,29 +92,29 @@ NO DEBERIAN EXISTIR CONFLICTOS NI DEPENDENCIAS CRUZADAS ENTRE LOS ELEMENTOS DE L
 	 - CTRL::Completar todos los metodos sin cuerpo ------ LISTA
 
 ============
-== FASE 4 == ON WORK
+== FASE 4 == DONE
 ============
  4.1
 
-     - TEST:Pruebas Unitarias del Actor:Chef
+     - TEST:Pruebas Unitarias del Actor:Chef ------ LISTA
  4.2
 
-     - TEST::Pruebas Unitarias del Actor:Cajero
-	 - TEST::Pruebas Unitarias del Actor:Mesonero
+     - TEST::Pruebas Unitarias del Actor:Cajero ------ LISTA
+	 - TEST::Pruebas Unitarias del Actor:Mesonero ------ LISTA
  4.3
 
-     - TEST::Pruebas Unitarias del Actor:Cliente
+     - TEST::Pruebas Unitarias del Actor:Cliente ------ LISTA
 
 ============
-== FASE 5 ==
+== FASE 5 == DONE
 ============
  5.1
 	// FABIAN
-    - Enlace y Limpieza de codigo obsoleto
-	  + Repasar todos los metodos y eliminar el codigo comentado/obsoleto
+    - Enlace y Limpieza de codigo obsoleto  ------ LISTA
+	  + Repasar todos los metodos y eliminar el codigo comentado/obsoleto 
  5.2
 	// FABIAN
-    - Refactorizar codigo
+    - Refactorizar codigo ------ LISTA
 	  + Aplicar sugerencias de netbeans
 	  + Aplicar optimizaciones que se encuentren sobre la marcha
 	  + Renombrar elementos con nombres ambiguos o genericos y colocarles nombres mas intuitivos
@@ -124,17 +124,17 @@ NO DEBERIAN EXISTIR CONFLICTOS NI DEPENDENCIAS CRUZADAS ENTRE LOS ELEMENTOS DE L
     - DOCUMENTAR (BIEN DOCUMENTADO) BIIIIENNNNNNNNN DOCUMENTADOOOOOOOO!!!!
 
 ============
-== FASE 6 ==
+== FASE 6 == DONE
 ============
  6.1
 	//DAVID
-    - Ensamblado de paquete JAR y prueba bajo Windows
+    - Ensamblado de paquete JAR y prueba bajo Windows ------ LISTA
  6.2
 	//FABIAN
-    - Ensamblado de paquete JAR y prueba bajo LINUX (Ubuntu)
+    - Ensamblado de paquete JAR y prueba bajo LINUX (Ubuntu) ------ LISTA
  6.3
 	//RUBEN
-    - Construccion de Archivo MARKDOWN para el programa con lo siguiente:
+    - Construccion de Archivo MARKDOWN para el programa con lo siguiente: ------ LISTA
 	  + Requisitos del Proyecto
 	  + Documentacion de Compilacion bajo Windows
 	  + Documentacion de Compilacion bajo Linux
